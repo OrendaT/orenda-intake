@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Ogg Text TRIAL';
+  src: url('./assets/fonts/Ogg Text TRIAL regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400; /* Regular */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ogg Text TRIAL';
+  src: url('./assets/fonts/Ogg Text TRIAL medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500; /* Medium */
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Ogg Text TRIAL';
+  src: url('./assets/fonts/Ogg Text TRIAL medium-bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600; /* Semi-bold or Medium-Bold */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ogg Text TRIAL';
+  src: url('./assets/fonts/Ogg Text TRIAL.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700; /* Default Bold */
+  font-display: swap;
+}
+
+:root,
+#root,
+html,
+body {
+  min-height: 100%;
+}
+
+@layer base {
+  html {
+    color: #070707;
+    box-sizing: border-box;
+    accent-color: #333;
+  }
+  body {
+    @apply font-dm-sans;
+  }
+
+  /*Remove blue autofill colour  */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+  }
+
+  /* Customize input:date picker icon */
+  input[type='date']::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    display: block;
+    background: url('./assets/calendar_icon.svg') no-repeat;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-width: thin;
+    z-index: 1;
+  }
+
+  /* Remove input buttons for number type */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+  /* ...for Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer utilities {
+  .padding-inline {
+    @apply px-5 sm:~px-8/12;
+  }
+  .input-base {
+    @apply block w-full border-b border-[#D1D1D1] bg-transparent pb-2 outline-none ~text-sm/base;
+  }
+
+  .label {
+    @apply mb-3 text-base font-medium;
+  }
+
+  .sublist-decimal {
+    @apply mt-1 list-decimal space-y-1.5 ps-1;
+  }
+
+  .sublist-disc {
+    @apply mt-1 list-disc space-y-1.5 ps-1;
+  }
+}
+
+@layer components {
+  .fieldset {
+    @apply space-y-6  border-[#CECECE] ~px-4/16  sm:pt-0 ~pb-8/12;
+  }
+
+  .legend {
+    /* @apply text-center font-heading font-bold ~text-xl/2xl sm:~my-6/10; */
+    @apply text-center font-heading font-bold ~text-xl/2xl mt-7;
+  }
+
+  .fieldset-section {
+    @apply mx-auto max-w-[46.125rem] space-y-2 rounded-2xl border-[#D6D6D6] ~px-0/14 ~pt-2/4 ~pb-8/16 sm:border;
+  }
+
+  .fieldset-section-heading {
+    @apply font-medium ~text-base/lg;
+  }
+}
