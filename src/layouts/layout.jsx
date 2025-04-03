@@ -11,11 +11,9 @@ const Layout = () => {
   }, [pathname]);
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Outlet />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <Outlet />
+    </ThemeProvider>
   );
 };
 export default Layout;

@@ -1,7 +1,6 @@
 import FileInput from '../ui/file-input';
 import IMask from '../ui/imask';
 import Input from '../ui/input';
-import Radios from '../ui/radios';
 
 const InsuranceAndPayment = () => {
   return (
@@ -9,6 +8,12 @@ const InsuranceAndPayment = () => {
       <h2 className='legend'>Insurance & Payment Info</h2>
 
       <section className='fieldset-section'>
+        <Input
+          label='Insurance Member ID'
+          name='insurance_member_id'
+          sx={{ marginBlockStart: 1 }}
+        />
+
         <div>
           <h3 className='label'>
             Please upload images of your insurance card&nbsp;
@@ -29,7 +34,7 @@ const InsuranceAndPayment = () => {
         </div>
       </section>
       <section className='fieldset-section'>
-        <h3 className='fieldset-section-heading'>Credit Card Details</h3>
+        <h3 className='fieldset-section-heading mt-4'>Credit Card Details</h3>
         <p className='font-medium'>
           Your copay/deductible is due at the time of your appointment. We
           require you to keep a credit card on file. You may use a health
@@ -49,8 +54,8 @@ const InsuranceAndPayment = () => {
           required={true}
         />
         <Input
-          label='CVC / Security Code'
-          name='cvc_security_code'
+          label='CVV / Security Code'
+          name='cvv'
           required={true}
         />
         <Input

@@ -8,6 +8,9 @@ export default {
     screens,
     fontSize,
     extend: {
+      backgroundImage: {
+        dotted: 'url(/src/assets/dotted.png)',
+      },
       colors: {
         'orenda-purple': '#2E0086',
         'orenda-green': '#127801',

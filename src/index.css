@@ -65,6 +65,7 @@ body {
     color: rgba(0, 0, 0, 0);
     display: block;
     background: url('./assets/calendar_icon.svg') no-repeat;
+    background-size: 1.25rem;
     width: 1.125rem;
     height: 1.125rem;
     border-width: thin;
@@ -86,6 +87,10 @@ body {
 }
 
 @layer utilities {
+  .bg-dotted-purple {
+    @apply bg-[#f6f7fc] bg-dotted bg-cover bg-fixed;
+  }
+
   .padding-inline {
     @apply px-5 sm:~px-8/12;
   }
@@ -108,16 +113,19 @@ body {
 
 @layer components {
   .fieldset {
-    @apply space-y-6  border-[#CECECE] ~px-4/16  sm:pt-0 ~pb-8/12;
+    @apply space-y-6 border-[#CECECE] ~pb-8/12 sm:pt-0 sm:~px-4/16;
+  }
+
+  .hidden-section {
+    @apply rounded border-l-4 border-gray-500 bg-gray-100 p-3;
   }
 
   .legend {
-    /* @apply text-center font-heading font-bold ~text-xl/2xl sm:~my-6/10; */
-    @apply text-center font-heading font-bold ~text-xl/2xl mt-7;
+    @apply text-center font-heading font-bold ~text-xl/2xl sm:~my-6/10;
   }
 
   .fieldset-section {
-    @apply mx-auto max-w-[46.125rem] space-y-2 rounded-2xl border-[#D6D6D6] ~px-0/14 ~pt-2/4 ~pb-8/16 sm:border;
+    @apply mx-auto max-w-[46.125rem] space-y-6 rounded-2xl border border-[#D6D6D6] bg-white ~px-5/14 ~pt-2/6 ~pb-12/16;
   }
 
   .fieldset-section-heading {

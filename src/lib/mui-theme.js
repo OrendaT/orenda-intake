@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material';
+import { createTheme, List } from '@mui/material';
 
 const theme = createTheme({
   typography: {
@@ -13,7 +13,7 @@ const theme = createTheme({
     MuiFormLabel: {
       styleOverrides: {
         asterisk: {
-          color: 'red',
+          color: '#2E0086',
         },
         root: {
           color: '#000',
@@ -56,6 +56,26 @@ const theme = createTheme({
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: '#333',
           },
+        },
+      },
+    },
+    MuiSelect: {
+      variants: {
+        List: {
+          styleOverrides: {
+            scrollbarWidth: 'none',
+          },
+        },
+      },
+      style: {
+        scrollbarWidth: 'none',
+      },
+      styleOverrides: {
+        root: {
+          scrollbarWidth: 'none',
+        },
+        list: {
+          scrollbarWidth: 'none',
         },
       },
     },
