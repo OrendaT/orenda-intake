@@ -129,7 +129,7 @@ const MentalHealth = () => {
       <div>
         <h3 className='label'>
           Who would you like us to contact in the event of an emergency? What is
-          this person's relationship to you?&nbsp;
+          this person&apos;s relationship to you?&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
         <Input

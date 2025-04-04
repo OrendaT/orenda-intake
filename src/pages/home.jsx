@@ -66,7 +66,7 @@ const Home = () => {
                 />
                 <div>
                   <span>
-                    I confirm that I have read and agreed to Orenda's{' '}
+                    I confirm that I have read and agreed to Orenda&apos;s{' '}
                     <PolicyDialog open={openTerms} onOpenChange={setOpenTerms}>
                       <button
                         type='button'

@@ -5,8 +5,9 @@ const FileInput = ({
   label,
   name,
   disabled,
-  required,
+  required = true,
   errorMsg,
+  accept = 'image/*,application/pdf',
   validations,
 }) => {
   const {
@@ -53,8 +54,21 @@ const FileInput = ({
             value: required,
             message: errorMsg || 'This field is required',
           },
-          validate: validations,
+          validate: {
+            empty: (value) => {
+              if (required) return value.length > 0 || 'This field is required';
+            },
+            acceptedFormats: (files) => {
+              if (accept)
+                return (
+                  accept.split(',').includes(files[0]?.type) ||
+                  'Invalid file format'
+                );
+            },
+            ...validations,
+          },
         })}
+        accept={accept}
       />
     </div>
   );

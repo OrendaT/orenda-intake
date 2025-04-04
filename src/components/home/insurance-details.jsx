@@ -1,7 +1,13 @@
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
+import { useFormContext } from 'react-hook-form';
 
 const InsuranceDetails = () => {
+  const { watch } = useFormContext();
+  const front = watch('insurance_card_front');
+
+  console.log(front)
+
   return (
     <section className='fieldset-section'>
       <Input
@@ -21,8 +27,8 @@ const InsuranceDetails = () => {
         </p>
       </div>
       <div className='grid ~gap-4/6'>
-        <FileInput label='Front' name='insurance_card_front' required={true} />
-        <FileInput label='Back' name='insurance_card_back' required={true} />
+        <FileInput label='Front' name='insurance_card_front' />
+        <FileInput label='Back' name='insurance_card_back' />
       </div>
     </section>
   );

@@ -61,7 +61,7 @@ const PersonalInfo = () => {
 
               <p className='text-sm text-gray-700'>
                 I understand and give permission for my child to be treated by
-                an Orenda Psychiatry provider. As part of my child's treatment,
+                an Orenda Psychiatry provider. As part of my child&apos;s treatment,
                 their provider may prescribe medication as needed for their
                 condition. I understand the provider may need to speak with me
                 to discuss medication options and changes on an ongoing basis. I
