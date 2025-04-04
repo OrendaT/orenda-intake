@@ -46,6 +46,7 @@ const Select = ({
             <InputLabel id={id || name}>{label}</InputLabel>
             <MUISelect
               {...field}
+              value={field.value || ''}
               label={label}
               id={id || name}
               fullWidth
@@ -53,8 +54,8 @@ const Select = ({
               {...selectProps}
             >
               {!required && <MenuItem value=''>None</MenuItem>}
-              {options.map((option) => (
-                <MenuItem value={option}>{option}</MenuItem>
+              {options?.map((option) => (
+                <MenuItem key={option} value={option}>{option}</MenuItem>
               ))}
             </MUISelect>
             {error && <FormHelperText>{errorMsg}</FormHelperText>}

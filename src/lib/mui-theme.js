@@ -20,9 +20,9 @@ const theme = createTheme({
           zIndex: 1,
           backgroundColor: 'inherit',
           fontWeight: 500,
-        },
-        error: {
-          color: '#000',
+          '&.Mui-error': {
+            color: '#000',
+          },
         },
       },
     },

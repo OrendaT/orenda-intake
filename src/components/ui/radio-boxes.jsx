@@ -47,7 +47,7 @@ const RadioBoxes = ({
         </label>
       ))}
       {errors?.[name]?.message && (
-        <p className='!mt-2 px-3 text-xs text-red-500'>{errors?.[name]?.message}</p>
+        <p className='px-3 error'>{errors?.[name]?.message}</p>
       )}
     </>
   );

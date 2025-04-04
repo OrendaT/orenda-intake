@@ -9,7 +9,7 @@ const AgreementCheckbox = ({ label, name, errorMsg, className }) => {
     >
       <input
         type='checkbox'
-        className='size-4 accent-blue-500'
+        className='size-4'
         {...register(name, {
           required: errorMsg,
         })}

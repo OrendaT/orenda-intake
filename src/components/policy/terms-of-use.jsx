@@ -1,20 +1,22 @@
+import Signature from './signature';
+
 const Terms = () => {
   return (
-    <section className='mt-12 text-justify'>
-      <h2 className='mb-4 font-heading font-bold ~text-lg/2xl'>Terms Of Use</h2>
-
-      <div>
-        <h3 className='mb-2'>CONSENT FOR TELEHEALTH CONSULTATION</h3>
+    <section className='mt-12'>
+      {/* CONSENT FOR TELEHEALTH CONSULTATION */}
+      <article>
+        <h3 className='mb-4 font-medium'>
+          CONSENT FOR TELEHEALTH CONSULTATION
+        </h3>
         <ol className='mb-4 list-decimal ps-4'>
           <li>
             I understand that my health care provider wishes me to engage in a
             telehealth consultation.
           </li>
           <li>
-            My health care provider explained to me how the video conferencing
-            technology that will be used to affect such a consultation will not
-            be the same as a direct client/health care provider visit due to the
-            fact that I will not be in the same room as my provider.
+            I understand that the video conferencing technology will not be the
+            same as a direct client/health care provider visit due to the fact
+            that I will not be in the same room as my provider.
           </li>
           <li>
             I understand that a telehealth consultation has potential benefits
@@ -26,54 +28,30 @@ const Terms = () => {
             interruptions, unauthorized access, and technical difficulties. I
             understand that my health care provider or I can discontinue the
             telehealth consult/visit if it is felt that the videoconferencing
-            connections are not adequate for the situation.
-          </li>
-          <li>
-            I have had a direct conversation with my provider, during which I
-            had the opportunity to ask questions in regard to this procedure. My
-            questions have been answered and the risks, benefits and any
-            practical alternatives have been discussed with me in a language in
-            which I understand.
+            connections are not adequate
           </li>
         </ol>
 
-        <p className='my-4'>By signing this form, I certify:</p>
-
-        <ul className='list-disc ps-4'>
-          <li>
-            That I have read or had this form read and/or had this form
-            explained to me.
-          </li>
-          <li>
-            That I fully understand its contents including the risks and
-            benefits of the procedure(s).
-          </li>
-          <li>
-            That I have been given ample opportunity to ask questions and that
-            any questions have been answered to my satisfaction.
-          </li>
-        </ul>
-
         <p className='my-4'>
-          BY SIGNING BELOW I AM AGREEING THAT I HAVE READ, UNDERSTOOD AND AGREE
-          TO THE ITEMS CONTAINED IN THIS DOCUMENT.
+          BY SIGNING BELOW I CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE TO
+          THE ITEMS CONTAINED IN THIS DOCUMENT.
         </p>
 
-        <form className='mb-4'>
-          <label htmlFor=''>
-            <input type='checkbox' name='' id='' /> I agree
-          </label>
-        </form>
-      </div>
+        <Signature />
+      </article>
 
-      <div className='space-y-4'>
-        <p>This notice went into effect on November 1, 2021 </p>
-        <p>NOTICE OF PRIVACY PRACTICES</p>
+      {/* NOTICE OF PRIVACY PRACTICES */}
+      <article>
+        <p className='my-1'>This notice went into effect on November 1, 2021</p>
+
+        <h3 className='mb-4 font-medium'>NOTICE OF PRIVACY PRACTICES</h3>
+
         <p>
           THIS NOTICE DESCRIBES HOW HEALTH INFORMATION MAY BE USED AND DISCLOSED
           AND HOW YOU CAN GET ACCESS TO THIS INFORMATION. PLEASE REVIEW IT
           CAREFULLY.
         </p>
+
         <ol className='list-[upper-roman] space-y-4 ps-4'>
           <li>
             OUR PLEDGE REGARDING HEALTH INFORMATION: Orenda Psychiatry
@@ -109,16 +87,14 @@ const Terms = () => {
             </ul>
           </li>
 
-          <li className='space-y-2'>
+          <li className='space-y-4'>
             <p>
               HOW ORENDA PSYCHIATRY MAY USE AND DISCLOSE HEALTH INFORMATION
               ABOUT YOU: The following categories describe different ways that
-              Orenda Psychiatry uses and disclose health information. For each
-              category of uses or disclosures we will explain what we mean and
-              try to give some examples. Not every use or disclosure in a
-              category will be listed. However, all of the ways we are permitted
-              to use and disclose information will fall within one of the
-              categories.
+              Orenda Psychiatry uses and disclose health information. Not every
+              use or disclosure in a category will be listed. However, all of
+              the ways we are permitted to use and disclose information will
+              fall within one of the categories.
             </p>
             <p>
               For Treatment Payment, or Health Care Operations: Federal privacy
@@ -138,12 +114,12 @@ const Terms = () => {
             </p>
             <p>
               Disclosures for treatment purposes are not limited to the minimum
-              necessary standard. Because therapists and other health care
+              necessary standard because therapists and other health care
               providers need access to the full record and/or full and complete
               information in order to provide quality care. The word “treatment”
               includes, among other things, the coordination and management of
               health care providers with a third party, consultations between
-              health care providers and referrals of a patient for health care
+              healthcare providers and referrals of a patient for health care
               from one health care provider to another.
             </p>
             <p>
@@ -165,19 +141,42 @@ const Terms = () => {
                 Psychotherapy Notes. Orenda Psychiatry does keep “psychotherapy
                 notes” as that term is defined in 45 CFR § 164.501, and any use
                 or disclosure of such notes requires your Authorization unless
-                the use or disclosure is: a. For our use in treating you. b. For
-                our use in training or supervising mental health practitioners
-                to help them improve their skills in group, joint, family, or
-                individual counseling or therapy. c. For our use in defending
-                myself in legal proceedings instituted by you. d. For use by the
-                Secretary of Health and Human Services to investigate our
-                compliance with HIPAA. e. Required by law and the use or
-                disclosure is limited to the requirements of such law. f.
-                Required by law for certain health oversight activities
-                pertaining to the originator of the psychotherapy notes. g.
-                Required by a coroner who is performing duties authorized by
-                law. h. Required to help avert a serious threat to the health
-                and safety of others.
+                the use or disclosure is:
+                <ol
+                  className='sublist-disc my-4 [list-style-type:lower-alpha]'
+                  type='a'
+                >
+                  <li>For our use in treating you.</li>
+                  <li>
+                    For our use in training or supervising mental health
+                    practitioners to help them improve their skills in group,
+                    joint, family, or individual counseling or therapy.
+                  </li>
+                  <li>
+                    For our use in defending myself in legal proceedings
+                    instituted by you.
+                  </li>
+                  <li>
+                    For use by the Secretary of Health and Human Services to
+                    investigate our compliance with HIPAA.
+                  </li>
+                  <li>
+                    Required by law and the use or disclosure is limited to the
+                    requirements of such law.
+                  </li>
+                  <li>
+                    Required by law for certain health oversight activities
+                    pertaining to the originator of the psychotherapy notes.
+                  </li>
+                  <li>
+                    Required by a coroner who is performing duties authorized by
+                    law.
+                  </li>
+                  <li>
+                    Required to help avert a serious threat to the health and
+                    safety of others.
+                  </li>
+                </ol>
               </li>
               <li>
                 Marketing Purposes. We will not use or disclose your PHI for
@@ -191,6 +190,7 @@ const Terms = () => {
           </li>
           <li>
             CERTAIN USES AND DISCLOSURES DO NOT REQUIRE YOUR AUTHORIZATION.
+            <br />
             Subject to certain limitations in the law, Orenda Psychiatry can use
             and disclose your PHI without your Authorization for the following
             reasons:
@@ -269,12 +269,11 @@ const Terms = () => {
             YOU HAVE THE FOLLOWING RIGHTS WITH RESPECT TO YOUR PHI:
             <ol className='sublist-decimal'>
               <li>
-                {' '}
                 The Right to Request Limits on Uses and Disclosures of Your PHI.
                 You have the right to ask us not to use or disclose certain PHI
                 for treatment, payment, or health care operations purposes. We
                 are not required to agree to your request, and we may say “no”
-                if we believe it would affect your health care.{' '}
+                if we believe it would affect your health care.
               </li>
               <li>
                 The Right to Request Restrictions for Out-of-Pocket Expenses
@@ -282,13 +281,13 @@ const Terms = () => {
                 disclosures of your PHI to health plans for payment or health
                 care operations purposes if the PHI pertains solely to a health
                 care item or a health care service that you have paid for
-                out-of-pocket in full.{' '}
+                out-of-pocket in full.
               </li>
               <li>
                 The Right to Choose How Orenda Psychiatry Sends PHI to You. You
                 have the right to ask us to contact you in a specific way (for
                 example, home or office phone) or to send mail to a different
-                address, and we will agree to all reasonable requests.{' '}
+                address, and we will agree to all reasonable requests.
               </li>
               <li>
                 The Right to See and Get Copies of Your PHI. Other than
@@ -297,7 +296,7 @@ const Terms = () => {
                 we have about you. We will provide you with a copy of your
                 record, or a summary of it, if you agree to receive a summary,
                 within 30 days of receiving your written request, and we may
-                charge a reasonable, cost based fee for doing so.{' '}
+                charge a reasonable, cost based fee for doing so.
               </li>
               <li>
                 The Right to Get a List of the Disclosures We Have Made. You
@@ -311,48 +310,44 @@ const Terms = () => {
                 shorter time. We will provide the list to you at no charge, but
                 if you make more than one request in the same year, we will
                 charge you a reasonable cost based fee for each additional
-                request.{' '}
+                request.
               </li>
               <li>
-                {' '}
                 The Right to Correct or Update Your PHI. If you believe that
                 there is a mistake in your PHI, or that a piece of important
                 information is missing from your PHI, you have the right to
                 request that we correct the existing information or add the
                 missing information. We may say “no” to your request, but we
                 will tell you why in writing within 60 days of receiving your
-                request.{' '}
+                request.
               </li>
               <li>
                 The Right to Get a Paper or Electronic Copy of this Notice. You
                 have the right get a paper copy of this Notice, and you have the
                 right to get a copy of this notice by e-mail. And, even if you
                 have agreed to receive this Notice via e-mail, you also have the
-                right to request a paper copy of it.{' '}
+                right to request a paper copy of it.
               </li>
             </ol>
           </li>
         </ol>
 
-        <p>
-          Acknowledgement of Receipt of Privacy Notice Under the Health
-          Insurance Portability and Accountability Act of 1996 (HIPAA), you have
-          certain rights regarding the use and disclosure of your protected
-          health information. By checking the box below, you are acknowledging
-          that you have received a copy of HIPAA Notice of Privacy Practices.
+        <p className='mb-4'>Acknowledgement of Receipt of Privacy Notice</p>
+        <p className='mb-4'>
+          Under the Health Insurance Portability and Accountability Act of 1996
+          (HIPAA), you have certain rights regarding the use and disclosure of
+          your protected health information. By checking the box below, you are
+          acknowledging that you have received a copy of HIPAA Notice of Privacy
+          Practices.
         </p>
-        <p>
-          By typing my signing below, I hereby certify that I have read,
-          understood and agree to the provision of psychiatric services by
-          Orenda Psychiatry and it's Providers.
+        <p className='mb-4'>
+          BY SIGNING BELOW I AM CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE
+          TO THE PROVISION OF PSYCHIATRIC SERVICES BY ORENDA PSYCHIATRY AND ITS
+          PROVIDERS.
         </p>
 
-        <form>
-          <label htmlFor=''>
-            <input type='checkbox' name='' id='' /> I agree
-          </label>
-        </form>
-      </div>
+        <Signature />
+      </article>
     </section>
   );
 };

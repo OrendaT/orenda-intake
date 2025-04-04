@@ -43,7 +43,7 @@ const SelectCheckboxes = ({
       })}
 
       {errors?.[name]?.message && (
-        <p className='px-3 text-xs text-red-500'>{errors?.[name]?.message}</p>
+        <p className='error mt-0 px-3'>{errors?.[name]?.message}</p>
       )}
     </>
   );

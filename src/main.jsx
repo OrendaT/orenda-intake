@@ -4,8 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './layouts/layout.jsx';
 import Home from './pages/home.jsx';
 
-import './index.css';
-import PolicyPage from './pages/policy.jsx';
+import './styles/index.css'
 
 const router = createBrowserRouter([
   {
@@ -15,10 +14,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-      },
-      {
-        path: 'policy',
-        element: <PolicyPage />,
       },
     ],
   },

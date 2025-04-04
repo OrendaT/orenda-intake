@@ -84,11 +84,18 @@ body {
   input[type='number'] {
     -moz-appearance: textfield;
   }
+  :root {
+    --radius: 0.5rem;
+  }
 }
 
 @layer utilities {
   .bg-dotted-purple {
     @apply bg-[#f6f7fc] bg-dotted bg-cover bg-fixed;
+  }
+
+  .error {
+    @apply mt-1 text-xs text-[#d32f2f];
   }
 
   .padding-inline {
@@ -103,11 +110,11 @@ body {
   }
 
   .sublist-decimal {
-    @apply mt-1 list-decimal space-y-1.5 ps-1;
+    @apply my-4 list-decimal space-y-2 ps-1;
   }
 
   .sublist-disc {
-    @apply mt-1 list-disc space-y-1.5 ps-1;
+    @apply my-4 list-disc space-y-2 ps-1;
   }
 }
 

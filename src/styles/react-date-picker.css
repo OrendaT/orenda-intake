@@ -1,0 +1,99 @@
+.react-date-picker {
+  * {
+    font-family: inherit;
+  }
+
+  .react-date-picker__wrapper {
+    border: none;
+
+    .react-date-picker__inputGroup__input {
+      &:focus {
+        outline: transparent;
+      }
+
+      &:invalid {
+        background: transparent;
+      }
+    }
+
+    .react-date-picker__inputGroup__year {
+      width: 2.5rem !important;
+    }
+  }
+
+  .react-date-picker__calendar {
+    padding-top: 0.5rem;
+    z-index: 2;
+    width: fit-content;
+
+    * {
+      font-family: inherit;
+    }
+
+    .react-calendar {
+      width: 100%;
+      max-width: 270px;
+      padding: 0.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.285);
+      border-radius: 1rem;
+      color: #000;
+
+      .react-calendar__navigation {
+        justify-content: space-evenly;
+      }
+
+      .react-calendar__navigation__arrow,
+      .react-calendar__navigation button {
+        min-width: fit-content;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        flex-grow: 0 !important;
+        align-self: center;
+        border: 1px solid #eee;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .react-calendar__navigation__label {
+        border: none !important;
+      }
+      .react-calendar__month-view__weekdays {
+        margin-bottom: 0.5rem;
+      }
+
+      .react-calendar__month-view__weekdays__weekday {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #000000;
+        text-transform: capitalize;
+        text-decoration: none;
+        padding: 0;
+
+        abbr {
+          text-decoration: none;
+        }
+      }
+      .react-calendar__month-view__days {
+        gap: 0rem;
+      }
+
+      .react-calendar__tile--now {
+        background: #eee;
+      }
+
+      .react-calendar__tile {
+        padding-block: 0.75rem;
+        border-radius: 0.5rem;
+
+        &:hover:not(.react-calendar__tile--active) {
+          background: #eee;
+        }
+      }
+
+      .react-calendar__tile--active {
+        background: black;
+        font-weight: 500;
+      }
+    }
+  }
+}

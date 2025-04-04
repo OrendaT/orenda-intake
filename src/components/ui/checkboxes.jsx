@@ -46,7 +46,7 @@ const Checkboxes = ({
       ))}
 
       {errors?.[name]?.message && (
-        <p className='px-3 text-xs !mt-2 text-red-500'>{errors?.[name]?.message}</p>
+        <p className='px-3 error'>{errors?.[name]?.message}</p>
       )}
     </>
   );

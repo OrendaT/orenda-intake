@@ -44,7 +44,7 @@ const Radios = ({
       ))}
 
       {errors?.[name]?.message && (
-        <p className='!mt-1 px-3 text-xs text-red-500'>
+        <p className='px-3 error'>
           {errors?.[name]?.message}
         </p>
       )}
