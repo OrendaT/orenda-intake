@@ -214,7 +214,7 @@ const MentalHealth = () => {
         </h3>
         <Input
           hiddenLabel
-          name='drug_use'
+          name='recreational_drug_use'
           multiline
           rows={2}
           variant='outlined'
@@ -286,7 +286,7 @@ const MentalHealth = () => {
         {hasOtherMedical && (
           <Input
             label='Other? Please specify'
-            name='medical_other'
+            name='personal_medical_history_other'
             required={hasOtherMedical}
           />
         )}
@@ -323,7 +323,7 @@ const MentalHealth = () => {
         </div>
         {hasAbnormalResults && (
           <Input
-            name='physical_exam_details'
+            name='recent_physical_exam_details'
             label='If abnormal results please describe'
             required={hasAbnormalResults}
           />
