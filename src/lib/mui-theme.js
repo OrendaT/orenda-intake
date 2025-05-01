@@ -14,6 +14,9 @@ const theme = createTheme({
       styleOverrides: {
         asterisk: {
           color: '#2E0086',
+          '&.Mui-error': {
+            color: '#2E0086',
+          },
         },
         root: {
           color: '#000',

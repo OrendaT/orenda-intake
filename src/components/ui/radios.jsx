@@ -27,7 +27,7 @@ const Radios = ({
         >
           <input
             id={name + option}
-            className='peer size-4'
+            className='peer size-4 flex-shrink-0'
             type='radio'
             value={option}
             {...register(name, {
@@ -44,9 +44,7 @@ const Radios = ({
       ))}
 
       {errors?.[name]?.message && (
-        <p className='px-3 error'>
-          {errors?.[name]?.message}
-        </p>
+        <p className='error px-3'>{errors?.[name]?.message}</p>
       )}
     </>
   );

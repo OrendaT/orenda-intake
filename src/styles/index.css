@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
   font-family: 'Ogg Text TRIAL';
-  src: url('./assets/fonts/Ogg Text TRIAL regular.ttf') format('truetype');
+  src: url('../assets/fonts/Ogg Text TRIAL regular.ttf') format('truetype');
   font-style: normal;
   font-weight: 400; /* Regular */
   font-display: swap;
@@ -14,14 +12,14 @@
 
 @font-face {
   font-family: 'Ogg Text TRIAL';
-  src: url('./assets/fonts/Ogg Text TRIAL medium.ttf') format('truetype');
+  src: url('../assets/fonts/Ogg Text TRIAL medium.ttf') format('truetype');
   font-style: normal;
   font-weight: 500; /* Medium */
   font-display: swap;
 }
 @font-face {
   font-family: 'Ogg Text TRIAL';
-  src: url('./assets/fonts/Ogg Text TRIAL medium-bold.ttf') format('truetype');
+  src: url('../assets/fonts/Ogg Text TRIAL medium-bold.ttf') format('truetype');
   font-style: normal;
   font-weight: 600; /* Semi-bold or Medium-Bold */
   font-display: swap;
@@ -29,7 +27,7 @@
 
 @font-face {
   font-family: 'Ogg Text TRIAL';
-  src: url('./assets/fonts/Ogg Text TRIAL.ttf') format('truetype');
+  src: url('../assets/fonts/Ogg Text TRIAL.ttf') format('truetype');
   font-style: normal;
   font-weight: 700; /* Default Bold */
   font-display: swap;
@@ -64,7 +62,7 @@ body {
   input[type='date']::-webkit-calendar-picker-indicator {
     color: rgba(0, 0, 0, 0);
     display: block;
-    background: url('./assets/calendar_icon.svg') no-repeat;
+    background: url('../assets/calendar_icon.svg') no-repeat;
     background-size: 1.25rem;
     width: 1.125rem;
     height: 1.125rem;
@@ -83,6 +81,7 @@ body {
   /* ...for Firefox */
   input[type='number'] {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
   :root {
     --radius: 0.5rem;

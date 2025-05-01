@@ -1,4 +1,4 @@
-import Signature from './signature';
+import Signature from '../ui/signature';
 
 const Terms = () => {
   return (
@@ -37,7 +37,7 @@ const Terms = () => {
           THE ITEMS CONTAINED IN THIS DOCUMENT.
         </p>
 
-        <Signature />
+        <Signature name='telehealth_consent_signature' />
       </article>
 
       {/* NOTICE OF PRIVACY PRACTICES */}
@@ -341,12 +341,12 @@ const Terms = () => {
           Practices.
         </p>
         <p className='mb-4'>
-          BY SIGNING BELOW I AM CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE
+          BY SIGNING BELOW I CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE
           TO THE PROVISION OF PSYCHIATRIC SERVICES BY ORENDA PSYCHIATRY AND ITS
           PROVIDERS.
         </p>
 
-        <Signature />
+        <Signature name='privacy_policy_signature' />
       </article>
     </section>
   );

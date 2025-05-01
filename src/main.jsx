@@ -1,19 +1,19 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './layouts/layout.jsx';
 import Home from './pages/home.jsx';
 
-import './styles/index.css'
+import './styles/index.css';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    Component: Layout,
     children: [
       {
         index: true,
-        element: <Home />,
+        Component: Home,
       },
     ],
   },

@@ -10,7 +10,6 @@ const useAutoSave = ({ key = STORAGE_KEY, value, delay = 1000 }) => {
     if (deepEqual(value, previousValue.current)) return;
 
     const timeOutId = setTimeout(() => {
-      console.log('Saving...');
       setItem(key, value);
       previousValue.current = value;
     }, delay);

@@ -1,6 +1,17 @@
 import { useFormContext } from 'react-hook-form';
 import { LuUpload } from 'react-icons/lu';
 
+const imageTypes = [
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+  'image/webp',
+  'image/svg+xml',
+  'image/bmp',
+  'image/tiff',
+  'image/x-icon',
+];
+
 const FileInput = ({
   label,
   name,
@@ -59,11 +70,18 @@ const FileInput = ({
               if (required) return value.length > 0 || 'This field is required';
             },
             acceptedFormats: (files) => {
-              if (accept)
+              const fileType = files[0]?.type;
+              if (accept) {
+                let acceptedFiles = accept.split(',');
+
+                if (acceptedFiles.includes('image/*')) {
+                  acceptedFiles = [...acceptedFiles, ...imageTypes];
+                }
+
                 return (
-                  accept.split(',').includes(files[0]?.type) ||
-                  'Invalid file format'
+                  acceptedFiles.includes(fileType) || 'Invalid file format'
                 );
+              }
             },
             ...validations,
           },

@@ -1,18 +1,12 @@
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
-import { useFormContext } from 'react-hook-form';
 
 const InsuranceDetails = () => {
-  const { watch } = useFormContext();
-  const front = watch('insurance_card_front');
-
-  console.log(front)
-
   return (
     <section className='fieldset-section'>
       <Input
         label='Insurance Member ID'
-        name='insurance_member_id'
+        name='insurance_id'
         sx={{ marginBlockStart: 1 }}
       />
 

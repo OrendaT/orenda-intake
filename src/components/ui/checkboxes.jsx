@@ -23,11 +23,11 @@ const Checkboxes = ({
       {options.map((option) => (
         <div
           key={name + option}
-          className={clsx('flex items-center gap-2 text-sm', className)}
+          className={clsx('flex items-center gap-2', className)}
         >
           <input
             id={name + option}
-            className={clsx('peer', size)}
+            className={clsx('peer flex-shrink-0', size)}
             type='checkbox'
             value={option}
             {...register(name, {
@@ -46,7 +46,7 @@ const Checkboxes = ({
       ))}
 
       {errors?.[name]?.message && (
-        <p className='px-3 error'>{errors?.[name]?.message}</p>
+        <p className='error px-3'>{errors?.[name]?.message}</p>
       )}
     </>
   );

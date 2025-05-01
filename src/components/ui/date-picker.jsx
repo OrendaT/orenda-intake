@@ -27,7 +27,7 @@ const DatePicker = ({
       render={({ field, fieldState: { error } }) => (
         <div>
           <ReactDatePicker
-            value={field.value} 
+            value={field.value}
             onChange={field.onChange}
             required={required}
             calendarIcon={<Calendar className='size-5' />}
@@ -37,7 +37,7 @@ const DatePicker = ({
             })}
             monthPlaceholder='mm'
             dayPlaceholder='dd'
-            yearPlaceholder='yr'
+            yearPlaceholder='yyyy'
             format='MM/dd/yyyy'
           />
 

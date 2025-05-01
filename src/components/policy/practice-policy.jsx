@@ -1,4 +1,5 @@
-import Signature from './signature';
+import AgreementCheckbox from '../ui/agreement-checkbox';
+import Signature from '../ui/signature';
 
 const PracticePolicy = () => {
   return (
@@ -165,7 +166,7 @@ const PracticePolicy = () => {
             BY SIGNING BELOW, I CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE
             TO THE TERMS AND CONDITIONS CONTAINED IN THIS DOCUMENT.
           </p>
-          <Signature />
+          <Signature name='practice_policies_signature' />
         </article>
         <article className='space-y-4'>
           <h3 className='font-medium'>
@@ -396,7 +397,6 @@ const PracticePolicy = () => {
 
           <ol className='list-decimal space-y-4'>
             <li>
-              {' '}
               If a client threatens or attempts to commit suicide or otherwise
               conducts him/her self in a manner in which there is a substantial
               risk of incurring serious bodily harm.
@@ -406,7 +406,6 @@ const PracticePolicy = () => {
               person.
             </li>
             <li>
-              {' '}
               If the therapist has a reasonable suspicion that a client or other
               named victim is the perpetrator, observer of, or actual victim of
               physical, emotional or sexual abuse of children under the age of
@@ -433,12 +432,12 @@ const PracticePolicy = () => {
           </ol>
 
           <p>
-            BY SIGNING BELOW I AM CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE
-            TO THE PROVISION OF PSYCHIATRIC SERVICES BY ORENDA PSYCHIATRY AND
-            ITS PROVIDERS.
+            BY SIGNING BELOW I CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE TO
+            THE PROVISION OF PSYCHIATRIC SERVICES BY ORENDA PSYCHIATRY AND ITS
+            PROVIDERS.
           </p>
 
-          <Signature />
+          <Signature name='informed_consent_signature' />
         </article>
 
         <article className='space-y-4'>
@@ -459,7 +458,7 @@ const PracticePolicy = () => {
             information on prescribed medications, dosages, and refill history.
           </p>
 
-          <Signature />
+          <Signature name='medication_history_signature' />
         </article>
       </div>
     </section>

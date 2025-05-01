@@ -1,21 +1,30 @@
 import { FormProvider, useForm } from 'react-hook-form';
-import PatientsDetails from '../components/home/patients-details';
-import InsuranceAndPayment from '../components/home/insurance_and_payment';
 import Button from '@/components/ui/custom-button';
-import PolicyDialog from '@/components/policy';
-import { sendToMail } from '../services/email';
 import { useState } from 'react';
-import { getItem, removeItem } from '@/lib/utils';
+import { getItem, parseFormData, removeItem } from '@/lib/utils';
 import { STORAGE_KEY } from '@/lib/constants';
 import useAutoSave from '@/hooks/useAutoSave';
+import useSubmitData from '@/hooks/useSubmitData';
+import { initialValues } from '@/lib/definitions';
+import {
+  PersonalInfo,
+  AddressDetails,
+  MentalHealth,
+  InsuranceDetails,
+  CreditCardDetails,
+  PolicyDialog,
+} from '@/components';
 
 const Home = () => {
-  const defaultValues = getItem(STORAGE_KEY);
+  const defaultValues = getItem(STORAGE_KEY) ?? initialValues;
   const methods = useForm({ defaultValues });
-  const { handleSubmit, register, watch } = methods;
+  const { handleSubmit, register, reset, watch } = methods;
+  const { isLoading, submitData } = useSubmitData();
 
-  // Watch the terms and conditions checkbox
-  const acceptedTerms = watch('terms_and_conditions');
+  // Watch the policy agreement checkbox
+  const acceptedTerms =
+    watch('policy_agreement')?.[0] === 'I agree' ||
+    watch('policy_agreement') === 'I agree';
 
   const [openTerms, setOpenTerms] = useState(false);
   const [termsOpened, setTermsOpened] = useState(false);
@@ -28,11 +37,26 @@ const Home = () => {
   };
 
   const onSubmit = async (data) => {
-    sendToMail(data);
-    removeItem(STORAGE_KEY);
-  };
+    data = parseFormData(data);
 
-  useAutoSave({ value: watch() });
+    console.log(data);
+
+    const response = await submitData(data);
+
+    if (response.success) {
+      removeItem(STORAGE_KEY);
+      reset(initialValues);
+      setTermsOpened(false);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+  const formState = watch();
+  const sanitizedState = { ...formState, policy_agreement: undefined };
+  useAutoSave({ value: sanitizedState });
 
   return (
     <main className='padding-inline bg-dotted-purple py-16'>
@@ -47,46 +71,77 @@ const Home = () => {
         <section className='mt-10 ~text-sm/base'>
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
+              {/* Form content */}
               <div className='space-y-8'>
-                <PatientsDetails />
-                <InsuranceAndPayment />
+                <fieldset className='fieldset'>
+                  <PersonalInfo />
+                  <AddressDetails />
+                  <MentalHealth />
+                </fieldset>
+                <fieldset className='fieldset ~text-sm/base'>
+                  <h2 className='legend'>Insurance & Payment Info</h2>
+                  <InsuranceDetails />
+                  <CreditCardDetails />
+                </fieldset>
               </div>
 
-              <label
-                onClick={handleTermsOpened}
-                className='mx-auto flex w-full max-w-2xl items-center gap-4 ~text-sm/base'
-              >
-                <input
-                  className='flex-shrink-0 ~size-4/5'
-                  type='checkbox'
-                  value='agreed-to-terms'
-                  {...register('terms_and_conditions', {
-                    required: 'This field is required',
-                  })}
-                />
-                <div>
-                  <span>
-                    I confirm that I have read and agreed to Orenda&apos;s{' '}
-                    <PolicyDialog open={openTerms} onOpenChange={setOpenTerms}>
-                      <button
-                        type='button'
-                        className='font-medium text-orenda-purple underline underline-offset-2'
+              {/* Agreement Checkbox */}
+              <div className='sm:ps-8'>
+                <label
+                  onClick={handleTermsOpened}
+                  className='mx-auto flex w-full max-w-2xl items-center gap-4 ~text-sm/base'
+                >
+                  <input
+                    className='flex-shrink-0 ~size-4/5'
+                    type='checkbox'
+                    value='I agree'
+                    {...register('policy_agreement', {
+                      required: 'This field is required',
+                    })}
+                  />
+                  <div>
+                    <span>
+                      I confirm that I have read and agreed to Orenda&apos;s{' '}
+                      <PolicyDialog
+                        open={openTerms}
+                        onOpenChange={setOpenTerms}
                       >
-                        Terms of Use and Practice Policy
-                      </button>
-                    </PolicyDialog>
-                  </span>
-                  &nbsp;
-                  <span className='text-orenda-purple'>*</span>
-                </div>
-              </label>
+                        <button
+                          type='button'
+                          className='font-medium text-orenda-purple underline underline-offset-2'
+                        >
+                          Terms of Use and Practice Policy
+                        </button>
+                      </PolicyDialog>
+                    </span>
+                    &nbsp;
+                    <span className='text-orenda-purple'>*</span>
+                  </div>
+                </label>
+              </div>
+              {/* 
+              <button
+                className='fixed right-24 top-1/2'
+                type='button'
+                onClick={() =>
+                  scrollTo({
+                    left: 0,
+                    top: 0,
+                    behavior: 'smooth',
+                  })
+                }
+              >
+                Reset
+              </button> */}
 
+              {/* Form submit button */}
               <Button
                 disabled={!acceptedTerms}
+                isSubmitting={isLoading}
                 type='submit'
                 className='mx-auto mt-12'
               >
-                Submit Form
+                {isLoading ? 'Submitting...' : 'Submit Form'}
               </Button>
             </form>
           </FormProvider>

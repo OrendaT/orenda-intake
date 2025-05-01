@@ -1,5 +1,4 @@
 import IMask from '@/components/ui/imask';
-import Input from '@/components/ui/input';
 
 const CreditCardDetails = () => {
   return (
@@ -12,19 +11,29 @@ const CreditCardDetails = () => {
         <a href='tel:+13477077735'>(347) 707-7735</a>.
       </p>
 
-      <Input
+      <IMask
         label='Credit Card Number'
         name='credit_card_number'
-        required={true}
+        mask={'999999999999999'}
+        maskChar=''
       />
       <IMask
         label='Credit Card Expiration (mm/yy)'
-        name='credit_card_expiration'
+        name='credit_card_exp_date'
         mask='99/99'
-        required={true}
       />
-      <Input label='CVV / Security Code' name='cvv' required={true} />
-      <Input label='Billing Zip Code' name='billing_zip_code' required={true} />
+      <IMask
+        label='CVV / Security Code'
+        name='credit_card_csv'
+        mask={'9999'}
+        maskChar=''
+      />
+      <IMask
+        label='Billing Zip Code'
+        name='billing_zip_code'
+        mask={'99999'}
+        maskChar=''
+      />
     </section>
   );
 };

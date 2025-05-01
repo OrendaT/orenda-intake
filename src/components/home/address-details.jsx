@@ -1,18 +1,17 @@
 import Input from '@/components/ui/input';
 import Select from '@/components/ui/select';
 import { usStates } from '@/lib/definitions';
+import IMask from '../ui/imask';
 
-{
-  /* Address Section, Tel & Email */
-}
+/* Address Section, Tel & Email */
 const AddressDetails = () => {
   return (
     <section className='fieldset-section'>
       <div className='!mt-2 grid ~gap-2/3'>
-        <Input label='Address 1' name='address_1' />
+        <Input label='Address 1' name='address_one' />
         <Input
           label='Address 2'
-          name='address_2'
+          name='address_two'
           placeholder='Apartment, suite, unit, building, floor, etc (optional)'
           required={false}
         />
@@ -24,12 +23,13 @@ const AddressDetails = () => {
             size='small'
           />
           <Select label='State' name='state' options={usStates} size='small' />
-          <Input
+          <IMask
             label='Zip Code'
             name='zip_code'
-            type='number'
             errorMsg='State is required'
             size='small'
+            mask={'99999'}
+            maskChar=''
           />
         </div>
       </div>

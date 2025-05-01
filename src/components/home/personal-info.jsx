@@ -1,15 +1,25 @@
 import { useFormContext } from 'react-hook-form';
-import Tooltip from '@mui/material/Tooltip';
 import IMask from '@/components/ui/imask';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
-import AgreementCheckbox from '@/components/ui/agreement-checkbox';
 import DatePicker from '@/components/ui/date-picker';
 import 'react-date-picker/dist/DatePicker.css';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import Signature from '../ui/signature';
 
-const PersonalInfo = () => {
+export default function PersonalInfo() {
   const { watch } = useFormContext();
-  const isMinorChildAppointment = watch('minor_child_appointment') === 'Yes';
+  const isMinorChildAppointment = watch('for_minor_child') === 'Yes';
 
   return (
     <section className='fieldset-section'>
@@ -30,7 +40,7 @@ const PersonalInfo = () => {
       <div className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>
         <IMask
           label='Phone Number'
-          name='phone_number'
+          name='phone'
           mask='(999) 999-9999'
           type='tel'
         />
@@ -45,7 +55,7 @@ const PersonalInfo = () => {
           <span className='text-orenda-purple'>*</span>
         </h4>
         <div className='flex items-center ~gap-5/7'>
-          <Radios name='minor_child_appointment' options={['Yes', 'No']} />
+          <Radios name='for_minor_child' options={['Yes', 'No']} />
         </div>
 
         {/* Conditional Acknowledgment Message & Checkbox */}
@@ -58,24 +68,23 @@ const PersonalInfo = () => {
                   of the first appointment with a minor.
                 </strong>
               </p>
-
               <p className='text-sm text-gray-700'>
                 I understand and give permission for my child to be treated by
-                an Orenda Psychiatry provider. As part of my child&apos;s treatment,
-                their provider may prescribe medication as needed for their
-                condition. I understand the provider may need to speak with me
-                to discuss medication options and changes on an ongoing basis. I
-                understand that I will be informed immediately about situations
-                that could endanger my child. I know that this decision to
-                breach confidentiality in these circumstances is up to the
-                clinician’s professional judgment and is in the best interest of
-                my child. I will refrain from requesting detailed information
-                about individual therapy sessions with my child. I understand
-                that I will be provided with periodic updates about general
-                progress, and/or may be asked to participate in therapy sessions
-                as needed. I understand my provider may require one-on-one
-                sessions with my child without any parent present and the
-                provider may request to speak to a parent without the child
+                an Orenda Psychiatry provider. As part of my child&apos;s
+                treatment, their provider may prescribe medication as needed for
+                their condition. I understand the provider may need to speak
+                with me to discuss medication options and changes on an ongoing
+                basis. I understand that I will be informed immediately about
+                situations that could endanger my child. I know that this
+                decision to breach confidentiality in these circumstances is up
+                to the clinician’s professional judgment and is in the best
+                interest of my child. I will refrain from requesting detailed
+                information about individual therapy sessions with my child. I
+                understand that I will be provided with periodic updates about
+                general progress, and/or may be asked to participate in therapy
+                sessions as needed. I understand my provider may require
+                one-on-one sessions with my child without any parent present and
+                the provider may request to speak to a parent without the child
                 present. <br />
                 <br />
                 <strong className='font-medium'>
@@ -84,20 +93,14 @@ const PersonalInfo = () => {
                   CONFIDENTIALITY.
                 </strong>
               </p>
-
-              <AgreementCheckbox
-                label='I agree'
-                name='minor_child_agreement'
-                className='mt-2'
-                errorMsg='This field is required'
-              />
+              <Signature name='guardian_signature' />
             </div>
 
             <div className='mt-4 flex flex-col gap-x-8 gap-y-6 sm:flex-row'>
               <Input label='Your Name (Guardian)' name='guardian_name' />
               <Input
                 label='Relationship to child'
-                name='relationship_to_child'
+                name='relationship_with_child'
               />
             </div>
           </>
@@ -109,26 +112,52 @@ const PersonalInfo = () => {
         <h4 className='label flex items-center'>
           Sex assigned at birth:&nbsp;
           <span className='text-orenda-purple'>*</span>
-          <Tooltip
-            title='This information is necessary for medical reasons related to psychiatric medications and treatment planning. This information will remain confidential.'
-            placement='top'
-          >
-            <button
-              type='button'
-              className='ml-2 size-5 rounded-full bg-gray-400 text-[0.75em] leading-none text-white'
-            >
-              ?
-            </button>
-          </Tooltip>
+          <DesktopTooltip />
+          <MobileTooltip />
         </h4>
         <div className='flex items-center ~gap-5/7'>
-          <Radios name='sex_at_birth' options={['Male', 'Female']} />
+          <Radios name='sex_assigned_at_birth' options={['Male', 'Female']} />
         </div>
       </div>
 
       {/* Gender (Optional) */}
-      <Input label='Gender (Optional)' name='city' required={false} />
+      <Input label='Gender (Optional)' name='gender' required={false} />
     </section>
   );
-};
-export default PersonalInfo;
+}
+
+const DesktopTooltip = () => (
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger
+        type='button'
+        className='ml-2 hidden size-4 place-items-center rounded-full border-2 border-zinc-700 text-xs leading-none md:grid'
+      >
+        ?
+      </TooltipTrigger>
+      <TooltipContent>
+        <p className='max-w-[40ch]'>
+          This information is necessary for medical reasons related to
+          psychiatric medications and treatment planning. This information will
+          remain confidential.
+        </p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+);
+
+const MobileTooltip = () => (
+  <Popover>
+    <PopoverTrigger
+      type='button'
+      className='ml-2 grid size-4 place-items-center rounded-full border-2 border-zinc-700 text-xs leading-none md:hidden'
+    >
+      ?
+    </PopoverTrigger>
+    <PopoverContent className='max-w-[40ch] bg-black/90 p-2 text-xs text-white'>
+      This information is necessary for medical reasons related to psychiatric
+      medications and treatment planning. This information will remain
+      confidential.
+    </PopoverContent>
+  </Popover>
+);
