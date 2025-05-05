@@ -41,7 +41,7 @@ const DatePicker = ({
             format='MM/dd/yyyy'
           />
 
-          {error && <p className='error'>{error.message}</p>}
+          {error && <p className='error'>{error?.message}</p>}
         </div>
       )}
     />

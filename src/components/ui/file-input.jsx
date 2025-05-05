@@ -51,7 +51,7 @@ const FileInput = ({
       </small>
 
       {errors?.[name]?.message && (
-        <p className='error'>{errors?.[name].message}</p>
+        <p className='error'>{errors?.[name]?.message}</p>
       )}
 
       {/* Hidden File Input */}

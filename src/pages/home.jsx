@@ -31,7 +31,7 @@ const Home = () => {
   const [termsOpened, setTermsOpened] = useState(false);
 
   if(isError){
-    toast.error(error.message)
+    toast.error(error?.message)
   }
 
   const handleTermsOpened = () => {
