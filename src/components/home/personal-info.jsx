@@ -93,14 +93,22 @@ export default function PersonalInfo() {
                   CONFIDENTIALITY.
                 </strong>
               </p>
-              <Signature name='guardian_signature' />
+              <Signature
+                name='guardian_signature'
+                required={isMinorChildAppointment}
+              />
             </div>
 
             <div className='mt-4 flex flex-col gap-x-8 gap-y-6 sm:flex-row'>
-              <Input label='Your Name (Guardian)' name='guardian_name' />
+              <Input
+                label='Your Name (Guardian)'
+                name='guardian_name'
+                required={isMinorChildAppointment}
+              />
               <Input
                 label='Relationship to child'
                 name='relationship_with_child'
+                required={isMinorChildAppointment}
               />
             </div>
           </>
