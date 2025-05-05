@@ -127,8 +127,8 @@ const Comp = ({ id, className, onChange, value }) => {
         />
 
         {/* Click to sign overlay */}
-        {signature.text &&
-          !value.text &&
+        {signature?.text &&
+          !value?.text &&
           text === null &&
           !isClicked &&
           !focused && (

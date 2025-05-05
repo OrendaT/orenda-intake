@@ -1,9 +1,9 @@
 import { STORAGE_KEY } from '@/lib/constants';
-import { setItem } from '@/lib/utils';
+import { getItem, setItem } from '@/lib/utils';
 import { deepEqual } from 'fast-equals';
 import { useEffect, useRef } from 'react';
 
-const useAutoSave = ({ key = STORAGE_KEY, value, delay = 1000 }) => {
+const useAutoSave = ({ key = STORAGE_KEY, value, delay = 500 }) => {
   const previousValue = useRef(value);
 
   useEffect(() => {

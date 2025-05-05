@@ -13,6 +13,7 @@ const Input = ({
   pattern,
   minLength,
   validations,
+  className,
   ...inputProps
 }) => {
   return (
@@ -40,6 +41,7 @@ const Input = ({
           variant={variant}
           fullWidth
           placeholder={placeholder}
+          className={className}
           {...inputProps}
         />
       )}

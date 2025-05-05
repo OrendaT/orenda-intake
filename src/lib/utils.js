@@ -100,7 +100,7 @@ export const convertToFormData = (obj) => {
   Object.entries(obj).forEach(([key, value]) => {
     if (Array.isArray(value)) {
       value.forEach((item) => {
-        formData.append(`${key}[]`, item);
+        formData.append(key, item);
       });
     } else if (value) {
       formData.append(key, value);

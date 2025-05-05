@@ -14,12 +14,13 @@ import {
   CreditCardDetails,
   PolicyDialog,
 } from '@/components';
+import { toast } from 'sonner';
 
 const Home = () => {
   const defaultValues = getItem(STORAGE_KEY) ?? initialValues;
   const methods = useForm({ defaultValues });
   const { handleSubmit, register, reset, watch } = methods;
-  const { isLoading, submitData } = useSubmitData();
+  const { isLoading, submitData, isError, error } = useSubmitData();
 
   // Watch the policy agreement checkbox
   const acceptedTerms =
@@ -28,6 +29,10 @@ const Home = () => {
 
   const [openTerms, setOpenTerms] = useState(false);
   const [termsOpened, setTermsOpened] = useState(false);
+
+  if(isError){
+    toast.error(error.message)
+  }
 
   const handleTermsOpened = () => {
     if (!termsOpened) {
@@ -43,6 +48,8 @@ const Home = () => {
 
     const response = await submitData(data);
 
+    console.log(response);
+
     if (response.success) {
       removeItem(STORAGE_KEY);
       reset(initialValues);
@@ -55,7 +62,10 @@ const Home = () => {
     }
   };
   const formState = watch();
-  const sanitizedState = { ...formState, policy_agreement: undefined };
+  const sanitizedState = {
+    ...formState,
+    policy_agreement: undefined,
+  };
   useAutoSave({ value: sanitizedState });
 
   return (

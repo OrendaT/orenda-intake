@@ -234,6 +234,7 @@ const MentalHealth = () => {
             name='hospitalized_psych_details'
             label='Please provide detail'
             required={beenHospitalized}
+            className='mt-5'
           />
         )}
       </div>
