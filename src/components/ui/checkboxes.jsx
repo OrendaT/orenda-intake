@@ -9,8 +9,7 @@ const Checkboxes = ({
   disabled,
   required,
   errorMsg,
-  pattern,
-  minLength,
+  registerOptions,
   validations,
 }) => {
   const {
@@ -36,8 +35,7 @@ const Checkboxes = ({
                 value: required,
                 message: errorMsg || 'This field is required',
               },
-              pattern,
-              minLength,
+              ...registerOptions,
               validate: validations,
             })}
           />

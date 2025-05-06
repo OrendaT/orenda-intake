@@ -95,7 +95,7 @@ export default function PersonalInfo() {
               </p>
               <Signature
                 name='guardian_signature'
-                required={isMinorChildAppointment}
+                options={{ shouldUnregister: true }}
               />
             </div>
 
@@ -103,12 +103,12 @@ export default function PersonalInfo() {
               <Input
                 label='Your Name (Guardian)'
                 name='guardian_name'
-                required={isMinorChildAppointment}
+                registerOptions={{ shouldUnregister: true }}
               />
               <Input
                 label='Relationship to child'
                 name='relationship_with_child'
-                required={isMinorChildAppointment}
+                registerOptions={{ shouldUnregister: true }}
               />
             </div>
           </>

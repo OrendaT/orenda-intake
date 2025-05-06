@@ -15,12 +15,20 @@ import {
   PolicyDialog,
 } from '@/components';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
   const defaultValues = getItem(STORAGE_KEY) ?? initialValues;
   const methods = useForm({ defaultValues });
-  const { handleSubmit, register, reset, watch } = methods;
+  const {
+    handleSubmit,
+    register,
+    reset,
+    watch,
+    formState: { errors },
+  } = methods;
   const { isLoading, submitData, isError, error } = useSubmitData();
+  const navigate = useNavigate();
 
   // Watch the policy agreement checkbox
   const acceptedTerms =
@@ -30,8 +38,8 @@ const Home = () => {
   const [openTerms, setOpenTerms] = useState(false);
   const [termsOpened, setTermsOpened] = useState(false);
 
-  if(isError){
-    toast.error(error?.message)
+  if (isError) {
+    toast.error(error?.message || error?.error || 'Something went wrong');
   }
 
   const handleTermsOpened = () => {
@@ -44,21 +52,13 @@ const Home = () => {
   const onSubmit = async (data) => {
     data = parseFormData(data);
 
-    console.log(data);
-
     const response = await submitData(data);
-
-    console.log(response);
 
     if (response.success) {
       removeItem(STORAGE_KEY);
       reset(initialValues);
       setTermsOpened(false);
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
+      navigate('/success');
     }
   };
   const formState = watch();
@@ -66,6 +66,7 @@ const Home = () => {
     ...formState,
     policy_agreement: undefined,
   };
+
   useAutoSave({ value: sanitizedState });
 
   return (
@@ -153,6 +154,12 @@ const Home = () => {
               >
                 {isLoading ? 'Submitting...' : 'Submit Form'}
               </Button>
+
+              {!!Object.entries(errors)?.length && (
+                <p className='error !mt-4 text-center !text-sm font-semibold'>
+                  Please ensure all required fields are filled out.
+                </p>
+              )}
             </form>
           </FormProvider>
         </section>

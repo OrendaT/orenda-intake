@@ -5,6 +5,7 @@ import Layout from './layouts/layout.jsx';
 import Home from './pages/home.jsx';
 
 import './styles/index.css';
+import Success from './pages/success.jsx';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: '/success',
+        Component: Success,
       },
     ],
   },

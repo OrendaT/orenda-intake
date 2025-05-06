@@ -17,8 +17,7 @@ const Select = ({
   variant = 'standard',
   errorMsg = 'This field is required',
   placeholder,
-  pattern,
-  minLength,
+  registerOptions,
   validations,
   ...selectProps
 }) => {
@@ -32,8 +31,7 @@ const Select = ({
             value: required,
             message: errorMsg,
           },
-          pattern,
-          minLength,
+          ...registerOptions,
           validate: validations,
         }}
         render={({ field, fieldState: { error } }) => (
@@ -55,7 +53,9 @@ const Select = ({
             >
               {!required && <MenuItem value=''>None</MenuItem>}
               {options?.map((option) => (
-                <MenuItem key={option} value={option}>{option}</MenuItem>
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
               ))}
             </MUISelect>
             {error && <FormHelperText>{errorMsg}</FormHelperText>}

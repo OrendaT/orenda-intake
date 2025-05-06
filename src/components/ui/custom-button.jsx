@@ -31,8 +31,10 @@ const Button = ({
       className={cn(btnClasses, className)}
       {...props}
     >
-      <span className={cn(spanClasses, hoverClass)} />
-      {children}
+      <span>
+        <span className={cn(spanClasses, hoverClass)} />
+        {children}
+      </span>
     </Comp>
   );
 };

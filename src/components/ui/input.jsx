@@ -10,10 +10,9 @@ const Input = ({
   variant = 'standard',
   errorMsg = 'This field is required',
   placeholder,
-  pattern,
-  minLength,
   validations,
   className,
+  registerOptions,
   ...inputProps
 }) => {
   return (
@@ -25,8 +24,7 @@ const Input = ({
           value: required,
           message: errorMsg,
         },
-        pattern,
-        minLength,
+        ...registerOptions,
         validate: validations,
       }}
       render={({ field: { ref, ...field }, fieldState: { error } }) => (

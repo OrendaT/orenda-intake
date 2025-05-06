@@ -13,8 +13,7 @@ const IMask = ({
   variant,
   errorMsg,
   placeholder,
-  pattern,
-  minLength,
+  registerOptions,
   validations,
   maskPlaceholder,
   inputProps,
@@ -29,8 +28,7 @@ const IMask = ({
           value: required,
           message: errorMsg || 'This field is required',
         },
-        pattern,
-        minLength,
+        ...registerOptions,
         validate: validations,
       }}
       render={({ field: { onChange, value, ref }, fieldState: { error } }) => (

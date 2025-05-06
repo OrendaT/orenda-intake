@@ -58,8 +58,6 @@ export const base64ToFile = (base64Data, fileName) => {
   return new File([uint8Array], fileName, { type: mime });
 };
 
-
-
 export const convertFileListsToFiles = (obj) => {
   Object.entries(obj).forEach(([key, value]) => {
     if (value instanceof FileList && value.length === 1) {
@@ -71,8 +69,8 @@ export const convertFileListsToFiles = (obj) => {
 
 export const convertBase64ToFile = (obj) => {
   Object.entries(obj).forEach(([key, value]) => {
-    if (base64Strings.includes(key)) {
-      obj[key] = base64ToFile(value.base64, key);
+    if (base64Strings?.includes(key)) {
+      if (value) obj[key] = base64ToFile(value.base64, key);
     }
   });
 

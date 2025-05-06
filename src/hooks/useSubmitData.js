@@ -22,12 +22,16 @@ const useSubmitData = () => {
     } catch (error) {
       setIsError(true);
       setError(error.response.data);
+      setTimeout(() => {
+        setIsError(false);
+        setError(null);
+      }, 3000);
       console.error(error);
     } finally {
       setIsLoading(false);
     }
 
-    return response.data;
+    return response.data || response;
   };
 
   return { isLoading, isError, error, submitData };

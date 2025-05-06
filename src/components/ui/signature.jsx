@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
 import useSignature from '@/hooks/useSignature';
@@ -23,6 +23,9 @@ const Comp = ({ id, className, onChange, value }) => {
   const [text, setText] = useState(() => null);
   const [isClicked, setIsClicked] = useState(false);
   const [focused, setFocused] = useState(false);
+  const {
+    formState: { errors },
+  } = useFormContext();
 
   const canvasRef = useRef(null);
 
@@ -144,15 +147,18 @@ const Comp = ({ id, className, onChange, value }) => {
             </button>
           )}
       </div>
+      <div>
+        {errors?.[id] && <p className='error'>Your signature is required</p>}
 
-      {/* Clear button */}
-      <button
-        type='button'
-        onClick={clear}
-        className='ml-auto block rounded-lg border border-zinc-800 px-4 py-1.5 text-sm uppercase tracking-wide'
-      >
-        Clear
-      </button>
+        {/* Clear button */}
+        <button
+          type='button'
+          onClick={clear}
+          className='ml-auto block rounded-lg border border-zinc-800 px-4 py-1.5 text-sm uppercase tracking-wide'
+        >
+          Clear
+        </button>
+      </div>
     </div>
   );
 };
@@ -177,11 +183,16 @@ export default function SignatureMaker({
   required = true,
   errorMsg,
   className,
+  options,
 }) {
   return (
     <Controller
       name={name}
-      rules={{ disabled, required: { value: required, message: errorMsg } }}
+      rules={{
+        disabled,
+        required: { value: required, message: errorMsg },
+        ...options,
+      }}
       render={({ field: { onChange, value } }) => (
         <Comp
           id={name}
