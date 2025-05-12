@@ -57,7 +57,7 @@ const Comp = ({ id, className, onChange, value }) => {
   };
 
   const handleChange = (value) => {
-    const base64 = canvasRef.current?.toDataURL() || '';
+    const base64 = drawOnCanvas(value);
     setSignature({ text: value ?? text, base64 });
     onChange({ text: value ?? text, base64 });
   };
