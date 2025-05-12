@@ -7,7 +7,7 @@ const Checkboxes = ({
   size,
   className,
   disabled,
-  required,
+  required = true,
   errorMsg,
   registerOptions,
   validations,

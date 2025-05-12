@@ -110,7 +110,8 @@ const MentalHealth = () => {
       <div>
         <h3 className='label'>
           Please check any of the following you have experienced in the past six
-          months
+          months&nbsp;
+          <span className='text-orenda-purple'>*</span>
         </h3>
         <div className='mb-3 grid sm:grid-cols-2'>
           <Checkboxes
@@ -256,7 +257,8 @@ const MentalHealth = () => {
 
       <div>
         <h3 className='label'>
-          Personal medical history; please check all that apply
+          Personal medical history; please check all that apply&nbsp;
+          <span className='text-orenda-purple'>*</span>
         </h3>
         <div className='mb-3 grid sm:grid-cols-2'>
           <Checkboxes
