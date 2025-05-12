@@ -15,8 +15,25 @@ const Success = () => {
         <p className='mb-12 max-w-[23.5rem] ~text-sm/base'>
           Form has been submitted successfully.
         </p>
-        <Link className='mx-auto block w-full max-w-72' to='/'>
-          <Button>Home page</Button>
+
+        <p className='mx-auto mb-6 max-w-md text-center ~text-sm/base'>
+          We use billing partners including Headway to process billing and
+          insurance claims. Please click below to go to Headway for Insurance
+          In-Network acknowledgments
+        </p>
+
+        <Link
+          className='flex w-2/3 max-w-64'
+          to='https://headway.co/sign-up'
+          target='_blank'
+          rel='noreferrer noopener'
+        >
+          <Button
+            className='max-w-64 border-orenda-green text-orenda-green'
+            hoverClass='bg-orenda-green text-white'
+          >
+            Go to Headway
+          </Button>
         </Link>
       </div>
     </main>
