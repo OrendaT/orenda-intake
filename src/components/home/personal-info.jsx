@@ -4,18 +4,8 @@ import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import DatePicker from '@/components/ui/date-picker';
 import 'react-date-picker/dist/DatePicker.css';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import Signature from '../ui/signature';
+import ResponsiveTooltip from '../responsive-tooltip';
 
 export default function PersonalInfo() {
   const { watch } = useFormContext();
@@ -120,8 +110,12 @@ export default function PersonalInfo() {
         <h4 className='label flex items-center'>
           Sex assigned at birth:&nbsp;
           <span className='text-orenda-purple'>*</span>
-          <DesktopTooltip />
-          <MobileTooltip />
+          <ResponsiveTooltip
+            trigger={'?'}
+            content={`This information is necessary for medical reasons related to
+              psychiatric medications and treatment planning. This information
+              will remain confidential.`}
+          />
         </h4>
         <div className='flex items-center ~gap-5/7'>
           <Radios name='sex_assigned_at_birth' options={['Male', 'Female']} />

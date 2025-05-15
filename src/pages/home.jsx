@@ -16,6 +16,8 @@ import {
 } from '@/components';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
+import SignatureMaker from '@/components/ui/signature';
+import ResponsiveTooltip from '@/components/responsive-tooltip';
 
 const Home = () => {
   const defaultValues = getItem(STORAGE_KEY) ?? initialValues;
@@ -36,18 +38,10 @@ const Home = () => {
     watch('policy_agreement') === 'I agree';
 
   const [openTerms, setOpenTerms] = useState(false);
-  const [termsOpened, setTermsOpened] = useState(false);
 
   if (isError) {
     toast.error(error?.message || error?.error || 'Something went wrong');
   }
-
-  const handleTermsOpened = () => {
-    if (!termsOpened) {
-      setTermsOpened(true);
-      setOpenTerms(true);
-    }
-  };
 
   const onSubmit = async (data) => {
     data = parseFormData(data);
@@ -75,8 +69,13 @@ const Home = () => {
         <h1 className='mb-4 text-center font-heading font-bold ~text-3xl/[2.625rem]'>
           Orenda Intake Form
         </h1>
-        <p className='text-center font-semibold ~text-sm/base'>
-          Please fill this out with current information towards your appointment
+        <p className='mx-auto max-w-3xl text-center font-semibold ~text-sm/base'>
+          Please complete this form so your appointment may be scheduled
+          <br />
+          <em>
+            (/Your appointment will be confirmed following the completion of
+            this form/)
+          </em>
         </p>
 
         <section className='mt-10 ~text-sm/base'>
@@ -96,14 +95,11 @@ const Home = () => {
                 </fieldset>
               </div>
 
-              {/* Agreement Checkbox */}
-              <div className='sm:ps-8'>
-                <label
-                  onClick={handleTermsOpened}
-                  className='mx-auto flex w-full max-w-2xl items-center gap-4 ~text-sm/base'
-                >
+              {/* Terms and Conditions Agreement */}
+              <fieldset className='mx-auto max-w-[46.125rem] rounded border-l-[5px] border-zinc-500 bg-transparent pb-0 ~px-5/12 ~pt-3/6'>
+                <label className='flex w-full items-center gap-2 ~text-sm/[0.93rem]'>
                   <input
-                    className='flex-shrink-0 ~size-4/5'
+                    className='size-4 flex-shrink-0'
                     type='checkbox'
                     value='I agree'
                     {...register('policy_agreement', {
@@ -128,22 +124,12 @@ const Home = () => {
                     &nbsp;
                     <span className='text-orenda-purple'>*</span>
                   </div>
+
+                  <ResponsiveTooltip trigger={'?'} content={'Terms of Use'} />
                 </label>
-              </div>
-              {/* 
-              <button
-                className='fixed right-24 top-1/2'
-                type='button'
-                onClick={() =>
-                  scrollTo({
-                    left: 0,
-                    top: 0,
-                    behavior: 'smooth',
-                  })
-                }
-              >
-                Reset
-              </button> */}
+
+                <SignatureMaker name='terms_signature' className='mt-5' />
+              </fieldset>
 
               {/* Form submit button */}
               <Button

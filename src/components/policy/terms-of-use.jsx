@@ -1,5 +1,3 @@
-import Signature from '../ui/signature';
-
 const Terms = () => {
   return (
     <section className='mt-12'>
@@ -31,13 +29,6 @@ const Terms = () => {
             connections are not adequate
           </li>
         </ol>
-
-        <p className='my-4'>
-          BY SIGNING BELOW I CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE TO
-          THE ITEMS CONTAINED IN THIS DOCUMENT.
-        </p>
-
-        <Signature name='telehealth_consent_signature' />
       </article>
 
       {/* NOTICE OF PRIVACY PRACTICES */}
@@ -340,13 +331,6 @@ const Terms = () => {
           acknowledging that you have received a copy of HIPAA Notice of Privacy
           Practices.
         </p>
-        <p className='mb-4'>
-          BY SIGNING BELOW I CERTIFY THAT I HAVE READ, UNDERSTAND AND AGREE
-          TO THE PROVISION OF PSYCHIATRIC SERVICES BY ORENDA PSYCHIATRY AND ITS
-          PROVIDERS.
-        </p>
-
-        <Signature name='privacy_policy_signature' />
       </article>
     </section>
   );

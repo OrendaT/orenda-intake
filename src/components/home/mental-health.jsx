@@ -167,7 +167,8 @@ const MentalHealth = () => {
 
       <div>
         <h3 className='label'>
-          Please list any medication allergies.&nbsp;
+          Please list any medication allergies (If none, please indicate)
+          &nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
         <Input
