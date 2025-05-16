@@ -1,5 +1,10 @@
 import axios from '@/lib/axios';
-import { getLSItem, isValidEmail, setLSItem } from '@/lib/utils';
+import {
+  convertToFormData,
+  getLSItem,
+  isValidEmail,
+  setLSItem,
+} from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
@@ -20,11 +25,12 @@ const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
         if (isPending && !form_id) {
           try {
             setIsLoading(true);
-            const res = await axios.post('patients/pending-patient', {
+            const data = convertToFormData({
               first_name,
               last_name,
               email,
             });
+            const res = await axios.post('patients/pending-patient', data);
 
             if (res.data.success) {
               setLSItem('form_id', res.data.id);

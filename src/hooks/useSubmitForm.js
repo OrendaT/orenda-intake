@@ -1,6 +1,7 @@
 import { convertToFormData, getLSItem, removeLSItem } from '@/lib/utils';
 import axios from '@/lib/axios';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 const useSubmitForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +20,7 @@ const useSubmitForm = () => {
       removeLSItem('form_id');
       setError(null);
     } catch (error) {
+      toast.error(error.response?.data?.message || 'Something went wrong');
       setIsError(true);
       setError(error.response.data);
       setTimeout(() => {

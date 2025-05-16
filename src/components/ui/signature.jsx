@@ -33,7 +33,7 @@ const Comp = ({ id, className, onChange, value }) => {
    *
    * @param {string} text - Signature text
    */
-  const drawOnCanvas = async (text) => {
+  const drawOnCanvas = (text) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -44,9 +44,6 @@ const Comp = ({ id, className, onChange, value }) => {
     canvas.height = CANVAS_Y * ratio;
     ctx.scale(ratio, ratio);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Wait for web fonts to load
-    // await document.fonts.ready;
 
     if (text) {
       ctx.font =
@@ -88,11 +85,12 @@ const Comp = ({ id, className, onChange, value }) => {
       setIsClicked(false);
     }
 
-    /** Redraw stored signature text on canvas automatically 
+    /** Redraw stored signature text on canvas automatically
      * after signed via click to sign
      */
     if (isClicked) {
       drawOnCanvas(signature.text || '');
+      onChange(signature);
     }
   }, [signature, isClicked, drawOnCanvas]);
 

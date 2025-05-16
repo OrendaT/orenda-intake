@@ -14,7 +14,6 @@ import {
   CreditCardDetails,
   PolicyDialog,
 } from '@/components';
-import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
 import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
@@ -30,7 +29,7 @@ const Home = () => {
     watch,
     formState: { errors },
   } = methods;
-  const { isLoading, submitForm, isError, error } = useSubmitForm();
+  const { isLoading, submitForm } = useSubmitForm();
   const navigate = useNavigate();
 
   // Watch the policy agreement checkbox
@@ -40,10 +39,6 @@ const Home = () => {
 
   const [openTerms, setOpenTerms] = useState(false);
 
-  if (isError) {
-    toast.error(error?.message || error?.error || 'Something went wrong');
-  }
-
   const onSubmit = async (data) => {
     data = parseFormData(data);
 
@@ -51,7 +46,6 @@ const Home = () => {
 
     if (response.success) {
       removeItem(STORAGE_KEY);
-      reset(initialValues);
       navigate('/success');
     }
   };
