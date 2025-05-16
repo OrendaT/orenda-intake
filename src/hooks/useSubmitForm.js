@@ -1,21 +1,22 @@
-import { convertToFormData } from '@/lib/utils';
+import { convertToFormData, getLSItem, removeLSItem } from '@/lib/utils';
 import axios from '@/lib/axios';
 import { useState } from 'react';
-import { toast } from 'sonner';
 
-const useSubmitData = () => {
+const useSubmitForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState(null);
 
-  const submitData = async (data) => {
+  const submitForm = async (data) => {
     let response;
+    const id = getLSItem('form_id');
+    data.id = id;
     const formData = convertToFormData(data);
 
     try {
       setIsLoading(true);
       response = await axios.post('patients', formData);
-      toast.success('Form submission successful!');
+      removeLSItem('form_id');
       setError(null);
     } catch (error) {
       setIsError(true);
@@ -32,6 +33,6 @@ const useSubmitData = () => {
     return response.data || response;
   };
 
-  return { isLoading, isError, error, submitData };
+  return { isLoading, isError, error, submitForm };
 };
-export default useSubmitData;
+export default useSubmitForm;

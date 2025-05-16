@@ -11,6 +11,9 @@ export const cn = (...inputs) => twMerge(clsx(inputs));
 export const setItem = (key, value) =>
   Cookies.set(key, JSON.stringify(value), { expires: EXPIRY_TIME });
 
+export const setLSItem = (key, value) =>
+  localStorage.setItem(key, JSON.stringify(value));
+
 export const getItem = (key) => {
   let item = Cookies.get(key);
   if (item) {
@@ -18,12 +21,28 @@ export const getItem = (key) => {
   }
   return item;
 };
+
+export const getLSItem = (key) => {
+  let item = localStorage.getItem(key);
+  if (item) {
+    item = JSON.parse(item);
+  }
+  return item;
+};
+
 export const removeItem = (key) => Cookies.remove(key);
+
+export const removeLSItem = (key) => localStorage.removeItem(key);
 
 export const isNumeric = (value) => {
   if (typeof value === 'number') return !isNaN(value);
   if (typeof value === 'string') return /^\d+$/.test(value.trim());
   return false;
+};
+
+export const isValidEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
 };
 
 /**
@@ -106,9 +125,4 @@ export const convertToFormData = (obj) => {
   });
 
   return formData;
-};
-
-export const isValidEmail = (email) => {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
 };

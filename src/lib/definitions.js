@@ -56,7 +56,7 @@ export const usStates = [
 export const base64Strings = [
   'guardian_signature',
   'honesty_signature',
-  'policy_signature',
+  'policy_agreement_signature',
 ];
 
 export const initialValues = {
@@ -119,5 +119,5 @@ export const initialValues = {
   honesty_signature: '',
 
   policy_agreement: '',
-  policy_signature: '',
+  policy_agreement_signature: '',
 };

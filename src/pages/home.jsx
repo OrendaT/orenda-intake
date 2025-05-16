@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { getItem, parseFormData, removeItem } from '@/lib/utils';
 import { STORAGE_KEY } from '@/lib/constants';
 import useAutoSave from '@/hooks/useAutoSave';
-import useSubmitData from '@/hooks/useSubmitData';
+import useSubmitForm from '@/hooks/useSubmitForm';
 import { initialValues } from '@/lib/definitions';
 import {
   PersonalInfo,
@@ -18,6 +18,7 @@ import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
 import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
+import useAutoCreateForm from '@/hooks/useAutoCreateForm';
 
 const Home = () => {
   const defaultValues = getItem(STORAGE_KEY) ?? initialValues;
@@ -29,7 +30,7 @@ const Home = () => {
     watch,
     formState: { errors },
   } = methods;
-  const { isLoading, submitData, isError, error } = useSubmitData();
+  const { isLoading, submitForm, isError, error } = useSubmitForm();
   const navigate = useNavigate();
 
   // Watch the policy agreement checkbox
@@ -46,12 +47,11 @@ const Home = () => {
   const onSubmit = async (data) => {
     data = parseFormData(data);
 
-    const response = await submitData(data);
+    const response = await submitForm(data);
 
     if (response.success) {
       removeItem(STORAGE_KEY);
       reset(initialValues);
-      setTermsOpened(false);
       navigate('/success');
     }
   };
@@ -62,6 +62,9 @@ const Home = () => {
   };
 
   useAutoSave({ value: sanitizedState });
+
+  const { first_name, last_name, email, phone } = formState;
+  useAutoCreateForm({ first_name, last_name, email, phone });
 
   return (
     <main className='padding-inline bg-dotted-purple py-16'>
@@ -142,7 +145,10 @@ const Home = () => {
                   </div>
                 </label>
 
-                <SignaturePad name='policy_signature' className='mt-5' />
+                <SignaturePad
+                  name='policy_agreement_signature'
+                  className='mt-5'
+                />
               </fieldset>
 
               {/* Form submit button */}
