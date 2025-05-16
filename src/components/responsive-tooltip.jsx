@@ -28,7 +28,7 @@ const ResponsiveTooltip = ({
               className,
             )}
           >
-            {trigger}
+            {trigger || '?'}
           </TooltipTrigger>
           <TooltipContent className={cn('max-w-[40ch]', contentClassName)}>
             {content}

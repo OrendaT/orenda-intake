@@ -111,7 +111,6 @@ export default function PersonalInfo() {
           Sex assigned at birth:&nbsp;
           <span className='text-orenda-purple'>*</span>
           <ResponsiveTooltip
-            trigger={'?'}
             content={`This information is necessary for medical reasons related to
               psychiatric medications and treatment planning. This information
               will remain confidential.`}

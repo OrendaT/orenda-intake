@@ -16,7 +16,7 @@ import {
 } from '@/components';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
-import SignatureMaker from '@/components/ui/signature';
+import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 
 const Home = () => {
@@ -97,7 +97,7 @@ const Home = () => {
 
               {/* Terms and Conditions Agreement */}
               <fieldset className='mx-auto max-w-[46.125rem] rounded border-l-[5px] border-zinc-500 bg-transparent pb-0 ~px-5/12 ~pt-3/6'>
-                <label className='flex w-full items-center gap-2 ~text-sm/[0.93rem]'>
+                <label className='flex w-full items-center gap-3 ~text-sm/[0.93rem]'>
                   <input
                     className='size-4 flex-shrink-0'
                     type='checkbox'
@@ -106,29 +106,43 @@ const Home = () => {
                       required: 'This field is required',
                     })}
                   />
+
                   <div>
                     <span>
-                      I confirm that I have read and agreed to Orenda&apos;s{' '}
+                      By clicking on the checkbox and signing below, I confirm
+                      that I have read and agreed to Orenda&apos;s{' '}
                       <PolicyDialog
                         open={openTerms}
                         onOpenChange={setOpenTerms}
                       >
                         <button
                           type='button'
-                          className='font-medium text-orenda-purple underline underline-offset-2'
+                          className='font-medium text-orenda-purple'
                         >
-                          Terms of Use and Practice Policy
+                          <span className='underline underline-offset-2'>
+                            Terms of Use and Practice Policy
+                          </span>
                         </button>
                       </PolicyDialog>
                     </span>
-                    &nbsp;
-                    <span className='text-orenda-purple'>*</span>
-                  </div>
 
-                  <ResponsiveTooltip trigger={'?'} content={'Terms of Use'} />
+                    <span className='inline-flex'>
+                      <ResponsiveTooltip
+                        content={
+                          <ul>
+                            <li>Consent for Telehealth Consultation</li>
+                            <li>Notice of Privacy Policies</li>
+                            <li>Practice Policies</li>
+                            <li>Informed Consent for Psychiatric Treatment </li>
+                            <li>Consent for Medication History</li>
+                          </ul>
+                        }
+                      />
+                    </span>
+                  </div>
                 </label>
 
-                <SignatureMaker name='terms_signature' className='mt-5' />
+                <SignaturePad name='terms_signature' className='mt-5' />
               </fieldset>
 
               {/* Form submit button */}

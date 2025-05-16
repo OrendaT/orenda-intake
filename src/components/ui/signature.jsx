@@ -20,7 +20,6 @@ const MAX_LENGTH = 29; // Max characters for signature text
 const Comp = ({ id, className, onChange, value }) => {
   const { signature, setSignature } = useSignature();
 
-  const [text, setText] = useState(() => null);
   const [isClicked, setIsClicked] = useState(false);
   const [focused, setFocused] = useState(false);
   const {
@@ -34,7 +33,7 @@ const Comp = ({ id, className, onChange, value }) => {
    *
    * @param {string} text - Signature text
    */
-  const drawOnCanvas = (text) => {
+  const drawOnCanvas = async (text) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -46,8 +45,12 @@ const Comp = ({ id, className, onChange, value }) => {
     ctx.scale(ratio, ratio);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Wait for web fonts to load
+    // await document.fonts.ready;
+
     if (text) {
-      ctx.font = 'italic 100px "Dancing Script"';
+      ctx.font =
+        'italic 100px "Dancing Script", "Pacifico", "Great Vibes", "Brush Script MT", cursive';
       ctx.fillStyle = 'rgba(0,0,0)';
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'center';
@@ -58,8 +61,8 @@ const Comp = ({ id, className, onChange, value }) => {
 
   const handleChange = (value) => {
     const base64 = drawOnCanvas(value);
-    setSignature({ text: value ?? text, base64 });
-    onChange({ text: value ?? text, base64 });
+    if (!isClicked) setSignature({ text: value, base64 });
+    onChange({ text: value, base64 });
   };
 
   /** Redraw stored signature text on canvas */
@@ -71,50 +74,43 @@ const Comp = ({ id, className, onChange, value }) => {
     }
   };
 
-  /** Clears the signature */
+  /** Clears the signature from internal clear */
   const clear = () => {
     setSignature({ text: '', base64: '' });
+    setIsClicked(false);
+    drawOnCanvas('');
   };
 
   useEffect(() => {
-    if (!signature.text && text) {
-      setText('');
+    /** Clears the signature from external clear */
+    if (!signature.text && value?.text) {
+      handleChange('');
+      setIsClicked(false);
     }
 
-    if (signature.text && text === '') {
-      setText(null);
-    }
-
+    /** Redraw stored signature text on canvas automatically 
+     * after signed via click to sign
+     */
     if (isClicked) {
       drawOnCanvas(signature.text || '');
-      handleChange();
     }
-  }, [signature, text]);
-
-  useEffect(() => {
-    if (value?.base64) {
-      drawOnCanvas(value.text);
-    }
-  }, [drawOnCanvas]);
+  }, [signature, isClicked, drawOnCanvas]);
 
   return (
     <div id={id} className={cn('signature', className)}>
       {/* Text input for signature */}
-      {(!signature.text || text !== null) && (
+      {(!signature.text || value?.text) && !isClicked && (
         <input
           type='text'
-          value={text}
-          onChange={(e) => {
-            const value = e.target.value;
+          value={value?.text}
+          onChange={({ target: { value } }) => {
             if (value.length > MAX_LENGTH) return;
-            setText(value);
             handleChange(value);
           }}
           className='mb-2 mt-4 block w-full max-w-sm rounded bg-white/50 px-4 py-2 outline outline-1 outline-zinc-200 transition-all duration-300 ~text-sm/base focus:outline-zinc-500'
           placeholder='Type your signature here'
           onFocus={() => setFocused(true)}
           onBlur={() => {
-            if (text === '') setText(null);
             setFocused(false);
           }}
         />
@@ -130,34 +126,30 @@ const Comp = ({ id, className, onChange, value }) => {
         />
 
         {/* Click to sign overlay */}
-        {signature?.text &&
-          !value?.text &&
-          text === null &&
-          !isClicked &&
-          !focused && (
-            <button
-              type='button'
-              onClick={sign}
-              className='absolute inset-0 content-center rounded-[inherit] bg-black/20 text-center font-open-sans'
-            >
-              <p className='font-medium italic ~text-base/3xl'>
-                <span className='sm:hidden'>Tap</span>{' '}
-                <span className='hidden sm:inline'>Click</span> to sign
-              </p>
-            </button>
-          )}
+        {signature?.text && !value?.text && !isClicked && !focused && (
+          <button
+            type='button'
+            onClick={sign}
+            className='absolute inset-0 content-center rounded-[inherit] bg-black/20 text-center font-open-sans'
+          >
+            <p className='font-medium italic ~text-base/3xl'>
+              <span className='sm:hidden'>Tap</span>{' '}
+              <span className='hidden sm:inline'>Click</span> to sign
+            </p>
+          </button>
+        )}
       </div>
       <div>
         {errors?.[id] && <p className='error'>Your signature is required</p>}
 
         {/* Clear button */}
-        <button
+        {/* <button
           type='button'
           onClick={clear}
           className='ml-auto block rounded-lg border border-zinc-800 px-4 py-1.5 text-sm uppercase tracking-wide'
         >
           Clear
-        </button>
+        </button> */}
       </div>
     </div>
   );
@@ -165,7 +157,7 @@ const Comp = ({ id, className, onChange, value }) => {
 
 /**
  * @author vehktaur
- * @component SignatureMaker
+ * @component SignaturePad
  *
  * @description A typed signature input controlled by React Hook Form. Renders a canvas preview and outputs
  * base64-encoded image of the signature.
@@ -177,7 +169,7 @@ const Comp = ({ id, className, onChange, value }) => {
  * @param {string} [props.errorMsg] - Error message for validation
  * @param {string} [props.className] - Optional wrapper class
  */
-export default function SignatureMaker({
+export default function SignaturePad({
   name,
   disabled = false,
   required = true,

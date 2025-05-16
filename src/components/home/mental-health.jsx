@@ -4,7 +4,7 @@ import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import AgreementCheckbox from '@/components/ui/agreement-checkbox';
 import Checkboxes from '../ui/checkboxes';
-import SignatureMaker from '../ui/signature';
+import SignaturePad from '../ui/signature';
 
 const MentalHealth = () => {
   const { watch } = useFormContext();
@@ -167,8 +167,7 @@ const MentalHealth = () => {
 
       <div>
         <h3 className='label'>
-          Please list any medication allergies (If none, please indicate)
-          &nbsp;
+          Please list any medication allergies (If none, please indicate) &nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
         <Input
@@ -486,7 +485,7 @@ const MentalHealth = () => {
         name='honesty'
         label='I answered all questions truthfully'
       />
-      <SignatureMaker name='honesty_signature' />
+      <SignaturePad name='honesty_signature' />
     </section>
   );
 };
