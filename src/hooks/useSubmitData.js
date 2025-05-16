@@ -1,9 +1,7 @@
 import { convertToFormData } from '@/lib/utils';
-import axios from 'axios';
+import axios from '@/lib/axios';
 import { useState } from 'react';
 import { toast } from 'sonner';
-
-const url = import.meta.env.VITE_API_URL;
 
 const useSubmitData = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +14,7 @@ const useSubmitData = () => {
 
     try {
       setIsLoading(true);
-      response = await axios.post(url, formData);
+      response = await axios.post('patients', formData);
       toast.success('Form submission successful!');
       setError(null);
     } catch (error) {
