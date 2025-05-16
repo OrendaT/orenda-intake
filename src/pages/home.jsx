@@ -142,7 +142,7 @@ const Home = () => {
                   </div>
                 </label>
 
-                <SignaturePad name='terms_signature' className='mt-5' />
+                <SignaturePad name='policy_signature' className='mt-5' />
               </fieldset>
 
               {/* Form submit button */}

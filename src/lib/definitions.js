@@ -53,18 +53,10 @@ export const usStates = [
   'Wyoming',
 ];
 
-export const policy_signatures = [
-  'medication_history_signature',
-  'informed_consent_signature',
-  'practice_policies_signature',
-  'privacy_policy_signature',
-  'telehealth_consent_signature',
-];
-
 export const base64Strings = [
   'guardian_signature',
   'honesty_signature',
-  ...policy_signatures,
+  'policy_signature',
 ];
 
 export const initialValues = {
@@ -98,12 +90,6 @@ export const initialValues = {
   credit_card_exp_date: '',
   credit_card_csv: '',
   billing_zip_code: '',
-  policy_agreement: '',
-  medication_history_signature: '',
-  informed_consent_signature: '',
-  practice_policies_signature: '',
-  privacy_policy_signature: '',
-  telehealth_consent_signature: '',
 
   // New fields
   seen_health_professional: '',
@@ -131,4 +117,7 @@ export const initialValues = {
   has_weapons: '',
   honesty: '',
   honesty_signature: '',
+
+  policy_agreement: '',
+  policy_signature: '',
 };
