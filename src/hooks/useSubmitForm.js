@@ -32,7 +32,7 @@ const useSubmitForm = () => {
       setIsLoading(false);
     }
 
-    return response.data || response;
+    return response;
   };
 
   return { isLoading, isError, error, submitForm };

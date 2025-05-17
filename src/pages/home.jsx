@@ -14,10 +14,10 @@ import {
   CreditCardDetails,
   PolicyDialog,
 } from '@/components';
-import { useNavigate } from 'react-router';
 import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import useAutoCreateForm from '@/hooks/useAutoCreateForm';
+import useSignature from '@/hooks/useSignature';
 
 const Home = () => {
   const defaultValues = getItem(STORAGE_KEY) ?? initialValues;
@@ -30,7 +30,7 @@ const Home = () => {
     formState: { errors },
   } = methods;
   const { isLoading, submitForm } = useSubmitForm();
-  const navigate = useNavigate();
+  const { setSignature } = useSignature();
 
   // Watch the policy agreement checkbox
   const acceptedTerms =
@@ -42,13 +42,20 @@ const Home = () => {
   const onSubmit = async (data) => {
     data = parseFormData(data);
 
+    console.log(data);
+
     const response = await submitForm(data);
 
-    if (response.success) {
+    console.log(response);
+
+    if (response.data.success) {
       removeItem(STORAGE_KEY);
-      navigate('/success');
+      reset(initialValues);
+      setSignature({ text: '', base64: '' });
+      location.href = '/success';
     }
   };
+
   const formState = watch();
   const sanitizedState = {
     ...formState,
