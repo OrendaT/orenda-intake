@@ -77,8 +77,8 @@ const Home = () => {
           Please complete this form so your appointment may be scheduled
           <br />
           <em>
-            (/Your appointment will be confirmed following the completion of
-            this form/)
+            (Your appointment will be confirmed following the completion of
+            this form)
           </em>
         </p>
 
