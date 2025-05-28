@@ -8,9 +8,9 @@ const PracticePolicy = () => {
       <div className='space-y-6'>
         <article className='space-y-4'>
           <p>
-            APPOINTMENTS: Orenda Psychiatry only offers tele-health appointments
-            either by video conferencing or telephone. In person appointments
-            are offered at provider discretion only.
+            APPOINTMENTS: Orenda Psychiatry offers tele-health appointments by
+            video conferencing. In-person appointments are offered at provider
+            discretion only.
           </p>
           <div>
             <p>
@@ -21,12 +21,18 @@ const PracticePolicy = () => {
             </p>
 
             <ol className='list-decimal space-y-2 ps-4'>
-              <li> On the morning of your scheduled appointment</li>
               <li>
-                Upon cancellation or re-scheduling of an appointment within 24
-                hours of appointment time
+                On the morning of your scheduled appointment (for copays and/or
+                deductible)
               </li>
-              <li>Upon late or no-show for appointment.</li>
+              <li>
+                2. Upon cancellation or re-scheduling of an appointment within
+                24 hours of appointment time (per practice Cancellation policy)
+              </li>
+              <li>
+                3. Upon late-arrival or no-show for appointment. (per practice
+                Late & No-Show policy)
+              </li>
             </ol>
           </div>
           <p>
@@ -123,13 +129,17 @@ const PracticePolicy = () => {
             contact Orenda Psychiatry directly. It is expected that you and your
             provider meet consistently and regularly in order for your
             prescriber to provide medication management. Orenda Psychiatry
-            providers will not provide early refills on controlled substances.
-            Additionally, controlled substances require that the client be
-            assessed prior to each refill. Please note that our providers are
-            highly experienced and qualified to offer expert opinions on your
-            case. As such, they are not obligated to prescribe a specific
-            medication if they believe it is unnecessary or potentially harmful,
-            based on their professional judgment and expertise.
+            providers will not provide early refills on controlled substances.{' '}
+            <strong>
+              Additionally, prescriptions for controlled substances require that
+              the client be assessed prior to each refill. Controlled substance
+              prescription quantities will not exceed a 30 day supply.
+            </strong>{' '}
+            Please note that our providers are highly experienced and qualified
+            to offer expert opinions on your case. As such, they are not
+            obligated to prescribe a specific medication if they believe it is
+            unnecessary or potentially harmful, based on their professional
+            judgment and expertise.
           </p>
           <p>
             SOCIAL MEDIA AND TELECOMMUNICATION: Due to the importance of your
@@ -161,8 +171,8 @@ const PracticePolicy = () => {
           </p>
         </article>
         <article className='space-y-4'>
-          <h3 className='font-medium'>
-            Informed Consent for Psychiatric Treatment
+          <h3 className='font-semibold'>
+            INFORMED CONSENT FOR PSYCHIATRIC TREATMENT
           </h3>
           <p>
             Make sure you read all the important information below. Only use our
@@ -185,7 +195,7 @@ const PracticePolicy = () => {
             a medical or psychiatric emergency.
           </p>
 
-          <h3>WHEN DUTY OF CARE BEGINS</h3>
+          <h3 className='font-semibold'>WHEN DUTY OF CARE BEGINS</h3>
           <ul className='sublist-disc'>
             <li>
               I understand that my provider will take responsibility for my care
@@ -217,7 +227,9 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3>RISKS AND BENEFITS OF USING OUR TELEPSYCHIATRY SERVICE</h3>
+          <h3 className='font-semibold'>
+            RISKS AND BENEFITS OF USING OUR TELEPSYCHIATRY SERVICE
+          </h3>
           <ul className='sublist-disc'>
             <li>
               I understand that currently video conferencing technology will be
@@ -259,7 +271,9 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3>IMPORTANCE OF FULLY AND TRUTHFULLY ANSWERING ALL QUESTIONS</h3>
+          <h3 className='font-semibold'>
+            IMPORTANCE OF FULLY AND TRUTHFULLY ANSWERING ALL QUESTIONS
+          </h3>
           <ul className='sublist-disc'>
             <li>
               I understand that the information I provide will be used to
@@ -282,13 +296,13 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3>RISKS OF PSYCHOTROPIC MEDICATION</h3>
+          <h3 className='font-medium'>RISKS OF PSYCHOTROPIC MEDICATION</h3>
           <ul className='sublist-disc'>
             <li>
-              I understand that the information I provide will be used to
+              • I understand that the information I provide will be used to
               determine my treatment. I understand that the safety and
               appropriateness of treatment prescribed will rely on the accuracy
-              of information I share with my provider.I understand that all
+              of information I share with my provider. I understand that all
               medications that may be prescribed or recommended by my provider,
               including prescriptions, over the counter medications, and herbal
               supplements can cause serious side effects, adverse events, severe
@@ -357,7 +371,9 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3>RISKS TO ELECTRONIC HEALTH INFORMATION</h3>
+          <h3 className='font-semibold'>
+            RISKS TO ELECTRONIC HEALTH INFORMATION
+          </h3>
           <ul className='list-disc'>
             <li>
               I understand that although Orenda Psychiatry implements
@@ -366,7 +382,7 @@ const PracticePolicy = () => {
               and confidentiality of my health information.
             </li>
           </ul>
-          <h3>RISKS AND BENEFITS TO PSYCHOTHERAPY</h3>
+          <h3 className='font-semibold'>RISKS AND BENEFITS TO PSYCHOTHERAPY</h3>
           <ul className='list-disc'>
             <li>
               I understand that the outcome of my treatment depends largely on
@@ -425,7 +441,7 @@ const PracticePolicy = () => {
         </article>
 
         <article className='space-y-4'>
-          <h3 className='font-medium'>CONSENT FOR MEDICATION HISTORY</h3>
+          <h3 className='font-semibold'>CONSENT FOR MEDICATION HISTORY</h3>
 
           <p>
             I understand that as part of my healthcare at Orenda Psychiatry, it

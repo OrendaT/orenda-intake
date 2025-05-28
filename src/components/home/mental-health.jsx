@@ -27,6 +27,12 @@ const MentalHealth = () => {
   const history = watch('personal_medical_history');
   const hasOtherMedical = Array.isArray(history) && history.includes('Other');
 
+  const relationship = watch('relationship_details');
+  const hasRelationShipDetailsOther =
+    Array.isArray(relationship) && relationship.includes('Other');
+
+  const hasSuicidalThoughts = watch('suicidal_thoughts') === 'Yes';
+
   return (
     <section className='fieldset-section'>
       <div className='~mt-5/7'>
@@ -64,14 +70,14 @@ const MentalHealth = () => {
 
         {needsTherapy && (
           <>
-            <div className='hidden-section mt-4'>
+            <div className='mt-4 hidden-section'>
               <p className='text-sm text-gray-700'>
                 Please note that not all our providers offer therapy services at
                 this time, and the first available therapy appointment might be
                 a few days out.
               </p>
 
-              <div className='mt-5 grid grid-cols-2'>
+              <div className='grid grid-cols-2 mt-5'>
                 <Radios
                   name='therapy_availability'
                   errorMsg='This field is required'
@@ -113,7 +119,7 @@ const MentalHealth = () => {
           months&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
-        <div className='mb-3 grid sm:grid-cols-2'>
+        <div className='grid mb-3 sm:grid-cols-2'>
           <Checkboxes
             name='symptoms_past_six_months'
             options={[
@@ -151,9 +157,8 @@ const MentalHealth = () => {
 
       <div>
         <h3 className='label'>
-          Specify all medications and supplements you are presently taking and
-          for what reason. If you do not take any medications, just write
-          "none"&nbsp;
+          Please list all prescription medications and supplements you take or
+          note "none".&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
         <Input
@@ -242,17 +247,15 @@ const MentalHealth = () => {
 
       <div>
         <h3 className='label'>
-          Is there a history of mental illness in your family? If so, provide
-          additional information.&nbsp;
+          Is there a history of mental illness in your family? &nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
-        <Input
-          hiddenLabel
-          name='family_history_mental_illness'
-          multiline
-          rows={2}
-          variant='outlined'
-        />
+        <div className='flex items-center ~gap-5/7'>
+          <Radios
+            name='family_history_mental_illness'
+            options={['Yes', 'No']}
+          />
+        </div>
       </div>
 
       <div>
@@ -260,7 +263,7 @@ const MentalHealth = () => {
           Personal medical history; please check all that apply&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
-        <div className='mb-3 grid sm:grid-cols-2'>
+        <div className='grid mb-3 sm:grid-cols-2'>
           <Checkboxes
             name='personal_medical_history'
             options={[
@@ -335,23 +338,36 @@ const MentalHealth = () => {
 
       <div>
         <h3 className='label'>
-          If you are in a relationship, please describe the nature of the
-          relationship and months or years together.&nbsp;
+          Relationship status:&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
-        <Input
-          hiddenLabel
-          name='relationship_details'
-          multiline
-          rows={2}
-          variant='outlined'
-        />
+        <div className='grid mb-3 sm:grid-cols-2'>
+          <Checkboxes
+            name='relationship_details'
+            options={[
+              'Single',
+              'Dating',
+              'Married',
+              'Other committed relationship',
+              'Separated/divorced',
+              'Widowed',
+              'Other',
+            ]}
+          />
+        </div>
+
+        {hasRelationShipDetailsOther && (
+          <Input
+            label='Other? Please specify'
+            name='relationship_details_other'
+            required={hasRelationShipDetailsOther}
+          />
+        )}
       </div>
 
       <div>
         <h3 className='label'>
-          What is your level of education? Highest grade/degree and type of
-          degree.&nbsp;
+          What is your highest level of education?&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
         <Input
@@ -365,8 +381,7 @@ const MentalHealth = () => {
 
       <div>
         <h3 className='label'>
-          What is your current occupation? What do you do? How long have you
-          been doing it?&nbsp;
+          What is your current occupation?&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
         <Input
@@ -405,15 +420,36 @@ const MentalHealth = () => {
 
       <div className='pt-5'>
         <h3 className='label'>
-          Do you have current suicidal thoughts? If you have current suicidal
-          thoughts, please immediately contact 911 or go to your nearest
-          emergency room; or contact the National Suicide Prevention Hotline at:
-          1-800-273-8255.&nbsp;
+          Have you ever had suicidal thoughts? &nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
         <div className='flex items-center ~gap-5/7'>
           <Radios name='suicidal_thoughts' options={['Yes', 'No']} />
         </div>
+
+        {hasSuicidalThoughts && (
+          <div className='mt-5 bg-transparent hidden-section'>
+            <p className='mb-4'>
+              <em>
+                If you are actively having suicidal thoughts and have a plan to
+                harm yourself, please call <a href='tel:911'>911</a>{' '}
+                immediately.
+              </em>
+            </p>
+
+            <div className='grid gap-3 sm:grid-cols-2'>
+              <Radios
+                name='has_suicidal_thoughts_details'
+                options={[
+                  'Yes, I’ve had passive thoughts (e.g., wishing I were dead or not waking up) but no plan or intent.',
+                  ' Yes, I’ve had active thoughts about suicide but no plan or intent to act on them.',
+                  'Yes, I’ve had active thoughts with a plan, but no intent to act.',
+                  ' Yes, I’ve had active thoughts with a plan and intent to act.',
+                ]}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       <div>
@@ -434,7 +470,7 @@ const MentalHealth = () => {
         </div>
 
         {hasHearingImpairment && (
-          <div className='mt-4 rounded border-l-4 border-gray-500 bg-gray-100 p-3'>
+          <div className='p-3 mt-4 bg-gray-100 border-l-4 border-gray-500 rounded'>
             <p className='text-sm text-gray-700'>
               If you utilize an interpreter service due to a hearing impairment,
               rest assured that they can seamlessly join your video session

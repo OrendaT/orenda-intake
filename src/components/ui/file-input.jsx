@@ -38,10 +38,10 @@ const FileInput = ({
         <LuUpload className='~size-5/6' />
       </label>
 
-      <p className='~text-sm/base'>Upload The {label} of your Insurance card</p>
+      <p className='~text-sm/base'>{label}</p>
 
       {file && (
-        <p className='truncate text-sm font-medium text-orenda-green'>
+        <p className='text-sm font-medium truncate text-orenda-green'>
           {file?.name}
         </p>
       )}

@@ -77,8 +77,17 @@ const Home = () => {
           Please complete this form so your appointment may be scheduled
           <br />
           <em>
-            (Your appointment will be confirmed following the completion of
-            this form)
+            (Your appointment will be confirmed following the completion of this
+            form)
+          </em>
+        </p>
+        <br />
+        <p className='mx-auto max-w-3xl text-center'>
+          <em>
+            If you or someone you know is struggling or in crisis, call the
+            National Suicide Prevention Hotline at{' '}
+            <a href='tel:18002738255'>1-800-273-8255</a> or{' '}
+            <a href='tel:911'>911</a>. Immediate help is available.
           </em>
         </p>
 
@@ -89,10 +98,14 @@ const Home = () => {
               <div className='space-y-8'>
                 <fieldset className='fieldset'>
                   <PersonalInfo />
-                  <AddressDetails />
+                  <fieldset className='fieldset'>
+                    <h2 className='legend'>Mailing Address</h2>
+                    <AddressDetails />
+                  </fieldset>
+
                   <MentalHealth />
                 </fieldset>
-                <fieldset className='fieldset ~text-sm/base'>
+                <fieldset className='fieldset'>
                   <h2 className='legend'>Insurance & Payment Info</h2>
                   <InsuranceDetails />
                   <CreditCardDetails />

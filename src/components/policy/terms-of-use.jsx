@@ -3,7 +3,7 @@ const Terms = () => {
     <section className='mt-12'>
       {/* CONSENT FOR TELEHEALTH CONSULTATION */}
       <article>
-        <h3 className='mb-4 font-medium'>
+        <h3 className='mb-4 font-semibold'>
           CONSENT FOR TELEHEALTH CONSULTATION
         </h3>
         <ol className='mb-4 list-decimal ps-4'>
@@ -35,7 +35,7 @@ const Terms = () => {
       <article>
         <p className='my-1'>This notice went into effect on November 1, 2021</p>
 
-        <h3 className='mb-4 font-medium'>NOTICE OF PRIVACY PRACTICES</h3>
+        <h3 className='mb-4 font-semibold'>NOTICE OF PRIVACY PRACTICES</h3>
 
         <p>
           THIS NOTICE DESCRIBES HOW HEALTH INFORMATION MAY BE USED AND DISCLOSED

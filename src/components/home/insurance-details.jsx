@@ -21,8 +21,21 @@ const InsuranceDetails = () => {
         </p>
       </div>
       <div className='grid ~gap-4/6'>
-        <FileInput label='Front' name='insurance_card_front' />
-        <FileInput label='Back' name='insurance_card_back' />
+        <FileInput
+          label='Upload The Front of your Insurance card'
+          name='insurance_card_front'
+        />
+        <FileInput
+          label='Upload The Back of your Insurance card'
+          name='insurance_card_back'
+        />
+      </div>
+
+      <div className='!mt-8'>
+        <h3 className='label'>
+          Please upload a copy of a government or school-issued photo ID.{' '}
+        </h3>
+        <FileInput label='Photo ID' name='photo_id' accept='image/*' />
       </div>
     </section>
   );
