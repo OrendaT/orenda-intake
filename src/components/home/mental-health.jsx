@@ -342,7 +342,7 @@ const MentalHealth = () => {
           <span className='text-orenda-purple'>*</span>
         </h3>
         <div className='grid mb-3 sm:grid-cols-2'>
-          <Checkboxes
+          <Radios
             name='relationship_details'
             options={[
               'Single',
