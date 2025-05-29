@@ -110,7 +110,6 @@ export const initialValues = {
   pregnant_or_breastfeeding: '',
   recent_physical_exam: '',
   recent_physical_exam_details: '',
-  relationship_details: '',
   education_level: '',
   current_occupation: '',
   living_situation: '',
@@ -120,4 +119,12 @@ export const initialValues = {
 
   policy_agreement: '',
   policy_agreement_signature: '',
+
+  relationship_status: '',
+  relationship_status_other: '',
+  appointment_address: '',
+  appointment_city: '',
+  appointment_state: '',
+  suicidal_thoughts_details: '',
+  photo_ID: '',
 };
