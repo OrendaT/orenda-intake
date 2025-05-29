@@ -40,6 +40,11 @@ const Home = () => {
   const [openTerms, setOpenTerms] = useState(false);
 
   const onSubmit = async (data) => {
+    if (data.relationship_status_other) {
+      data.relationship_status = data.relationship_status_other;
+      data.relationship_status_other = undefined;
+    }
+
     data = parseFormData(data);
 
     console.log(data);

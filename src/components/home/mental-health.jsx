@@ -27,9 +27,7 @@ const MentalHealth = () => {
   const history = watch('personal_medical_history');
   const hasOtherMedical = Array.isArray(history) && history.includes('Other');
 
-  const relationship = watch('relationship_details');
-  const hasRelationShipDetailsOther =
-    Array.isArray(relationship) && relationship.includes('Other');
+  const hasOtherRelationship = watch('relationship_status') === 'Other';
 
   const hasSuicidalThoughts = watch('suicidal_thoughts') === 'Yes';
 
@@ -70,14 +68,14 @@ const MentalHealth = () => {
 
         {needsTherapy && (
           <>
-            <div className='mt-4 hidden-section'>
+            <div className='hidden-section mt-4'>
               <p className='text-sm text-gray-700'>
                 Please note that not all our providers offer therapy services at
                 this time, and the first available therapy appointment might be
                 a few days out.
               </p>
 
-              <div className='grid grid-cols-2 mt-5'>
+              <div className='mt-5 grid grid-cols-2'>
                 <Radios
                   name='therapy_availability'
                   errorMsg='This field is required'
@@ -119,7 +117,7 @@ const MentalHealth = () => {
           months&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
-        <div className='grid mb-3 sm:grid-cols-2'>
+        <div className='mb-3 grid sm:grid-cols-2'>
           <Checkboxes
             name='symptoms_past_six_months'
             options={[
@@ -263,7 +261,7 @@ const MentalHealth = () => {
           Personal medical history; please check all that apply&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
-        <div className='grid mb-3 sm:grid-cols-2'>
+        <div className='mb-3 grid sm:grid-cols-2'>
           <Checkboxes
             name='personal_medical_history'
             options={[
@@ -341,7 +339,7 @@ const MentalHealth = () => {
           Relationship status:&nbsp;
           <span className='text-orenda-purple'>*</span>
         </h3>
-        <div className='grid mb-3 sm:grid-cols-2'>
+        <div className='mb-3 grid sm:grid-cols-2'>
           <Radios
             name='relationship_status'
             options={[
@@ -356,10 +354,10 @@ const MentalHealth = () => {
           />
         </div>
 
-        {hasRelationShipDetailsOther && (
+        {hasOtherRelationship && (
           <Input
             label='Other? Please specify'
-            name='relationship_status'
+            name='relationship_status_other'
             required={hasRelationShipDetailsOther}
           />
         )}
@@ -428,7 +426,7 @@ const MentalHealth = () => {
         </div>
 
         {hasSuicidalThoughts && (
-          <div className='mt-5 bg-transparent hidden-section'>
+          <div className='hidden-section mt-5 bg-transparent'>
             <p className='mb-4'>
               <em>
                 If you are actively having suicidal thoughts and have a plan to
@@ -470,7 +468,7 @@ const MentalHealth = () => {
         </div>
 
         {hasHearingImpairment && (
-          <div className='p-3 mt-4 bg-gray-100 border-l-4 border-gray-500 rounded'>
+          <div className='mt-4 rounded border-l-4 border-gray-500 bg-gray-100 p-3'>
             <p className='text-sm text-gray-700'>
               If you utilize an interpreter service due to a hearing impairment,
               rest assured that they can seamlessly join your video session
