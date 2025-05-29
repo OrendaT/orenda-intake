@@ -68,12 +68,12 @@ const Home = () => {
   useAutoCreateForm({ first_name, last_name, email, phone });
 
   return (
-    <main className='padding-inline bg-dotted-purple py-16'>
+    <main className='padding-inline bg-dotted-purple py-16 ~text-sm/base'>
       <div className='mx-auto max-w-[59.4rem]'>
         <h1 className='mb-4 text-center font-heading font-bold ~text-3xl/[2.625rem]'>
           Orenda Intake Form
         </h1>
-        <p className='mx-auto max-w-3xl text-center font-semibold ~text-sm/base'>
+        <p className='mx-auto max-w-3xl text-center font-semibold'>
           Please complete this form so your appointment may be scheduled
           <br />
           <em>

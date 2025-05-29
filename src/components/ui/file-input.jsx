@@ -19,6 +19,7 @@ const FileInput = ({
   required = true,
   errorMsg,
   accept = 'image/*,application/pdf',
+  maxSize = 5,
   validations,
 }) => {
   const {
@@ -47,7 +48,7 @@ const FileInput = ({
       )}
 
       <small className='text-[#626262] ~text-xs/sm'>
-        Image or Pdf Only • 5MB max
+        Image or Pdf Only • {maxSize}MB max
       </small>
 
       {errors?.[name]?.message && (

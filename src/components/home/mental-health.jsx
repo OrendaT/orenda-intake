@@ -343,7 +343,7 @@ const MentalHealth = () => {
         </h3>
         <div className='grid mb-3 sm:grid-cols-2'>
           <Radios
-            name='relationship_details'
+            name='relationship_status'
             options={[
               'Single',
               'Dating',
@@ -359,7 +359,7 @@ const MentalHealth = () => {
         {hasRelationShipDetailsOther && (
           <Input
             label='Other? Please specify'
-            name='relationship_details_other'
+            name='relationship_status'
             required={hasRelationShipDetailsOther}
           />
         )}
@@ -439,7 +439,7 @@ const MentalHealth = () => {
 
             <div className='grid gap-3 sm:grid-cols-2'>
               <Radios
-                name='has_suicidal_thoughts_details'
+                name='suicidal_thoughts_details'
                 options={[
                   'Yes, I’ve had passive thoughts (e.g., wishing I were dead or not waking up) but no plan or intent.',
                   ' Yes, I’ve had active thoughts about suicide but no plan or intent to act on them.',

@@ -35,7 +35,7 @@ const InsuranceDetails = () => {
         <h3 className='label'>
           Please upload a copy of a government or school-issued photo ID.{' '}
         </h3>
-        <FileInput label='Photo ID' name='photo_id' accept='image/*' />
+        <FileInput label='Photo ID' name='photo_ID' />
       </div>
     </section>
   );

@@ -44,11 +44,11 @@ const AddressDetails = () => {
             <span className='text-orenda-purple'>*</span>
           </h3>
           <div className='flex items-center ~gap-5/7'>
-            <Radios name='same_address' options={['Yes', 'No']} />
+            <Radios name='appointment_address' options={['Yes', 'No']} />
           </div>
 
           {isDifferentAddress && (
-            <div className='hidden-section mt-4 bg-transparent'>
+            <div className='mt-4 bg-transparent hidden-section'>
               <p className='mb-2'>
                 <strong className='font-medium'>
                   Please provide the city/state where the appointment will take
@@ -58,13 +58,13 @@ const AddressDetails = () => {
 
               <div className='grid gap-y-5 ~gap-x-8/16 sm:grid-cols-2'>
                 <Input
-                  label='City'
+                  label='Appointment City'
                   name='appointment_city'
                   errorMsg='City is required'
                   size='small'
                 />
                 <Select
-                  label='State'
+                  label='Appointment State'
                   name='appointment_state'
                   options={usStates}
                   size='small'
