@@ -8,7 +8,7 @@ import { useFormContext } from 'react-hook-form';
 /* Address Section, Tel & Email */
 const AddressDetails = () => {
   const { watch } = useFormContext();
-  const isDifferentAddress = watch('same_address') === 'No';
+  const isDifferentAddress = watch('appointment_address') === 'No';
 
   return (
     <section className='fieldset-section'>
