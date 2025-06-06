@@ -127,4 +127,6 @@ export const initialValues = {
   appointment_state: '',
   suicidal_thoughts_details: '',
   photo_ID: '',
+
+  insurance_provider: '',
 };

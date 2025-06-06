@@ -108,7 +108,7 @@ export default function PersonalInfo() {
       {/* Sex Assigned at Birth */}
       <div className='pt-[1em]'>
         <h4 className='label flex items-center'>
-          Sex assigned at birth:&nbsp;
+          Patient's sex assigned at birth:&nbsp;
           <span className='text-orenda-purple'>*</span>
           <ResponsiveTooltip
             content={`This information is necessary for medical reasons related to
@@ -122,7 +122,15 @@ export default function PersonalInfo() {
       </div>
 
       {/* Gender (Optional) */}
-      <Input label='Gender (Optional)' name='gender' required={false} />
+      <Input
+        label={
+          <>
+            Patient's Gender <small>(Optional)</small>
+          </>
+        }
+        name='gender'
+        required={false}
+      />
     </section>
   );
 }

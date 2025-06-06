@@ -4,11 +4,23 @@ import Input from '@/components/ui/input';
 const InsuranceDetails = () => {
   return (
     <section className='fieldset-section'>
-      <Input
-        label='Insurance Member ID'
-        name='insurance_id'
-        sx={{ marginBlockStart: 1 }}
-      />
+      <div className='grid ~gap-4/6 sm:grid-cols-2'>
+        <Input
+          label='Insurance Member ID'
+          name='insurance_id'
+          sx={{ marginBlockStart: 1 }}
+        />
+        <Input
+          label={
+            <>
+              Insurance Provider{' '}
+              <small>(Aetna, Cigna, Blue Cross, United etc.)</small>
+            </>
+          }
+          name='insurance_provider'
+          sx={{ marginBlockStart: 1 }}
+        />
+      </div>
 
       <div>
         <h3 className='label'>
