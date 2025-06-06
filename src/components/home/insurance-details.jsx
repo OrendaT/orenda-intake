@@ -19,6 +19,8 @@ const InsuranceDetails = () => {
           }
           name='insurance_provider'
           sx={{ marginBlockStart: 1 }}
+          helperText='Please note that we are not currently in-network with any Medicaid/Medicare plans.
+'
         />
       </div>
 
