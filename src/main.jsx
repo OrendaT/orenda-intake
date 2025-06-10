@@ -17,7 +17,11 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: '/success',
+        path: 'intake',
+        Component: Home,
+      },
+      {
+        path: 'success',
         Component: Success,
       },
     ],
