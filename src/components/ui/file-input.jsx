@@ -42,7 +42,7 @@ const FileInput = ({
       <p className='~text-sm/base'>{label}</p>
 
       {file && (
-        <p className='text-sm font-medium truncate text-orenda-green'>
+        <p className='truncate text-sm font-medium text-orenda-green'>
           {file?.name}
         </p>
       )}
@@ -72,7 +72,7 @@ const FileInput = ({
             },
             acceptedFormats: (files) => {
               const fileType = files[0]?.type;
-              if (accept) {
+              if (required && accept) {
                 let acceptedFiles = accept.split(',');
 
                 if (acceptedFiles.includes('image/*')) {
