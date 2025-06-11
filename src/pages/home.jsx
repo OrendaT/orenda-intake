@@ -18,10 +18,8 @@ import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import useAutoCreateForm from '@/hooks/useAutoCreateForm';
 import useSignature from '@/hooks/useSignature';
-import { useNavigate } from 'react-router';
 
 const Home = () => {
-  const navigate = useNavigate();
   const defaultValues = getItem(STORAGE_KEY) ?? initialValues;
   const methods = useForm({ defaultValues });
   const {
@@ -59,7 +57,7 @@ const Home = () => {
       removeItem(STORAGE_KEY);
       reset(initialValues);
       setSignature({ text: '', base64: '' });
-      navigate('/success');
+      location.href = '/success';
     }
   };
 
@@ -80,7 +78,7 @@ const Home = () => {
         <h1 className='mb-4 text-center font-heading font-bold ~text-3xl/[2.625rem]'>
           Orenda Intake Form
         </h1>
-        <p className='mx-auto max-w-3xl text-center font-semibold'>
+        <p className='max-w-3xl mx-auto font-semibold text-center'>
           Please complete this form so your appointment may be scheduled
           <br />
           <em>
@@ -89,7 +87,7 @@ const Home = () => {
           </em>
         </p>
         <br />
-        <p className='mx-auto max-w-3xl text-center'>
+        <p className='max-w-3xl mx-auto text-center'>
           <em>
             If you or someone you know is struggling or in crisis, call the
             National Suicide Prevention Hotline at{' '}
@@ -123,7 +121,7 @@ const Home = () => {
               <fieldset className='mx-auto max-w-[46.125rem] rounded border-l-[5px] border-zinc-500 bg-transparent pb-0 ~px-5/12 ~pt-3/6'>
                 <label className='flex w-full items-center gap-3 ~text-sm/[0.93rem]'>
                   <input
-                    className='size-4 flex-shrink-0'
+                    className='flex-shrink-0 size-4'
                     type='checkbox'
                     value='I agree'
                     {...register('policy_agreement', {
