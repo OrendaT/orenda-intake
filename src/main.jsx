@@ -6,11 +6,13 @@ import Home from './pages/home.jsx';
 
 import './styles/index.css';
 import Success from './pages/success.jsx';
+import NotFound from './pages/not-found.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     Component: Layout,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
