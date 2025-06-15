@@ -13,8 +13,8 @@ const NotFound = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center px-4 text-center h-dvh'>
-      <h1 className='mb-6 text-4xl font-bold text-gray-800 font-heading'>
+    <div className='flex flex-col items-center justify-center px-5 text-center h-dvh'>
+      <h1 className='mb-6 ~text-3xl/4xl font-bold text-gray-800 font-heading'>
         Page Not Found
       </h1>
       <p className='mb-8 text-gray-600'>
