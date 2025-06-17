@@ -173,11 +173,11 @@ const Home = () => {
               {/* Form submit button */}
               <Button
                 disabled={!acceptedTerms}
-                isSubmitting={isLoading}
+                isLoading={isLoading}
                 type='submit'
                 className='mx-auto mt-12'
               >
-                {isLoading ? 'Submitting...' : 'Submit Form'}
+                {isLoading ? 'Submitting' : 'Submit Form'}
               </Button>
 
               {!!Object.entries(errors)?.length && (
