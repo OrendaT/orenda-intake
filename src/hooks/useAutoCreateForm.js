@@ -8,13 +8,13 @@ import {
 import { useEffect, useState } from 'react';
 
 const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
-  const form_id = getLSItem('form_id');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(Boolean(form_id));
+  const [formId, setFormId] = useState(() => getLSItem('form_id'));
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
     const timeout = setTimeout(() => {
       const createPendingPatient = async () => {
         const isPending =
@@ -23,7 +23,7 @@ const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
           isValidEmail(email) &&
           phone.length > 7;
 
-        if (isPending && !form_id && !isSuccess) {
+        if (isPending && !formId && isMounted) {
           try {
             setIsLoading(true);
             const data = convertToFormData({
@@ -35,11 +35,11 @@ const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
 
             if (res.data.success) {
               setLSItem('form_id', res.data.id);
-              setIsSuccess(true);
+              setFormId(res.data.id);
             }
           } catch (err) {
             setIsError(true);
-            setError(err.response.data);
+            setError(err?.response?.data || 'Something went wrong');
             console.error('Failed to create pending patient', err);
           } finally {
             setIsLoading(false);
@@ -50,15 +50,17 @@ const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
       createPendingPatient();
     }, 500);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      isMounted = false;
+      clearTimeout(timeout);
+    };
   }, [
     first_name,
     last_name,
     email,
     phone,
-    form_id,
-    isSuccess,
-    setIsSuccess,
+    formId,
+    setFormId,
     setIsLoading,
     setIsError,
     setError,
