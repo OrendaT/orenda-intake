@@ -3,7 +3,7 @@ import IMask from '@/components/ui/imask';
 const CreditCardDetails = () => {
   return (
     <section className='fieldset-section'>
-      <h3 className='fieldset-section-heading mt-4'>Credit Card Details</h3>
+      <h3 className='mt-4 fieldset-section-heading'>Credit Card Details</h3>
       <p className='~text-sm/base'>
         Your copay/deductible is due at the time of your appointment. We require
         you to keep a credit card on file. You may use a health savings card if
@@ -14,7 +14,7 @@ const CreditCardDetails = () => {
       <IMask
         label='Credit Card Number'
         name='credit_card_number'
-        mask={'999999999999999'}
+        mask={'99999999999999999999'}
         maskChar=''
       />
       <IMask
