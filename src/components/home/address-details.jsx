@@ -3,13 +3,9 @@ import Select from '@/components/ui/select';
 import { usStates } from '@/lib/definitions';
 import IMask from '../ui/imask';
 import Radios from '../ui/radios';
-import { useFormContext } from 'react-hook-form';
 
 /* Address Section, Tel & Email */
 const AddressDetails = () => {
-  const { watch } = useFormContext();
-  const isDifferentAddress = watch('appointment_address') === 'No';
-
   return (
     <section className='fieldset-section'>
       <div className='!mt-2 grid ~gap-2/3'>
@@ -40,38 +36,43 @@ const AddressDetails = () => {
 
         <div className='mt-5'>
           <h3 className='label'>
-            Will your appointments generally be at this address?&nbsp;
+            &nbsp;
             <span className='text-orenda-purple'>*</span>
           </h3>
           <div className='flex items-center ~gap-5/7'>
-            <Radios name='appointment_address' options={['Yes', 'No']} />
+            <Radios
+              label=' Will your appointments generally be at this address?'
+              name='appointment_address'
+              options={['Yes', 'No']}
+              showHiddenSectionValue={1}
+              grid={false}
+              hiddenSection={
+                <>
+                  <p className='mb-2'>
+                    <strong className='font-medium'>
+                      Please provide the city/state where the appointment will
+                      take place.
+                    </strong>
+                  </p>
+
+                  <div className='grid gap-y-5 ~gap-x-8/16 sm:grid-cols-2'>
+                    <Input
+                      label='Appointment City'
+                      name='appointment_city'
+                      errorMsg='City is required'
+                      size='small'
+                    />
+                    <Select
+                      label='Appointment State'
+                      name='appointment_state'
+                      options={usStates}
+                      size='small'
+                    />
+                  </div>
+                </>
+              }
+            />
           </div>
-
-          {isDifferentAddress && (
-            <div className='mt-4 bg-transparent hidden-section'>
-              <p className='mb-2'>
-                <strong className='font-medium'>
-                  Please provide the city/state where the appointment will take
-                  place.
-                </strong>
-              </p>
-
-              <div className='grid gap-y-5 ~gap-x-8/16 sm:grid-cols-2'>
-                <Input
-                  label='Appointment City'
-                  name='appointment_city'
-                  errorMsg='City is required'
-                  size='small'
-                />
-                <Select
-                  label='Appointment State'
-                  name='appointment_state'
-                  options={usStates}
-                  size='small'
-                />
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </section>

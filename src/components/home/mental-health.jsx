@@ -1,4 +1,3 @@
-import { useFormContext } from 'react-hook-form';
 import IMask from '@/components/ui/imask';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
@@ -7,11 +6,6 @@ import Checkboxes from '../ui/checkboxes';
 import SignaturePad from '../ui/signature';
 
 const MentalHealth = () => {
-  const { watch } = useFormContext();
-
-  const healthType = watch('mental_health_care_type');
-  const needsTherapy = ['Both', 'Therapy'].includes(healthType);
-
   return (
     <section className='fieldset-section'>
       <Input
@@ -26,14 +20,19 @@ const MentalHealth = () => {
 
       <Radios
         containerClassName='my-7'
-        label='Tell us more about the type of mental health care that you are seeking:'
+        label={
+          <>
+            What would you like your sessions to focus on?{' '}
+            <small>(Select one answer)</small>
+          </>
+        }
         name='mental_health_care_type'
         options={[
+          'Medication Management (with brief talk therapy)',
+          'Weekly/Bi-weekly Talk Therapy only',
           `Psychiatric Services 
               (Medication Management)`,
           'Therapy',
-          'Both',
-          "I'm not sure",
         ]}
         showHiddenSectionValue={2}
         hiddenSection={

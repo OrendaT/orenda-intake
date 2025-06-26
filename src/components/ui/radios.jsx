@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import clsx from 'clsx';
 import { useFormContext } from 'react-hook-form';
 
 const Radios = ({
@@ -12,6 +11,7 @@ const Radios = ({
   required = true,
   showRequiredMark = true,
   errorMsg = 'This field is required',
+  labelSuffix,
   showHiddenSectionValue,
   hiddenSection,
   registerOptions,
@@ -23,7 +23,14 @@ const Radios = ({
     watch,
   } = useFormContext();
 
-  const showHiddenSection = watch(name) === options[showHiddenSectionValue];
+  const selectedValue = watch(name);
+
+  const showHiddenSection =
+    typeof showHiddenSectionValue === 'number'
+      ? selectedValue === options[showHiddenSectionValue]
+      : Array.isArray(showHiddenSectionValue)
+        ? showHiddenSectionValue.includes(selectedValue)
+        : selectedValue === showHiddenSectionValue;
 
   return (
     <div className={cn(containerClassName)}>
@@ -36,6 +43,7 @@ const Radios = ({
               <span className='text-orenda-purple'>*</span>
             </>
           )}
+          {labelSuffix}
         </h3>
       )}
       <div
@@ -51,7 +59,7 @@ const Radios = ({
           >
             <input
               id={name + option}
-              className='peer size-4 flex-shrink-0'
+              className='flex-shrink-0 peer size-4'
               type='radio'
               value={option}
               {...register(name, {
@@ -68,11 +76,11 @@ const Radios = ({
         ))}
       </div>
       {errors?.[name]?.message && (
-        <p className='error px-3'>{errors?.[name]?.message}</p>
+        <p className='px-3 error'>{errors?.[name]?.message}</p>
       )}
 
       {showHiddenSection && (
-        <div className='hidden-section mt-5 bg-transparent'>
+        <div className='mt-5 bg-transparent hidden-section'>
           {hiddenSection}
         </div>
       )}
