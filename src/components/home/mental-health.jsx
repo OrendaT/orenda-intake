@@ -30,11 +30,8 @@ const MentalHealth = () => {
         options={[
           'Medication Management (with brief talk therapy)',
           'Weekly/Bi-weekly Talk Therapy only',
-          `Psychiatric Services 
-              (Medication Management)`,
-          'Therapy',
         ]}
-        showHiddenSectionValue={2}
+        showHiddenSectionValue={1}
         hiddenSection={
           <Radios
             label={
@@ -152,7 +149,6 @@ const MentalHealth = () => {
           <Input
             name='hospitalized_psych_details'
             label='Please provide detail'
-            required={beenHospitalized}
             className='mt-5'
           />
         }
@@ -272,7 +268,7 @@ const MentalHealth = () => {
         hiddenSection={
           <Radios
             label={
-              <em className='mb-4 inline-block'>
+              <em className='inline-block mb-4'>
                 If you are actively having suicidal thoughts and have a plan to
                 harm yourself, please call <a href='tel:911'>911</a>{' '}
                 immediately.

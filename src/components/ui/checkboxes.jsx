@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
 
 const Checkboxes = ({
@@ -37,10 +37,10 @@ const Checkboxes = ({
       </h3>
       <div className={cn('grid sm:grid-cols-2', className)}>
         {options.map((option) => (
-          <div key={name + option} className={clsx('flex items-center gap-2')}>
+          <div key={name + option} className={cn('flex items-center gap-2')}>
             <input
               id={name + option}
-              className={clsx('peer flex-shrink-0', size)}
+              className={cn('peer flex-shrink-0', size)}
               type='checkbox'
               value={option}
               {...register(name, {

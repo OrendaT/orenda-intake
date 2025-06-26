@@ -19,7 +19,7 @@ const Input = ({
   ...inputProps
 }) => {
   return (
-    <div className={cn(containerClassName)}>
+    <div className={cn('w-full', containerClassName)}>
       {customLabel && (
         <h3 className='label'>
           {customLabel}

@@ -33,7 +33,7 @@ const Radios = ({
         : selectedValue === showHiddenSectionValue;
 
   return (
-    <div className={cn(containerClassName)}>
+    <div className={cn('w-full', containerClassName)}>
       {label && (
         <h3 className='label'>
           {label}
@@ -43,7 +43,7 @@ const Radios = ({
               <span className='text-orenda-purple'>*</span>
             </>
           )}
-          {labelSuffix}
+          <div className='inline-flex flex-col items-center h-full'>{labelSuffix}</div>
         </h3>
       )}
       <div
