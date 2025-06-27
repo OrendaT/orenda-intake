@@ -20,7 +20,8 @@ const DatePicker = ({
     <div className={cn(containerClasses)}>
       {label && (
         <h4 className='label'>
-          {label} {required && <RequiredMark />}
+          {label}
+          {required && <RequiredMark />}
         </h4>
       )}
       <Controller
