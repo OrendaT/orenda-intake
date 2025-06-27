@@ -31,7 +31,9 @@ const Radios = ({
       ? selectedValue === options[showHiddenSectionValue]
       : Array.isArray(showHiddenSectionValue)
         ? showHiddenSectionValue.includes(selectedValue)
-        : selectedValue === showHiddenSectionValue;
+        : typeof showHiddenSectionValue === 'string'
+          ? selectedValue === showHiddenSectionValue
+          : false;
 
   return (
     <div className={cn('w-full', containerClassName)}>
