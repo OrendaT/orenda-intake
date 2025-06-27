@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
+import RequiredMark from './required-mark';
 
 const Checkboxes = ({
   label,
@@ -28,12 +29,7 @@ const Checkboxes = ({
     <div>
       <h3 className='label'>
         {label}
-        {required && (
-          <>
-            &nbsp;
-            <span className='text-orenda-purple'>*</span>
-          </>
-        )}
+        {required && <RequiredMark />}
       </h3>
       <div className={cn('grid sm:grid-cols-2', className)}>
         {options.map((option) => (

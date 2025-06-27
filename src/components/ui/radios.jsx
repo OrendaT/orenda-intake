@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
+import RequiredMark from './required-mark';
 
 const Radios = ({
   name,
@@ -37,13 +38,10 @@ const Radios = ({
       {label && (
         <h3 className='label'>
           {label}
-          {required && showRequiredMark && (
-            <>
-              &nbsp;
-              <span className='text-orenda-purple'>*</span>
-            </>
-          )}
-          <div className='inline-flex flex-col items-center h-full'>{labelSuffix}</div>
+          {required && showRequiredMark && <RequiredMark />}
+          <div className='inline-flex h-full flex-col items-center'>
+            {labelSuffix}
+          </div>
         </h3>
       )}
       <div
@@ -59,7 +57,7 @@ const Radios = ({
           >
             <input
               id={name + option}
-              className='flex-shrink-0 peer size-4'
+              className='peer size-4 flex-shrink-0'
               type='radio'
               value={option}
               {...register(name, {
@@ -76,11 +74,11 @@ const Radios = ({
         ))}
       </div>
       {errors?.[name]?.message && (
-        <p className='px-3 error'>{errors?.[name]?.message}</p>
+        <p className='error px-3'>{errors?.[name]?.message}</p>
       )}
 
       {showHiddenSection && (
-        <div className='mt-5 bg-transparent hidden-section'>
+        <div className='hidden-section mt-5 bg-transparent'>
           {hiddenSection}
         </div>
       )}

@@ -4,6 +4,7 @@ import { Calendar } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import '@/styles/react-date-picker.css';
 import 'react-calendar/dist/Calendar.css';
+import RequiredMark from './required-mark';
 
 const DatePicker = ({
   label,
@@ -19,13 +20,7 @@ const DatePicker = ({
     <div className={cn(containerClasses)}>
       {label && (
         <h4 className='label'>
-          {label}{' '}
-          {required && (
-            <>
-              nbsp;
-              <span className='text-orenda-purple'>*</span>
-            </>
-          )}
+          {label} {required && <RequiredMark />}
         </h4>
       )}
       <Controller

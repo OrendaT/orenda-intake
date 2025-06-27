@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
+import RequiredMark from './required-mark';
 
 const Input = ({
   name,
@@ -23,12 +24,7 @@ const Input = ({
       {customLabel && (
         <h3 className='label'>
           {customLabel}
-          {required && (
-            <>
-              &nbsp;
-              <span className='text-orenda-purple'>*</span>
-            </>
-          )}
+          {required && <RequiredMark />}
         </h3>
       )}
       <Controller
