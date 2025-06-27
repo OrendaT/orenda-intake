@@ -24,7 +24,7 @@ const CreditCardDetails = () => {
       </p>
 
       <div className='relative'>
-        <div className='pointer-events-none absolute bottom-0 left-0 z-10 mb-1 ml-[1.79rem] flex items-end bg-white'>
+        <div className='pointer-events-none absolute top-5 left-0 z-10 ml-[1.79rem] flex items-end bg-white'>
           {Array.from({ length: cardDetails.number.length }).map((_, index) => (
             <span
               key={index}
