@@ -49,7 +49,7 @@ const useSubmitForm = () => {
 
       return response;
     },
-    [isLoading, isSuccess],
+    [],
   );
 
 
