@@ -52,13 +52,6 @@ const useSubmitForm = () => {
     [isLoading, isSuccess],
   );
 
-  // Reset function to clear all states
-  const resetForm = useCallback(() => {
-    setIsLoading(false);
-    setIsError(false);
-    setIsSuccess(false);
-    setError(null);
-  }, []);
 
   return {
     isLoading,
@@ -66,7 +59,6 @@ const useSubmitForm = () => {
     isSuccess,
     error,
     submitForm,
-    resetForm,
   };
 };
 
