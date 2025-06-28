@@ -4,18 +4,24 @@ import { number, expirationDate, cvv, postalCode } from 'card-validator';
 import { useState } from 'react';
 import PaymentIcon from '../ui/payment-icon';
 import { cn } from '@/lib/utils';
+import { useFormContext } from 'react-hook-form';
 
 const CreditCardDetails = () => {
-  const [cardDetails, setCardDetails] = useState({
-    number: '',
-    type: '',
-    length: 16,
-    cvv_length: 3,
+  const { watch } = useFormContext();
+  const cc_number = watch('credit_card_number');
+  const [cardDetails, setCardDetails] = useState(() => {
+    const validation = number(cc_number);
+    return {
+      number: cc_number || '',
+      type: validation?.card?.type || '',
+      length: validation?.card?.lengths[0] || 16,
+      cvv_length: validation?.card?.code.size || 3,
+    };
   });
 
   return (
     <section className='fieldset-section'>
-      <h3 className='mt-4 fieldset-section-heading'>Credit Card Details</h3>
+      <h3 className='fieldset-section-heading mt-4'>Credit Card Details</h3>
       <p className='~text-sm/base'>
         Your copay/deductible is due at the time of your appointment. We require
         you to keep a credit card on file. You may use a health savings card if
@@ -24,7 +30,7 @@ const CreditCardDetails = () => {
       </p>
 
       <div className='relative'>
-        <div className='pointer-events-none absolute top-5 left-0 z-10 ml-[1.79rem] flex items-end bg-white'>
+        <div className='pointer-events-none absolute left-0 top-5 z-10 ml-[1.79rem] flex items-end bg-white'>
           {Array.from({ length: cardDetails.number.length }).map((_, index) => (
             <span
               key={index}
