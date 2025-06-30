@@ -9,6 +9,7 @@ import { useFormContext } from 'react-hook-form';
 const CreditCardDetails = () => {
   const { watch } = useFormContext();
   const cc_number = watch('credit_card_number');
+  const [hideCardNumber, setHideCardNumber] = useState(true);
   const [cardDetails, setCardDetails] = useState(() => {
     const validation = number(cc_number);
     return {
@@ -30,7 +31,14 @@ const CreditCardDetails = () => {
       </p>
 
       <div className='relative'>
-        <div className='pointer-events-none absolute left-0 top-5 z-10 ml-[1.79rem] flex items-end bg-white'>
+        <div
+          className={cn(
+            'pointer-events-none absolute left-0 top-5 z-10 ml-[1.79rem] flex items-end bg-white transition-opacity duration-300',
+            {
+              'opacity-0': !hideCardNumber,
+            },
+          )}
+        >
           {Array.from({ length: cardDetails.number.length }).map((_, index) => (
             <span
               key={index}
@@ -43,6 +51,7 @@ const CreditCardDetails = () => {
             </span>
           ))}
         </div>
+
         <IMask
           label='Credit Card Number'
           name='credit_card_number'
@@ -52,6 +61,8 @@ const CreditCardDetails = () => {
               : '9999 9999 9999 9999'
           }
           maskChar=''
+          onFocus={() => setHideCardNumber(false)}
+          onBlur={() => setHideCardNumber(true)}
           inputProps={{
             slotProps: {
               input: {
