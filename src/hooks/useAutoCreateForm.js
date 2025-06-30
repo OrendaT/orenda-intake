@@ -19,14 +19,14 @@ const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
 
   useEffect(() => {
     const createPendingPatient = async () => {
-      const isPending =
+      const isPendingForm =
         first_name.length > 1 &&
         last_name.length > 1 &&
         isValidEmail(email) &&
         phone.length > 7;
 
       // Exit early if conditions aren't met
-      if (!isPending || formId || isCreatingRef.current) {
+      if (!isPendingForm || formId || isCreatingRef.current) {
         return;
       }
 
