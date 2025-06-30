@@ -25,7 +25,6 @@ const useSubmitForm = () => {
 
       response = await axios.post('patients', formData);
 
-      removeLSItem('form_id');
       setIsSuccess(true);
     } catch (error) {
       console.error('Form submission error:', error);

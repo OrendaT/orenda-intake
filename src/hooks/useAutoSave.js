@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from '@/lib/constants';
+import { INTAKE_FORM } from '@/lib/constants';
 import { setItem } from '@/lib/utils';
 import { deepEqual } from 'fast-equals';
 import { useEffect, useRef } from 'react';
@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react';
  * @param {any} options.value - Value to store
  * @param {number} options.delay - Debounce delay in ms
  */
-const useAutoSave = ({ key = STORAGE_KEY, value, delay = 500 }) => {
+const useAutoSave = ({ key = INTAKE_FORM, value, delay = 500 }) => {
   const previousValueRef = useRef(value);
   const timeoutRef = useRef(null);
 
