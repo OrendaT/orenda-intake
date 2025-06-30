@@ -7,7 +7,6 @@ const IMask = ({
   name,
   type,
   id,
-  mask,
   disabled,
   required = true,
   variant,
@@ -15,7 +14,6 @@ const IMask = ({
   placeholder,
   registerOptions,
   validations,
-  maskPlaceholder,
   inputProps,
   ...props
 }) => {
@@ -32,7 +30,7 @@ const IMask = ({
         ...registerOptions,
       }}
       render={({ field: { onChange, value, ref }, fieldState: { error } }) => (
-        <InputMask mask={mask} onChange={onChange} value={value} {...props}>
+        <InputMask onChange={onChange} value={value} {...props}>
           {(maskProps) => (
             <TextField
               inputRef={ref}
