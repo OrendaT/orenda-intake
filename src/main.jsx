@@ -5,7 +5,6 @@ import Layout from './layouts/layout.jsx';
 import Home from './pages/home.jsx';
 
 import './styles/index.css';
-import Success from './pages/success.jsx';
 import NotFound from './pages/not-found.jsx';
 
 const router = createBrowserRouter([
@@ -21,10 +20,6 @@ const router = createBrowserRouter([
       {
         path: 'intake',
         Component: Home,
-      },
-      {
-        path: 'success',
-        Component: Success,
       },
     ],
   },

@@ -28,14 +28,13 @@ const IMask = ({
           value: required,
           message: errorMsg || 'This field is required',
         },
-        ...registerOptions,
         validate: validations,
+        ...registerOptions,
       }}
       render={({ field: { onChange, value, ref }, fieldState: { error } }) => (
         <InputMask mask={mask} onChange={onChange} value={value} {...props}>
-          {(inputProps) => (
+          {(maskProps) => (
             <TextField
-              {...inputProps}
               inputRef={ref}
               required={required}
               type={type || 'text'}
@@ -46,6 +45,8 @@ const IMask = ({
               variant={variant || 'standard'}
               fullWidth
               placeholder={placeholder}
+              {...maskProps}
+              {...inputProps}
             />
           )}
         </InputMask>

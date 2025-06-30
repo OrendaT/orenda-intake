@@ -1,5 +1,6 @@
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
+import RequiredMark from '../ui/required-mark';
 
 const InsuranceDetails = () => {
   return (
@@ -26,8 +27,8 @@ const InsuranceDetails = () => {
 
       <div>
         <h3 className='label'>
-          Please upload images of your insurance card&nbsp;
-          <span className='text-orenda-purple'>*</span>
+          Please upload images of your insurance card
+          <RequiredMark />
         </h3>
         <p className='text-sm'>
           If you do not have insurance, please upload a screenshot of this or

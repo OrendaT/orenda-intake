@@ -10,19 +10,21 @@ import { useEffect, useState } from 'react';
 const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [formId, setFormId] = useState(() => getLSItem('form_id'));
   const [error, setError] = useState(null);
+
   useEffect(() => {
+    let isMounted = true;
+
     const timeout = setTimeout(() => {
       const createPendingPatient = async () => {
-        const form_id = getLSItem('form_id');
-
         const isPending =
           first_name.length > 1 &&
           last_name.length > 1 &&
           isValidEmail(email) &&
           phone.length > 7;
 
-        if (isPending && !form_id) {
+        if (isPending && !formId) {
           try {
             setIsLoading(true);
             const data = convertToFormData({
@@ -32,15 +34,18 @@ const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
             });
             const res = await axios.post('patients/pending-patient', data);
 
-            if (res.data.success) {
+            if (isMounted && res.data.success) {
               setLSItem('form_id', res.data.id);
+              setFormId(res.data.id);
             }
           } catch (err) {
-            setIsError(true);
-            setError(err.response.data);
-            console.error('Failed to create pending patient', err);
+            if (isMounted) {
+              setIsError(true);
+              setError(err?.response?.data || 'Something went wrong');
+              console.error('Failed to create pending patient', err);
+            }
           } finally {
-            setIsLoading(false);
+            if (isMounted) setIsLoading(false);
           }
         }
       };
@@ -48,8 +53,11 @@ const useAutoCreateForm = ({ first_name, last_name, email, phone }) => {
       createPendingPatient();
     }, 500);
 
-    return () => clearTimeout(timeout);
-  }, [first_name, last_name, email, phone]);
+    return () => {
+      isMounted = false;
+      clearTimeout(timeout);
+    };
+  }, [first_name, last_name, email, phone, formId]);
 
   return { isLoading, isError, error };
 };

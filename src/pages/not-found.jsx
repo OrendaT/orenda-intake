@@ -1,7 +1,7 @@
 import Button from '@/components/ui/custom-button';
 import { useNavigate } from 'react-router';
 
-const NotFound = () => {
+const NotFound = (props) => {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -11,6 +11,8 @@ const NotFound = () => {
       navigate('/');
     }
   };
+
+  console.log('NotFound component rendered', props);
 
   return (
     <div className='flex flex-col items-center justify-center px-5 text-center h-dvh'>
