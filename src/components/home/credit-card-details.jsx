@@ -5,7 +5,6 @@ import { useState } from 'react';
 import PaymentIcon from '../ui/payment-icon';
 import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
-import { on } from 'events';
 
 const CreditCardDetails = () => {
   const { watch } = useFormContext();
@@ -32,22 +31,27 @@ const CreditCardDetails = () => {
       </p>
 
       <div className='relative'>
-        <div className='pointer-events-none absolute left-0 top-5 z-10 ml-[1.79rem] flex items-end bg-white'>
-          {hideCardNumber &&
-            Array.from({ length: cardDetails.number.length }).map(
-              (_, index) => (
-                <span
-                  key={index}
-                  className={cn(
-                    'bg-white/30 text-base tracking-tighter blur-[4px]',
-                    cardDetails.number[index] === ' ' && 'w-2.5',
-                  )}
-                >
-                  {cardDetails.number[index]}
-                </span>
-              ),
-            )}
+        <div
+          className={cn(
+            'pointer-events-none absolute left-0 top-5 z-10 ml-[1.79rem] flex items-end bg-white transition-opacity duration-300',
+            {
+              'opacity-0': !hideCardNumber,
+            },
+          )}
+        >
+          {Array.from({ length: cardDetails.number.length }).map((_, index) => (
+            <span
+              key={index}
+              className={cn(
+                'bg-white/30 text-base tracking-tighter blur-[4px]',
+                cardDetails.number[index] === ' ' && 'w-2.5',
+              )}
+            >
+              {cardDetails.number[index]}
+            </span>
+          ))}
         </div>
+
         <IMask
           label='Credit Card Number'
           name='credit_card_number'
@@ -57,6 +61,8 @@ const CreditCardDetails = () => {
               : '9999 9999 9999 9999'
           }
           maskChar=''
+          onFocus={() => setHideCardNumber(false)}
+          onBlur={() => setHideCardNumber(true)}
           inputProps={{
             slotProps: {
               input: {
@@ -85,12 +91,6 @@ const CreditCardDetails = () => {
                 length: validation?.card?.lengths[0] || 16,
                 cvv_length: validation?.card?.code.size || 3,
               });
-            },
-            onFocus: () => {
-              setHideCardNumber(false);
-            },
-            onBlur: () => {
-              setHideCardNumber(true);
             },
           }}
         />
