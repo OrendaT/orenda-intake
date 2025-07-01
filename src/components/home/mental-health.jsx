@@ -206,8 +206,15 @@ const MentalHealth = () => {
           'Yes, and there were abnormal results',
           'No',
         ]}
-        otherName='recent_physical_exam_details'
-        otherLabel='If abnormal results please describe'
+        showHiddenSectionValue={1}
+        hiddenSection={
+          <>
+            <Input
+              label='If abnormal results please describe'
+              name='recent_physical_exam_details'
+            />
+          </>
+        }
       />
 
       <Radios
