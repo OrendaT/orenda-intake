@@ -275,7 +275,7 @@ const MentalHealth = () => {
         hiddenSection={
           <Radios
             label={
-              <em className='mb-4 inline-block'>
+              <em className='inline-block mb-4'>
                 If you are actively having suicidal thoughts and have a plan to
                 harm yourself, please call <a href='tel:911'>911</a>{' '}
                 immediately.

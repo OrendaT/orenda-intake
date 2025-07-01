@@ -18,7 +18,7 @@ import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import useAutoCreateForm from '@/hooks/useAutoCreateForm';
 import useSignature from '@/hooks/useSignature';
-import SuccessModal from '@/components/home/success-modal';
+import SuccessModal from '@/components/intake/success-modal';
 
 const Home = () => {
   const defaultValues = getItem(INTAKE_FORM) ?? initialValues;
@@ -40,7 +40,7 @@ const Home = () => {
 
   const [openTerms, setOpenTerms] = useState(false);
 
-  const onSubmit = async (data) => {
+  const onSubmit = handleSubmit(async (data) => {
     if (data.relationship_status_other) {
       data.relationship_status = data.relationship_status_other;
       data.relationship_status_other = undefined;
@@ -60,7 +60,7 @@ const Home = () => {
       removeLSItem(FORM_ID);
       setSignature({ text: '', base64: '' });
     }
-  };
+  });
 
   const formState = watch();
   const sanitizedState = {
@@ -100,15 +100,12 @@ const Home = () => {
 
           <section className='mt-10 ~text-sm/base'>
             <FormProvider {...methods}>
-              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+              <form onSubmit={onSubmit} noValidate>
                 {/* Form content */}
                 <div className='space-y-8'>
                   <fieldset className='fieldset'>
                     <PersonalInfo />
-                    <fieldset className='fieldset'>
-                      <h2 className='legend'>Address</h2>
-                      <AddressDetails />
-                    </fieldset>
+                    <AddressDetails />
 
                     <MentalHealth />
                   </fieldset>

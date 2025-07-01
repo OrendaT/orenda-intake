@@ -2,10 +2,11 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './layouts/layout.jsx';
-import Home from './pages/home.jsx';
+import IntakeForm from './pages/intake.jsx';
 
 import './styles/index.css';
 import NotFound from './pages/not-found.jsx';
+import CreditCardForm from './pages/credit-card.jsx';
 
 const router = createBrowserRouter([
   {
@@ -15,11 +16,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Home,
+        Component: IntakeForm,
       },
       {
         path: 'intake',
-        Component: Home,
+        Component: IntakeForm,
+      },
+      {
+        path: 'credit-card',
+        Component: CreditCardForm,
       },
     ],
   },
