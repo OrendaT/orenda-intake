@@ -1,3 +1,4 @@
+import DatePicker from '@/components/ui/date-picker';
 import IMask from '@/components/ui/imask';
 import Input from '@/components/ui/input';
 import Select from '@/components/ui/select';
@@ -19,7 +20,7 @@ const CreditCardForm = () => {
           <h1 className='mb-4 text-center font-heading font-bold ~text-3xl/[2.625rem]'>
             Orenda Credit Card Authorization Form
           </h1>
-          <p className='mx-auto max-w-3xl text-center font-semibold'>
+          <p className='max-w-3xl mx-auto font-semibold text-center'>
             Please complete this form so your appointment may be scheduled
             <br />
             <em>
@@ -28,7 +29,7 @@ const CreditCardForm = () => {
             </em>
           </p>
           <br />
-          <p className='mx-auto max-w-3xl text-center'>
+          <p className='max-w-3xl mx-auto text-center'>
             <em>
               If you or someone you know is struggling or in crisis, call the
               National Suicide Prevention Hotline at{' '}
