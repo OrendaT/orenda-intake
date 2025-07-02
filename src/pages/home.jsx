@@ -80,7 +80,7 @@ const Home = () => {
           <h1 className='mb-4 text-center font-heading font-bold ~text-3xl/[2.625rem]'>
             Orenda Intake Form
           </h1>
-          <p className='mx-auto max-w-3xl text-center font-semibold'>
+          <p className='max-w-3xl mx-auto font-semibold text-center'>
             Please complete this form so your appointment may be scheduled
             <br />
             <em>
@@ -89,12 +89,13 @@ const Home = () => {
             </em>
           </p>
           <br />
-          <p className='mx-auto max-w-3xl text-center'>
+          <p className='max-w-3xl mx-auto text-center'>
             <em>
-              If you or someone you know is struggling or in crisis, call the
-              National Suicide Prevention Hotline at{' '}
-              <a href='tel:18002738255'>1-800-273-8255</a> or{' '}
-              <a href='tel:911'>911</a>. Immediate help is available.
+              If you or someone you know is actively considering suicide or
+              self-harm, please immediately call <a href='tel:911'>911</a> or
+              the Suicide Prevention Hotline at{' '}
+              <a href='tel:+18002738255'>1-800-273-8255</a>. Immediate help is
+              available.
             </em>
           </p>
 
@@ -123,7 +124,7 @@ const Home = () => {
                 <fieldset className='mx-auto max-w-[46.125rem] rounded border-l-[5px] border-zinc-500 bg-transparent pb-0 ~px-5/12 ~pt-3/6'>
                   <label className='flex w-full items-center gap-3 ~text-sm/[0.93rem]'>
                     <input
-                      className='size-4 flex-shrink-0'
+                      className='flex-shrink-0 size-4'
                       type='checkbox'
                       value='I agree'
                       {...register('policy_agreement', {
