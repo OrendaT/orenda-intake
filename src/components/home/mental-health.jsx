@@ -266,34 +266,6 @@ const MentalHealth = () => {
       />
 
       <Radios
-        containerClassName='pt-5'
-        label='Have you ever had suicidal thoughts?'
-        name='suicidal_thoughts'
-        grid={false}
-        options={['Yes', 'No']}
-        showHiddenSectionValue='Yes'
-        hiddenSection={
-          <Radios
-            label={
-              <em className='mb-4 inline-block'>
-                If you are actively having suicidal thoughts and have a plan to
-                harm yourself, please call <a href='tel:911'>911</a>{' '}
-                immediately.
-              </em>
-            }
-            name='suicidal_thoughts_details'
-            showRequiredMark={false}
-            options={[
-              'Yes, I’ve had passive thoughts (e.g., wishing I were dead or not waking up) but no plan or intent.',
-              ' Yes, I’ve had active thoughts about suicide but no plan or intent to act on them.',
-              'Yes, I’ve had active thoughts with a plan, but no intent to act.',
-              ' Yes, I’ve had active thoughts with a plan and intent to act.',
-            ]}
-          />
-        }
-      />
-
-      <Radios
         label='Do you have any hearing impairments that would affect your participation in sessions or require accommodations?'
         name='hearing_impairment'
         options={[

@@ -78,7 +78,6 @@ export const initialValues = {
   reason_for_visit: '',
   mental_health_care_type: '',
   therapy_availability: '',
-  suicidal_thoughts: '',
   hearing_impairment: '',
   interpreter_guidelines: '',
   emergency_contact_info: '',
@@ -125,7 +124,6 @@ export const initialValues = {
   appointment_address: '',
   appointment_city: '',
   appointment_state: '',
-  suicidal_thoughts_details: '',
   photo_ID: '',
 
   insurance_provider: '',
