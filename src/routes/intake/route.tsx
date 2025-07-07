@@ -35,13 +35,9 @@ export function IntakeForm() {
     register,
     reset,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = methods;
-  const {
-    isPending: isLoading,
-    isSuccess,
-    mutateAsync: submitForm,
-  } = useSubmitForm();
+  const { isSuccess, mutateAsync: submitForm } = useSubmitForm();
   const { setSignature } = useSignature();
 
   // Watch the policy agreement checkbox
@@ -182,11 +178,11 @@ export function IntakeForm() {
               {/* Form submit button */}
               <Button
                 disabled={!acceptedTerms}
-                isLoading={isLoading}
+                isLoading={isSubmitting}
                 type='submit'
                 className='mx-auto mt-12'
               >
-                {isLoading ? 'Submitting' : 'Submit Form'}
+                {isSubmitting ? 'Submitting' : 'Submit Form'}
               </Button>
 
               {!!Object.entries(errors)?.length && (
