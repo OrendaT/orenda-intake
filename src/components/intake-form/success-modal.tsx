@@ -33,7 +33,7 @@ const SuccessModal = ({ open }: { open: boolean }) => {
           <p className="mx-auto mb-6 max-w-md text-center clamp-[text,sm,base]">
             We use billing partners including Headway to process billing and
             insurance claims. Please click below to go to Headway for Insurance
-            In-Network acknowledgments
+            In-Network acknowledgments
           </p>
 
           <a

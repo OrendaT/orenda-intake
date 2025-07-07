@@ -1,13 +1,13 @@
-import axios from "@/lib/axios";
-import { FORM_ID } from "@/lib/constants";
+import axios from '@/lib/axios';
+import { FORM_ID } from '@/lib/constants';
 import {
   convertToFormData,
   getLSItem,
   isValidEmail,
   setLSItem,
-} from "@/lib/utils";
-import { AxiosError } from "axios";
-import { useEffect, useState, useRef } from "react";
+} from '@/lib/utils';
+import { AxiosError } from 'axios';
+import { useEffect, useState, useRef } from 'react';
 
 interface UseAutoCreateFormProps {
   first_name?: string;
@@ -24,7 +24,7 @@ const useAutoCreateForm = ({
 }: UseAutoCreateFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [formId, setFormId] = useState(() => getLSItem("form_id"));
+  const [formId, setFormId] = useState(() => getLSItem(FORM_ID));
   const [error, setError] = useState(null);
 
   // Prevent multiple simultaneous calls
@@ -59,7 +59,7 @@ const useAutoCreateForm = ({
           email,
         });
 
-        const res = await axios.post("patients/pending-patient", data);
+        const res = await axios.post('patients/pending-patient', data);
 
         if (res.data.success) {
           setLSItem(FORM_ID, res.data.id);
@@ -72,9 +72,9 @@ const useAutoCreateForm = ({
             ? err?.response?.data
             : err instanceof Error
               ? err.message
-              : "Something went wrong"
+              : 'Something went wrong',
         );
-        console.error("Failed to create pending patient", err);
+        console.error('Failed to create pending patient', err);
       } finally {
         setIsLoading(false);
         isCreatingRef.current = false;

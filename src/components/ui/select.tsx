@@ -1,12 +1,12 @@
-import type { SelectInputProps } from "@/types";
+import type { SelectInputProps } from '@/types';
 import {
   FormControl,
   FormHelperText,
   InputLabel,
   MenuItem,
   Select as MUISelect,
-} from "@mui/material";
-import { Controller } from "react-hook-form";
+} from '@mui/material';
+import { Controller } from 'react-hook-form';
 
 const Select = ({
   label,
@@ -15,9 +15,8 @@ const Select = ({
   options,
   disabled,
   required = true,
-  variant = "standard",
-  errorMsg = "This field is required",
-  placeholder,
+  variant = 'standard',
+  errorMsg = 'This field is required',
   registerOptions,
   validations,
   ...selectProps
@@ -45,14 +44,14 @@ const Select = ({
             <InputLabel id={id || name}>{label}</InputLabel>
             <MUISelect
               {...field}
-              value={field.value || ""}
+              value={field.value || ''}
               label={label}
-              variant="standard"
+              variant='standard'
               id={id || name}
               fullWidth
               {...selectProps}
             >
-              {!required && <MenuItem value="">None</MenuItem>}
+              {!required && <MenuItem value=''>None</MenuItem>}
               {options?.map(({ label, value }) => (
                 <MenuItem key={value} value={value}>
                   {label || value}

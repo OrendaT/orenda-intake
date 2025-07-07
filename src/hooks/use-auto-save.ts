@@ -1,11 +1,13 @@
-import { INTAKE_FORM } from "@/lib/constants";
-import { setItem } from "@/lib/utils";
-import { deepEqual } from "fast-equals";
-import { useEffect, useRef } from "react";
+import { INTAKE_FORM } from '@/lib/constants';
+import { setItem } from '@/lib/utils';
+import { deepEqual } from 'fast-equals';
+import { useEffect, useRef } from 'react';
+import { toast } from 'sonner';
+import { useDebouncedCallback } from 'use-debounce';
 
 interface UseAutoSaveProps {
   key?: string;
-  value: any;
+  value: unknown;
   delay?: number;
 }
 
@@ -15,10 +17,20 @@ interface UseAutoSaveProps {
 const useAutoSave = ({
   key = INTAKE_FORM,
   value,
-  delay = 500,
+  delay = 1000,
 }: UseAutoSaveProps) => {
   const previousValueRef = useRef(value);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const debouncedSave = useDebouncedCallback(() => {
+    try {
+      setItem(key, value);
+    } catch (error) {
+      console.error('Error saving to storage:', error);
+      toast.error('Error during auto save');
+    }
+
+    previousValueRef.current = value;
+  }, delay);
 
   useEffect(() => {
     // Skip saving if values are deeply equal
@@ -26,28 +38,10 @@ const useAutoSave = ({
       return;
     }
 
-    // Clear any existing timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    debouncedSave();
 
-    // Set new timeout for debounced save
-    timeoutRef.current = setTimeout(() => {
-      try {
-        setItem(key, value);
-        previousValueRef.current = value;
-      } catch (error) {
-        console.error("Error saving data:", error);
-      }
-    }, delay);
-
-    // Cleanup on unmount or before next effect run
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, [key, value, delay]);
+    return () => debouncedSave.cancel?.();
+  }, [value, debouncedSave]);
 };
 
 export default useAutoSave;

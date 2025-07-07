@@ -1,9 +1,12 @@
-import { intakeInitialValues } from "@/lib/definitions";
-import type { SelectProps, TextFieldProps } from "@mui/material";
-import type { ComponentProps, ReactNode } from "react";
-import type { DatePickerProps } from "react-date-picker";
-import type { ControllerProps, RegisterOptions } from "react-hook-form";
-import type ReactInputMask from "react-input-mask";
+import {
+  creditCardInitialValues,
+  intakeInitialValues,
+} from '@/lib/definitions';
+import type { SelectProps, TextFieldProps } from '@mui/material';
+import type { ComponentProps, ReactNode } from 'react';
+import type { DatePickerProps } from 'react-date-picker';
+import type { ControllerProps, RegisterOptions } from 'react-hook-form';
+import type ReactInputMask from 'react-input-mask';
 
 type Option = {
   label?: string;
@@ -12,12 +15,14 @@ type Option = {
 
 export type SVGProps = React.SVGProps<SVGSVGElement>;
 
-type OptionalIntakeFields = "relationship_status_other";
+type OptionalIntakeFields = 'relationship_status_other';
 export type IntakeFormData = Omit<
   typeof intakeInitialValues,
   OptionalIntakeFields
 > &
   Partial<Pick<typeof intakeInitialValues, OptionalIntakeFields>>;
+
+export type CreditCardFormData = typeof creditCardInitialValues;
 
 export type BaseFieldProps = {
   label?: string | ReactNode;
@@ -26,11 +31,11 @@ export type BaseFieldProps = {
   showRequiredMark?: boolean;
   errorMsg?: string;
   placeholder?: string;
-  validations?: RegisterOptions["validate"];
+  validations?: RegisterOptions['validate'];
   className?: string;
   containerClassName?: string;
   registerOptions?: RegisterOptions;
-  rules?: ControllerProps["rules"];
+  rules?: ControllerProps['rules'];
   required?: boolean;
   disabled?: boolean;
   grid?: boolean;
@@ -40,14 +45,14 @@ export type InputProps = BaseFieldProps & TextFieldProps;
 
 export type FileInputProps = BaseFieldProps & {
   maxSize?: 5;
-  accept?: ComponentProps<"input">["accept"];
+  accept?: ComponentProps<'input'>['accept'];
 };
 
 export type TDatePickerProps = BaseFieldProps & DatePickerProps;
 
 export type MaskProps = BaseFieldProps &
   ComponentProps<typeof ReactInputMask> & {
-    variant?: TextFieldProps["variant"];
+    variant?: TextFieldProps['variant'];
     inputProps?: TextFieldProps;
   };
 
@@ -69,7 +74,7 @@ export type RadioProps = BaseFieldProps & {
   options: Option[];
 };
 
-export type ButtonProps = ComponentProps<"button"> & {
+export type ButtonProps = ComponentProps<'button'> & {
   asChild?: boolean;
   hoverClass?: string;
   isLoading?: boolean;

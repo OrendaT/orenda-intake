@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
-import { cn } from "@/lib/utils";
-import useSignature from "@/hooks/use-signature";
-import type { BaseFieldProps } from "@/types";
-import type { TSignature } from "@/context/signature-context";
+import { cn } from '@/lib/utils';
+import useSignature from '@/hooks/use-signature';
+import type { BaseFieldProps } from '@/types';
+import type { TSignature } from '@/context/signature-context';
 
 const CANVAS_X = 1200; // Canvas width in pixels
 const CANVAS_Y = 320; // Canvas height in pixels
@@ -24,8 +24,8 @@ const Comp = ({
 }: {
   id: string;
   className?: string;
-  onChange: Function;
-  value: any;
+  onChange: (value: TSignature) => void;
+  value: TSignature;
 }) => {
   const { signature, setSignature } = useSignature();
 
@@ -42,11 +42,11 @@ const Comp = ({
    *
    * @param {string} text - Signature text
    */
-  const drawOnCanvas = (text: string) => {
+  const drawOnCanvas = useCallback((text: string) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
 
     if (!ctx) return;
 
@@ -60,20 +60,23 @@ const Comp = ({
     if (text) {
       ctx.font =
         'italic 100px "Dancing Script", "Pacifico", "Great Vibes", "Brush Script MT", cursive';
-      ctx.fillStyle = "rgba(0,0,0)";
-      ctx.textBaseline = "middle";
-      ctx.textAlign = "center";
+      ctx.fillStyle = 'rgba(0,0,0)';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
       ctx.fillText(text, CANVAS_X / 2, CANVAS_Y / 2);
     }
     return canvas.toDataURL();
-  };
+  }, []);
 
-  const handleChange = (value: string) => {
-    const base64 = drawOnCanvas(value) || "";
+  const handleChange = useCallback(
+    (value: string) => {
+      const base64 = drawOnCanvas(value) || '';
 
-    if (!isClicked) setSignature({ text: value, base64 });
-    onChange({ text: value, base64 });
-  };
+      if (!isClicked) setSignature({ text: value, base64 });
+      onChange({ text: value, base64 });
+    },
+    [isClicked, drawOnCanvas, onChange, setSignature],
+  );
 
   /** Redraw stored signature text on canvas */
   const sign = () => {
@@ -94,7 +97,7 @@ const Comp = ({
   useEffect(() => {
     /** Clears the signature from external clear */
     if (!signature.text && value?.text) {
-      handleChange("");
+      handleChange('');
       setIsClicked(false);
     }
 
@@ -102,24 +105,24 @@ const Comp = ({
      * after signed via click to sign
      */
     if (isClicked) {
-      drawOnCanvas(signature.text || "");
+      drawOnCanvas(signature.text || '');
       onChange(signature);
     }
-  }, [signature, isClicked, drawOnCanvas]);
+  }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value.text]);
 
   return (
-    <div id={id} className={cn("signature", className)}>
+    <div id={id} className={cn('signature', className)}>
       {/* Text input for signature */}
       {(!signature.text || value?.text) && !isClicked && (
         <input
-          type="text"
+          type='text'
           value={value?.text}
           onChange={({ target: { value } }) => {
             if (value.length > MAX_LENGTH) return;
             handleChange(value);
           }}
-          className="mb-2 mt-4 block w-full max-w-sm rounded bg-white/50 px-4 py-2 outline outline-zinc-200 transition-all duration-300 clamp-[text,sm,base] focus:outline-zinc-500"
-          placeholder="Type your signature here"
+          className='clamp-[text,sm,base] mt-4 mb-2 block w-full max-w-sm rounded bg-white/50 px-4 py-2 outline outline-zinc-200 transition-all duration-300 focus:outline-zinc-500'
+          placeholder='Type your signature here'
           onFocus={() => setFocused(true)}
           onBlur={() => {
             setFocused(false);
@@ -128,30 +131,30 @@ const Comp = ({
       )}
 
       {/* Canvas preview */}
-      <div className="relative rounded-xl">
+      <div className='relative rounded-xl'>
         <canvas
           ref={canvasRef}
           width={CANVAS_X}
           height={CANVAS_Y}
-          className="my-5 w-full rounded-[inherit] border border-dashed border-zinc-500"
+          className='my-5 w-full rounded-[inherit] border border-dashed border-zinc-500'
         />
 
         {/* Click to sign overlay */}
         {signature?.text && !value?.text && !isClicked && !focused && (
           <button
-            type="button"
+            type='button'
             onClick={sign}
-            className="absolute inset-0 content-center rounded-[inherit] bg-black/20 text-center font-open-sans"
+            className='font-open-sans absolute inset-0 content-center rounded-[inherit] bg-black/20 text-center'
           >
-            <p className="font-medium italic clamp-[text,base,3xl]">
-              <span className="sm:hidden">Tap</span>{" "}
-              <span className="hidden sm:inline">Click</span> to sign
+            <p className='clamp-[text,base,3xl] font-medium italic'>
+              <span className='sm:hidden'>Tap</span>{' '}
+              <span className='hidden sm:inline'>Click</span> to sign
             </p>
           </button>
         )}
       </div>
       <div>
-        {errors?.[id] && <p className="error">Your signature is required</p>}
+        {errors?.[id] && <p className='error'>Your signature is required</p>}
 
         {/* Clear button */}
         {/* <button
@@ -177,7 +180,7 @@ export default function SignaturePad({
   name,
   disabled,
   required = true,
-  errorMsg = "This field is required",
+  errorMsg = 'This field is required',
   className,
   rules,
 }: BaseFieldProps) {
