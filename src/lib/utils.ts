@@ -76,33 +76,38 @@ export const base64ToFile = (base64Data: string, fileName: string) => {
   return new File([uint8Array], fileName, { type: mime });
 };
 
-export const convertFileListsToFiles = (obj: IntakeFormData) => {
+export const convertFileListsToFiles = <T>(obj: Record<string, unknown>): T => {
   Object.entries(obj).forEach(([key, value]) => {
     if (value instanceof FileList && value.length === 1) {
-      (obj as any)[key] = value[0];
+      obj[key] = value[0];
     }
   });
-  return obj;
+  return obj as T;
 };
 
-export const convertBase64ToFile = (obj: IntakeFormData) => {
+export const convertBase64ToFile = <T>(obj: Record<string, unknown>): T => {
   Object.entries(obj).forEach(([key, value]) => {
     if (base64Strings?.includes(key)) {
-      if (value) (obj as any)[key] = base64ToFile((value as any).base64, key);
+      if (value && typeof value === 'object' && 'base64' in value) {
+        const base64 = value.base64;
+        if (typeof base64 === 'string') {
+          obj[key] = base64ToFile(base64, key);
+        }
+      }
     }
   });
 
-  return obj;
+  return obj as T;
 };
 
 export const parseFormData = (data: IntakeFormData) => {
   // convert Base64 strings to Files
-  data = convertBase64ToFile(data);
+  data = convertBase64ToFile<IntakeFormData>(data);
 
   // convert FileLists to Files
-  data = convertFileListsToFiles(data);
+  data = convertFileListsToFiles<IntakeFormData>(data);
 
-  //convert date object to date
+  // parse DOB (convert date object to US date)
   const rawDate = new Date(data.date_of_birth);
   const formattedDate = rawDate.toLocaleDateString('en-US');
   data.date_of_birth = formattedDate;
