@@ -1,8 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@/components/ui/custom-button';
-import { getItem, parseFormData, removeItem, removeLSItem } from '@/lib/utils';
-import { FORM_ID, INTAKE_FORM } from '@/lib/constants';
+import {
+  getItem,
+  isValidEmail,
+  parseFormData,
+  removeItem,
+  removeLSItem,
+} from '@/lib/utils';
+import { FORM_IDS, FORMS } from '@/lib/constants';
 import useAutoSave from '@/hooks/use-auto-save';
 import useSubmitForm from '@/hooks/use-submit-form';
 import { intakeInitialValues } from '@/lib/definitions';
@@ -23,10 +29,17 @@ import type { IntakeFormData } from '@/types';
 
 export const Route = createFileRoute('/intake')({
   component: IntakeForm,
+  head: () => ({
+    meta: [
+      {
+        title: 'Orenda | Intake Form',
+      },
+    ],
+  }),
 });
 
 export function IntakeForm() {
-  const defaultValues = getItem(INTAKE_FORM) ?? intakeInitialValues;
+  const defaultValues = getItem(FORMS.intake) ?? intakeInitialValues;
   const methods = useForm<IntakeFormData>({
     defaultValues: defaultValues as IntakeFormData,
   });
@@ -37,8 +50,11 @@ export function IntakeForm() {
     watch,
     formState: { errors, isSubmitting },
   } = methods;
-  const { isSuccess, mutateAsync: submitForm } = useSubmitForm();
-  const { setSignature } = useSignature();
+  const { isSuccess, mutateAsync: submitForm } = useSubmitForm({
+    form: 'intake',
+    url: 'patients',
+  });
+  const { resetSignature } = useSignature();
 
   // Watch the policy agreement checkbox
   const acceptedTerms =
@@ -56,10 +72,10 @@ export function IntakeForm() {
     const res = await submitForm(data);
 
     if (res?.data.success) {
-      removeItem(INTAKE_FORM);
+      removeItem(FORMS.intake);
       reset(intakeInitialValues);
-      removeLSItem(FORM_ID);
-      setSignature({ text: '', base64: '' });
+      removeLSItem(FORM_IDS.intake);
+      resetSignature();
     }
   });
 
@@ -73,7 +89,21 @@ export function IntakeForm() {
 
   const { first_name, last_name, email, phone } = formState;
 
-  useAutoCreateForm({ first_name, last_name, email, phone });
+  useAutoCreateForm({
+    formID: 'intake_id',
+    isPendingForm: Boolean(
+      first_name?.length > 1 &&
+        last_name?.length > 1 &&
+        isValidEmail(email) &&
+        phone?.length > 7,
+    ),
+    data: {
+      first_name,
+      last_name,
+      email,
+    },
+    url: 'patients/pending-patient',
+  });
 
   return (
     <>

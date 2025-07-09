@@ -5,10 +5,13 @@ import Input from '@/components/ui/input';
 import PaymentIcon from '@/components/ui/payment-icon';
 import Select from '@/components/ui/select';
 import SignaturePad from '@/components/ui/signature';
+import useAutoCreateForm from '@/hooks/use-auto-create-form';
 import useAutoSave from '@/hooks/use-auto-save';
-import { CREDIT_CARD_FORM, US_STATES } from '@/lib/constants';
+import useSignature from '@/hooks/use-signature';
+import useSubmitForm from '@/hooks/use-submit-form';
+import { FORM_IDS, FORMS, US_STATES } from '@/lib/constants';
 import { creditCardInitialValues } from '@/lib/definitions';
-import { cn, getItem } from '@/lib/utils';
+import { cn, getItem, removeItem, removeLSItem } from '@/lib/utils';
 import type { CreditCardFormData } from '@/types';
 import { InputAdornment } from '@mui/material';
 import { createFileRoute } from '@tanstack/react-router';
@@ -18,17 +21,34 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 export const Route = createFileRoute('/credit-card')({
   component: CreditCard,
+  head: () => ({
+    meta: [
+      {
+        title: 'Orenda | Credit Card Form',
+      },
+    ],
+  }),
 });
 
 function CreditCard() {
-  const defaultValues = getItem(CREDIT_CARD_FORM) ?? creditCardInitialValues;
+  const defaultValues = getItem(FORMS.credit_card) ?? creditCardInitialValues;
   const methods = useForm<CreditCardFormData>({
     defaultValues: defaultValues as CreditCardFormData,
   });
+  const { resetSignature } = useSignature();
+  const { mutateAsync: submitForm } = useSubmitForm({
+    form: 'credit_card',
+    url: 'credit-cards',
+  });
 
-  const { handleSubmit, watch } = methods;
+  const {
+    handleSubmit,
+    watch,
+    reset,
+    formState: { isSubmitting },
+  } = methods;
 
-  const cc_number = watch('card_number');
+  const cc_number = watch('credit_card_number');
   const [hideCardNumber, setHideCardNumber] = useState(true);
   const [cardDetails, setCardDetails] = useState(() => {
     const validation = number(cc_number);
@@ -40,13 +60,37 @@ function CreditCard() {
     };
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const res = await submitForm(data);
+
+    if (res?.data.success) {
+      removeItem(FORMS.credit_card);
+      removeLSItem(FORM_IDS.credit_card);
+      resetSignature();
+      reset(creditCardInitialValues);
+    }
   });
 
   const formState = watch();
 
-  useAutoSave({ key: CREDIT_CARD_FORM, value: formState });
+  useAutoSave({ key: FORMS.credit_card, value: formState });
+
+  const { patient_name, cardholder_name, date_of_birth } = formState;
+
+  useAutoCreateForm({
+    formID: 'intake_id',
+    isPendingForm: Boolean(
+      patient_name?.length > 1 &&
+        cardholder_name?.length > 3 &&
+        date_of_birth?.length > 5,
+    ),
+    data: {
+      patient_name,
+      cardholder_name,
+      date_of_birth,
+    },
+    url: 'credit-cards/pending-credit-card',
+  });
 
   return (
     <main className='main'>
@@ -136,7 +180,7 @@ function CreditCard() {
 
                 <IMask
                   label='Card Number'
-                  name='card_number'
+                  name='credit_card_number'
                   mask={
                     cardDetails.type === 'american-express'
                       ? '9999 9999 9999 999'
@@ -180,7 +224,7 @@ function CreditCard() {
 
               <IMask
                 label='Expiration Date (mm/yy)'
-                name='exp_date'
+                name='credit_card_exp_date'
                 mask='99/99'
                 validations={{
                   exp_date: (value) => {
@@ -191,7 +235,7 @@ function CreditCard() {
               />
               <IMask
                 label='CVV'
-                name='cvv'
+                name='credit_card_csv'
                 mask={cardDetails.cvv_length === 3 ? '999' : '9999'}
                 maskChar=''
                 validations={{
@@ -205,19 +249,19 @@ function CreditCard() {
               <div className='mt-5 space-y-5'>
                 <article>
                   <p>
-                    By signing below, I authorize Orenda Psychiatry to charge my
-                    credit card for private pay sessions as follows:
+                    Private Pay sessions will be billed up front according to
+                    the following schedule:
                   </p>
                   <ul className='list-disc pl-5'>
                     <li>$300 for intake appointments </li>
                     <li>
-                      $150–$250 for follow-up appointments (rate varies based on
+                      $150-$250 for follow-up appointment (rate varies based on
                       session length)
                     </li>
                   </ul>
                 </article>
 
-                <article>
+                {/* <article>
                   <h3 className='label font-semibold'>
                     Upfront Payment Agreement:
                   </h3>
@@ -225,28 +269,28 @@ function CreditCard() {
                     I understand and agree that Orenda Psychiatry will charge my
                     credit card upfront to secure my appointment.
                   </p>
-                </article>
+                </article> */}
 
                 <article>
                   <h3 className='label font-semibold'>
                     Cancellation & Refund Policy:
                   </h3>
                   <p>
-                    Full refund for cancellations made more than 24 hours before
-                    the appointment
+                    Full refund will be issued for cancellations made more than
+                    24 hours prior to scheduled appointment.
                   </p>
                 </article>
 
-                <article>
-                  <h3 className='label font-semibold'>
-                    Electronic Signature Acknowledgment
-                  </h3>
-                  <p>
-                    By typing my name below, I acknowledge that this serves as
-                    my electronic signature and has the same legal effect as a
-                    handwritten signature under applicable law.
-                  </p>
-                </article>
+                <p>
+                  By electronically signing my name below, I authorize Orenda to
+                  charge my credit card, debit card, HSA or FSA Card, and/or
+                  financial account number (collectively, “Payment Method”) in
+                  connection with any and all provider sessions I receive
+                  through Orenda. I further authorize Orenda to maintain my
+                  Payment Method on file to pay for any and all such sessions
+                  until I revoke my authorization. I understand that a copy of
+                  my current Payment Authorization can be provided upon request.
+                </p>
 
                 <SignaturePad className='-mt-2' name='signature' />
                 <DatePicker label='Date' name='signature_date' />
@@ -255,8 +299,12 @@ function CreditCard() {
           </div>
 
           {/* Form submit button */}
-          <Button type='submit' className='mx-auto mt-12'>
-            Submit Form
+          <Button
+            type='submit'
+            className='mx-auto mt-12'
+            isLoading={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting' : 'Submit Form'}
           </Button>
         </form>
       </FormProvider>

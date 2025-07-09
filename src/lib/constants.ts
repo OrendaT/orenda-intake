@@ -1,6 +1,13 @@
-export const INTAKE_FORM = 'intake';
-export const CREDIT_CARD_FORM = 'credit_card';
-export const FORM_ID = 'form_id';
+export const FORMS = {
+  intake: 'intake',
+  credit_card: 'credit_card',
+} as const;
+
+export const FORM_IDS = {
+  intake: 'intake_id',
+  credit_card: 'credit_card_id',
+} as const;
+
 export const EXPIRY_TIME = 3;
 
 export const US_STATES = [

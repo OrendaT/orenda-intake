@@ -1,30 +1,27 @@
-import axios from '@/lib/axios';
-import { FORM_ID } from '@/lib/constants';
-import {
-  convertToFormData,
-  getLSItem,
-  isValidEmail,
-  setLSItem,
-} from '@/lib/utils';
+import axios from '@/lib/api/axios';
+import type { PENDING_FORM_EPS } from '@/lib/api/endpoints';
+import { FORM_IDS } from '@/lib/constants';
+import { convertToFormData, getLSItem, setLSItem } from '@/lib/utils';
+import type { CreditCardFormData, IntakeFormData } from '@/types';
 import { AxiosError } from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
 interface UseAutoCreateFormProps {
-  first_name?: string;
-  last_name?: string;
-  email?: string;
-  phone?: string;
+  formID: (typeof FORM_IDS)[keyof typeof FORM_IDS];
+  isPendingForm: boolean;
+  data: Partial<IntakeFormData | CreditCardFormData>;
+  url: (typeof PENDING_FORM_EPS)[keyof typeof PENDING_FORM_EPS];
 }
 
 const useAutoCreateForm = ({
-  first_name,
-  last_name,
-  email,
-  phone,
+  formID,
+  isPendingForm,
+  data,
+  url,
 }: UseAutoCreateFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [formId, setFormId] = useState(() => getLSItem(FORM_ID));
+  const [formId, setFormId] = useState(() => getLSItem(formID));
   const [error, setError] = useState(null);
 
   // Prevent multiple simultaneous calls
@@ -32,16 +29,6 @@ const useAutoCreateForm = ({
 
   useEffect(() => {
     const createPendingPatient = async () => {
-      const isPendingForm =
-        first_name &&
-        last_name &&
-        email &&
-        phone &&
-        first_name.length > 1 &&
-        last_name.length > 1 &&
-        isValidEmail(email) &&
-        phone.length > 7;
-
       // Exit early if conditions aren't met
       if (!isPendingForm || formId || isCreatingRef.current) {
         return;
@@ -53,16 +40,12 @@ const useAutoCreateForm = ({
         setIsError(false);
         setError(null);
 
-        const data = convertToFormData({
-          first_name,
-          last_name,
-          email,
-        });
+        const _data = convertToFormData(data);
 
-        const res = await axios.post('patients/pending-patient', data);
+        const res = await axios.post(url, _data);
 
         if (res.data.success) {
-          setLSItem(FORM_ID, res.data.id);
+          setLSItem(formID, res.data.id);
           setFormId(res.data.id);
         }
       } catch (err) {
@@ -82,7 +65,7 @@ const useAutoCreateForm = ({
     };
 
     createPendingPatient();
-  }, [first_name, last_name, email, phone, formId]);
+  }, [isPendingForm, formId]);
 
   return { isLoading, isError, error, formId };
 };

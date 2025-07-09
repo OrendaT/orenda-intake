@@ -1,13 +1,14 @@
-import { INTAKE_FORM } from '@/lib/constants';
+import { FORMS } from '@/lib/constants';
 import { setItem } from '@/lib/utils';
+import type { CreditCardFormData, IntakeFormData } from '@/types';
 import { deepEqual } from 'fast-equals';
 import { useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { useDebouncedCallback } from 'use-debounce';
 
 interface UseAutoSaveProps {
-  key?: string;
-  value: unknown;
+  key?: (typeof FORMS)[keyof typeof FORMS];
+  value: Partial<IntakeFormData | CreditCardFormData>;
   delay?: number;
 }
 
@@ -15,7 +16,7 @@ interface UseAutoSaveProps {
  * Custom hook for automatically saving data to storage with debounce
  */
 const useAutoSave = ({
-  key = INTAKE_FORM,
+  key = FORMS.intake,
   value,
   delay = 1000,
 }: UseAutoSaveProps) => {

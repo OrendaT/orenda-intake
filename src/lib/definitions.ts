@@ -87,9 +87,9 @@ export const creditCardInitialValues = {
   state: '',
   zip_code: '',
 
-  card_number: '',
-  card_exp_date: '',
-  card_cvv: '',
+  credit_card_number: '',
+  credit_card_exp_date: '',
+  credit_card_csv: '',
 
   signature: '',
   signature_date: '',

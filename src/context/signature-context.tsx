@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
 const initialValue = {
-  base64: "",
-  text: "",
+  base64: '',
+  text: '',
 };
 
 export type TSignature = typeof initialValue;
@@ -10,13 +10,23 @@ export type TSignature = typeof initialValue;
 export const SignatureContext = createContext<{
   signature: typeof initialValue;
   setSignature: React.Dispatch<React.SetStateAction<TSignature>>;
-}>({ signature: initialValue, setSignature: () => {} });
+  resetSignature: () => void;
+}>({
+  signature: initialValue,
+  setSignature: () => {},
+});
 
 const SignatureProvider = ({ children }: { children: React.ReactNode }) => {
   const [signature, setSignature] = useState(initialValue);
 
   return (
-    <SignatureContext.Provider value={{ signature, setSignature }}>
+    <SignatureContext.Provider
+      value={{
+        signature,
+        setSignature,
+        resetSignature: () => setSignature(initialValue),
+      }}
+    >
       {children}
     </SignatureContext.Provider>
   );
