@@ -6,19 +6,19 @@ import type { CreditCardFormData, IntakeFormData } from '@/types';
 import { AxiosError } from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
-interface UseAutoCreateFormProps {
+interface UseCreatePendingFormProps {
   formID: (typeof FORM_IDS)[keyof typeof FORM_IDS];
   isPendingForm: boolean;
   data: Partial<IntakeFormData | CreditCardFormData>;
   url: (typeof PENDING_FORM_EPS)[keyof typeof PENDING_FORM_EPS];
 }
 
-const useAutoCreateForm = ({
+const useCreatePendingForm = ({
   formID,
   isPendingForm,
   data,
   url,
-}: UseAutoCreateFormProps) => {
+}: UseCreatePendingFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [formId, setFormId] = useState(() => getLSItem(formID));
@@ -65,9 +65,9 @@ const useAutoCreateForm = ({
     };
 
     createPendingPatient();
-  }, [isPendingForm, formId]);
+  }, [data, url, isPendingForm, formId, formID]);
 
   return { isLoading, isError, error, formId };
 };
 
-export default useAutoCreateForm;
+export default useCreatePendingForm;

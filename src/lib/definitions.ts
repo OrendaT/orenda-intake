@@ -1,11 +1,5 @@
 export const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-export const base64Strings = [
-  'guardian_signature',
-  'honesty_signature',
-  'policy_agreement_signature',
-];
-
 export const intakeInitialValues = {
   first_name: '',
   last_name: '',

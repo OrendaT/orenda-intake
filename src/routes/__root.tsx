@@ -1,5 +1,5 @@
 import { Toaster } from '@/components/ui/sonner';
-import SignatureProvider from '@/context/signature-context';
+import { SignatureProvider } from '@/context/signature-context';
 import theme from '@/lib/mui-theme';
 import { ThemeProvider } from '@mui/material';
 import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router';

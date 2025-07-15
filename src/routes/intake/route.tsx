@@ -4,7 +4,7 @@ import Button from '@/components/ui/custom-button';
 import {
   getItem,
   isValidEmail,
-  parseFormData,
+  parseIntakeFormData,
   removeItem,
   removeLSItem,
 } from '@/lib/utils';
@@ -22,7 +22,7 @@ import {
 } from '@/components';
 import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
-import useAutoCreateForm from '@/hooks/use-auto-create-form';
+import useCreatePendingForm from '@/hooks/use-create-pending-form';
 import useSignature from '@/hooks/use-signature';
 import SuccessModal from '@/components/intake-form/success-modal';
 import type { IntakeFormData } from '@/types';
@@ -67,7 +67,7 @@ export function IntakeForm() {
       data.relationship_status_other = undefined;
     }
 
-    data = parseFormData(data);
+    data = parseIntakeFormData(data);
 
     const res = await submitForm(data);
 
@@ -89,7 +89,7 @@ export function IntakeForm() {
 
   const { first_name, last_name, email, phone } = formState;
 
-  useAutoCreateForm({
+  useCreatePendingForm({
     formID: 'intake_id',
     isPendingForm: Boolean(
       first_name?.length > 1 &&

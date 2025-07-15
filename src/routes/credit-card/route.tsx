@@ -5,13 +5,19 @@ import Input from '@/components/ui/input';
 import PaymentIcon from '@/components/ui/payment-icon';
 import Select from '@/components/ui/select';
 import SignaturePad from '@/components/ui/signature';
-import useAutoCreateForm from '@/hooks/use-auto-create-form';
+import useCreatePendingForm from '@/hooks/use-create-pending-form';
 import useAutoSave from '@/hooks/use-auto-save';
 import useSignature from '@/hooks/use-signature';
 import useSubmitForm from '@/hooks/use-submit-form';
 import { FORM_IDS, FORMS, US_STATES } from '@/lib/constants';
 import { creditCardInitialValues } from '@/lib/definitions';
-import { cn, getItem, removeItem, removeLSItem } from '@/lib/utils';
+import {
+  cn,
+  getItem,
+  parseCCFormData,
+  removeItem,
+  removeLSItem,
+} from '@/lib/utils';
 import type { CreditCardFormData } from '@/types';
 import { InputAdornment } from '@mui/material';
 import { createFileRoute } from '@tanstack/react-router';
@@ -61,6 +67,7 @@ function CreditCard() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    data = parseCCFormData(data);
     const res = await submitForm(data);
 
     if (res?.data.success) {
@@ -77,17 +84,15 @@ function CreditCard() {
 
   const { patient_name, cardholder_name, date_of_birth } = formState;
 
-  useAutoCreateForm({
+  useCreatePendingForm({
     formID: 'intake_id',
     isPendingForm: Boolean(
-      patient_name?.length > 1 &&
-        cardholder_name?.length > 3 &&
-        date_of_birth?.length > 5,
+      patient_name?.length > 1 && cardholder_name?.length > 3 && date_of_birth,
     ),
     data: {
       patient_name,
       cardholder_name,
-      date_of_birth,
+      date_of_birth: new Date(date_of_birth).toLocaleDateString('en-US'),
     },
     url: 'credit-cards/pending-credit-card',
   });

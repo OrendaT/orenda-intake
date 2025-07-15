@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 /* prettier-ignore */
 @plugin 'tailwind-clamp' {
   minSize: 23.4375rem;
@@ -9,7 +9,7 @@
   nocompatible: true;
   preferredStrategy: 'pseudoelements';
 }
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -58,9 +58,9 @@
 
   --breakpoint-xs: 390px;
 
-  --font-dm-sans: "DM Sans", "sans-serif";
-  --font-heading: "Ogg Text TRIAL", "serif";
-  --font-open-sans: "Open Sans", "sans-serif";
+  --font-dm-sans: 'DM Sans', 'sans-serif';
+  --font-heading: 'Ogg Text TRIAL', 'serif';
+  --font-open-sans: 'Open Sans', 'sans-serif';
 }
 
 :root {
@@ -132,31 +132,31 @@
 }
 
 @font-face {
-  font-family: "Ogg Text TRIAL";
-  src: url("../assets/fonts/Ogg Text TRIAL regular.ttf") format("truetype");
+  font-family: 'Ogg Text TRIAL';
+  src: url('../assets/fonts/Ogg Text TRIAL regular.ttf') format('truetype');
   font-style: normal;
   font-weight: 400; /* Regular */
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Ogg Text TRIAL";
-  src: url("../assets/fonts/Ogg Text TRIAL medium.ttf") format("truetype");
+  font-family: 'Ogg Text TRIAL';
+  src: url('../assets/fonts/Ogg Text TRIAL medium.ttf') format('truetype');
   font-style: normal;
   font-weight: 500; /* Medium */
   font-display: swap;
 }
 @font-face {
-  font-family: "Ogg Text TRIAL";
-  src: url("../assets/fonts/Ogg Text TRIAL medium-bold.ttf") format("truetype");
+  font-family: 'Ogg Text TRIAL';
+  src: url('../assets/fonts/Ogg Text TRIAL medium-bold.ttf') format('truetype');
   font-style: normal;
   font-weight: 600; /* Semi-bold or Medium-Bold */
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Ogg Text TRIAL";
-  src: url("../assets/fonts/Ogg Text TRIAL.ttf") format("truetype");
+  font-family: 'Ogg Text TRIAL';
+  src: url('../assets/fonts/Ogg Text TRIAL.ttf') format('truetype');
   font-style: normal;
   font-weight: 700; /* Default Bold */
   font-display: swap;
@@ -192,10 +192,10 @@ body {
   }
 
   /* Customize input:date picker icon */
-  input[type="date"]::-webkit-calendar-picker-indicator {
+  input[type='date']::-webkit-calendar-picker-indicator {
     color: rgba(0, 0, 0, 0);
     display: block;
-    background: url("../assets/calendar_icon.svg") no-repeat;
+    background: url('../assets/calendar_icon.svg') no-repeat;
     background-size: 1.25rem;
     width: 1.125rem;
     height: 1.125rem;
@@ -204,20 +204,17 @@ body {
   }
 
   /* Remove input buttons for number type */
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     margin: 0;
   }
   /* ...for Firefox */
-  input[type="number"] {
+  input[type='number'] {
     -moz-appearance: textfield;
     appearance: textfield;
-  }
-  :root {
-    --radius: 0.5rem;
   }
 }
 
@@ -227,10 +224,10 @@ body {
   }
 
   .padding-inline {
-    @apply px-5 sm:clamp-[px,8,12];
+    @apply sm:clamp-[px,8,12] px-5;
   }
   .input-base {
-    @apply block w-full border-b border-[#D1D1D1] bg-transparent pb-2 outline-none clamp-[text,sm,base];
+    @apply clamp-[text,sm,base] block w-full border-b border-[#D1D1D1] bg-transparent pb-2 outline-none;
   }
 
   .sublist-decimal {
@@ -244,23 +241,23 @@ body {
 
 @layer components {
   .main {
-    @apply px-5 sm:clamp-[px,8,12] min-h-dvh bg-[#f6f7fc] bg-dotted bg-cover bg-fixed py-16 clamp-[text,sm,base];
+    @apply sm:clamp-[px,8,12] bg-dotted clamp-[text,sm,base] min-h-dvh bg-[#f6f7fc] bg-cover bg-fixed px-5 py-16;
   }
 
   .main-container {
-    @apply max-w-[60rem] mx-auto;
+    @apply mx-auto max-w-[60rem];
   }
 
   .page-heading {
-    @apply mb-4 text-center font-heading font-bold clamp-[text,3xl,2.625rem] clamp-[leading,2rem,3rem];
+    @apply font-heading clamp-[text,3xl,2.625rem] clamp-[leading,2rem,3rem] mb-4 text-center font-bold;
   }
 
   .form-content {
     .fieldset {
-      @apply mx-auto max-w-[46.125rem] grid gap-y-6 rounded-2xl border border-[#D6D6D6] bg-white clamp-[px,5,14] clamp-[pt,2,6] clamp-[pb,12,16] clamp-[mb,10,20];
+      @apply clamp-[px,5,14] clamp-[pt,2,6] clamp-[pb,12,16] clamp-[mb,10,20] mx-auto grid max-w-[46.125rem] gap-y-6 rounded-2xl border border-[#D6D6D6] bg-white;
 
       .heading {
-        @apply font-medium clamp-[text,base,lg];
+        @apply clamp-[text,base,lg] font-medium;
       }
     }
   }
@@ -274,6 +271,6 @@ body {
   }
 
   .legend {
-    @apply text-center font-heading font-bold clamp-[text,xl,2xl] clamp-[mb,3,6];
+    @apply font-heading clamp-[text,xl,2xl] clamp-[mb,3,6] text-center font-bold;
   }
 }

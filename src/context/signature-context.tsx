@@ -7,16 +7,23 @@ const initialValue = {
 
 export type TSignature = typeof initialValue;
 
-export const SignatureContext = createContext<{
+type ContextType = {
   signature: typeof initialValue;
   setSignature: React.Dispatch<React.SetStateAction<TSignature>>;
   resetSignature: () => void;
-}>({
+};
+
+export const SignatureContext = createContext<ContextType>({
   signature: initialValue,
   setSignature: () => {},
+  resetSignature: () => {},
 });
 
-const SignatureProvider = ({ children }: { children: React.ReactNode }) => {
+export const SignatureProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [signature, setSignature] = useState(initialValue);
 
   return (
@@ -31,5 +38,3 @@ const SignatureProvider = ({ children }: { children: React.ReactNode }) => {
     </SignatureContext.Provider>
   );
 };
-
-export default SignatureProvider;

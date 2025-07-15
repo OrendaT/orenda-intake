@@ -2,8 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import Cookies from 'js-cookie';
 import { EXPIRY_TIME } from '@/lib/constants';
-import { base64Strings } from '@/lib/definitions';
-import type { IntakeFormData } from '@/types';
+import type { CreditCardFormData, IntakeFormData } from '@/types';
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -87,12 +86,10 @@ export const convertFileListsToFiles = <T>(obj: Record<string, unknown>): T => {
 
 export const convertBase64ToFile = <T>(obj: Record<string, unknown>): T => {
   Object.entries(obj).forEach(([key, value]) => {
-    if (base64Strings?.includes(key)) {
-      if (value && typeof value === 'object' && 'base64' in value) {
-        const base64 = value.base64;
-        if (typeof base64 === 'string') {
-          obj[key] = base64ToFile(base64, key);
-        }
+    if (value && typeof value === 'object' && 'base64' in value) {
+      const base64 = value.base64;
+      if (typeof base64 === 'string') {
+        obj[key] = base64ToFile(base64, key);
       }
     }
   });
@@ -100,7 +97,7 @@ export const convertBase64ToFile = <T>(obj: Record<string, unknown>): T => {
   return obj as T;
 };
 
-export const parseFormData = (data: IntakeFormData) => {
+export const parseIntakeFormData = (data: IntakeFormData) => {
   // convert Base64 strings to Files
   data = convertBase64ToFile<IntakeFormData>(data);
 
@@ -108,9 +105,24 @@ export const parseFormData = (data: IntakeFormData) => {
   data = convertFileListsToFiles<IntakeFormData>(data);
 
   // parse DOB (convert date object to US date)
-  const rawDate = new Date(data.date_of_birth);
-  const formattedDate = rawDate.toLocaleDateString('en-US');
-  data.date_of_birth = formattedDate;
+  const rawDOB = new Date(data.date_of_birth);
+  const formattedDOB = rawDOB.toLocaleDateString('en-US');
+  data.date_of_birth = formattedDOB;
+
+  return data;
+};
+
+export const parseCCFormData = (data: CreditCardFormData) => {
+  data = convertBase64ToFile<CreditCardFormData>(data);
+
+  // parse signature and  date (convert date object to US date)
+  const rawDOB = new Date(data.date_of_birth);
+  const formattedDOB = rawDOB.toLocaleDateString('en-US');
+  data.date_of_birth = formattedDOB;
+
+  const rawSignatureDate = new Date(data.signature_date);
+  const formattedSignatureDate = rawSignatureDate.toLocaleDateString('en-US');
+  data.signature_date = formattedSignatureDate;
 
   return data;
 };
