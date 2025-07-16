@@ -24,7 +24,7 @@ const useCreatePendingForm = ({
   const [formId, setFormId] = useState(() => getLSItem(formID));
   const [error, setError] = useState(null);
 
-  // Prevent multiple simultaneous calls
+  // Prevent multiple simultaneous calls to the api
   const isCreatingRef = useRef(false);
 
   useEffect(() => {
