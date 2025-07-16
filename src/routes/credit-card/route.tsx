@@ -82,12 +82,17 @@ function CreditCard() {
 
   useAutoSave({ key: FORMS.credit_card, value: formState });
 
-  const { patient_name, cardholder_name, date_of_birth } = formState;
+  const { patient_name, cardholder_name, date_of_birth, address_one, city } =
+    formState;
 
   useCreatePendingForm({
     formID: 'intake_id',
     isPendingForm: Boolean(
-      patient_name?.length > 1 && cardholder_name?.length > 3 && date_of_birth,
+      patient_name?.length > 1 &&
+        cardholder_name?.length > 3 &&
+        date_of_birth &&
+        address_one &&
+        city,
     ),
     data: {
       patient_name,
