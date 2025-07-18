@@ -24,7 +24,7 @@ import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import useCreatePendingForm from '@/hooks/use-create-pending-form';
 import useSignature from '@/hooks/use-signature';
-import SuccessModal from '@/components/intake-form/success-modal';
+import SuccessModal from '@/routes/intake/-components/success-modal';
 import type { IntakeFormData } from '@/types';
 
 export const Route = createFileRoute('/intake')({

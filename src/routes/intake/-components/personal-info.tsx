@@ -1,51 +1,51 @@
-import IMask from "@/components/ui/imask";
-import Input from "@/components/ui/input";
-import Radios from "@/components/ui/radios";
-import DatePicker from "@/components/ui/date-picker";
-import Signature from "../ui/signature";
-import ResponsiveTooltip from "../responsive-tooltip";
+import IMask from '@/components/ui/imask';
+import Input from '@/components/ui/input';
+import Radios from '@/components/ui/radios';
+import DatePicker from '@/components/ui/date-picker';
+import Signature from '../../../components/ui/signature';
+import ResponsiveTooltip from '../../../components/responsive-tooltip';
 
 export default function PersonalInfo() {
   return (
-    <fieldset className="fieldset">
-      <div className="!mt-4 grid gap-x-8 gap-y-6 sm:grid-cols-2">
-        <Input label="First Name" name="first_name" />
-        <Input label="Last Name" name="last_name" />
+    <fieldset className='fieldset'>
+      <div className='!mt-4 grid gap-x-8 gap-y-6 sm:grid-cols-2'>
+        <Input label='First Name' name='first_name' />
+        <Input label='Last Name' name='last_name' />
       </div>
 
       <DatePicker
-        label="Date of Birth"
-        name="date_of_birth"
-        containerClassName="pt-4"
+        label='Date of Birth'
+        name='date_of_birth'
+        containerClassName='pt-4'
       />
 
-      <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+      <div className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>
         <IMask
-          label="Phone Number"
-          name="phone"
-          mask="(999) 999-9999"
-          type="tel"
+          label='Phone Number'
+          name='phone'
+          mask='(999) 999-9999'
+          type='tel'
         />
 
-        <Input label="Email Address" name="email" type="email" />
+        <Input label='Email Address' name='email' type='email' />
       </div>
 
       {/* Minor Child Appointment */}
       <Radios
-        label="Is this appointment for a minor?"
-        name="for_minor_child"
-        options={[{ value: "Yes" }, { value: "No" }]}
+        label='Is this appointment for a minor?'
+        name='for_minor_child'
+        options={[{ value: 'Yes' }, { value: 'No' }]}
         grid={false}
         showHiddenSectionValue={0}
         hiddenSection={
           <>
-            <p className="mb-4">
-              <strong className="font-medium">
+            <p className='mb-4'>
+              <strong className='font-medium'>
                 Please note that the parent/guardian must join the beginning of
                 the first appointment with a minor.
               </strong>
             </p>
-            <p className="text-sm text-gray-700">
+            <p className='text-sm text-gray-700'>
               I understand and give permission for my child to be treated by an
               Orenda Psychiatry provider. As part of my child&apos;s treatment,
               their provider may prescribe medication as needed for their
@@ -63,26 +63,26 @@ export default function PersonalInfo() {
               child without any parent present and the provider may request to
               speak to a parent without the child present. <br />
               <br />
-              <strong className="font-medium">
+              <strong className='font-medium'>
                 BY SIGNING BELOW, I ACKNOWLEDGE THAT I HAVE REVIEWED THE
                 POLICIES DESCRIBED ABOVE AND UNDERSTAND THE LIMITS TO
                 CONFIDENTIALITY.
               </strong>
             </p>
             <Signature
-              name="guardian_signature"
+              name='guardian_signature'
               rules={{ shouldUnregister: true }}
             />
 
-            <div className="mt-4 flex flex-col gap-x-8 gap-y-6 sm:flex-row">
+            <div className='mt-4 flex flex-col gap-x-8 gap-y-6 sm:flex-row'>
               <Input
-                label="Your Name (Guardian)"
-                name="guardian_name"
+                label='Your Name (Guardian)'
+                name='guardian_name'
                 registerOptions={{ shouldUnregister: true }}
               />
               <Input
-                label="Relationship to child"
-                name="relationship_with_child"
+                label='Relationship to child'
+                name='relationship_with_child'
                 registerOptions={{ shouldUnregister: true }}
               />
             </div>
@@ -101,8 +101,8 @@ export default function PersonalInfo() {
               will remain confidential.`}
           />
         }
-        name="sex_assigned_at_birth"
-        options={[{ value: "Male" }, { value: "Female" }]}
+        name='sex_assigned_at_birth'
+        options={[{ value: 'Male' }, { value: 'Female' }]}
         grid={false}
       />
 
@@ -113,7 +113,7 @@ export default function PersonalInfo() {
             Patient's Gender <small>(Optional)</small>
           </>
         }
-        name="gender"
+        name='gender'
         required={false}
       />
     </fieldset>

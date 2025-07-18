@@ -2,7 +2,7 @@ import IMask from '@/components/ui/imask';
 import { InputAdornment } from '@mui/material';
 import { number, expirationDate, cvv, postalCode } from 'card-validator';
 import { useState } from 'react';
-import PaymentIcon from '../ui/payment-icon';
+import PaymentIcon from '../../../components/ui/payment-icon';
 import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
 import type { IntakeFormData } from '@/types';
