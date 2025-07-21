@@ -87,7 +87,7 @@ function CreditCard() {
     formState;
 
   useCreatePendingForm({
-    formID: 'intake_id',
+    formID: 'credit_card_id',
     isPendingForm: Boolean(
       patient_name?.length > 1 &&
         cardholder_name?.length > 3 &&
