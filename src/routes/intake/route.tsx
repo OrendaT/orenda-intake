@@ -33,7 +33,7 @@ export const Route = createFileRoute('/intake')({
     meta: [
       {
         title: 'Intake Form | Orenda',
-        description: 'Intake Form for Orenda',
+        description: 'Complete the Orenda Intake Form to get started with your mental health journey.',
       },
     ],
   }),
