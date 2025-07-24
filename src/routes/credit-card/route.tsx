@@ -31,7 +31,8 @@ export const Route = createFileRoute('/credit-card')({
   head: () => ({
     meta: [
       {
-        title: 'Orenda | Credit Card Form',
+        title: 'Credit Card Form | Orenda',
+        description: 'Credit Card Form for Orenda',
       },
     ],
   }),
