@@ -99,11 +99,11 @@ export function ProviderOnboardingForm() {
               </div>
 
               {/* Terms and Conditions Agreement */}
-              <fieldset className='clamp-[px,0,12] mx-auto mt-10 max-w-[42.5rem] rounded bg-transparent pb-0'>
+              <fieldset className='clamp-[px,0,12] mx-auto mt-10 max-w-[47.5rem] rounded bg-transparent pb-0'>
                 <div className='clamp-[pl,4,10] relative py-2 before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:rounded-full before:bg-[#B2B2B2]'>
-                  <label className='clamp-[text,sm,0.93rem] flex w-full items-center gap-3'>
+                  <label className='clamp-[text,sm,0.93rem] flex w-full items-start gap-2'>
                     <input
-                      className='size-4 flex-shrink-0'
+                      className='mt-[5px] size-3.5 flex-shrink-0'
                       type='checkbox'
                       value='I agree'
                       {...register('policy_agreement', {
@@ -113,7 +113,8 @@ export function ProviderOnboardingForm() {
 
                     <div>
                       <span>
-                        By clicking on the checkbox and signing below, I confirm that I have read and agreed to Orenda&apos;s{' '}
+                        By clicking on the checkbox and signing below, I confirm
+                        that I have read and agreed to Orenda&apos;s{' '}
                         <PolicyDialog>
                           <button
                             type='button'

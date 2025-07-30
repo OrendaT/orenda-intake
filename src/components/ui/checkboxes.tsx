@@ -45,7 +45,7 @@ const Checkboxes = ({
           return (
             <label
               key={id}
-              className={cn('flex items-baseline gap-2 leading-none')}
+              className={cn('flex items-start gap-2 leading-none')}
             >
               <input
                 id={id}

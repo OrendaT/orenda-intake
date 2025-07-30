@@ -17,13 +17,13 @@ const AgreementCheckbox = ({
     <div>
       <label
         className={cn(
-          "flex items-center gap-2 text-sm text-gray-700",
+          "flex items-center leading-none gap-2 text-sm text-gray-700",
           className
         )}
       >
         <input
           type="checkbox"
-          className="size-4"
+          className="size-3.5"
           value={label?.toString()}
           {...register(name, {
             required: errorMsg,

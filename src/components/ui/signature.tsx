@@ -121,7 +121,7 @@ const Comp = ({
             if (value.length > MAX_LENGTH) return;
             handleChange(value);
           }}
-          className='clamp-[text,sm,base] mt-4 mb-2 block w-full max-w-sm rounded bg-white/50 px-4 py-2 outline outline-zinc-200 transition-all duration-300 focus:outline-zinc-500'
+          className='clamp-[text,sm,base] mt-4 mb-2 block w-full max-w-sm border-b border-l border-[#b2b2b2] px-2 py-[0.38rem] transition-all duration-300 outline-none focus:border-[#070707]'
           placeholder='Type your signature here'
           onFocus={() => setFocused(true)}
           onBlur={() => {
