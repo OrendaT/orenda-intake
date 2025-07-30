@@ -10,7 +10,7 @@ import useAutoSave from '@/hooks/use-auto-save';
 import useSignature from '@/hooks/use-signature';
 import useSubmitForm from '@/hooks/use-submit-form';
 import { FORM_IDS, FORMS, US_STATES } from '@/lib/constants';
-import { creditCardInitialValues } from '@/lib/definitions';
+import { creditCardInitialValues as initialValues } from '@/lib/definitions';
 import {
   cn,
   getItem,
@@ -39,7 +39,7 @@ export const Route = createFileRoute('/credit-card')({
 });
 
 function CreditCard() {
-  const defaultValues = getItem(FORMS.credit_card) ?? creditCardInitialValues;
+  const defaultValues = getItem(FORMS.credit_card) ?? initialValues;
   const methods = useForm<CreditCardFormData>({
     defaultValues: defaultValues as CreditCardFormData,
   });
@@ -76,7 +76,7 @@ function CreditCard() {
       removeItem(FORMS.credit_card);
       removeLSItem(FORM_IDS.credit_card);
       resetSignature();
-      reset(creditCardInitialValues);
+      reset(initialValues);
     }
   });
 
@@ -181,7 +181,7 @@ function CreditCard() {
                         <span
                           key={index}
                           className={cn(
-                            'bg-white/30 text-base tracking-tighter blur-[4px]',
+                            'bg-white/30 clamp-[text,sm,base] tracking-tighter blur-[4px]',
                             cardDetails.number[index] === ' ' && 'w-2.5',
                           )}
                         >

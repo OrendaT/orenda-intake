@@ -44,7 +44,7 @@ const CreditCardDetails = () => {
             <span
               key={index}
               className={cn(
-                'bg-white/30 text-base tracking-tighter blur-[4px]',
+                'bg-white/30 clamp-[text,sm,base] tracking-tighter blur-[4px]',
                 cardDetails.number[index] === ' ' && 'w-2.5',
               )}
             >

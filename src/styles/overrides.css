@@ -1,0 +1,3 @@
+.MuiFormLabel-root {
+  @apply !clamp-[text,sm,base];
+}

@@ -1,11 +1,13 @@
 export const FORMS = {
   intake: 'intake',
   credit_card: 'credit_card',
+  provider_onboarding: 'provider_onboarding',
 } as const;
 
 export const FORM_IDS = {
   intake: 'intake_id',
   credit_card: 'credit_card_id',
+  provider_onboarding: 'provider_onboarding_id',
 } as const;
 
 export const EXPIRY_TIME = 3;

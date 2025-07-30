@@ -11,7 +11,7 @@ import {
 import { FORM_IDS, FORMS } from '@/lib/constants';
 import useAutoSave from '@/hooks/use-auto-save';
 import useSubmitForm from '@/hooks/use-submit-form';
-import { intakeInitialValues } from '@/lib/definitions';
+import { intakeInitialValues as initialValues } from '@/lib/definitions';
 import {
   PersonalInfo,
   AddressDetails,
@@ -33,14 +33,15 @@ export const Route = createFileRoute('/intake')({
     meta: [
       {
         title: 'Intake Form | Orenda',
-        description: 'Complete the Orenda Intake Form to get started with your mental health journey.',
+        description:
+          'Complete the Orenda Intake Form to get started with your mental health journey.',
       },
     ],
   }),
 });
 
 export function IntakeForm() {
-  const defaultValues = getItem(FORMS.intake) ?? intakeInitialValues;
+  const defaultValues = getItem(FORMS.intake) ?? initialValues;
   const methods = useForm<IntakeFormData>({
     defaultValues: defaultValues as IntakeFormData,
   });
@@ -74,7 +75,7 @@ export function IntakeForm() {
 
     if (res?.data.success) {
       removeItem(FORMS.intake);
-      reset(intakeInitialValues);
+      reset(initialValues);
       removeLSItem(FORM_IDS.intake);
       resetSignature();
     }

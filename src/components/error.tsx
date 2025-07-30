@@ -1,18 +1,7 @@
 import Button from '@/components/ui/custom-button';
-import { useNavigate, type ErrorComponentProps } from '@tanstack/react-router';
+import { type ErrorComponentProps } from '@tanstack/react-router';
 
 const Error = (props: ErrorComponentProps) => {
-  const navigate = useNavigate();
-
-  const goBack = () => {
-    props.reset();
-    if (window.history.length > 1) {
-      navigate({ to: '.' });
-    } else {
-      navigate({ to: '/' });
-    }
-  };
-
   console.log(props);
 
   return (
@@ -27,7 +16,7 @@ const Error = (props: ErrorComponentProps) => {
         Component stack: {props.info?.componentStack}
       </p>
 
-      <Button className='w-fit px-12' onClick={goBack}>
+      <Button className='w-fit px-12' onClick={location.reload}>
         Go Back
       </Button>
     </div>

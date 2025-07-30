@@ -7,9 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import Terms from "./terms-of-use";
-import PracticePolicy from "./practice-policy";
+} from '@/components/ui/dialog';
+import Terms from './terms-of-use';
+import PracticePolicy from './practice-policy';
 
 const PolicyDialog = ({
   children,
@@ -18,12 +18,12 @@ const PolicyDialog = ({
   return (
     <Dialog {...props}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="clamp-[px,5,10] clamp-[pt,4,8] clamp[pb,8,12] scrollbar-none">
+      <DialogContent className='clamp-[px,5,10] clamp-[pt,4,8] clamp[pb,8,12] scrollbar-none'>
         <DialogHeader>
-          <DialogTitle className="text-center font-heading font-bold clamp-[text,2xl,4xl] clamp[mb,0,6]">
+          <DialogTitle className='font-heading !clamp-[text,xl,3xl] mt-6 clamp[mb,0,6] text-center font-bold'>
             Terms of Use & Practice Policy
           </DialogTitle>
-          <DialogDescription className="text-center clamp[mb,0,6]">
+          <DialogDescription className='clamp[mb,0,6] text-center'>
             Welcome to Orenda Psychiatry. Your agreement to the following terms
             and conditions is required for you/your child to receive
             professional services from us.
@@ -36,10 +36,10 @@ const PolicyDialog = ({
           <PracticePolicy />
         </>
 
-        <DialogFooter className="mt-10">
+        <DialogFooter className='mt-10'>
           <DialogClose
-            className="rounded-md border px-4 py-1.5 font-medium clamp-[text,sm,base]"
-            type="button"
+            className='clamp-[text,sm,base] rounded-md border px-4 py-1.5 font-medium'
+            type='button'
           >
             Go to Submit
           </DialogClose>

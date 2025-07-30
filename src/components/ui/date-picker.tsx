@@ -1,11 +1,11 @@
-import { Controller } from "react-hook-form";
-import ReactDatePicker from "react-date-picker";
-import { Calendar } from "lucide-react";
-import { cn } from "@/lib/utils";
-import "@/styles/react-date-picker.css";
-import "react-calendar/dist/Calendar.css";
-import RequiredMark from "./required-mark";
-import type { TDatePickerProps } from "@/types";
+import { Controller } from 'react-hook-form';
+import ReactDatePicker from 'react-date-picker';
+import { Calendar } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import '@/styles/react-date-picker.css';
+import 'react-calendar/dist/Calendar.css';
+import RequiredMark from './required-mark';
+import type { TDatePickerProps } from '@/types';
 
 const DatePicker = ({
   label,
@@ -13,14 +13,14 @@ const DatePicker = ({
   containerClassName,
   disabled,
   required = true,
-  errorMsg = "This field is required",
+  errorMsg = 'This field is required',
   validations,
   ...inputProps
 }: TDatePickerProps) => {
   return (
-    <div className={cn(containerClassName)}>
+    <div className={cn('mt-2', containerClassName)}>
       {label && (
-        <h4 className="label">
+        <h4 className='label'>
           {label}
           {required && <RequiredMark />}
         </h4>
@@ -41,18 +41,18 @@ const DatePicker = ({
               value={field.value}
               onChange={field.onChange}
               required={required}
-              calendarIcon={<Calendar className="size-5" />}
+              calendarIcon={<Calendar className='clamp-[size,4,1.2rem]' />}
               {...inputProps}
-              className={cn("w-full border-b-2 font-dm-sans", {
-                "border-[#d32f2f] text-[#d32f2f]": error,
+              className={cn('font-dm-sans w-full border-b-2', {
+                'border-[#d32f2f] text-[#d32f2f]': error,
               })}
-              monthPlaceholder="mm"
-              dayPlaceholder="dd"
-              yearPlaceholder="yyyy"
-              format="MM/dd/yyyy"
+              monthPlaceholder='mm'
+              dayPlaceholder='dd'
+              yearPlaceholder='yyyy'
+              format='MM/dd/yyyy'
             />
 
-            {error && <p className="error">{error?.message}</p>}
+            {error && <p className='error'>{error?.message}</p>}
           </div>
         )}
       />

@@ -1,31 +1,20 @@
 import { createFileRoute } from '@tanstack/react-router';
+
+// Importing necessary components and hooks
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@/components/ui/custom-button';
-import {
-  getItem,
-  isValidEmail,
-  parseIntakeFormData,
-  removeItem,
-  removeLSItem,
-} from '@/lib/utils';
+import { getItem, removeItem, removeLSItem } from '@/lib/utils';
 import { FORM_IDS, FORMS } from '@/lib/constants';
 import useAutoSave from '@/hooks/use-auto-save';
 import useSubmitForm from '@/hooks/use-submit-form';
-import { intakeInitialValues } from '@/lib/definitions';
-import {
-  PersonalInfo,
-  AddressDetails,
-  MentalHealth,
-  InsuranceDetails,
-  CreditCardDetails,
-  PolicyDialog,
-} from '@/components';
-import SignaturePad from '@/components/ui/signature';
-import ResponsiveTooltip from '@/components/responsive-tooltip';
 import useCreatePendingForm from '@/hooks/use-create-pending-form';
 import useSignature from '@/hooks/use-signature';
-import SuccessModal from '@/routes/intake/-components/success-modal';
-import type { IntakeFormData } from '@/types';
+import type { ProviderOnboardingFormData } from '@/types';
+import { providerOnboardingInitialValues as initialValues } from '@/lib/definitions';
+
+// Importing the component for Part 1 of the form
+import Part1 from './-components/part-1';
+import Part2 from './-components/part-2';
 
 export const Route = createFileRoute('/provider-onboarding/')({
   component: ProviderOnboardingForm,
@@ -34,76 +23,50 @@ export const Route = createFileRoute('/provider-onboarding/')({
       {
         title: 'Provider Onboarding Form | Orenda',
         description:
-          'Complete the Orenda Provider Onboarding Form to get started with your mental health journey.',
+          'Complete the Orenda Provider Onboarding Form to join Orenda Psychiatry.',
       },
     ],
   }),
 });
 
 export function ProviderOnboardingForm() {
-  const defaultValues = getItem(FORMS.intake) ?? intakeInitialValues;
-  const methods = useForm<IntakeFormData>({
-    defaultValues: defaultValues as IntakeFormData,
+  const defaultValues = getItem(FORMS.provider_onboarding) || initialValues;
+  const methods = useForm<ProviderOnboardingFormData>({
+    defaultValues: defaultValues as ProviderOnboardingFormData,
   });
   const {
     handleSubmit,
-    register,
     reset,
     watch,
     formState: { errors, isSubmitting },
   } = methods;
-  const { isSuccess, mutateAsync: submitForm } = useSubmitForm({
-    form: 'intake',
+  const { mutateAsync: submitForm } = useSubmitForm({
+    form: 'provider_onboarding',
     url: 'patients',
   });
   const { resetSignature } = useSignature();
 
-  // Watch the policy agreement checkbox
-  const acceptedTerms =
-    watch('policy_agreement')?.[0] === 'I agree' ||
-    watch('policy_agreement') === 'I agree';
-
   const onSubmit = handleSubmit(async (data) => {
-    if (data.relationship_status_other) {
-      data.relationship_status = data.relationship_status_other;
-      data.relationship_status_other = undefined;
-    }
-
-    data = parseIntakeFormData(data);
+    // Parse the form data to ensure it matches the expected structure
 
     const res = await submitForm(data);
 
     if (res?.data.success) {
-      removeItem(FORMS.intake);
-      reset(intakeInitialValues);
-      removeLSItem(FORM_IDS.intake);
+      removeItem(FORMS.provider_onboarding);
+      reset(initialValues);
+      removeLSItem(FORM_IDS.provider_onboarding);
       resetSignature();
     }
   });
 
   const formState = watch();
-  const sanitizedState = {
-    ...formState,
-    policy_agreement: undefined,
-  };
 
-  useAutoSave({ value: sanitizedState });
-
-  const { first_name, last_name, email, phone } = formState;
+  useAutoSave({ key: FORMS.provider_onboarding, value: formState });
 
   useCreatePendingForm({
-    formID: 'intake_id',
-    isPendingForm: Boolean(
-      first_name?.length > 1 &&
-        last_name?.length > 1 &&
-        isValidEmail(email) &&
-        phone?.length > 7,
-    ),
-    data: {
-      first_name,
-      last_name,
-      email,
-    },
+    formID: 'provider_onboarding_id',
+    isPendingForm: false,
+    data: {},
     url: 'patients/pending-patient',
   });
 
@@ -111,105 +74,28 @@ export function ProviderOnboardingForm() {
     <>
       <main className='main'>
         <div className='main-container'>
-          <h1 className='page-heading'>Orenda Intake Form</h1>
-
-          <p className='mx-auto max-w-3xl text-center font-semibold'>
-            Please complete this form so your appointment may be scheduled
-            <br />
-            <em>
-              (Your appointment will be confirmed following the completion of
-              this form)
-            </em>
-          </p>
-
-          <br />
+          <h1 className='page-heading'>
+            Orenda Psychiatry Provider Onboarding Form
+          </h1>
 
           <p className='mx-auto max-w-3xl text-center'>
-            <em>
-              If you or someone you know is actively considering suicide or
-              self-harm, please immediately call <a href='tel:911'>911</a> or
-              the Suicide Prevention Hotline at{' '}
-              <a href='tel:+18002738255'>1-800-273-8255</a>. Immediate help is
-              available.
-            </em>
+            This form is designed to facilitate your onboarding process with us.
           </p>
 
           <FormProvider {...methods}>
             <form
-              className='clamp-[text,sm,base] mt-10'
+              className='clamp-[text,sm,base] provider-onboarding-form mt-10'
               onSubmit={onSubmit}
               noValidate
             >
               {/* Form content */}
-              <div className='form-content'>
-                <PersonalInfo />
-
-                <AddressDetails />
-
-                <MentalHealth />
-
-                <InsuranceDetails />
-
-                <CreditCardDetails />
+              <div className='form-content space-y-20'>
+                <Part1 />
+                <Part2 />
               </div>
-
-              {/* Terms and Conditions Agreement */}
-              <fieldset className='clamp-[px,0,12] mx-auto max-w-[52.125rem] rounded bg-transparent pb-0'>
-                <div className='clamp-[pl,4,10] border-l-[5px] border-zinc-500'>
-                  <label className='clamp-[text,sm,0.93rem] flex w-full items-center gap-3'>
-                    <input
-                      className='size-4 flex-shrink-0'
-                      type='checkbox'
-                      value='I agree'
-                      {...register('policy_agreement', {
-                        required: 'This field is required',
-                      })}
-                    />
-
-                    <div>
-                      <span>
-                        By clicking on the checkbox and signing below, I confirm
-                        that I have read and agreed to Orenda&apos;s{' '}
-                        <PolicyDialog>
-                          <button
-                            type='button'
-                            className='text-orenda-purple font-medium'
-                          >
-                            <span className='underline underline-offset-2'>
-                              Terms of Use and Practice Policy
-                            </span>
-                          </button>
-                        </PolicyDialog>
-                      </span>
-
-                      <span className='inline-flex'>
-                        <ResponsiveTooltip
-                          content={
-                            <ul>
-                              <li>Consent for Telehealth Consultation</li>
-                              <li>Notice of Privacy Policies</li>
-                              <li>Practice Policies</li>
-                              <li>
-                                Informed Consent for Psychiatric Treatment{' '}
-                              </li>
-                              <li>Consent for Medication History</li>
-                            </ul>
-                          }
-                        />
-                      </span>
-                    </div>
-                  </label>
-
-                  <SignaturePad
-                    name='policy_agreement_signature'
-                    className='mt-5'
-                  />
-                </div>
-              </fieldset>
 
               {/* Form submit button */}
               <Button
-                disabled={!acceptedTerms}
                 isLoading={isSubmitting}
                 type='submit'
                 className='mx-auto mt-12'
@@ -226,8 +112,6 @@ export function ProviderOnboardingForm() {
           </FormProvider>
         </div>
       </main>
-
-      {isSuccess && <SuccessModal open={isSuccess} />}
     </>
   );
 }
