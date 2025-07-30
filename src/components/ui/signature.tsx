@@ -80,8 +80,8 @@ const Comp = ({
 
   /** Redraw stored signature text on canvas */
   const sign = () => {
-    if (signature.text) {
-      drawOnCanvas(signature.text);
+    if (signature?.text) {
+      drawOnCanvas(signature?.text);
       setIsClicked(true);
       onChange(signature);
     }
@@ -96,7 +96,7 @@ const Comp = ({
 
   useEffect(() => {
     /** Clears the signature from external clear */
-    if (!signature.text && value?.text) {
+    if (!signature?.text && value?.text) {
       handleChange('');
       setIsClicked(false);
     }
@@ -105,15 +105,15 @@ const Comp = ({
      * after signed via click to sign
      */
     if (isClicked) {
-      drawOnCanvas(signature.text || '');
+      drawOnCanvas(signature?.text || '');
       onChange(signature);
     }
-  }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value.text]);
+  }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value?.text]);
 
   return (
     <div id={id} className={cn('signature', className)}>
       {/* Text input for signature */}
-      {(!signature.text || value?.text) && !isClicked && (
+      {(!signature?.text || value?.text) && !isClicked && (
         <input
           type='text'
           value={value?.text}
@@ -174,7 +174,7 @@ const Comp = ({
  * @component SignaturePad
  *
  * @description A typed signature input controlled by React Hook Form. Renders a canvas preview and outputs
- * base64-encoded image of the signature.
+ * base64-encoded image of the signature?.
  */
 export default function SignaturePad({
   name,

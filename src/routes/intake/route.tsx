@@ -155,7 +155,7 @@ export function IntakeForm() {
 
               {/* Terms and Conditions Agreement */}
               <fieldset className='clamp-[px,0,12] mx-auto max-w-[52.125rem] rounded bg-transparent pb-0'>
-                <div className='clamp-[pl,4,10] border-l-[5px] border-zinc-500'>
+                <div className='clamp-[pl,4,10] py-2 relative before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:rounded-full before:bg-[#B2B2B2]'>
                   <label className='clamp-[text,sm,0.93rem] flex w-full items-center gap-3'>
                     <input
                       className='size-4 flex-shrink-0'

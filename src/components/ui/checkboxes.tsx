@@ -27,7 +27,9 @@ const Checkboxes = ({
   } = useFormContext();
 
   const selected = watch(name);
-  const includesOther = Array.isArray(selected) && selected.includes('Other');
+  const includesOther =
+    Array.isArray(selected) &&
+    (selected.includes('Other') || selected.includes('Others'));
 
   return (
     <div className={cn('mt-2 w-full', containerClassName)}>
@@ -35,16 +37,19 @@ const Checkboxes = ({
         {label}
         {required && <RequiredMark />}
       </h3>
-      <div className={cn('grid gap-x-3 sm:grid-cols-2', className)}>
+      <div className={cn('grid gap-3 sm:grid-cols-2', className)}>
         {options.map(({ label, value }) => {
           const option = label || value;
           const id = name + value;
 
           return (
-            <div key={id} className={cn('flex items-baseline gap-2')}>
+            <label
+              key={id}
+              className={cn('flex items-baseline gap-2 leading-none')}
+            >
               <input
                 id={id}
-                className={cn('peer flex-shrink-0', size)}
+                className={cn('peer size-3.5 flex-shrink-0', size)}
                 type='checkbox'
                 value={option}
                 {...register(name, {
@@ -57,8 +62,8 @@ const Checkboxes = ({
                   validate: validations,
                 })}
               />
-              <label htmlFor={id}>{option}</label>
-            </div>
+              {option}
+            </label>
           );
         })}
       </div>
@@ -67,9 +72,12 @@ const Checkboxes = ({
         <p className='error px-3'>{errors?.[name]?.message.toString()}</p>
       )}
 
-      <HiddenSection show={includesOther} className='pb-3 pt-1'>
+      <HiddenSection show={includesOther} className='pt-1 pb-3'>
         <Input
-          label={otherLabel || 'Other? Please specify'}
+          label={
+            otherLabel ||
+            `${Array.isArray(selected) ? selected?.find((val: string) => val.includes('Other')) : selected}? Please specify`
+          }
           name={otherName || name + '_other'}
           required={includesOther}
         />

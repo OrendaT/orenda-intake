@@ -22,7 +22,7 @@ const CreditCardDetails = () => {
   });
 
   return (
-    <fieldset className='fieldset'>
+    <fieldset className='fieldset mb-10'>
       <h3 className='heading mt-4'>Credit Card Details</h3>
       <p className='clamp-[text,sm,base]'>
         Your copay/deductible is due at the time of your appointment. We require

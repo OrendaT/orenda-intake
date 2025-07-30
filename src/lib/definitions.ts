@@ -99,4 +99,6 @@ export const providerOnboardingInitialValues = {
   state_of_license: '',
   state_of_license_st: '',
   pecos_consent: '',
+  policy_agreement: '',
+  policy_agreement_signature: '',
 };

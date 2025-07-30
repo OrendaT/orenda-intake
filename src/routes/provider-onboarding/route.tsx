@@ -15,8 +15,11 @@ import { providerOnboardingInitialValues as initialValues } from '@/lib/definiti
 // Importing the component for Part 1 of the form
 import Part1 from './-components/part-1';
 import Part2 from './-components/part-2';
+import SignaturePad from '@/components/ui/signature';
+import ResponsiveTooltip from '@/components/responsive-tooltip';
+import { PolicyDialog } from '@/components';
 
-export const Route = createFileRoute('/provider-onboarding/')({
+export const Route = createFileRoute('/provider-onboarding')({
   component: ProviderOnboardingForm,
   head: () => ({
     meta: [
@@ -36,6 +39,7 @@ export function ProviderOnboardingForm() {
   });
   const {
     handleSubmit,
+    register,
     reset,
     watch,
     formState: { errors, isSubmitting },
@@ -93,6 +97,59 @@ export function ProviderOnboardingForm() {
                 <Part1 />
                 <Part2 />
               </div>
+
+              {/* Terms and Conditions Agreement */}
+              <fieldset className='clamp-[px,0,12] mx-auto mt-10 max-w-[42.5rem] rounded bg-transparent pb-0'>
+                <div className='clamp-[pl,4,10] relative py-2 before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:rounded-full before:bg-[#B2B2B2]'>
+                  <label className='clamp-[text,sm,0.93rem] flex w-full items-center gap-3'>
+                    <input
+                      className='size-4 flex-shrink-0'
+                      type='checkbox'
+                      value='I agree'
+                      {...register('policy_agreement', {
+                        required: 'This field is required',
+                      })}
+                    />
+
+                    <div>
+                      <span>
+                        By clicking on the checkbox and signing below, I confirm that I have read and agreed to Orenda&apos;s{' '}
+                        <PolicyDialog>
+                          <button
+                            type='button'
+                            className='text-orenda-purple font-medium'
+                          >
+                            <span className='underline underline-offset-2'>
+                              Terms of Use and Practice Policy
+                            </span>
+                          </button>
+                        </PolicyDialog>
+                      </span>
+
+                      <span className='inline-flex'>
+                        <ResponsiveTooltip
+                          content={
+                            <ul>
+                              <li>Consent for Telehealth Consultation</li>
+                              <li>Notice of Privacy Policies</li>
+                              <li>Practice Policies</li>
+                              <li>
+                                Informed Consent for Psychiatric Treatment{' '}
+                              </li>
+                              <li>Consent for Medication History</li>
+                            </ul>
+                          }
+                        />
+                      </span>
+                    </div>
+                  </label>
+
+                  <SignaturePad
+                    name='policy_agreement_signature'
+                    className='mt-5'
+                  />
+                </div>
+              </fieldset>
 
               {/* Form submit button */}
               <Button

@@ -1,8 +1,10 @@
 import { cn } from '@/lib/utils';
-import type { SelectInputProps } from '@/types';
+import type { CheckboxProps } from '@/types';
 import { useFormContext } from 'react-hook-form';
 import { LuX } from 'react-icons/lu';
 import RequiredMark from './required-mark';
+import HiddenSection from '../hidden-section';
+import Input from './input';
 
 const SelectCheckboxes = ({
   label,
@@ -13,11 +15,19 @@ const SelectCheckboxes = ({
   className,
   required = true,
   disabled,
-}: SelectInputProps) => {
+  otherLabel,
+  otherName,
+}: CheckboxProps) => {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext();
+
+  const selected = watch(name);
+  const includesOther =
+    Array.isArray(selected) &&
+    (selected.includes('Other') || selected.includes('Others'));
 
   return (
     <div className={cn('mt-2 w-full', containerClassName)}>
@@ -62,6 +72,17 @@ const SelectCheckboxes = ({
       {errors?.[name]?.message && (
         <p className='error mt-0 px-3'>{errors?.[name]?.message.toString()}</p>
       )}
+
+      <HiddenSection show={includesOther} className='pt-1 pb-3'>
+        <Input
+          label={
+            otherLabel ||
+            `${Array.isArray(selected) ? selected?.find((val: string) => val.includes('Other')) : selected}? Please specify`
+          }
+          name={otherName || name + '_other'}
+          required={includesOther}
+        />
+      </HiddenSection>
     </div>
   );
 };
