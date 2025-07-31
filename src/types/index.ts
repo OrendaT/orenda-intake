@@ -25,7 +25,13 @@ export type IntakeFormData = Omit<
 
 export type CreditCardFormData = typeof creditCardInitialValues;
 
-export type ProviderOnboardingFormData = typeof providerOnboardingInitialValues;
+export type ProviderOnboardingFormData = Omit<
+  typeof providerOnboardingInitialValues,
+  'therapy_sessions' | 'languages'
+> & {
+  therapy_sessions: string[];
+  languages: string[];
+};
 
 export type FormData =
   | IntakeFormData

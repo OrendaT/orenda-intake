@@ -101,4 +101,7 @@ export const providerOnboardingInitialValues = {
   pecos_consent: '',
   policy_agreement: '',
   policy_agreement_signature: '',
+  therapy_sessions: [],
+  therapy_session_others: '',
+  languages: [],
 };

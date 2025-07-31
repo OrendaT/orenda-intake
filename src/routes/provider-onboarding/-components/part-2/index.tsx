@@ -1,8 +1,9 @@
-import Checkboxes from '@/components/ui/checkboxes';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import SelectCheckboxes from '@/components/ui/select-checkboxes';
 import { YES_NO } from '@/lib/constants';
+import TherapySessions from './therapy-sessions';
+import Languages from './languages';
 
 const patientsAgeRange = [
   { value: 'Children (5+ yrs)' },
@@ -17,42 +18,61 @@ const followUpAppointmentLengths = [
   { value: '25 - 30 minutes' },
 ];
 
-const therapyOnlySessions = [
-  { value: 'Couples therapy' },
-  { value: 'Talk Therapy' },
-  { value: 'Do not currently offer therapy only sessions' },
-  { value: 'Others' },
-];
-
-const specializations = [
-  { value: 'Substance Use Disorder (SUD)' },
-  { value: 'Medication Assisted Treatment (MAT)' },
-  { value: 'Geripsych' },
-  { value: 'Autism Spectrum Disorder (ASD)' },
-  { value: 'Eating Disorder(s)' },
-  { value: 'Gender Affirming Care' },
-  { value: 'Chronic Pain' },
-  { value: 'Tics/Tourette Syndrome' },
-  { value: 'Genomic Testing' },
-  { value: 'Maternity / Post Partum' },
+const mentalHealthIssues = [
+  { value: 'ADHD' },
+  { value: 'Adjustment Disorder' },
+  { value: 'Anger Management' },
+  { value: 'Anxiety' },
+  { value: 'Autism' },
+  { value: 'Autism Spectrum Disorders (ASD)' },
   { value: 'Bipolar Disorder' },
-  { value: 'Personality Disorder(s)' },
-  { value: 'Others' },
+  { value: 'Body Image' },
+  { value: 'CBT' },
+  { value: 'Chronic Pain' },
+  { value: 'Couples' },
+  { value: 'Depression' },
+  { value: 'Eating Disorders' },
+  { value: 'Family Trauma' },
+  { value: 'Gender Affirming Care' },
+  { value: 'Generalized Anxiety Disorder (GAD)' },
+  { value: 'Genomic Testing' },
+  { value: 'Group Therapy' },
+  { value: 'Infertility/Fertility Challenges' },
+  { value: 'Insomnia' },
+  { value: 'Issues with Self Esteem' },
+  { value: 'Life Transitions in Young Adulthood' },
+  { value: 'Major Depressive Disorder (MDD)' },
+  { value: 'Medication-Assisted Treatment' },
+  { value: 'Menopause' },
+  { value: "Men's Health" },
+  { value: 'Mood Disorders' },
+  { value: 'Oppositional Defiant Disorder' },
+  { value: 'Panic Disorders (DOS)' },
+  { value: 'LGBTQ+ Care' },
+  { value: 'Post-Partum Depression (PPD)' },
+  { value: 'Premenstrual Dysphoric Disorder (PDD)' },
+  { value: 'Psychosis' },
+  { value: 'Psychotherapy' },
+  { value: 'PTSD' },
+  { value: 'Relationships' },
+  { value: 'Schizophrenia' },
+  { value: 'Sleep Disorders' },
+  { value: 'Social Anxiety' },
+  { value: 'Stress Related' },
+  { value: 'Substance Use Disorder (SUD)' },
+  { value: 'Trauma' },
+  { value: 'Weight Management' },
+  { value: "Women's Health" },
 ];
 
-const languages = [
-  { value: 'Russian' },
-  { value: 'Bengali' },
-  { value: 'Cantonese' },
-  { value: 'Mandarin' },
-  { value: 'Uzbek' },
-  { value: 'Tagalog' },
-  { value: 'Spanish' },
-  { value: 'Yoruba' },
-  { value: 'French (Creole)' },
-  { value: 'Portuguese' },
-  { value: 'None' },
-  { value: 'Others' },
+const mentalHealthSpecializations = [
+  { value: 'ADHD' },
+  { value: 'Anger Management' },
+  { value: 'Couples' },
+  { value: 'Eating Disorders' },
+  { value: 'Group Therapy' },
+  { value: 'LGBTQ+ Care' },
+  { value: 'Premenstrual Dysphoric Disorder (PDD)' },
 ];
 
 const ethnicities = [
@@ -112,29 +132,25 @@ const Part2 = () => {
         />
       </fieldset>
 
-      <fieldset className='fieldset'>
-        <Checkboxes
-          label='What type of therapy only sessions do you offer?'
-          name='therapy_only_sessions'
-          options={therapyOnlySessions}
-        />
-      </fieldset>
+      <TherapySessions />
 
       <fieldset className='fieldset'>
         <SelectCheckboxes
-          label='What focus areas do you want advertised as specializing in?'
-          name='focus_areas'
-          options={specializations}
+          label='What mental health issues do you provide care for? (select all that apply)'
+          name='mental_health_issues'
+          options={mentalHealthIssues}
+        />
+
+        <hr className='mt-5 border-[#B2B2B2]' />
+
+        <SelectCheckboxes
+          label='Please select which of these you would like to specialize in for marketing purposes'
+          name='mental_health_issues_specialization'
+          options={mentalHealthSpecializations}
         />
       </fieldset>
 
-      <fieldset className='fieldset'>
-        <SelectCheckboxes
-          label='What languages do you speak (other than English)?'
-          name='language'
-          options={languages}
-        />
-      </fieldset>
+      <Languages />
 
       <fieldset className='fieldset'>
         <Radios

@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import type { SelectInputProps } from '@/types';
 import {
   FormControl,
@@ -19,10 +20,11 @@ const Select = ({
   errorMsg = 'This field is required',
   registerOptions,
   validations,
+  containerClassName,
   ...selectProps
 }: SelectInputProps) => {
   return (
-    <div>
+    <div className={cn(containerClassName)}>
       <Controller
         name={name}
         disabled={disabled}
