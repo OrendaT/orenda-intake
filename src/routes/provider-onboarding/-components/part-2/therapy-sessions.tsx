@@ -15,7 +15,7 @@ const therapyOnlySessions = [
 
 const TherapySessions = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
-  const hasOthers = watch('therapy_sessions').includes('Others');
+  const hasOthers = watch('therapy_sessions')?.includes('Others');
 
   return (
     <fieldset className='fieldset'>
