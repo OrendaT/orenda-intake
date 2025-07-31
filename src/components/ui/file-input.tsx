@@ -52,9 +52,9 @@ const FileInput = ({
       <div className='clamp-[pt,7,2.31rem] clamp-[pb,8,10] rounded-md border border-dashed border-[#D1D1D1] px-5 text-center text-[#333]'>
         <label
           htmlFor={name}
-          className='mx-auto mb-4 block w-fit rounded-full bg-[#EAEAEA] p-2'
+          className='mx-auto mb-4 block w-fit rounded-full bg-[#EAEAEA] p-2.5'
         >
-          <LuUpload className='clamp-[size,5,6]' />
+          <LuUpload className='clamp-[size,4,5]' />
         </label>
 
         <p className='mb-[0.81rem] text-sm'>{label}</p>
