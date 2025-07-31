@@ -18,6 +18,7 @@ import Part2 from './-components/part-2';
 import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import { PolicyDialog } from '@/components';
+import SuccessModal from './-components/success-modal';
 
 export const Route = createFileRoute('/provider-onboarding')({
   component: ProviderOnboardingForm,
@@ -44,7 +45,7 @@ export function ProviderOnboardingForm() {
     watch,
     formState: { errors, isSubmitting },
   } = methods;
-  const { mutateAsync: submitForm } = useSubmitForm({
+  const { mutateAsync: submitForm, isSuccess } = useSubmitForm({
     form: 'provider_onboarding',
     url: 'patients',
   });
@@ -170,6 +171,8 @@ export function ProviderOnboardingForm() {
           </FormProvider>
         </div>
       </main>
+
+      <SuccessModal open={isSuccess} />
     </>
   );
 }

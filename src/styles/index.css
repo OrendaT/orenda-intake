@@ -251,7 +251,7 @@ body {
   }
 
   .page-heading {
-    @apply font-heading clamp-[text,3xl,2.625rem] clamp-[leading,2rem,3rem] mb-4 text-center font-bold;
+    @apply font-heading clamp-[text,3xl,2.625rem] clamp-[leading,2.25rem,3.5rem] mb-4 text-center font-bold;
   }
 
   .form-content {
