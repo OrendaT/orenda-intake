@@ -15,6 +15,25 @@ const imageTypes = [
   'image/x-icon',
 ];
 
+const getFileTypes = (accept: string) => {
+  const types = accept.split(',');
+  const fileTypes: string[] = [];
+
+  types.forEach((type) => {
+    if (type.includes('image/')) {
+      fileTypes.push('Image');
+    } else if (type.includes('application/pdf')) {
+      fileTypes.push('Pdf');
+    } else if (type.includes('word')) {
+      fileTypes.push('.docx');
+    } else {
+      fileTypes.push('File');
+    }
+  });
+
+  return [...new Set(fileTypes)];
+};
+
 const FileInput = ({
   label,
   heading,
@@ -37,7 +56,7 @@ const FileInput = ({
   const file = watch(name)?.[0];
 
   return (
-    <div className={cn('mt-2',className)}>
+    <div className={cn('mt-2', className)}>
       {heading && (
         <h3 className='label'>
           {heading}
@@ -66,12 +85,7 @@ const FileInput = ({
         )}
 
         <small className='clamp-[text,xs,sm] text-[#626262]'>
-          {accept.includes('image/') && accept.includes('application/pdf')
-            ? 'Image or Pdf'
-            : accept.includes('image/')
-              ? 'Image'
-              : 'Pdf'}{' '}
-          Only • {maxSize}MB max
+          {getFileTypes(accept).join(' or ')} Only • {maxSize}MB max
         </small>
 
         {errors?.[name]?.message && (
@@ -96,7 +110,7 @@ const FileInput = ({
               },
               acceptedFormats: (files) => {
                 const fileType = files[0]?.type;
-                if (required && accept) {
+                if (fileType && accept) {
                   let acceptedFiles = accept.split(',');
 
                   if (acceptedFiles.includes('image/*')) {
@@ -105,6 +119,15 @@ const FileInput = ({
 
                   return (
                     acceptedFiles.includes(fileType) || 'Invalid file format'
+                  );
+                }
+              },
+              maxSize: (files) => {
+                const fileSize = files[0]?.size;
+                if (fileSize && maxSize) {
+                  return (
+                    fileSize <= maxSize * 1024 * 1024 ||
+                    `File size must be less than ${maxSize}MB`
                   );
                 }
               },

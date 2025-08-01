@@ -190,6 +190,9 @@ export default function SignaturePad({
       disabled={disabled}
       rules={{
         required: { value: required, message: errorMsg },
+        validate: (value) => {
+          if (required) return value.text.length > 0 || errorMsg;
+        },
         ...rules,
       }}
       render={({ field: { onChange, value } }) => (
