@@ -1,7 +1,7 @@
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
-import { YES_NO } from '@/lib/constants';
+import { acceptForCredentialing, YES_NO } from '@/lib/constants';
 
 const HiddenSection = () => (
   <div className='space-y-6'>
@@ -11,7 +11,11 @@ const HiddenSection = () => (
       hiddenLabel
     />
 
-    <FileInput heading='Copy of Additional DEA' name='dea_registration_copy' />
+    <FileInput
+      heading='Copy of Additional DEA'
+      name='dea_registration_copy'
+      accept={acceptForCredentialing}
+    />
   </div>
 );
 

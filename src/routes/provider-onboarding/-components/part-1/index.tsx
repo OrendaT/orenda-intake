@@ -4,7 +4,7 @@ import Biography from './biography';
 import CAQH from './caqh';
 import PersonalInfo from './personal-info';
 import LicenseAndDea from './license-and-dea';
-import { YES_NO } from '@/lib/constants';
+import { acceptForCredentialing, YES_NO } from '@/lib/constants';
 import FileInput from '@/components/ui/file-input';
 import IdentificationRequirements from './identification-requirements';
 import StateOfLicense from './state-of-license';
@@ -38,6 +38,7 @@ const Part1 = () => {
         <FileInput
           heading='Copy of PMHNP-BC (Cert with GOLD seal, or ANCC card is satisfactory)'
           name='pmhnp_bc'
+          accept={acceptForCredentialing}
         />
       </fieldset>
 
@@ -47,6 +48,7 @@ const Part1 = () => {
         <FileInput
           heading='Copy of Malpractice Insurance - MUST be CURRENT DATE, not future dated. If expiring soon, please email future dated to credentialing@orendapsych.com'
           name='malpractice_insurance'
+          accept={acceptForCredentialing}
         />
       </fieldset>
 
@@ -54,6 +56,7 @@ const Part1 = () => {
         <FileInput
           heading='PDF of Resume/CV (please include mm/yyyy of start and end dates for BSN and MSN or DNP)'
           name='resume'
+          accept={acceptForCredentialing}
         />
       </fieldset>
 

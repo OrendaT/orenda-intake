@@ -14,7 +14,7 @@ const Button = ({
 }: ButtonProps) => {
   // Default button classes
   const btnClasses = cn(
-    `group relative z-[1] flex items-center justify-center gap-2 w-full max-w-[16.31rem] overflow-hidden rounded-3xl border border-orenda-purple px-4 py-[0.62rem] font-open-sans font-bold text-orenda-purple transition-colors hover:text-white `,
+    `group cursor-pointer relative z-[1] flex items-center justify-center gap-2 w-full max-w-[16.31rem] overflow-hidden rounded-3xl border border-orenda-purple px-4 py-[0.62rem] font-open-sans font-bold text-orenda-purple transition-colors hover:text-white `,
     disabled && "cursor-not-allowed opacity-50 hover:text-orenda-purple"
   );
 

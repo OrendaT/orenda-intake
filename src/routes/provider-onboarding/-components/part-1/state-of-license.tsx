@@ -2,6 +2,7 @@ import HiddenSection from '@/components/hidden-section';
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
+import { acceptForCredentialing } from '@/lib/constants';
 import type { ProviderOnboardingFormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 
@@ -121,6 +122,7 @@ const StateOfLicense = () => {
                 <FileInput
                   heading='Please upload your 4NP here'
                   name='4NP file'
+                  accept={acceptForCredentialing}
                 />
               ) : null
             }

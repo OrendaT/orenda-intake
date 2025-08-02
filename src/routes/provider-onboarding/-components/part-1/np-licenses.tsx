@@ -1,7 +1,7 @@
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
-import { YES_NO } from '@/lib/constants';
+import { acceptForCredentialing, YES_NO } from '@/lib/constants';
 
 const HiddenSection = () => (
   <div className='space-y-6'>
@@ -14,6 +14,7 @@ const HiddenSection = () => (
     <FileInput
       heading='Copy of Additional State License'
       name='np_licenses_state_license'
+      accept={acceptForCredentialing}
     />
   </div>
 );

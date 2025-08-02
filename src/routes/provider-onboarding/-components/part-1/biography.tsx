@@ -1,4 +1,5 @@
 import FileInput from '@/components/ui/file-input';
+import { acceptForCredentialing } from '@/lib/constants';
 
 const Biography = () => {
   return (
@@ -8,6 +9,7 @@ const Biography = () => {
       <FileInput
         heading='Professional Statement'
         name='professional_statement'
+        accept={acceptForCredentialing}
       />
 
       <FileInput

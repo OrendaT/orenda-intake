@@ -66,3 +66,6 @@ export const US_STATES = [
 ];
 
 export const YES_NO = [{ value: 'Yes' }, { value: 'No' }];
+
+export const acceptForCredentialing =
+  'image/*,application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';

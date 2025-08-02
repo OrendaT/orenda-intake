@@ -26,8 +26,8 @@ const getFileTypes = (accept: string) => {
       fileTypes.push('Pdf');
     } else if (type.includes('word')) {
       fileTypes.push('.docx');
-    } else {
-      fileTypes.push('File');
+    } else if (type.includes('docx')) {
+      fileTypes.push('.docx');
     }
   });
 

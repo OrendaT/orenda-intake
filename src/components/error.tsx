@@ -18,7 +18,7 @@ const Error = (props: ErrorComponentProps) => {
       </p>
 
       <Button
-        className='w-fit cursor-pointer px-12'
+        className='w-fit px-12'
         onClick={() => location.reload()}
       >
         Refresh Page

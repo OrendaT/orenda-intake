@@ -1,4 +1,5 @@
 import FileInput from '@/components/ui/file-input';
+import { acceptForCredentialing } from '@/lib/constants';
 
 const IdentificationRequirements = () => {
   return (
@@ -27,10 +28,12 @@ const IdentificationRequirements = () => {
           </>
         }
         name='photo_id'
+        accept={acceptForCredentialing}
       />
       <FileInput
         heading='Upload Your Proof of Address ID'
         name='proof_of_address_id'
+        accept={acceptForCredentialing}
       />
     </fieldset>
   );

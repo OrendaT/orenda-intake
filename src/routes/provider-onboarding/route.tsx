@@ -75,6 +75,10 @@ export function ProviderOnboardingForm() {
     url: 'patients/pending-patient',
   });
 
+  const acceptedTerms =
+    watch('policy_agreement')?.[0] === 'I agree' ||
+    watch('policy_agreement') === 'I agree';
+
   return (
     <>
       <main className='main'>
@@ -155,6 +159,7 @@ export function ProviderOnboardingForm() {
 
               {/* Form submit button */}
               <Button
+                disabled={!acceptedTerms}
                 isLoading={isSubmitting}
                 type='submit'
                 className='mx-auto mt-12'
