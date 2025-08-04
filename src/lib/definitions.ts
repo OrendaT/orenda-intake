@@ -3,6 +3,7 @@ export const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const intakeInitialValues = {
   first_name: '',
   last_name: '',
+  preferred_name: '',
   date_of_birth: '',
   phone: '',
   email: '',

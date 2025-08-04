@@ -23,11 +23,11 @@ const SuccessModal = ({ open }: { open: boolean }) => {
           <SuccessIcon className='text-orenda-purple clamp-[size,20,32] mb-6' />
 
           <h1 className='clamp-[text,xl,3xl] mb-6 font-semibold'>
-            Congratulations!
+            You're Almost Done!
           </h1>
 
           <p className='clamp-[mb,8,12] clamp-[text,base,lg] max-w-[23.5rem] font-medium'>
-            Form has been submitted successfully.
+            Your intake form has been submitted successfully.
           </p>
 
           <p className='clamp-[text,sm,base] mx-auto mb-6 max-w-md text-center'>

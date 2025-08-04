@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IntakeRouteRouteImport } from './routes/intake/route'
 import { Route as CreditCardRouteRouteImport } from './routes/credit-card/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProviderOnboardingIndexRouteImport } from './routes/provider-onboarding/index'
 
 const IntakeRouteRoute = IntakeRouteRouteImport.update({
   id: '/intake',
@@ -29,44 +28,35 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProviderOnboardingIndexRoute = ProviderOnboardingIndexRouteImport.update({
-  id: '/provider-onboarding/',
-  path: '/provider-onboarding/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
   '/intake': typeof IntakeRouteRoute
-  '/provider-onboarding': typeof ProviderOnboardingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
   '/intake': typeof IntakeRouteRoute
-  '/provider-onboarding': typeof ProviderOnboardingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
   '/intake': typeof IntakeRouteRoute
-  '/provider-onboarding/': typeof ProviderOnboardingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/credit-card' | '/intake' | '/provider-onboarding'
+  fullPaths: '/' | '/credit-card' | '/intake'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/credit-card' | '/intake' | '/provider-onboarding'
-  id: '__root__' | '/' | '/credit-card' | '/intake' | '/provider-onboarding/'
+  to: '/' | '/credit-card' | '/intake'
+  id: '__root__' | '/' | '/credit-card' | '/intake'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CreditCardRouteRoute: typeof CreditCardRouteRoute
   IntakeRouteRoute: typeof IntakeRouteRoute
-  ProviderOnboardingIndexRoute: typeof ProviderOnboardingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,13 +82,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/provider-onboarding/': {
-      id: '/provider-onboarding/'
-      path: '/provider-onboarding'
-      fullPath: '/provider-onboarding'
-      preLoaderRoute: typeof ProviderOnboardingIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -106,7 +89,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CreditCardRouteRoute: CreditCardRouteRoute,
   IntakeRouteRoute: IntakeRouteRoute,
-  ProviderOnboardingIndexRoute: ProviderOnboardingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
