@@ -13,6 +13,8 @@ export default function PersonalInfo() {
         <Input label='Last Name' name='last_name' />
       </div>
 
+      <Input label='Preferred Name' name='preferred_name' />
+
       <DatePicker
         label='Date of Birth'
         name='date_of_birth'
