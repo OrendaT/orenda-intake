@@ -33,7 +33,8 @@ export const Route = createFileRoute('/intake')({
     meta: [
       {
         title: 'Intake Form | Orenda',
-        description: 'Complete the Orenda Intake Form to get started with your mental health journey.',
+        description:
+          'Complete the Orenda Intake Form to get started with your mental health journey.',
       },
     ],
   }),
@@ -67,6 +68,8 @@ export function IntakeForm() {
       data.relationship_status = data.relationship_status_other;
       delete data.relationship_status_other;
     }
+
+    delete data.relationship_status_other;
 
     data = parseIntakeFormData(data);
 
