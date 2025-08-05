@@ -43,6 +43,11 @@ export const isValidEmail = (email: string) => {
   return regex.test(email);
 };
 
+function hasValue<T>(entry: [string, T]): entry is [string, NonNullable<T>] {
+  const [_, value] = entry;
+  return value !== null && value !== undefined && value !== '';
+}
+
 /**
  * Converts a base64 data URL to a File object.
  * @param {string} base64Data - The base64 data URL.
@@ -110,7 +115,7 @@ export const parseIntakeFormData = (data: IntakeFormData) => {
   data.date_of_birth = formattedDOB;
 
   data = Object.fromEntries(
-    Object.entries(data).filter(([_, value]) => value !== ''),
+    Object.entries(data).filter(hasValue),
   ) as IntakeFormData;
 
   return data;
