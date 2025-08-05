@@ -35,11 +35,11 @@ const Comp = ({
     formState: { errors },
   } = useFormContext();
 
+  const prevSignatureRef = useRef<TSignature>(signature);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   /**
    * Draw signature text on canvas and update global signature state
-   *
    * @param {string} text - Signature text
    */
   const drawOnCanvas = useCallback((text: string) => {
@@ -95,19 +95,26 @@ const Comp = ({
   // };
 
   useEffect(() => {
+    // Check if signature was changed from external source
+    const signatureChanged = prevSignatureRef.current.text !== signature.text;
+
     /** Clears the signature from external clear */
     if (!signature.text && value?.text) {
       handleChange('');
       setIsClicked(false);
+      return;
     }
 
     /** Redraw stored signature text on canvas automatically
      * after signed via click to sign
      */
-    if (isClicked) {
+    if (isClicked && signatureChanged) {
       drawOnCanvas(signature.text || '');
       onChange(signature);
     }
+
+    // Update the previous signature reference
+    prevSignatureRef.current = signature;
   }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value.text]);
 
   return (
