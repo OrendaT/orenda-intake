@@ -66,7 +66,7 @@ export function IntakeForm() {
   const onSubmit = handleSubmit(async (data) => {
     if (data.relationship_status_other) {
       data.relationship_status = data.relationship_status_other;
-      data.relationship_status_other = undefined;
+      delete data.relationship_status_other;
     }
 
     data = parseIntakeFormData(data);
