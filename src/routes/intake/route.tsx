@@ -69,8 +69,6 @@ export function IntakeForm() {
       delete data.relationship_status_other;
     }
 
-    delete data.relationship_status_other;
-
     data = parseIntakeFormData(data);
 
     const res = await submitForm(data);

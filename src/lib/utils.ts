@@ -109,6 +109,10 @@ export const parseIntakeFormData = (data: IntakeFormData) => {
   const formattedDOB = rawDOB.toLocaleDateString('en-US');
   data.date_of_birth = formattedDOB;
 
+  data = Object.fromEntries(
+    Object.entries(data).filter(([_, value]) => value !== ''),
+  ) as IntakeFormData;
+
   return data;
 };
 
