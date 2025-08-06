@@ -29,7 +29,7 @@ const Radios = ({
 
   const showHiddenSection =
     typeof showHiddenSectionValue === "number"
-      ? selectedValue === options[showHiddenSectionValue]
+      ? selectedValue === options[showHiddenSectionValue].value
       : Array.isArray(showHiddenSectionValue)
         ? showHiddenSectionValue.includes(selectedValue)
         : typeof showHiddenSectionValue === "string"
