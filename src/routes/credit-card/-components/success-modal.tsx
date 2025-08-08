@@ -38,7 +38,7 @@ const SuccessModal = ({ open }: { open: boolean }) => {
             Form has been submitted successfully.
           </p>
 
-          <p className='clamp-[text,sm,base] mx-auto max-w-md text-center font-medium'>
+          <p className='clamp-[text,sm,base] mx-auto mb-6 max-w-md text-center font-medium'>
             Our team will reach out to you soon.
           </p>
         </div>
