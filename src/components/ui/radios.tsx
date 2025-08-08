@@ -107,24 +107,24 @@ function shouldShowHiddenSection(
   if (showHiddenSectionValue === null || showHiddenSectionValue === false) {
     return false;
   }
-  
+
   if (showHiddenSectionValue === true) {
     return true;
   }
-  
-  const valuesToCheck = Array.isArray(showHiddenSectionValue) 
-    ? showHiddenSectionValue 
+
+  const valuesToCheck = Array.isArray(showHiddenSectionValue)
+    ? showHiddenSectionValue
     : [showHiddenSectionValue];
-    
-  return valuesToCheck.some(val => {
+
+  return valuesToCheck.some((val) => {
     if (typeof val === 'string') {
       return selectedValue === val;
     }
-    
+
     if (typeof val === 'number' && val >= 0 && val < options.length) {
       return selectedValue === options[val].value;
     }
-    
+
     return false;
   });
 }
