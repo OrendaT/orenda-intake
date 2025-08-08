@@ -22,7 +22,12 @@ export type IntakeFormData = Omit<
 > &
   Partial<Pick<typeof intakeInitialValues, OptionalIntakeFields>>;
 
-export type CreditCardFormData = typeof creditCardInitialValues;
+export type CreditCardFormData = Omit<
+  typeof creditCardInitialValues,
+  'signature_date'
+> & {
+  signature_date: string | Date;
+};
 
 export type BaseFieldProps = {
   label?: string | ReactNode;
