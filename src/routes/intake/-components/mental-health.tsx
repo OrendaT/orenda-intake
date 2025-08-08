@@ -20,7 +20,6 @@ const MentalHealth = () => {
       />
 
       <Radios
-        containerClassName='my-7'
         label={
           <>
             What would you like your sessions to focus on?{' '}
@@ -79,7 +78,6 @@ const MentalHealth = () => {
         label='Please check any of the following you have experienced in the past six
           months'
         name='symptoms_past_six_months'
-        className='mb-3'
         options={[
           { value: 'Increased appetite' },
           { value: 'Decreased appetite' },

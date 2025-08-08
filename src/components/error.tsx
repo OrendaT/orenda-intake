@@ -1,18 +1,7 @@
 import Button from '@/components/ui/custom-button';
-import { useNavigate, type ErrorComponentProps } from '@tanstack/react-router';
+import { type ErrorComponentProps } from '@tanstack/react-router';
 
 const Error = (props: ErrorComponentProps) => {
-  const navigate = useNavigate();
-
-  const goBack = () => {
-    props.reset();
-    if (window.history.length > 1) {
-      navigate({ to: '.' });
-    } else {
-      navigate({ to: '/' });
-    }
-  };
-
   console.log(props);
 
   return (
@@ -23,12 +12,16 @@ const Error = (props: ErrorComponentProps) => {
       <p className='mb-8 text-gray-600'>
         {props.error.name}: {props.error.message}
       </p>
-      <p className='mb-8 text-gray-600'>
-        Component stack: {props.info?.componentStack}
+
+      <p className='mx-auto mb-8 line-clamp-5 max-w-lg text-gray-600'>
+        Error stack: {props.error?.stack}
       </p>
 
-      <Button className='w-fit px-12' onClick={goBack}>
-        Go Back
+      <Button
+        className='w-fit px-12'
+        onClick={() => location.reload()}
+      >
+        Refresh Page
       </Button>
     </div>
   );

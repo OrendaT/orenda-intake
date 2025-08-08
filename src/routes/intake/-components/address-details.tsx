@@ -10,7 +10,6 @@ const AddressDetails = () => {
     <>
       <h2 className='legend'>Address</h2>
       <fieldset className='fieldset'>
-        <div className='clamp-[gap,2,3] !mt-2 grid sm:mt-0'>
           <Input label='Address 1' name='address_one' />
           <Input
             label='Address 2'
@@ -76,7 +75,6 @@ const AddressDetails = () => {
               </>
             }
           />
-        </div>
       </fieldset>
     </>
   );

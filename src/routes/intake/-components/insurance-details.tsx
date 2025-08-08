@@ -1,6 +1,5 @@
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
-import RequiredMark from '../../../components/ui/required-mark';
 
 const InsuranceDetails = () => {
   return (
@@ -28,18 +27,11 @@ const InsuranceDetails = () => {
           />
         </div>
 
-        <div>
-          <h3 className='label'>
-            Please upload images of your insurance card
-            <RequiredMark />
-          </h3>
-          <p className='text-sm'>
-            If you do not have insurance, please upload a screenshot of this or
-            some other file as you must upload something to proceed.
-          </p>
-        </div>
         <div className='clamp-[gap,4,6] grid'>
           <FileInput
+            heading='Please upload images of your insurance card'
+            subheading='If you do not have insurance, please upload a screenshot of this or
+            some other file as you must upload something to proceed.'
             label='Upload The Front of your Insurance card'
             name='insurance_card_front'
           />

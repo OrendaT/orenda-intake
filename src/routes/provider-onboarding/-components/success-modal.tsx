@@ -10,6 +10,7 @@ import { SuccessIcon } from '@/assets/svgs';
 
 const SuccessModal = ({ open }: { open: boolean }) => {
   const close = () => location.reload();
+
   return (
     <AlertDialog open={open}>
       <AlertDialogContent>
@@ -32,14 +33,14 @@ const SuccessModal = ({ open }: { open: boolean }) => {
         <div className='flex flex-col items-center py-8 text-center'>
           <SuccessIcon className='text-orenda-purple clamp-[size,20,32] mb-6' />
 
-          <h1 className='clamp-[text,xl,3xl] mb-6 font-semibold'>Thank you!</h1>
+          <h1 className='clamp-[text,xl,3xl] mb-6 font-semibold'>
+            Thank you for completing this form!
+          </h1>
 
-          <p className='clamp-[mb,8,12] clamp-[text,base,lg] max-w-[23.5rem] font-medium'>
-            Form has been submitted successfully.
-          </p>
-
-          <p className='clamp-[text,sm,base] mx-auto mb-6 max-w-md text-center'>
-            Our team will reach out to you soon.
+          <p className='clamp-[mb,8,12] clamp-[text,base,1.1rem] max-w-2xl'>
+            We appreciate your time and cooperation. If you have any questions
+            or need further assistance, please do not hesitate to contact us .
+            We look forward to working with you and supporting your success.
           </p>
         </div>
       </AlertDialogContent>

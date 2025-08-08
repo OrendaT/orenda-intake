@@ -80,8 +80,8 @@ const Comp = ({
 
   /** Redraw stored signature text on canvas */
   const sign = () => {
-    if (signature.text) {
-      drawOnCanvas(signature.text);
+    if (signature?.text) {
+      drawOnCanvas(signature?.text);
       setIsClicked(true);
       onChange(signature);
     }
@@ -99,7 +99,7 @@ const Comp = ({
     const signatureChanged = prevSignatureRef.current.text !== signature.text;
 
     /** Clears the signature from external clear */
-    if (!signature.text && value?.text) {
+    if (!signature?.text && value?.text) {
       handleChange('');
       setIsClicked(false);
       return;
@@ -120,7 +120,7 @@ const Comp = ({
   return (
     <div id={id} className={cn('signature', className)}>
       {/* Text input for signature */}
-      {(!signature.text || value?.text) && !isClicked && (
+      {(!signature?.text || value?.text) && !isClicked && (
         <input
           type='text'
           value={value?.text}
@@ -128,7 +128,7 @@ const Comp = ({
             if (value.length > MAX_LENGTH) return;
             handleChange(value);
           }}
-          className='clamp-[text,sm,base] mt-4 mb-2 block w-full max-w-sm rounded bg-white/50 px-4 py-2 outline outline-zinc-200 transition-all duration-300 focus:outline-zinc-500'
+          className='clamp-[text,sm,base] mt-4 mb-2 block w-full max-w-sm border-b border-l border-[#b2b2b2] px-2 py-[0.38rem] transition-all duration-300 outline-none focus:border-[#070707]'
           placeholder='Type your signature here'
           onFocus={() => setFocused(true)}
           onBlur={() => {
@@ -181,7 +181,7 @@ const Comp = ({
  * @component SignaturePad
  *
  * @description A typed signature input controlled by React Hook Form. Renders a canvas preview and outputs
- * base64-encoded image of the signature.
+ * base64-encoded image of the signature?.
  */
 export default function SignaturePad({
   name,
@@ -197,6 +197,9 @@ export default function SignaturePad({
       disabled={disabled}
       rules={{
         required: { value: required, message: errorMsg },
+        validate: (value) => {
+          if (required) return value.text.length > 0 || errorMsg;
+        },
         ...rules,
       }}
       render={({ field: { onChange, value } }) => (

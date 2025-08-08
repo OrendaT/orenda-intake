@@ -1,6 +1,7 @@
 import {
   creditCardInitialValues,
   intakeInitialValues,
+  providerOnboardingInitialValues,
 } from '@/lib/definitions';
 import type { SelectProps, TextFieldProps } from '@mui/material';
 import type { ComponentProps, ReactNode } from 'react';
@@ -24,6 +25,19 @@ export type IntakeFormData = Omit<
 
 export type CreditCardFormData = typeof creditCardInitialValues;
 
+export type ProviderOnboardingFormData = Omit<
+  typeof providerOnboardingInitialValues,
+  'therapy_sessions' | 'languages'
+> & {
+  therapy_sessions: string[];
+  languages: string[];
+};
+
+export type FormData =
+  | IntakeFormData
+  | CreditCardFormData
+  | ProviderOnboardingFormData;
+
 export type BaseFieldProps = {
   label?: string | ReactNode;
   name: string;
@@ -44,6 +58,8 @@ export type BaseFieldProps = {
 export type InputProps = BaseFieldProps & TextFieldProps;
 
 export type FileInputProps = BaseFieldProps & {
+  heading?: string | ReactNode;
+  subheading?: string | ReactNode;
   maxSize?: 5;
   accept?: ComponentProps<'input'>['accept'];
 };
@@ -69,7 +85,7 @@ export type SelectInputProps = SelectProps &
 
 export type RadioProps = BaseFieldProps & {
   labelSuffix?: ReactNode;
-  showHiddenSectionValue?: number | string;
+  showHiddenSectionValue?: number | string | boolean | string[] | number[];
   hiddenSection?: ReactNode;
   options: Option[];
 };

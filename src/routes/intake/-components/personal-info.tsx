@@ -18,7 +18,6 @@ export default function PersonalInfo() {
       <DatePicker
         label='Date of Birth'
         name='date_of_birth'
-        containerClassName='pt-4'
       />
 
       <div className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>

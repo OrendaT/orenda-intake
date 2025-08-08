@@ -13,6 +13,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@import './overrides.css';
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -180,7 +182,7 @@ body {
     accent-color: #333;
   }
   body {
-    @apply font-dm-sans bg-background text-foreground;
+    @apply font-dm-sans bg-background text-foreground clamp-[text,sm,base];
   }
 
   /*Remove blue autofill colour  */
@@ -249,12 +251,12 @@ body {
   }
 
   .page-heading {
-    @apply font-heading clamp-[text,3xl,2.625rem] clamp-[leading,2rem,3rem] mb-4 text-center font-bold;
+    @apply font-heading clamp-[text,3xl,2.625rem] clamp-[leading,2.25rem,3.5rem] mb-4 text-center font-bold;
   }
 
   .form-content {
     .fieldset {
-      @apply clamp-[px,5,14] clamp-[pt,2,6] clamp-[pb,12,16] clamp-[mb,10,20] mx-auto grid max-w-[46.125rem] gap-y-6 rounded-2xl border border-[#D6D6D6] bg-white;
+      @apply clamp-[px,5,14] clamp-[pt,2,6] clamp-[pb,12,16] clamp-[mb,10,20] clamp-[gap-y,5,6] mx-auto grid max-w-[46.125rem] rounded-2xl border border-[#D6D6D6] bg-white;
 
       .heading {
         @apply clamp-[text,base,lg] font-medium;
@@ -262,15 +264,25 @@ body {
     }
   }
 
-  .hidden-section {
-    @apply rounded border-l-4 border-gray-500 bg-gray-100 p-3;
-  }
-
   .label {
-    @apply mb-1 text-base font-medium;
+    @apply clamp-[text,sm,base] mb-2 font-medium;
   }
 
   .legend {
     @apply font-heading clamp-[text,xl,2xl] clamp-[mb,3,6] text-center font-bold;
+  }
+
+  .provider-onboarding-form {
+    .form-part {
+      @apply rounded-3xl border-[#CECECE] sm:border sm:bg-white sm:py-12;
+    }
+
+    .fieldset {
+      @apply clamp-[py,4,8] clamp-[mb,5,6] max-w-[42.5rem];
+
+      .heading {
+        @apply text-center text-base font-bold;
+      }
+    }
   }
 }

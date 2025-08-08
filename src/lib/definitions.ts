@@ -89,3 +89,20 @@ export const creditCardInitialValues = {
   signature: '',
   signature_date: '',
 };
+
+export const providerOnboardingInitialValues = {
+  first_name: '',
+  last_name: '',
+  date_of_birth: '',
+  phone: '',
+  email: '',
+  hear_about: '',
+  state_of_license: '',
+  state_of_license_st: '',
+  pecos_consent: '',
+  policy_agreement: '',
+  policy_agreement_signature: '',
+  therapy_sessions: [],
+  therapy_session_others: '',
+  languages: [],
+};
