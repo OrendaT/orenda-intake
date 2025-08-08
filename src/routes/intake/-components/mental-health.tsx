@@ -241,6 +241,10 @@ const MentalHealth = () => {
           { value: 'Widowed' },
           { value: 'Other' },
         ]}
+        showHiddenSectionValue={'Other'}
+        hiddenSection={
+          <Input name='relationship_status_other' label='Please describe' />
+        }
       />
 
       <Input
