@@ -26,7 +26,7 @@ const SuccessModal = ({ open }: { open: boolean }) => {
             You're Almost Done!
           </h1>
 
-          <p className='clamp-[mb,8,12] clamp-[text,base,lg] max-w-[23.5rem] font-medium'>
+          <p className='mb-8 clamp-[text,base,lg] max-w-[23.5rem] font-medium'>
             Your intake form has been submitted successfully.
           </p>
 

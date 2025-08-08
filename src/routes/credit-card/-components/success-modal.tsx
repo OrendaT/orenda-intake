@@ -34,11 +34,11 @@ const SuccessModal = ({ open }: { open: boolean }) => {
 
           <h1 className='clamp-[text,xl,3xl] mb-6 font-semibold'>Thank you!</h1>
 
-          <p className='clamp-[mb,8,12] clamp-[text,base,lg] max-w-[23.5rem] font-medium'>
+          <p className='clamp-[text,base,lg] mb-3 max-w-[23.5rem] font-medium'>
             Form has been submitted successfully.
           </p>
 
-          <p className='clamp-[text,sm,base] mx-auto mb-6 max-w-md text-center'>
+          <p className='clamp-[text,sm,base] mx-auto mb-6 max-w-md text-center font-medium'>
             Our team will reach out to you soon.
           </p>
         </div>

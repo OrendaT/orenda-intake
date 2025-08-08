@@ -87,7 +87,7 @@ export const creditCardInitialValues = {
   credit_card_csv: '',
 
   signature: '',
-  signature_date: '',
+  signature_date: new Date(),
 };
 
 export const providerOnboardingInitialValues = {
