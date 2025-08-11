@@ -6,9 +6,9 @@ const PersonalInfo = () => {
     <fieldset className='fieldset'>
       <h3 className='heading'>Personal Information</h3>
 
-      <Input name='full_name' label='Full Name (All names ever used)' />
+      <Input name='name' label='Full Name (All names ever used)' />
       <DatePicker name='date_of_birth' label='Date of Birth' />
-      <Input name='ssn' label='Social Security Number' />
+      <Input name='social_security_number' label='Social Security Number' />
     </fieldset>
   );
 };

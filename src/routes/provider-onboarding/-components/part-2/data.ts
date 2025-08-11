@@ -1,11 +1,11 @@
-export const patientsAgeRange = [
+export const patientsAgeGroups = [
   { value: 'Children (5+ yrs)' },
   { value: 'Teens (13-17 yrs)' },
   { value: 'Adult (18-64 yrs)' },
   { value: 'Seniors (65+ yrs)' },
 ];
 
-export const followUpAppointmentLengths = [
+export const followUpDuration = [
   { value: '15 - 20 minutes' },
   { value: '20 - 25 minutes' },
   { value: '25 - 30 minutes' },

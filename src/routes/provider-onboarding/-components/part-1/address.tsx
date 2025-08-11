@@ -8,7 +8,7 @@ const Address = () => {
     <fieldset className='fieldset'>
       <h2 className='heading'>Address</h2>
 
-      <Input label='Street Address' name='address_one' />
+      <Input label='Street Address' name='street_address' />
       <Input
         label='Address 2 (Apartment, suite, unit, building, floor etc)'
         name='address_two'

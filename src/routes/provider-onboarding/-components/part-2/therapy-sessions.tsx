@@ -6,7 +6,7 @@ import { YES_NO } from '@/lib/constants';
 import type { ProviderOnboardingFormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 
-const therapyOnlySessions = [
+const therapySessions = [
   { value: 'Couples therapy' },
   { value: 'Talk Therapy' },
   { value: 'Do not currently offer therapy only sessions' },
@@ -15,13 +15,13 @@ const therapyOnlySessions = [
 
 const TherapySessions = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
-  const hasOthers = watch('therapy_sessions')?.includes('Others');
+  const hasOthers = watch('therapy_session')?.includes('Others');
 
   return (
     <fieldset className='fieldset'>
       <Radios
         label='Do you offer therapy-only sessions?'
-        name='offers_therapy_only_sessions'
+        name='offers_therapy_session'
         options={YES_NO}
         showHiddenSectionValue={0}
         hiddenSection={
@@ -29,14 +29,14 @@ const TherapySessions = () => {
             <Select
               containerClassName='clamp-[max-w,15rem,lg]'
               label='If yes which of these do you provide'
-              name='therapy_sessions'
-              options={therapyOnlySessions}
+              name='therapy_session'
+              options={therapySessions}
               multiple
             />
             <HiddenSection show={hasOthers}>
               <Input
                 label='Others? Please specify'
-                name='therapy_sessions_others'
+                name='therapy_session_other'
               />
             </HiddenSection>
           </div>

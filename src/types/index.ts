@@ -16,6 +16,7 @@ type Option = {
 
 export type SVGProps = React.SVGProps<SVGSVGElement>;
 
+// Intake Form
 type OptionalIntakeFields = 'relationship_status_other';
 export type IntakeFormData = Omit<
   typeof intakeInitialValues,
@@ -23,6 +24,7 @@ export type IntakeFormData = Omit<
 > &
   Partial<Pick<typeof intakeInitialValues, OptionalIntakeFields>>;
 
+// Credit Card Form
 export type CreditCardFormData = Omit<
   typeof creditCardInitialValues,
   'signature_date'
@@ -30,13 +32,21 @@ export type CreditCardFormData = Omit<
   signature_date: string | Date;
 };
 
+// Provider Onboarding Form
+type OptionalOnboardingFields =
+  | 'therapy_session_other'
+  | 'additional_langs_other'
+  | 'race_ethnicity_other';
 export type ProviderOnboardingFormData = Omit<
   typeof providerOnboardingInitialValues,
-  'therapy_sessions' | 'languages'
-> & {
-  therapy_sessions: string[];
-  languages: string[];
-};
+  'therapy_session' | 'additional_langs' | OptionalOnboardingFields
+> &
+  Partial<
+    Pick<typeof providerOnboardingInitialValues, OptionalOnboardingFields>
+  > & {
+    therapy_session: string[];
+    additional_langs: string[];
+  };
 
 export type FormData =
   | IntakeFormData
@@ -45,7 +55,10 @@ export type FormData =
 
 export type BaseFieldProps = {
   label?: string | ReactNode;
-  name: string;
+  name:
+    | keyof IntakeFormData
+    | keyof CreditCardFormData
+    | keyof ProviderOnboardingFormData;
   customLabel?: string;
   showRequiredMark?: boolean;
   errorMsg?: string;

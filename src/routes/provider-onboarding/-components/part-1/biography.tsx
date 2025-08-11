@@ -16,7 +16,7 @@ const Biography = () => {
         heading='Headshot 1'
         subheading='Please provide a professional, high-quality images. Include one
           outdoor image with trees for marketing purposes.'
-        name='headshot_one'
+        name='headshot_1'
         label={
           <>
             Jpeg or Png (nice smile,{' '}
@@ -33,7 +33,7 @@ const Biography = () => {
         heading='Headshot 2'
         subheading='Please provide a professional, high-quality images. Include one
           outdoor image with trees for marketing purposes.'
-        name='headshot_two'
+        name='headshot_2'
         label={
           <>
             Jpeg or Png (nice smile,{' '}

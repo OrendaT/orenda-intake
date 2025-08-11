@@ -33,7 +33,7 @@ const stateOfLicenseOptions = Object.keys(states).map((state) => ({
   value: state,
 }));
 
-const statusOptions = [
+const collaboratingPhysicianOptions = [
   {
     value:
       'I have met the required amount of time and I can practice independently.',
@@ -60,15 +60,15 @@ const Option1 = ({
   <div className='space-y-4'>
     <Input
       label={`${abbr} Collaborating Physician Name`}
-      name={`${abbr.toLowerCase()}_collab_name`}
+      name={`collaborating_physician_name`}
     />
     <Input
       label={`${abbr} Collaborating Physician NPI: (put n/a if you do not know)`}
-      name={`${abbr.toLowerCase()}_collab_npi`}
+      name={`collaborating_physician_npi`}
     />
     <Input
       label={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
-      name={`${abbr.toLowerCase()}_collab_address`}
+      name={`collaborating_physician_email`}
       title={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
     />
   </div>
@@ -77,18 +77,21 @@ const Option1 = ({
 const StateOfLicense = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
 
-  const value = watch('state_of_license') as keyof typeof states;
-  const statusValue = watch('state_of_license_st');
+  const value = watch('primary_state_of_license') as keyof typeof states;
+  const collaborating_physician = watch('collaborating_physician');
 
   return (
     <fieldset className='fieldset'>
       <Radios
         label='Primary state of License'
-        name='state_of_license'
+        name='primary_state_of_license'
         options={stateOfLicenseOptions}
         showHiddenSectionValue='Others'
         hiddenSection={
-          <Input label='Please specify' name='state_of_license_other' />
+          <Input
+            label='Please specify'
+            name='primary_state_of_license_details'
+          />
         }
       />
 
@@ -112,16 +115,18 @@ const StateOfLicense = () => {
 
           <Radios
             className='sm:grid-cols-1'
-            name='state_of_license_st'
-            options={statusOptions}
+            name='collaborating_physician'
+            options={collaboratingPhysicianOptions}
             showHiddenSectionValue={[0, 1]}
             hiddenSection={
-              statusValue === statusOptions[0].value ? (
+              collaborating_physician ===
+              collaboratingPhysicianOptions[0].value ? (
                 <Option1 abbr={states[value].abbr} />
-              ) : statusValue === statusOptions[1].value ? (
+              ) : collaborating_physician ===
+                collaboratingPhysicianOptions[1].value ? (
                 <FileInput
                   heading='Please upload your 4NP here'
-                  name='4NP file'
+                  name='form_4NP_doc'
                   accept={acceptForCredentialing}
                 />
               ) : null

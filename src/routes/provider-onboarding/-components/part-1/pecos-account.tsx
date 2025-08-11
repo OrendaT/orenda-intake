@@ -16,16 +16,16 @@ const HiddenSection = ({
   <div className='space-y-4'>
     {value === 'Yes, I already have a PECOS account' ? (
       <>
-        <Input label='PECOS Username' name='pecos_username' />
-        <Input label='PECOS Password' name='pecos_password' type='password' />
+        <Input label='PECOS Username' name='PECOS_username' />
+        <Input label='PECOS Password' name='PECOS_password' type='password' />
       </>
     ) : (
       <>
         <Input
           label='Please provide your NPPES Username (to create your login details for PECOS)'
-          name='nppes_username'
+          name='NPPES_username'
         />
-        <Input label='NPPES Password' name='nppes_password' type='password' />
+        <Input label='NPPES Password' name='PECOS_password' type='password' />
       </>
     )}
   </div>
@@ -34,14 +34,14 @@ const HiddenSection = ({
 const PecosAccount = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
   const value = watch(
-    'pecos_consent',
+    'consent_create_pecos_account',
   ) as (typeof pecosAccountOptions)[number]['value'];
 
   return (
     <fieldset className='fieldset'>
       <Radios
         label='Do you consent to us creating a PECOS account on your behalf if you don’t have a PTAN/Medicare ID or access to a PECOS login?'
-        name='pecos_consent'
+        name='consent_create_pecos_account'
         options={pecosAccountOptions}
         className='sm:grid-cols-1'
         showHiddenSectionValue={[0, 1]}
@@ -53,7 +53,7 @@ const PecosAccount = () => {
         PTAN/Medicare ID or do not know your Medicare ID, please enter "N/A.")
       </p>
 
-      <Input name='ptan_response' label='Response' className='!-mt-3' />
+      <Input name='PTAN_medicare_ID' label='Response' className='!-mt-3' />
     </fieldset>
   );
 };

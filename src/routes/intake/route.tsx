@@ -64,11 +64,7 @@ export function IntakeForm() {
     watch('policy_agreement') === 'I agree';
 
   const onSubmit = handleSubmit(async (data) => {
-    if (data.relationship_status_other) {
-      data.relationship_status = data.relationship_status_other;
-      delete data.relationship_status_other;
-    }
-
+    // parse intake form data
     data = parseIntakeFormData(data);
 
     const res = await submitForm(data);
@@ -155,10 +151,10 @@ export function IntakeForm() {
 
               {/* Terms and Conditions Agreement */}
               <fieldset className='clamp-[px,0,12] mx-auto max-w-[51rem] rounded bg-transparent pb-0'>
-                <div className='clamp-[pl,4,10] py-2 relative before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:rounded-full before:bg-[#B2B2B2]'>
+                <div className='clamp-[pl,4,10] relative py-2 before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:rounded-full before:bg-[#B2B2B2]'>
                   <label className='clamp-[text,sm,0.93rem] flex w-full items-start gap-2'>
                     <input
-                      className='size-3.5 flex-shrink-0 mt-[5px]'
+                      className='mt-[5px] size-3.5 flex-shrink-0'
                       type='checkbox'
                       value='I agree'
                       {...register('policy_agreement', {

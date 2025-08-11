@@ -27,12 +27,12 @@ const IdentificationRequirements = () => {
             </ul>
           </>
         }
-        name='photo_id'
+        name='photo_ID'
         accept={acceptForCredentialing}
       />
       <FileInput
         heading='Upload Your Proof of Address ID'
-        name='proof_of_address_id'
+        name='proof_of_address_ID'
         accept={acceptForCredentialing}
       />
     </fieldset>

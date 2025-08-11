@@ -6,10 +6,10 @@ import TherapySessions from './therapy-sessions';
 import Languages from './languages';
 import {
   ethnicities,
-  followUpAppointmentLengths,
+  followUpDuration,
   mentalHealthIssues,
   mentalHealthSpecializations,
-  patientsAgeRange,
+  patientsAgeGroups,
   treatmentApproaches,
 } from './data';
 
@@ -33,16 +33,16 @@ const Part2 = () => {
       <fieldset className='fieldset'>
         <Radios
           label='What age of patients do you see?'
-          name='patients_age_range'
-          options={patientsAgeRange}
+          name='patient_age_groups'
+          options={patientsAgeGroups}
         />
       </fieldset>
 
       <fieldset className='fieldset'>
         <Radios
           label='How long are your follow up appointments?'
-          name='follow_up_appointment_length'
-          options={followUpAppointmentLengths}
+          name='follow_up_duration'
+          options={followUpDuration}
         />
       </fieldset>
 
@@ -51,7 +51,7 @@ const Part2 = () => {
       <fieldset className='fieldset'>
         <SelectCheckboxes
           label='What mental health issues do you provide care for? (select all that apply)'
-          name='mental_health_issues'
+          name='health_conditions_treated'
           options={mentalHealthIssues}
         />
 
@@ -59,7 +59,7 @@ const Part2 = () => {
 
         <SelectCheckboxes
           label='Please select which of these you would like to specialize in for marketing purposes'
-          name='mental_health_issues_specialization'
+          name='health_specialties'
           options={mentalHealthSpecializations}
         />
       </fieldset>
@@ -75,7 +75,12 @@ const Part2 = () => {
             { value: 'I need more information before making a decision.' },
           ]}
           showHiddenSectionValue={2}
-          hiddenSection={<Input label='Please explain' name='ketamine_other' />}
+          hiddenSection={
+            <Input
+              label='Please explain'
+              name='ketamine_assisted_therapy_more_info'
+            />
+          }
         />
       </fieldset>
 
@@ -94,7 +99,7 @@ const Part2 = () => {
       <fieldset className='fieldset'>
         <Radios
           label='In an instance where a patient wants to book with you for weekly, or bi-weekly talk therapy sessions, but they are either not interested or uncertain about taking any psychotropic medication, how would you respond? Please keep in mind that psychiatric NPs can and do provide therapy.'
-          name='weekly_talk_therapy'
+          name='therapy_preference_response'
           options={treatmentApproaches}
           className='sm:grid-cols-1'
         />
@@ -128,7 +133,7 @@ const Part2 = () => {
 
         <Radios
           label='Do you acknowledge and agree to follow these steps?'
-          name='acknowledge_steps'
+          name='therapy_policy_acknowledgement'
           options={YES_NO}
         />
       </fieldset>
@@ -141,7 +146,7 @@ const Part2 = () => {
           highlighted on your profile (please note this is optional).
         </h3>
 
-        <Input label='Response' name='optional_info' />
+        <Input label='Response' name='identity_details' />
       </fieldset>
     </div>
   );

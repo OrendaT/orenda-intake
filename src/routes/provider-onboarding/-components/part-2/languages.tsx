@@ -29,7 +29,7 @@ const Languages = () => {
     <fieldset className='fieldset'>
       <Radios
         label='Do you speak other languages other than English?'
-        name='other_languages'
+        name='speaks_additional_lang'
         options={YES_NO}
         showHiddenSectionValue={0}
         hiddenSection={
@@ -37,12 +37,15 @@ const Languages = () => {
             <Select
               containerClassName='clamp-[max-w,15rem,lg]'
               label='Please select'
-              name='languages'
+              name='additional_langs'
               options={languages}
               multiple
             />
             <HiddenSection show={hasOthers}>
-              <Input label='Others? Please specify' name='languages_others' />
+              <Input
+                label='Others? Please specify'
+                name='additional_langs_other'
+              />
             </HiddenSection>
           </div>
         }

@@ -5,11 +5,11 @@ import { acceptForCredentialing, YES_NO } from '@/lib/constants';
 
 const HiddenSection = () => (
   <div className='space-y-6'>
-    <Input label='Please list them' name='additional_qualifications_list' />
+    <Input label='Please list them' name='additional_qualifications' />
 
     <FileInput
       heading='Copy of Additional qualification/certifications:'
-      name='additional_qualifications_copy'
+      name='additional_qualifications_doc'
       accept={acceptForCredentialing}
     />
   </div>
@@ -20,7 +20,7 @@ const AdditionalQualifications = () => {
     <fieldset className='fieldset'>
       <Radios
         label='Do you have any additional qualifications such as FNP, Primary Care NP, Acute Care NP, etc.?'
-        name='additional_qualifications'
+        name='has_additional_qualifications'
         options={YES_NO}
         showHiddenSectionValue={0}
         hiddenSection={<HiddenSection />}

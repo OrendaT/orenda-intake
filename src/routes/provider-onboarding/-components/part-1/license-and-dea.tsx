@@ -7,13 +7,13 @@ const LicenseAndDea = () => {
     <fieldset className='fieldset'>
       <FileInput
         heading='Copy of PRIMARY STATE License'
-        name='primary_state_license'
+        name='primary_state_license_doc'
         accept={acceptForCredentialing}
       />
-      <Input label='PRIMARY STATE DEA Number' name='primary_state_dea' />
+      <Input label='PRIMARY STATE DEA Number' name='primary_state_dea_number' />
       <FileInput
         heading='Copy of PRIMARY STATE DEA'
-        name='primary_state_dea_copy'
+        name='primary_state_dea_doc'
         accept={acceptForCredentialing}
       />
     </fieldset>

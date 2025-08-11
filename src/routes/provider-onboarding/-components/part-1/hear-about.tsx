@@ -17,14 +17,14 @@ const hearAboutOptions = [
 const HearAbout = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
 
-  const value = watch('hear_about');
+  const value = watch('referral_source');
   const isOthers = value === 'Others';
 
   return (
     <fieldset className='fieldset'>
       <Radios
         label='How did you hear about Orenda?'
-        name='hear_about'
+        name='referral_source'
         options={hearAboutOptions}
         required={false}
         showHiddenSectionValue={['Others', 'Employee Referral']}
@@ -35,7 +35,7 @@ const HearAbout = () => {
                 ? 'Please specify'
                 : 'Please specify referring providers name'
             }
-            name={isOthers ? 'hear_about_other' : 'hear_about_referral'}
+            name={'referral_source_detail'}
           />
         }
       />

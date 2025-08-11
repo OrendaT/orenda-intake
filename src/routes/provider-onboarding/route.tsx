@@ -3,7 +3,12 @@ import { createFileRoute } from '@tanstack/react-router';
 // Importing necessary components and hooks
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@/components/ui/custom-button';
-import { getItem, removeItem, removeLSItem } from '@/lib/utils';
+import {
+  getItem,
+  parseOnboardingFormData,
+  removeItem,
+  removeLSItem,
+} from '@/lib/utils';
 import { FORM_IDS, FORMS } from '@/lib/constants';
 import useAutoSave from '@/hooks/use-auto-save';
 import useSubmitForm from '@/hooks/use-submit-form';
@@ -33,7 +38,7 @@ export const Route = createFileRoute('/provider-onboarding')({
   }),
 });
 
-export function ProviderOnboardingForm() {
+function ProviderOnboardingForm() {
   const defaultValues = getItem(FORMS.provider_onboarding) || initialValues;
   const methods = useForm<ProviderOnboardingFormData>({
     defaultValues: defaultValues as ProviderOnboardingFormData,
@@ -47,12 +52,13 @@ export function ProviderOnboardingForm() {
   } = methods;
   const { mutateAsync: submitForm, isSuccess } = useSubmitForm({
     form: 'provider_onboarding',
-    url: 'patients',
+    url: 'providers',
   });
   const { resetSignature } = useSignature();
 
   const onSubmit = handleSubmit(async (data) => {
     // Parse the form data to ensure it matches the expected structure
+    data = parseOnboardingFormData(data);
 
     const res = await submitForm(data);
 

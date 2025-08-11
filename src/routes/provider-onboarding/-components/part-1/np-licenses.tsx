@@ -7,13 +7,13 @@ const HiddenSection = () => (
   <div className='space-y-6'>
     <Input
       customLabel='Please list the additional states where you hold NP licenses along with the corresponding license numbers (e.g., NY License # XXXXX; CT License # XXXXX; MA License # XXXXX, etc.).'
-      name='np_licenses_states'
+      name='additional_np_licenses'
       hiddenLabel
     />
 
     <FileInput
       heading='Copy of Additional State License'
-      name='np_licenses_state_license'
+      name='additional_state_license_doc'
       accept={acceptForCredentialing}
     />
   </div>
@@ -24,7 +24,7 @@ const NPLicenses = () => {
     <fieldset className='fieldset'>
       <Radios
         label='Do you hold any additional NP licenses in states other than your PRIMARY STATE of practice?'
-        name='np_licenses'
+        name='has_additional_np_licenses'
         options={YES_NO}
         showHiddenSectionValue={0}
         hiddenSection={<HiddenSection />}

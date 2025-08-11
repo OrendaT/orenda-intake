@@ -2,7 +2,11 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import Cookies from 'js-cookie';
 import { EXPIRY_TIME } from '@/lib/constants';
-import type { CreditCardFormData, IntakeFormData } from '@/types';
+import type {
+  CreditCardFormData,
+  IntakeFormData,
+  ProviderOnboardingFormData,
+} from '@/types';
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -43,10 +47,46 @@ export const isValidEmail = (email: string) => {
   return regex.test(email);
 };
 
-function hasValue<T>(entry: [string, T]): entry is [string, NonNullable<T>] {
-  const [_, value] = entry;
-  return value !== null && value !== undefined && value !== '';
+function removeEmptyValues<T>(obj: Record<string, unknown>): T {
+  const newObj: Record<string, unknown> = {};
+
+  const isValid = (value: unknown) =>
+    value !== null && value !== undefined && value !== '';
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      if (isValid(value)) {
+        newObj[key] = value;
+      } else if (Array.isArray(value)) {
+        const filteredArray = value.filter((item) => isValid(item));
+        if (filteredArray.length > 0) {
+          newObj[key] = filteredArray;
+        }
+      }
+    }
+  }
+
+  return newObj as T;
 }
+
+export const convertToFormData = (obj: Record<string, unknown>) => {
+  const formData = new FormData();
+
+  Object.entries(obj).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        formData.append(key, item);
+      });
+    } else if (typeof value === 'string') {
+      formData.append(key, value);
+    } else if (value instanceof File) {
+      formData.append(key, value);
+    }
+  });
+
+  return formData;
+};
 
 /**
  * Converts a base64 data URL to a File object.
@@ -103,53 +143,74 @@ export const convertBase64ToFile = <T>(obj: Record<string, unknown>): T => {
 };
 
 export const parseIntakeFormData = (data: IntakeFormData) => {
+  // replace actual value with other
+  if (data.relationship_status_other) {
+    data.relationship_status = data.relationship_status_other;
+    delete data.relationship_status_other;
+  }
+
   // convert Base64 strings to Files
-  data = convertBase64ToFile<IntakeFormData>(data);
+  data = convertBase64ToFile(data);
 
   // convert FileLists to Files
-  data = convertFileListsToFiles<IntakeFormData>(data);
+  data = convertFileListsToFiles(data);
 
   // parse DOB (convert date object to US date)
   const rawDOB = new Date(data.date_of_birth);
   const formattedDOB = rawDOB.toLocaleDateString('en-US');
   data.date_of_birth = formattedDOB;
 
-  data = Object.fromEntries(
-    Object.entries(data).filter(hasValue),
-  ) as IntakeFormData;
+  // remove empty values
+  data = removeEmptyValues(data);
 
   return data;
 };
 
 export const parseCCFormData = (data: CreditCardFormData) => {
-  data = convertBase64ToFile<CreditCardFormData>(data);
+  // convert Base64 strings to Files
+  data = convertBase64ToFile(data);
 
-  // parse signature and  date (convert date object to US date)
+  // parse DOB date (convert date object to US date)
   const rawDOB = new Date(data.date_of_birth);
   const formattedDOB = rawDOB.toLocaleDateString('en-US');
   data.date_of_birth = formattedDOB;
 
+  // parse signature date (convert date object to US date)
   const rawSignatureDate = new Date(data.signature_date);
   const formattedSignatureDate = rawSignatureDate.toLocaleDateString('en-US');
   data.signature_date = formattedSignatureDate;
 
+  // remove empty values
+  data = removeEmptyValues(data);
+
   return data;
 };
 
-export const convertToFormData = (obj: Record<string, unknown>) => {
-  const formData = new FormData();
+export const parseOnboardingFormData = (data: ProviderOnboardingFormData) => {
+  // replace values with others value
+  if (data.race_ethnicity_other) {
+    data.race_ethnicity = data.race_ethnicity_other;
+    delete data.race_ethnicity_other;
+  }
+  if (data.therapy_session_other) {
+    const otherSessions = data.therapy_session_other.split(',');
+    data.therapy_session = [...data.therapy_session, ...otherSessions];
+    delete data.therapy_session_other;
+  }
+  if (data.additional_langs_other) {
+    const otherLanguages = data.additional_langs_other.split(',');
+    data.additional_langs = [...data.additional_langs, ...otherLanguages];
+    delete data.additional_langs_other;
+  }
 
-  Object.entries(obj).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      value.forEach((item) => {
-        formData.append(key, item);
-      });
-    } else if (typeof value === 'string') {
-      formData.append(key, value);
-    } else if (value instanceof File) {
-      formData.append(key, value);
-    }
-  });
+  // convert Base64 strings to Files
+  data = convertBase64ToFile(data);
 
-  return formData;
+  // convert FileLists to Files
+  data = convertFileListsToFiles(data);
+
+  // remove empty values
+  data = removeEmptyValues(data);
+
+  return data;
 };
