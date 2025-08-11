@@ -93,7 +93,7 @@ export type MaskProps = BaseFieldProps &
 export type CheckboxProps = SelectInputProps & {
   labelSuffix?: ReactNode;
   otherLabel?: string;
-  otherName?: string;
+  otherName?: BaseFieldProps['name'];
 };
 
 export type SelectInputProps = SelectProps &

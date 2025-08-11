@@ -23,7 +23,7 @@ const languages = [
 
 const Languages = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
-  const hasOthers = watch('languages')?.includes('Others');
+  const hasOthers = watch('additional_langs')?.includes('Others');
 
   return (
     <fieldset className='fieldset'>
