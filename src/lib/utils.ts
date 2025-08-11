@@ -54,7 +54,7 @@ function removeEmptyValues<T>(obj: Record<string, unknown>): T {
     value !== null && value !== undefined && value !== '';
 
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const value = obj[key];
       if (isValid(value)) {
         newObj[key] = value;
