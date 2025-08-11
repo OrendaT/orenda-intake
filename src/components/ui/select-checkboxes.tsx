@@ -79,7 +79,7 @@ const SelectCheckboxes = ({
             otherLabel ||
             `${Array.isArray(selected) ? selected?.find((val: string) => val.includes('Other')) : selected}? Please specify`
           }
-          name={otherName || name + '_other'}
+          name={otherName || ((name + '_other') as CheckboxProps['name'])}
           required={includesOther}
         />
       </HiddenSection>
