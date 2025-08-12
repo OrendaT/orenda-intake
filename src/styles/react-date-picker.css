@@ -54,7 +54,7 @@
         font-weight: 600;
       }
       .react-calendar__navigation button:disabled {
-        background-color: none;
+        background-color: transparent;
         opacity: 50%;
         cursor: not-allowed;
       }
@@ -95,7 +95,7 @@
         }
 
         &:disabled {
-          background-color: none;
+          background-color: transparent;
           opacity: 50%;
           cursor: not-allowed;
         }
