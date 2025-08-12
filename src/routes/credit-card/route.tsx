@@ -314,7 +314,6 @@ function CreditCard() {
                     name='signature_date'
                     minDate={new Date()}
                     maxDate={new Date()}
-                    containerClassName='mt-10'
                   />
                 </div>
               </fieldset>

@@ -29,7 +29,7 @@ const DatePicker = ({
         validate: validations,
       }}
       render={({ field, fieldState: { error } }) => (
-        <div className={cn('relative mt-4', containerClassName)}>
+        <div className={cn('relative pt-4', containerClassName)}>
           {label && (
             <h4
               className={cn(
