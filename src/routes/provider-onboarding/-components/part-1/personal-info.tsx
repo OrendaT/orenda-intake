@@ -8,6 +8,7 @@ const PersonalInfo = () => {
 
       <Input name='name' label='Full Name (All names ever used)' />
       <DatePicker name='date_of_birth' label='Date of Birth' />
+      <Input name='email' label='Email Address' />
       <Input name='social_security_number' label='Social Security Number' />
     </fieldset>
   );
