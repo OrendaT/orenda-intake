@@ -15,7 +15,11 @@ export default function PersonalInfo() {
 
       <Input label='Preferred Name' name='preferred_name' required={false} />
 
-      <DatePicker label='Date of Birth' name='date_of_birth' />
+      <DatePicker
+        label='Date of Birth'
+        name='date_of_birth'
+        maxDate={new Date()}
+      />
 
       <div className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>
         <IMask

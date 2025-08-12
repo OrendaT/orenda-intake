@@ -124,7 +124,7 @@ function CreditCard() {
                 <DatePicker
                   label='Date of Birth'
                   name='date_of_birth'
-                  containerClassName='mt-4'
+                  maxDate={new Date()}
                 />
 
                 <Input label='Cardholder Name' name='cardholder_name' />
@@ -181,7 +181,7 @@ function CreditCard() {
                         <span
                           key={index}
                           className={cn(
-                            'bg-white/30 clamp-[text,sm,base] tracking-tighter blur-[4px]',
+                            'clamp-[text,sm,base] bg-white/30 tracking-tighter blur-[4px]',
                             cardDetails.number[index] === ' ' && 'w-2.5',
                           )}
                         >
@@ -309,7 +309,13 @@ function CreditCard() {
                   </p>
 
                   <SignaturePad className='-mt-2' name='signature' />
-                  <DatePicker label='Date' name='signature_date' />
+                  <DatePicker
+                    label='Date'
+                    name='signature_date'
+                    minDate={new Date()}
+                    maxDate={new Date()}
+                    containerClassName='mt-10'
+                  />
                 </div>
               </fieldset>
             </div>

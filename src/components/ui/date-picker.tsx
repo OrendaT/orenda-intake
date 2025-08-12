@@ -18,45 +18,49 @@ const DatePicker = ({
   ...inputProps
 }: TDatePickerProps) => {
   return (
-    <div className={cn('mt-2', containerClassName)}>
-      {label && (
-        <h4 className='label'>
-          {label}
-          {required && <RequiredMark />}
-        </h4>
-      )}
-      <Controller
-        name={name}
-        disabled={disabled}
-        rules={{
-          required: {
-            value: required,
-            message: errorMsg,
-          },
-          validate: validations,
-        }}
-        render={({ field, fieldState: { error } }) => (
-          <div>
-            <ReactDatePicker
-              value={field.value}
-              onChange={field.onChange}
-              required={required}
-              calendarIcon={<Calendar className='clamp-[size,4,1.2rem]' />}
-              {...inputProps}
-              className={cn('font-dm-sans w-full border-b-2', {
-                'border-[#d32f2f] text-[#d32f2f]': error,
-              })}
-              monthPlaceholder='mm'
-              dayPlaceholder='dd'
-              yearPlaceholder='yyyy'
-              format='MM/dd/yyyy'
-            />
+    <Controller
+      name={name}
+      disabled={disabled}
+      rules={{
+        required: {
+          value: required,
+          message: errorMsg,
+        },
+        validate: validations,
+      }}
+      render={({ field, fieldState: { error } }) => (
+        <div className={cn('relative mt-4', containerClassName)}>
+          {label && (
+            <h4
+              className={cn(
+                'label absolute right-0 bottom-0 left-0 z-[1] mb-0 w-fit min-w-28 origin-top-left -translate-y-1 bg-white font-medium transition-all duration-300',
+                field.value && '-translate-y-7 scale-75 bg-transparent !pb-0',
+              )}
+            >
+              {label}
+              {required && <RequiredMark />}
+            </h4>
+          )}
 
-            {error && <p className='error'>{error?.message}</p>}
-          </div>
-        )}
-      />
-    </div>
+          <ReactDatePicker
+            value={field.value}
+            onChange={field.onChange}
+            required={required}
+            calendarIcon={<Calendar className='clamp-[size,4,1.2rem]' />}
+            {...inputProps}
+            className={cn('font-dm-sans w-full border-b-2', {
+              'border-[#d32f2f] text-[#d32f2f]': error,
+            })}
+            monthPlaceholder='mm'
+            dayPlaceholder='dd'
+            yearPlaceholder='yyyy'
+            format='MM/dd/yyyy'
+          />
+
+          {error && <p className='error'>{error?.message}</p>}
+        </div>
+      )}
+    />
   );
 };
 export default DatePicker;

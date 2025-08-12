@@ -146,7 +146,7 @@ const Part2 = () => {
           highlighted on your profile (please note this is optional).
         </h3>
 
-        <Input label='Response' name='identity_details' />
+        <Input label='Response' name='identity_details' required={false} />
       </fieldset>
     </div>
   );

@@ -47,6 +47,7 @@ function ProviderOnboardingForm() {
     handleSubmit,
     register,
     reset,
+    setFocus,
     watch,
     formState: { errors, isSubmitting },
   } = methods;
@@ -174,9 +175,26 @@ function ProviderOnboardingForm() {
               </Button>
 
               {!!Object.entries(errors)?.length && (
-                <p className='error !mt-4 text-center !text-sm font-semibold'>
-                  Please ensure all required fields are filled out.
-                </p>
+                <>
+                  <p className='error !mt-4 mb-2 text-center !text-sm font-semibold'>
+                    Please ensure all required fields are filled out.
+                  </p>
+                  <ul className='mx-auto w-fit text-center text-sm font-medium'>
+                    {Object.entries(errors)
+                      .slice(0, 3)
+                      .map(([name, { message }]) => (
+                        <li
+                          className='cursor-pointer text-red-900'
+                          key={name}
+                          onClick={() =>
+                            setFocus(name as keyof ProviderOnboardingFormData)
+                          }
+                        >
+                          {name}: {message}
+                        </li>
+                      ))}
+                  </ul>
+                </>
               )}
             </form>
           </FormProvider>
