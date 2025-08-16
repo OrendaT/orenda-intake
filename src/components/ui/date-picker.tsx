@@ -33,9 +33,8 @@ const DatePicker = ({
           {label && (
             <h4
               className={cn(
-                'label absolute top-5 right-0 left-0 z-[1] mb-0 w-fit min-w-28 origin-top-left -translate-y-1 bg-white font-medium transition-all duration-300',
-                field.value && '-translate-y-6 scale-75 bg-transparent !pb-0',
-                error && '',
+                'label absolute top-5 right-0 left-0 z-[1] mb-0 w-fit min-w-28 origin-top-left -translate-y-0.5 bg-white font-medium transition-all duration-300',
+                field.value && '-translate-y-6 scale-75 bg-transparent',
               )}
             >
               {label}
