@@ -12,7 +12,7 @@ const PersonalInfo = () => {
         label='Date of Birth'
         maxDate={new Date()}
       />
-      <Input name='email' label='Email Address' />
+      <Input name='email' label='Email Address' type='email' />
       <Input name='social_security_number' label='Social Security Number' />
     </fieldset>
   );

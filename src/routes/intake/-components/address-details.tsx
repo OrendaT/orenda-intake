@@ -4,7 +4,6 @@ import IMask from '../../../components/ui/imask';
 import Radios from '../../../components/ui/radios';
 import { US_STATES } from '@/lib/constants';
 
-/* Address Section, Tel & Email */
 const AddressDetails = () => {
   return (
     <>

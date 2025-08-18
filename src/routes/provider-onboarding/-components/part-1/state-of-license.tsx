@@ -70,6 +70,7 @@ const Option1 = ({
       label={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
       name={`collaborating_physician_email`}
       title={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
+      type='email'
     />
   </div>
 );
