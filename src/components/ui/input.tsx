@@ -1,18 +1,18 @@
-import { cn } from "@/lib/utils";
-import { TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
-import type { InputProps } from "@/types";
-import RequiredMark from "./required-mark";
+import { cn, isValidEmail } from '@/lib/utils';
+import { TextField } from '@mui/material';
+import { Controller } from 'react-hook-form';
+import type { InputProps } from '@/types';
+import RequiredMark from './required-mark';
 
 const Input = ({
   name,
   customLabel,
-  type = "text",
+  type = 'text',
   id,
   required = true,
   disabled,
-  variant = "standard",
-  errorMsg = "This field is required",
+  variant = 'standard',
+  errorMsg = 'This field is required',
   placeholder,
   validations,
   className,
@@ -21,9 +21,9 @@ const Input = ({
   ...inputProps
 }: InputProps) => {
   return (
-    <div className={cn("w-full", containerClassName)}>
+    <div className={cn('w-full', containerClassName)}>
       {customLabel && (
-        <h3 className="label">
+        <h3 className='label'>
           {customLabel}
           {required && <RequiredMark />}
         </h3>
@@ -37,7 +37,16 @@ const Input = ({
             message: errorMsg,
           },
           ...registerOptions,
-          validate: validations,
+          validate: {
+            isValidEmail: (value: string) => {
+              if (value && type === 'email')
+                return (
+                  isValidEmail(value) || 'Please enter a valid email address'
+                );
+              return true;
+            },
+            ...validations,
+          },
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => (
           <TextField
