@@ -182,7 +182,7 @@ function CreditCard() {
                           key={index}
                           className={cn(
                             'clamp-[text,sm,base] bg-white/30 tracking-tighter blur-[4px]',
-                            cardDetails.number[index] === ' ' && 'w-2.5',
+                            cardDetails.number[index] === ' ' && 'w-3',
                           )}
                         >
                           {cardDetails.number[index]}

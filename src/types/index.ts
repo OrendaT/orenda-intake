@@ -39,11 +39,15 @@ type OptionalOnboardingFields =
   | 'race_ethnicity_other';
 export type ProviderOnboardingFormData = Omit<
   typeof providerOnboardingInitialValues,
-  'therapy_session' | 'additional_langs' | OptionalOnboardingFields
+  | 'therapy_session'
+  | 'additional_langs'
+  | 'states_of_license'
+  | OptionalOnboardingFields
 > &
   Partial<
     Pick<typeof providerOnboardingInitialValues, OptionalOnboardingFields>
   > & {
+    states_of_license: string[];
     therapy_session: string[];
     additional_langs: string[];
   };
@@ -55,10 +59,10 @@ export type FormData =
 
 export type BaseFieldProps = {
   label?: string | ReactNode;
-  name:
-    | keyof IntakeFormData
-    | keyof CreditCardFormData
-    | keyof ProviderOnboardingFormData;
+  name: string;
+  // | keyof IntakeFormData
+  // | keyof CreditCardFormData
+  // | keyof ProviderOnboardingFormData;
   customLabel?: string;
   showRequiredMark?: boolean;
   errorMsg?: string;

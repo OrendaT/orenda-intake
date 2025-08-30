@@ -5,12 +5,6 @@ export const patientsAgeGroups = [
   { value: 'Seniors (65+ yrs)' },
 ];
 
-export const followUpDuration = [
-  { value: '15 - 20 minutes' },
-  { value: '20 - 25 minutes' },
-  { value: '25 - 30 minutes' },
-];
-
 export const mentalHealthIssues = [
   { value: 'ADHD' },
   { value: 'Adjustment Disorder' },
@@ -66,18 +60,6 @@ export const mentalHealthSpecializations = [
   { value: 'Group Therapy' },
   { value: 'LGBTQ+ Care' },
   { value: 'Premenstrual Dysphoric Disorder (PDD)' },
-];
-
-export const ethnicities = [
-  { value: 'Asian' },
-  { value: 'Black / African American' },
-  { value: 'Hispanic / LatinX' },
-  { value: 'Indigenous American / Alaskan' },
-  { value: 'Native Hawaiin / Other Pacific Islander' },
-  { value: 'White' },
-  { value: 'Middle Eastern' },
-  { value: 'Prefer not to say' },
-  { value: 'Others' },
 ];
 
 export const treatmentApproaches = [

@@ -45,7 +45,7 @@ const FileInput = ({
   accept = 'image/*,application/pdf',
   maxSize = 5,
   validations,
-  className,
+  containerClassName,
 }: FileInputProps) => {
   const {
     register,
@@ -56,7 +56,7 @@ const FileInput = ({
   const file = watch(name)?.[0];
 
   return (
-    <div className={cn('mt-2', className)}>
+    <div className={cn('mt-2', containerClassName)}>
       {heading && (
         <h3 className='label'>
           {heading}
@@ -68,7 +68,14 @@ const FileInput = ({
         <p className='clamp-[text,xs,sm] mb-3 font-medium'>{subheading}</p>
       )}
 
-      <div className='clamp-[pt,7,2.31rem] clamp-[pb,8,10] rounded-md border border-dashed border-[#D1D1D1] px-5 text-center text-[#333]'>
+      <div
+        className={cn(
+          'clamp-[pt,7,2.31rem] clamp-[pb,8,10] hover:border-orenda-purple/60 rounded-md border-2 border-dashed border-[#D1D1D1] px-5 text-center text-[#333] transition-colors duration-300',
+          {
+            'border-error-red': errors?.[name]?.message,
+          },
+        )}
+      >
         <label
           htmlFor={name}
           className='mx-auto mb-4 block w-fit rounded-full bg-[#EAEAEA] p-2.5'

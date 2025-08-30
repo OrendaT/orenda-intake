@@ -116,7 +116,7 @@ export const providerOnboardingInitialValues = {
   referral_source: '',
   referral_source_detail: '',
 
-  primary_state_of_license: '',
+  states_of_license: [],
   primary_state_of_license_details: '',
 
   collaborating_physician: '',

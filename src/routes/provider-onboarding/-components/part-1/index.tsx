@@ -3,11 +3,10 @@ import Address from './address';
 import Biography from './biography';
 import CAQH from './caqh';
 import PersonalInfo from './personal-info';
-import LicenseAndDea from './license-and-dea';
 import { acceptForCredentialing, YES_NO } from '@/lib/constants';
 import FileInput from '@/components/ui/file-input';
 import IdentificationRequirements from './identification-requirements';
-import StateOfLicense from './state-of-license';
+import StatesOfLicense from './states-of-license';
 import HearAbout from './hear-about';
 import PecosAccount from './pecos-account';
 import NPLicenses from './np-licenses';
@@ -28,9 +27,8 @@ const Part1 = () => {
       <CAQH />
       <Biography />
       <HearAbout />
-      <StateOfLicense />
+      <StatesOfLicense />
       <PecosAccount />
-      <LicenseAndDea />
       <NPLicenses />
       <DeaReg />
 
@@ -65,6 +63,17 @@ const Part1 = () => {
           label='Do you have a MSN, a DNP, or both?'
           name='highest_nursing_degree'
           options={[...YES_NO, { value: 'Both' }]}
+        />
+
+        <Radios
+          label='Do you have COI coverage?'
+          name='coi_coverage'
+          options={YES_NO}
+          showHiddenSectionValue={0}
+          required={false}
+          hiddenSection={
+            <FileInput heading='Please upload' name='coi_coverage_doc' />
+          }
         />
       </fieldset>
 

@@ -4,6 +4,7 @@ import Radios from '@/components/ui/radios';
 import DatePicker from '@/components/ui/date-picker';
 import Signature from '../../../components/ui/signature';
 import ResponsiveTooltip from '../../../components/responsive-tooltip';
+import { ethnicities } from '@/lib/constants';
 
 export default function PersonalInfo() {
   return (
@@ -108,7 +109,6 @@ export default function PersonalInfo() {
         grid={false}
       />
 
-      {/* Gender (Optional) */}
       <Input
         label={
           <>
@@ -117,6 +117,21 @@ export default function PersonalInfo() {
         }
         name='gender'
         required={false}
+      />
+
+      <Radios
+        label={
+          <>
+            Please indicate your race (optional) <small>(Optional)</small>
+          </>
+        }
+        name='race'
+        options={ethnicities}
+        required={false}
+        showHiddenSectionValue='Others'
+        hiddenSection={
+          <Input label='Please specify' name='race_other' />
+        }
       />
     </fieldset>
   );

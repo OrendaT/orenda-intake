@@ -1,12 +1,9 @@
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import SelectCheckboxes from '@/components/ui/select-checkboxes';
-import { YES_NO } from '@/lib/constants';
-import TherapySessions from './therapy-sessions';
+import { ethnicities, YES_NO } from '@/lib/constants';
 import Languages from './languages';
 import {
-  ethnicities,
-  followUpDuration,
   mentalHealthIssues,
   mentalHealthSpecializations,
   patientsAgeGroups,
@@ -37,16 +34,6 @@ const Part2 = () => {
           options={patientsAgeGroups}
         />
       </fieldset>
-
-      <fieldset className='fieldset'>
-        <Radios
-          label='How long are your follow up appointments?'
-          name='follow_up_duration'
-          options={followUpDuration}
-        />
-      </fieldset>
-
-      <TherapySessions />
 
       <fieldset className='fieldset'>
         <SelectCheckboxes

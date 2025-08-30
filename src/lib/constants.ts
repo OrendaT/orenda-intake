@@ -69,3 +69,15 @@ export const YES_NO = [{ value: 'Yes' }, { value: 'No' }];
 
 export const acceptForCredentialing =
   'image/*,application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+
+export const ethnicities = [
+  { value: 'Asian' },
+  { value: 'Black / African American' },
+  { value: 'Hispanic / LatinX' },
+  { value: 'Indigenous American / Alaskan' },
+  { value: 'Native Hawaiin / Other Pacific Islander' },
+  { value: 'White' },
+  { value: 'Middle Eastern' },
+  { value: 'Prefer not to say' },
+  { value: 'Others' },
+];

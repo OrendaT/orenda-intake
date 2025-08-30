@@ -6,7 +6,8 @@ const PersonalInfo = () => {
     <fieldset className='fieldset'>
       <h3 className='heading'>Personal Information</h3>
 
-      <Input name='name' label='Full Name (All names ever used)' />
+      <Input name='name' label='Full Name' />
+      <Input name='all_names' label='All Names Ever Used' />
       <DatePicker
         name='date_of_birth'
         label='Date of Birth'

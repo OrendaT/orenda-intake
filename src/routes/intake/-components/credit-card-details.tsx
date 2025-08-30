@@ -45,7 +45,7 @@ const CreditCardDetails = () => {
               key={index}
               className={cn(
                 'bg-white/30 clamp-[text,sm,base] tracking-tighter blur-[4px]',
-                cardDetails.number[index] === ' ' && 'w-2.5',
+                cardDetails.number[index] === ' ' && 'w-3',
               )}
             >
               {cardDetails.number[index]}
