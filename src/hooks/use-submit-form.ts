@@ -29,7 +29,9 @@ const useSubmitForm = ({ form, url }: useSubmitFormProps) => {
       console.error('Form submission error:', error);
       const errorMessage =
         error instanceof AxiosError
-          ? error.response?.data?.message
+          ? error.response?.data?.message ||
+            error.message ||
+            `Server responded with ${error.code} code`
           : 'Something went wrong';
       toast.error(errorMessage);
     },
