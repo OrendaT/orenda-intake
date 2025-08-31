@@ -103,7 +103,7 @@ const StatesOfLicense = () => {
           onClick={(event) => {
             const target = event.target as HTMLInputElement;
             const fieldName =
-              `${target.dataset.option?.split('(')[1].slice(0, 2)}_license`;
+              `${target.dataset.option?.split('(')[1].slice(0, 2)}_license` as keyof FormData;
 
             if (target.checked) {
               setValue(fieldName, ['license_complete']);
