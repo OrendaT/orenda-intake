@@ -1,26 +1,30 @@
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
+import { YES_NO } from '@/lib/constants';
 import type { ProviderOnboardingFormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 
-const pecosAccountOptions = [
-  { value: 'Yes, I already have a PECOS account' },
-  { value: 'No, please create one on my behalf' },
-];
-
-const HiddenSection = ({
-  value,
-}: {
-  value: (typeof pecosAccountOptions)[number]['value'];
-}) => (
+const HiddenSection = ({ value }: { value: string }) => (
   <div className='space-y-4'>
-    {value === 'Yes, I already have a PECOS account' ? (
+    {value === 'Yes' ? (
       <>
+        <p className='mb-2 max-w-[40ch] font-medium'>
+          <small>
+            By providing my log in credentials here, I authorize Orenda to
+            access my account on my behalf
+          </small>
+        </p>
         <Input label='PECOS Username' name='PECOS_username' />
         <Input label='PECOS Password' name='PECOS_password' type='password' />
       </>
     ) : (
       <>
+        <p className='mb-2 max-w-[40ch] font-medium'>
+          <small>
+            By initialling here, I authorize Orenda to create an account on my
+            behalf
+          </small>
+        </p>
         <Input
           label='Please provide your NPPES Username (to create your login details for PECOS)'
           name='NPPES_username'
@@ -33,17 +37,21 @@ const HiddenSection = ({
 
 const PecosAccount = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
-  const value = watch(
-    'consent_create_pecos_account',
-  ) as (typeof pecosAccountOptions)[number]['value'];
+  const value = watch('consent_create_pecos_account') as 'Yes' | 'No';
 
   return (
     <fieldset className='fieldset'>
       <Radios
-        label='Do you consent to us creating a PECOS account on your behalf if you don’t have a PTAN/Medicare ID or access to a PECOS login?'
+        label='Do you have a PECOS Account?'
         name='consent_create_pecos_account'
-        options={pecosAccountOptions}
         className='sm:grid-cols-1'
+        options={[
+          ...YES_NO,
+          {
+            value:
+              ' I do not authorize Orenda to access or create a PECOS account on my behalf',
+          },
+        ]}
         showHiddenSectionValue={[0, 1]}
         hiddenSection={<HiddenSection value={value} />}
       />

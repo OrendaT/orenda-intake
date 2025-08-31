@@ -1,3 +1,5 @@
+import type { LicenseDea } from '@/types';
+
 export const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 export const intakeInitialValues = {
@@ -160,7 +162,7 @@ export const providerOnboardingInitialValues = {
   follow_up_duration: '',
   offers_therapy_session: '',
   therapy_session: [],
-  health_conditions_treated: [],
+  health_conditions_treated: ['Depression', 'Anxiety', 'ADHD'],
   health_specialties: [],
   speaks_additional_lang: '',
   additional_langs: [],
@@ -181,3 +183,18 @@ export const providerOnboardingInitialValues = {
   additional_langs_other: '',
   therapy_session_other: '',
 };
+
+export const LDStates: LicenseDea[] = [
+  {
+    name: 'NY',
+  },
+  {
+    name: 'MA',
+  },
+  {
+    name: 'CT',
+  },
+  {
+    name: 'NJ',
+  },
+];

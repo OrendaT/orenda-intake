@@ -4,9 +4,12 @@ import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import { acceptForCredentialing } from '@/lib/constants';
-import type { ProviderOnboardingFormData } from '@/types';
+import type { ProviderOnboardingFormData as FormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 import StatesOfLicenseSummary from './states-of-license-summary';
+import { StatesContext } from './states-of-license-summary/states-context';
+import { LDStates } from '@/lib/definitions';
+import { useState } from 'react';
 
 const states = {
   'New York (NY)': {
@@ -78,89 +81,105 @@ const Option1 = ({
 );
 
 const StatesOfLicense = () => {
-  const { watch } = useFormContext<ProviderOnboardingFormData>();
+  const [_states, setStates] = useState(() => LDStates);
+
+  const { watch, setValue } = useFormContext<FormData>();
 
   const values = watch('states_of_license') as (keyof typeof states)[];
   const collaborating_physician = watch('collaborating_physician');
 
   return (
-    <fieldset className='fieldset'>
-      <Checkboxes
-        label={
-          <>
-            Which of these states do you have a license in?{' '}
-            <small>(Select all states licensed)</small>
-          </>
-        }
-        name='states_of_license'
-        options={statesOfLicenseOptions}
-      />
+    <StatesContext value={{ states: _states, setStates }}>
+      <fieldset className='fieldset'>
+        <Checkboxes
+          label={
+            <>
+              Which of these states do you have a license in?{' '}
+              <small>(Select all states licensed)</small>
+            </>
+          }
+          name='states_of_license'
+          options={statesOfLicenseOptions}
+          onClick={(event) => {
+            const target = event.target as HTMLInputElement;
+            const fieldName =
+              `${target.dataset.option?.split('(')[1].slice(0, 2)}_license`;
 
-      {values
-        ?.filter((state) => state !== 'Others')
-        ?.map((val) => {
-          const state = states[val];
-          return (
-            <HiddenSection
-              className='m-0 ps-0 pt-1 before:content-none'
-              show={!!val}
-              key={state.name}
-            >
-              <h3 className='relative mx-auto mt-4 mb-6 flex h-px w-full items-center bg-[#B2B2B2]'>
-                <span className='absolute right-1/2 translate-x-1/2 bg-white px-4 font-medium'>
-                  For {state.name}
-                </span>
-              </h3>
+            if (target.checked) {
+              setValue(fieldName, ['license_complete']);
+            } else {
+              setValue(fieldName, undefined);
+            }
+          }}
+        />
 
-              <p className='clamp-[text,xs,sm] mb-2 font-bold'>
-                If you are a {state.abbr} provider and are not yet practicing
-                independently, please let us know your current status regarding
-                collaborating physician agreements for the State of {state.name}
-                .*
-              </p>
+        {values
+          ?.filter((state) => state !== 'Others')
+          ?.map((val) => {
+            const state = states[val];
+            return (
+              <HiddenSection
+                className='m-0 ps-0 pt-1 before:content-none'
+                show={!!val}
+                key={state.name}
+              >
+                <h3 className='relative mx-auto mt-4 mb-6 flex h-px w-full items-center bg-[#B2B2B2]'>
+                  <span className='absolute right-1/2 translate-x-1/2 bg-white px-4 font-medium'>
+                    For {state.name}
+                  </span>
+                </h3>
 
-              <Radios
-                className='sm:grid-cols-1'
-                name={`${state.abbr}_collaborating_physician`}
-                options={collaboratingPhysicianOptions}
-                showHiddenSectionValue={[0, 1]}
-                hiddenSection={
-                  collaborating_physician ===
-                  collaboratingPhysicianOptions[0].value ? (
-                    <Option1 abbr={state.abbr} />
-                  ) : collaborating_physician ===
-                    collaboratingPhysicianOptions[1].value ? (
-                    <FileInput
-                      heading='Please upload your 4NP here'
-                      name={`${state.abbr}_form_4NP_doc`}
-                      accept={acceptForCredentialing}
-                    />
-                  ) : null
-                }
-              />
+                <p className='clamp-[text,xs,sm] mb-2 font-bold'>
+                  If you are a {state.abbr} provider and are not yet practicing
+                  independently, please let us know your current status
+                  regarding collaborating physician agreements for the State of{' '}
+                  {state.name}
+                  .*
+                </p>
 
-              <FileInput
-                heading={`Please upload a copy of your ${state.abbr} State License`}
-                name={`${state.abbr}_state_license_doc`}
-                accept={acceptForCredentialing}
-                containerClassName='mt-4 mb-2'
-              />
-              <Input
-                label={`${state.abbr} State DEA Number`}
-                name={`${state.abbr}_state_dea_number`}
-                containerClassName='mb-4'
-              />
-              <FileInput
-                heading={`Please upload a copy of your ${state.abbr} State DEA`}
-                name={`${state.abbr}_state_dea_doc`}
-                accept={acceptForCredentialing}
-              />
-            </HiddenSection>
-          );
-        })}
+                <Radios
+                  className='sm:grid-cols-1'
+                  name={`${state.abbr}_collaborating_physician`}
+                  options={collaboratingPhysicianOptions}
+                  showHiddenSectionValue={[0, 1]}
+                  hiddenSection={
+                    collaborating_physician ===
+                    collaboratingPhysicianOptions[0].value ? (
+                      <Option1 abbr={state.abbr} />
+                    ) : collaborating_physician ===
+                      collaboratingPhysicianOptions[1].value ? (
+                      <FileInput
+                        heading='Please upload your 4NP here'
+                        name={`${state.abbr}_form_4NP_doc`}
+                        accept={acceptForCredentialing}
+                      />
+                    ) : null
+                  }
+                />
 
-      <StatesOfLicenseSummary />
-    </fieldset>
+                <FileInput
+                  heading={`Please upload a copy of your ${state.abbr} State License`}
+                  name={`${state.abbr}_state_license_doc`}
+                  accept={acceptForCredentialing}
+                  containerClassName='mt-4 mb-2'
+                />
+                <Input
+                  label={`${state.abbr} State DEA Number`}
+                  name={`${state.abbr}_state_dea_number`}
+                  containerClassName='mb-4'
+                />
+                <FileInput
+                  heading={`Please upload a copy of your ${state.abbr} State DEA`}
+                  name={`${state.abbr}_state_dea_doc`}
+                  accept={acceptForCredentialing}
+                />
+              </HiddenSection>
+            );
+          })}
+
+        <StatesOfLicenseSummary />
+      </fieldset>
+    </StatesContext>
   );
 };
 export default StatesOfLicense;

@@ -12,6 +12,7 @@ import type ReactInputMask from 'react-input-mask';
 type Option = {
   label?: string;
   value: string;
+  readonly?: boolean;
 };
 
 export type SVGProps = React.SVGProps<SVGSVGElement>;
@@ -94,15 +95,17 @@ export type MaskProps = BaseFieldProps &
     inputProps?: TextFieldProps;
   };
 
-export type CheckboxProps = SelectInputProps & {
-  labelSuffix?: ReactNode;
-  otherLabel?: string;
-  otherName?: BaseFieldProps['name'];
-};
-
-export type SelectInputProps = SelectProps &
+export type SelectInputProps = SelectProps<string> &
   BaseFieldProps & {
     options: Option[];
+  };
+
+export type CheckboxProps = BaseFieldProps &
+  ComponentProps<'input'> & {
+    options: Option[];
+    labelSuffix?: ReactNode;
+    otherLabel?: string;
+    otherName?: BaseFieldProps['name'];
   };
 
 export type RadioProps = BaseFieldProps & {
@@ -116,4 +119,13 @@ export type ButtonProps = ComponentProps<'button'> & {
   asChild?: boolean;
   hoverClass?: string;
   isLoading?: boolean;
+};
+
+type Status = 'complete' | 'in_process';
+
+export type LicenseDea = {
+  name: string;
+  license?: Record<Status, boolean>;
+  dea?: Record<Status, boolean>;
+  practice_independently?: Record<'yes' | 'no', boolean>;
 };

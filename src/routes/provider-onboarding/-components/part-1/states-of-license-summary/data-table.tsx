@@ -8,52 +8,61 @@ import {
 } from '@/components/ui/table';
 import { flexRender, type Table as TTable } from '@tanstack/react-table';
 import { cn } from '@/lib/utils';
+import AddState from './add-state';
+import type { LicenseDea } from '@/types';
+import { nanoid } from 'nanoid';
 
-interface DataTableProps<T = unknown> {
-  table: TTable<T>;
+interface DataTableProps {
+  table: TTable<LicenseDea>;
   className?: string;
 }
 
-export default function DataTable<T>({ table, className }: DataTableProps<T>) {
+export default function DataTable({ table, className }: DataTableProps) {
   return (
-    <>
-      <Table className={cn(className)}>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow className='hover:bg-transparent' key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+    <Table className={cn('group', className)}>
+      <TableHeader>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <TableRow className='hover:bg-transparent' key={headerGroup.id}>
+            {headerGroup.headers.map((header) => {
+              return (
+                <TableHead
+                  key={header.id + headerGroup.id}
+                  colSpan={header.colSpan}
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </TableHead>
+              );
+            })}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody>
+        {
+          // Show actual data rows
+          table.getRowModel().rows.map((row) => (
+            <TableRow
+              key={row.id}
+              data-state={row.getIsSelected() && 'selected'}
+            >
+              {row.getVisibleCells().map((cell) => {
+                const id = nanoid();
                 return (
-                  <TableHead key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </TableHead>
+                  <TableCell key={id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
                 );
               })}
             </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {
-            // Show actual data rows
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          }
-        </TableBody>
-      </Table>
-    </>
+          ))
+        }
+      </TableBody>
+
+      <AddState />
+    </Table>
   );
 }

@@ -1,31 +1,6 @@
+import type { LicenseDea } from '@/types';
 import { createColumnHelper } from '@tanstack/react-table';
-
-type Status = 'complete' | 'in_process';
-
-type LicenseDea = {
-  name: string;
-  license: Record<Status, boolean>;
-  dea: Record<Status, boolean>;
-  practice_independently: Record<'yes' | 'no', boolean>;
-};
-
-export const data: LicenseDea[] = [
-  {
-    name: 'NY',
-    license: {
-      complete: false,
-      in_process: true,
-    },
-    dea: {
-      complete: false,
-      in_process: true,
-    },
-    practice_independently: {
-      yes: true,
-      no: false,
-    },
-  },
-];
+import Cell from './cell';
 
 const columnHelper = createColumnHelper<LicenseDea>();
 
@@ -37,13 +12,15 @@ export const columns = [
     id: 'license',
     header: 'License',
     columns: [
-      columnHelper.accessor((row) => row.license.complete, {
+      columnHelper.accessor((row) => row.license?.complete, {
+        id: 'license_complete',
         header: 'Complete',
-        cell: (info) => info.getValue(),
+        cell: Cell,
       }),
-      columnHelper.accessor((row) => row.license.in_process, {
+      columnHelper.accessor((row) => row.license?.in_process, {
+        id: 'license_in_process',
         header: 'In Process',
-        cell: (info) => info.getValue(),
+        cell: Cell,
       }),
     ],
   }),
@@ -51,13 +28,15 @@ export const columns = [
     id: 'dea',
     header: 'DEA',
     columns: [
-      columnHelper.accessor((row) => row.dea.complete, {
+      columnHelper.accessor((row) => row.dea?.complete, {
+        id: 'dea_complete',
         header: 'Complete',
-        cell: (info) => info.getValue(),
+        cell: Cell,
       }),
-      columnHelper.accessor((row) => row.dea.in_process, {
+      columnHelper.accessor((row) => row.dea?.in_process, {
+        id: 'dea_in_process',
         header: 'In Process',
-        cell: (info) => info.getValue(),
+        cell: Cell,
       }),
     ],
   }),
@@ -65,13 +44,13 @@ export const columns = [
     id: 'practice_independently',
     header: 'Practice Independently',
     columns: [
-      columnHelper.accessor((row) => row.practice_independently.yes, {
+      columnHelper.accessor((row) => row.practice_independently?.yes, {
         header: 'Yes',
-        cell: (info) => info.getValue(),
+        cell: Cell,
       }),
-      columnHelper.accessor((row) => row.practice_independently.no, {
+      columnHelper.accessor((row) => row.practice_independently?.no, {
         header: 'No',
-        cell: (info) => info.getValue(),
+        cell: Cell,
       }),
     ],
   }),

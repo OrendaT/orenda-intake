@@ -9,9 +9,8 @@ import IdentificationRequirements from './identification-requirements';
 import StatesOfLicense from './states-of-license';
 import HearAbout from './hear-about';
 import PecosAccount from './pecos-account';
-import NPLicenses from './np-licenses';
-import DeaReg from './dea-reg';
 import AdditionalQualifications from './additional-qualifications';
+import Input from '@/components/ui/input';
 
 const Part1 = () => {
   return (
@@ -29,8 +28,6 @@ const Part1 = () => {
       <HearAbout />
       <StatesOfLicense />
       <PecosAccount />
-      <NPLicenses />
-      <DeaReg />
 
       <fieldset className='fieldset'>
         <FileInput
@@ -63,6 +60,13 @@ const Part1 = () => {
           label='Do you have a MSN, a DNP, or both?'
           name='highest_nursing_degree'
           options={[...YES_NO, { value: 'Both' }]}
+          showHiddenSectionValue={0}
+          hiddenSection={
+            <Input
+              label='Please indicate which one'
+              name='highest_nursing_degree_other'
+            />
+          }
         />
 
         <Radios

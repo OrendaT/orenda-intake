@@ -6,10 +6,8 @@ export const patientsAgeGroups = [
 ];
 
 export const mentalHealthIssues = [
-  { value: 'ADHD' },
   { value: 'Adjustment Disorder' },
   { value: 'Anger Management' },
-  { value: 'Anxiety' },
   { value: 'Autism' },
   { value: 'Autism Spectrum Disorders (ASD)' },
   { value: 'Bipolar Disorder' },
@@ -17,7 +15,6 @@ export const mentalHealthIssues = [
   { value: 'CBT' },
   { value: 'Chronic Pain' },
   { value: 'Couples' },
-  { value: 'Depression' },
   { value: 'Eating Disorders' },
   { value: 'Family Trauma' },
   { value: 'Gender Affirming Care' },
@@ -50,16 +47,35 @@ export const mentalHealthIssues = [
   { value: 'Trauma' },
   { value: 'Weight Management' },
   { value: "Women's Health" },
+  { value: 'Depression', readonly: true },
+  { value: 'Anxiety', readonly: true },
+  { value: 'ADHD', readonly: true },
 ];
 
 export const mentalHealthSpecializations = [
-  { value: 'ADHD' },
-  { value: 'Anger Management' },
+  // { value: 'ADHD' },
+  // { value: 'Anger Management' },
+  // { value: 'Couples' },
+  // { value: 'Eating Disorders' },
+  // { value: 'Group Therapy' },
+  // { value: 'LGBTQ+ Care' },
+  // { value: 'Premenstrual Dysphoric Disorder (PDD)' },
+
+  { value: "Men's Health" },
+  { value: 'Weight Management' },
   { value: 'Couples' },
+  { value: 'Genomic Testing' },
   { value: 'Eating Disorders' },
-  { value: 'Group Therapy' },
-  { value: 'LGBTQ+ Care' },
-  { value: 'Premenstrual Dysphoric Disorder (PDD)' },
+  { value: 'Fertility' },
+  { value: "Women's Health" },
+  { value: 'LGBTQ' },
+  { value: 'Gender Affirming Care' },
+  { value: 'Substance Use Disorder (SUD)' },
+  { value: 'Autism' },
+  { value: 'Medication Assisted Treatment' },
+  { value: 'In-Person Visits' },
+  { value: 'Autism Spectrum Disorder' },
+  { value: 'MAT / Suboxone' },
 ];
 
 export const treatmentApproaches = [

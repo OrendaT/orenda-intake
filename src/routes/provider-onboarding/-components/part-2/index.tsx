@@ -37,7 +37,7 @@ const Part2 = () => {
 
       <fieldset className='fieldset'>
         <SelectCheckboxes
-          label='What mental health issues do you provide care for? (select all that apply)'
+          label='Please choose your top 3 specialties'
           name='health_conditions_treated'
           options={mentalHealthIssues}
         />
@@ -45,7 +45,7 @@ const Part2 = () => {
         <hr className='mt-5 border-[#B2B2B2]' />
 
         <SelectCheckboxes
-          label='Please select which of these you would like to specialize in for marketing purposes'
+          label='Which of these conditions are you comfortable/ experienced in handling?'
           name='health_specialties'
           options={mentalHealthSpecializations}
         />

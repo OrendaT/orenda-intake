@@ -19,6 +19,7 @@ const Checkboxes = ({
   otherLabel,
   otherName,
   containerClassName,
+  ...props
 }: CheckboxProps) => {
   const {
     register,
@@ -48,8 +49,10 @@ const Checkboxes = ({
               className={cn('flex items-start gap-2 leading-none')}
             >
               <input
+                {...props}
                 id={id}
                 className={cn('peer size-3.5 flex-shrink-0', size)}
+                data-option={option}
                 type='checkbox'
                 value={option}
                 {...register(name, {

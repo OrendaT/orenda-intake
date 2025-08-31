@@ -6,7 +6,7 @@ function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
     <div
       data-slot='table-container'
-      className='relative mb-4 w-full overflow-x-auto'
+      className='scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-thumb-rounded relative w-full overflow-x-auto pb-4'
     >
       <table
         data-slot='table'
@@ -58,7 +58,7 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
     <tr
       data-slot='table-row'
       className={cn(
-        'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
+        'data-[state=selected]:bg-muted border-b transition-colors',
         className,
       )}
       {...props}

@@ -38,15 +38,16 @@ const SelectCheckboxes = ({
         </h3>
       )}
       <div className='flex flex-wrap items-center gap-4'>
-        {options.map(({ label, value }) => {
+        {options.map(({ label, value, readonly }) => {
           const id = name + value;
           const option = label || value;
           return (
             <label
               key={id}
               className={cn(
-                'has-checked:bg-orenda-purple transition-all duration-150 ease-in-out has-checked:border-orenda-purple flex w-fit cursor-pointer items-center gap-2 rounded-2xl border border-[#E7E7E7] px-3 py-[0.38rem] text-xs leading-none has-checked:text-white',
+                'has-checked:bg-orenda-purple has-checked:border-orenda-purple flex w-fit cursor-pointer items-center gap-2 rounded-2xl border border-[#E7E7E7] px-3 py-[0.38rem] text-xs leading-none transition-all duration-150 ease-in-out has-checked:text-white',
                 className,
+                { 'pointer-events-none': readonly },
               )}
             >
               <input
@@ -64,6 +65,7 @@ const SelectCheckboxes = ({
                 hidden
               />
               {option}
+
               <LuX className='zoom-in animate-in -mt-px hidden size-3.5 peer-checked:inline-block' />
             </label>
           );
