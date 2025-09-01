@@ -6,6 +6,7 @@ const acceptedFormats = [
   'image/jpeg',
   'image/png',
   'image/gif',
+  'image/heic',
   'application/pdf',
 ];
 
