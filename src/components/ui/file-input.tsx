@@ -4,15 +4,11 @@ import { LuUpload } from 'react-icons/lu';
 import RequiredMark from './required-mark';
 import { cn } from '@/lib/utils';
 
-const imageTypes = [
+const acceptedFormats = [
   'image/jpeg',
   'image/png',
   'image/gif',
-  'image/webp',
-  'image/svg+xml',
-  'image/bmp',
-  'image/tiff',
-  'image/x-icon',
+  'application/pdf',
 ];
 
 const getFileTypes = (accept: string) => {
@@ -42,7 +38,7 @@ const FileInput = ({
   disabled,
   required = true,
   errorMsg,
-  accept = 'image/*,application/pdf',
+  accept = acceptedFormats.join(','),
   maxSize = 5,
   validations,
   containerClassName,
@@ -118,15 +114,9 @@ const FileInput = ({
               acceptedFormats: (files) => {
                 const fileType = files[0]?.type;
                 if (fileType && accept) {
-                  let acceptedFiles = accept.split(',');
+                  let accepted = accept.split(',');
 
-                  if (acceptedFiles.includes('image/*')) {
-                    acceptedFiles = [...acceptedFiles, ...imageTypes];
-                  }
-
-                  return (
-                    acceptedFiles.includes(fileType) || 'Invalid file format'
-                  );
+                  return accepted.includes(fileType) || 'Invalid file format';
                 }
               },
               maxSize: (files) => {
