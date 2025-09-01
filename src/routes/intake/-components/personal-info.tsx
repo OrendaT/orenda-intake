@@ -122,16 +122,14 @@ export default function PersonalInfo() {
       <Radios
         label={
           <>
-            Please indicate your race (optional) <small>(Optional)</small>
+            Please indicate your race <small>(Optional)</small>
           </>
         }
         name='race'
         options={ethnicities}
         required={false}
         showHiddenSectionValue='Others'
-        hiddenSection={
-          <Input label='Please specify' name='race_other' />
-        }
+        hiddenSection={<Input label='Please specify' name='race_other' />}
       />
     </fieldset>
   );
