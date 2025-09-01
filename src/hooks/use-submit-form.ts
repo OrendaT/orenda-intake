@@ -31,7 +31,7 @@ const useSubmitForm = ({ form, url }: useSubmitFormProps) => {
 
       if (isAxiosError(error)) {
         const data = error.response?.data;
-        message = data?.message || data.errors.split(',') || error.message;
+        message = data?.message || data.errors.split(', ') || error.message;
       }
       toast.error(message);
     },
