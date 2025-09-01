@@ -73,7 +73,7 @@ const FileInput = ({
             },
             acceptedFormats: (files) => {
               const fileType = files[0]?.type;
-              if (required && accept) {
+              if (fileType && accept) {
                 let acceptedFiles = accept.split(",");
 
                 if (acceptedFiles.includes("image/*")) {
