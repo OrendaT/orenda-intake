@@ -4,7 +4,7 @@ import { FORM_IDS } from '@/lib/constants';
 import { convertToFormData, getLSItem } from '@/lib/utils';
 import type { FormData } from '@/types';
 import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 
 interface useSubmitFormProps {
@@ -27,13 +27,13 @@ const useSubmitForm = ({ form, url }: useSubmitFormProps) => {
     mutationFn: submitForm,
     onError: (error) => {
       console.error('Form submission error:', error);
-      const errorMessage =
-        error instanceof AxiosError
-          ? error.response?.data?.message ||
-            error.message ||
-            `Server responded with ${error.code} code`
-          : 'Something went wrong';
-      toast.error(errorMessage);
+      let message = 'Something went wrong';
+
+      if (isAxiosError(error)) {
+        const data = error.response?.data;
+        message = data?.message || data.errors.split(',') || error.message;
+      }
+      toast.error(message);
     },
   });
 };
