@@ -160,7 +160,7 @@ export const providerOnboardingInitialValues = {
   highest_nursing_degree: '',
   photo_ID: '',
   proof_of_address_ID: '',
-  patient_age_groups: '',
+  patient_age_groups: [],
 
   follow_up_duration: '',
   offers_therapy_session: '',

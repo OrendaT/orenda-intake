@@ -9,6 +9,7 @@ import {
   patientsAgeGroups,
   treatmentApproaches,
 } from './data';
+import Checkboxes from '@/components/ui/checkboxes';
 
 const Part2 = () => {
   return (
@@ -28,7 +29,7 @@ const Part2 = () => {
       </p>
 
       <fieldset className='fieldset'>
-        <Radios
+        <Checkboxes
           label='What age of patients do you see?'
           name='patient_age_groups'
           options={patientsAgeGroups}
