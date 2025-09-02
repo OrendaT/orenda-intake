@@ -58,20 +58,17 @@ const FileInput = ({
         <div className='clamp-[text,xs,sm] mb-3 font-medium'>{subheading}</div>
       )}
 
-      <div
+      <label
         className={cn(
           'clamp-[pt,7,2.31rem] clamp-[pb,8,10] hover:border-orenda-purple/60 rounded-md border-2 border-dashed border-[#D1D1D1] px-5 text-center text-[#333] transition-colors duration-300',
           {
-            'border-error-red': errors?.[name]?.message,
+            'border-error-red hover:border-error-red': errors?.[name]?.message,
           },
         )}
       >
-        <label
-          htmlFor={name}
-          className='mx-auto mb-4 block w-fit rounded-full bg-[#EAEAEA] p-2.5'
-        >
+        <div className='mx-auto mb-4 block w-fit rounded-full bg-[#EAEAEA] p-2.5'>
           <LuUpload className='clamp-[size,4,5]' />
-        </label>
+        </div>
 
         <p className='mb-[0.81rem] text-sm'>{label}</p>
 
@@ -127,7 +124,7 @@ const FileInput = ({
           })}
           accept={accept}
         />
-      </div>
+      </label>
     </div>
   );
 };
