@@ -65,13 +65,23 @@ export const US_STATES = [
   { value: 'Wyoming' },
 ];
 
-
-
-
 export const YES_NO = [{ value: 'Yes' }, { value: 'No' }];
 
-export const acceptForCredentialing =
-  'image/*,application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+export const acceptedFormats = [
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+  'image/heic',
+  'application/pdf',
+];
+
+export const acceptForCredentialing = [
+  ...acceptedFormats,
+  '.doc',
+  '.docx',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+].join(',');
 
 export const ethnicities = [
   { value: 'Asian' },

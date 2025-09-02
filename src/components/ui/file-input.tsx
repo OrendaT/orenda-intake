@@ -3,14 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { LuUpload } from 'react-icons/lu';
 import RequiredMark from './required-mark';
 import { cn } from '@/lib/utils';
-
-const acceptedFormats = [
-  'image/jpeg',
-  'image/png',
-  'image/gif',
-  'image/heic',
-  'application/pdf',
-];
+import { acceptedFormats } from '@/lib/constants';
 
 const getFileTypes = (accept: string) => {
   const types = accept.split(',');
