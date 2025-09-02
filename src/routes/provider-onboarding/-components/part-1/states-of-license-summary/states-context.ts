@@ -16,7 +16,7 @@ export const useStates = () => {
   const context = useContext(StatesContext);
   if (!context) {
     throw new Error(
-      'useStates must be used within the license and dea fieldset',
+      'useStates must be used within the license and dea fieldset.',
     );
   }
   return context;
