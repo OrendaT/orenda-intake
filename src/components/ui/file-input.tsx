@@ -60,7 +60,7 @@ const FileInput = ({
 
       <label
         className={cn(
-          'clamp-[pt,7,2.31rem] clamp-[pb,8,10] hover:border-orenda-purple/60 block rounded-md border-2 border-dashed border-[#D1D1D1] px-5 text-center text-[#333] transition-colors duration-300',
+          'clamp-[pt,7,2.31rem] clamp-[pb,8,10] hover:border-orenda-purple/60 block cursor-pointer rounded-md border-2 border-dashed border-[#D1D1D1] px-5 text-center text-[#333] transition-colors duration-300',
           {
             'border-error-red hover:border-error-red': errors?.[name]?.message,
           },
@@ -70,7 +70,7 @@ const FileInput = ({
           <LuUpload className='clamp-[size,4,5]' />
         </div>
 
-        <p className='mb-[0.81rem] text-sm'>{label}</p>
+        {label && <p className='mb-[0.81rem] text-sm'>{label}</p>}
 
         {file && (
           <p className='text-orenda-green mb-4 truncate text-sm font-medium'>
