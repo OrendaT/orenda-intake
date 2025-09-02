@@ -24,6 +24,7 @@ import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import { PolicyDialog } from '@/components';
 import SuccessModal from './-components/success-modal';
+import { useState } from 'react';
 
 export const Route = createFileRoute('/provider-onboarding')({
   component: ProviderOnboardingForm,
@@ -38,8 +39,7 @@ export const Route = createFileRoute('/provider-onboarding')({
   }),
   // beforeLoad: (ctx: { search: { code?: string } }) => {
   //   if (!ctx.search?.code) {
-      
-      
+
   //     throw new Error('You shall not pass!');
   //   }
   // },
@@ -58,13 +58,17 @@ function ProviderOnboardingForm() {
     watch,
     formState: { errors, isSubmitting },
   } = methods;
-  const { mutateAsync: submitForm, isSuccess } = useSubmitForm({
+  const { mutateAsync: submitForm } = useSubmitForm({
     form: 'provider_onboarding',
     url: 'providers',
   });
   const { resetSignature } = useSignature();
+  const [success, setSuccess] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
+    // simulate successful submission
+    setSuccess(true);
+    return;
     // Parse the form data to ensure it matches the expected structure
     data = parseOnboardingFormData(data);
 
@@ -208,7 +212,7 @@ function ProviderOnboardingForm() {
         </div>
       </main>
 
-      <SuccessModal open={isSuccess} />
+      <SuccessModal open={success} />
     </>
   );
 }
