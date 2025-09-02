@@ -5,6 +5,8 @@ export const Route = createFileRoute('/')({
 });
 
 function Home() {
+  const env = import.meta.env.VITE_ENV;
+
   return (
     <main className='padding-inline relative grid min-h-dvh content-center justify-items-center gap-5 py-20'>
       <h1 className='page-heading mb-0'>Welcome to Orenda Forms</h1>
@@ -14,7 +16,11 @@ function Home() {
       <div className='flex flex-wrap items-center justify-center gap-x-4 gap-y-2 *:underline-offset-2 *:transition-all *:duration-300 *:hover:font-medium *:hover:underline'>
         <Link to='/intake'>Intake Form</Link>
         <Link to='/credit-card'>Credit Card Form</Link>
-        <Link to='/provider-onboarding'>Provider Onboarding Form</Link>
+        {env === 'development' ? (
+          <Link to='/provider-onboarding'>Provider Onboarding</Link>
+        ) : (
+          <p>Provider Onboarding</p>
+        )}
       </div>
 
       <footer className='absolute bottom-12'>

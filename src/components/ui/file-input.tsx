@@ -62,7 +62,7 @@ const FileInput = ({
       )}
 
       {subheading && (
-        <p className='clamp-[text,xs,sm] mb-3 font-medium'>{subheading}</p>
+        <div className='clamp-[text,xs,sm] mb-3 font-medium'>{subheading}</div>
       )}
 
       <div

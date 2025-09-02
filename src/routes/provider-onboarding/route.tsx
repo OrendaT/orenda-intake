@@ -36,6 +36,13 @@ export const Route = createFileRoute('/provider-onboarding')({
       },
     ],
   }),
+  // beforeLoad: (ctx: { search: { code?: string } }) => {
+  //   if (!ctx.search?.code) {
+      
+      
+  //     throw new Error('You shall not pass!');
+  //   }
+  // },
 });
 
 function ProviderOnboardingForm() {

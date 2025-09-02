@@ -18,7 +18,7 @@ type Option = {
 export type SVGProps = React.SVGProps<SVGSVGElement>;
 
 // Intake Form
-type OptionalIntakeFields = 'relationship_status_other';
+type OptionalIntakeFields = 'relationship_status_other' | 'race_other';
 export type IntakeFormData = Omit<
   typeof intakeInitialValues,
   OptionalIntakeFields

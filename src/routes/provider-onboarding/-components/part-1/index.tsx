@@ -1,16 +1,15 @@
-import Radios from '@/components/ui/radios';
 import Address from './address';
 import Biography from './biography';
 import CAQH from './caqh';
 import PersonalInfo from './personal-info';
-import { acceptForCredentialing, YES_NO } from '@/lib/constants';
+import { acceptForCredentialing } from '@/lib/constants';
 import FileInput from '@/components/ui/file-input';
 import IdentificationRequirements from './identification-requirements';
 import StatesOfLicense from './states-of-license';
 import HearAbout from './hear-about';
 import PecosAccount from './pecos-account';
 import AdditionalQualifications from './additional-qualifications';
-import Input from '@/components/ui/input';
+import MSNDNPCOI from './msn-dnp-coi';
 
 const Part1 = () => {
   return (
@@ -55,32 +54,7 @@ const Part1 = () => {
         />
       </fieldset>
 
-      <fieldset className='fieldset'>
-        <Radios
-          label='Do you have a MSN, a DNP, or both?'
-          name='highest_nursing_degree'
-          options={[...YES_NO, { value: 'Both' }]}
-          showHiddenSectionValue={0}
-          hiddenSection={
-            <Input
-              label='Please indicate which one'
-              name='highest_nursing_degree_other'
-            />
-          }
-        />
-
-        <Radios
-          label='Do you have COI coverage?'
-          name='coi_coverage'
-          options={YES_NO}
-          showHiddenSectionValue={0}
-          required={false}
-          hiddenSection={
-            <FileInput heading='Please upload' name='coi_coverage_doc' />
-          }
-        />
-      </fieldset>
-
+      <MSNDNPCOI />
       <IdentificationRequirements />
     </div>
   );

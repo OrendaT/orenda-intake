@@ -72,6 +72,9 @@ export const intakeInitialValues = {
   photo_ID: '',
 
   insurance_provider: '',
+
+  race: '',
+  race_other: '',
 };
 
 export const creditCardInitialValues = {

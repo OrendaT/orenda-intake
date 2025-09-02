@@ -144,6 +144,10 @@ export const convertBase64ToFile = <T>(obj: Record<string, unknown>): T => {
 
 export const parseIntakeFormData = (data: IntakeFormData) => {
   // replace actual value with other
+  if (data.race_other) {
+    data.race = data.race_other;
+    delete data.race_other;
+  }
   if (data.relationship_status_other) {
     data.relationship_status = data.relationship_status_other;
     delete data.relationship_status_other;

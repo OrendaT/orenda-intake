@@ -2,13 +2,13 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import { flexRender, type Table as TTable } from '@tanstack/react-table';
 import { cn } from '@/lib/utils';
-import AddState from './add-state';
 import type { LicenseDea } from '@/types';
 import { nanoid } from 'nanoid';
 
@@ -25,17 +25,19 @@ export default function DataTable({ table, className }: DataTableProps) {
           <TableRow className='hover:bg-transparent' key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
               return (
-                <TableHead
-                  key={header.id + headerGroup.id}
-                  colSpan={header.colSpan}
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </TableHead>
+                !header.id.includes('table') && (
+                  <TableHead
+                    key={header.id + headerGroup.id}
+                    colSpan={header.colSpan}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </TableHead>
+                )
               );
             })}
           </TableRow>
@@ -61,8 +63,29 @@ export default function DataTable({ table, className }: DataTableProps) {
           ))
         }
       </TableBody>
-
-      <AddState />
+      <TableFooter>
+        {table.getFooterGroups().map((footerGroup) => (
+          <TableRow className='hover:bg-transparent' key={footerGroup.id}>
+            {footerGroup.headers.map((header) => {
+              return (
+                header.id.includes('table') && (
+                  <TableHead
+                    key={header.id + footerGroup.id}
+                    colSpan={header.colSpan}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.footer,
+                          header.getContext(),
+                        )}
+                  </TableHead>
+                )
+              );
+            })}
+          </TableRow>
+        ))}
+      </TableFooter>
     </Table>
   );
 }
