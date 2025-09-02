@@ -68,7 +68,11 @@ const AddState = () => {
   const { setStates } = useStates();
 
   const submit = () => {
-    if (state) setStates((prev) => [...prev, { name: state }]);
+    if (state)
+      setStates((prev) => {
+        const hasState = prev.find((s) => s.name === state);
+        return hasState ? prev : [...prev, { name: state }];
+      });
     setOpen(false);
   };
 
