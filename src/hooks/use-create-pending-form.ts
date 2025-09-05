@@ -2,14 +2,14 @@ import axios from '@/lib/api/axios';
 import type { PENDING_FORM_EPS } from '@/lib/api/endpoints';
 import { FORM_IDS } from '@/lib/constants';
 import { convertToFormData, getLSItem, setLSItem } from '@/lib/utils';
-import type { CreditCardFormData, IntakeFormData } from '@/types';
+import type { FormData } from '@/types';
 import { isAxiosError } from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
 interface UseCreatePendingFormProps {
   formID: (typeof FORM_IDS)[keyof typeof FORM_IDS];
   isPendingForm: boolean;
-  data: Partial<IntakeFormData | CreditCardFormData>;
+  data: Partial<FormData>;
   url: (typeof PENDING_FORM_EPS)[keyof typeof PENDING_FORM_EPS];
 }
 

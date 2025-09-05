@@ -1,4 +1,5 @@
 import DatePicker from '@/components/ui/date-picker';
+import IMask from '@/components/ui/imask';
 import Input from '@/components/ui/input';
 
 const PersonalInfo = () => {
@@ -14,7 +15,12 @@ const PersonalInfo = () => {
         maxDate={new Date()}
       />
       <Input name='email' label='Email Address' type='email' />
-      <Input name='social_security_number' label='Social Security Number' />
+      <IMask
+        name='social_security_number'
+        label='Social Security Number'
+        mask={'999999999'}
+        maskChar=''
+      />
     </fieldset>
   );
 };

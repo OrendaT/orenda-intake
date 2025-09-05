@@ -13,9 +13,7 @@ const Input = ({
   disabled,
   variant = 'standard',
   errorMsg = 'This field is required',
-  placeholder,
   validations,
-  className,
   containerClassName,
   registerOptions,
   ...inputProps
@@ -59,8 +57,6 @@ const Input = ({
             error={!!error}
             variant={variant}
             fullWidth
-            placeholder={placeholder}
-            className={className}
             {...inputProps}
           />
         )}

@@ -3,7 +3,7 @@ import Checkboxes from '@/components/ui/checkboxes';
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
-import { acceptForCredentialing } from '@/lib/constants';
+import { acceptForCredentialing, YES_NO } from '@/lib/constants';
 import type { ProviderOnboardingFormData as FormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 import StatesOfLicenseSummary from './states-of-license-summary';
@@ -32,32 +32,40 @@ const collaboratingPhysicianOptions = [
   },
 ];
 
-const Option1 = ({
+const CPHS = ({
   abbr,
 }: {
   abbr: (typeof states)[Exclude<keyof typeof states, 'Others'>]['abbr'];
 }) => (
-  <div className='space-y-4'>
+  <div className='!space-y-4'>
     <Input
       label={`${abbr} Collaborating Physician Name`}
-      name={`states_of_license_${abbr}_collaborating_physician_name`}
+      name={`states_of_license__${abbr}__collaborating_physician_name`}
     />
-    <Input
+    <IMask
       label={`${abbr} Collaborating Physician NPI: (put n/a if you do not know)`}
-      name={`states_of_license_${abbr}_collaborating_physician_npi`}
+      name={`states_of_license__${abbr}__collaborating_physician_npi`}
+      mask={'9999999999'}
+      maskChar=''
     />
     <Input
       label={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
-      name={`states_of_license_${abbr}_collaborating_physician_email`}
+      name={`states_of_license__${abbr}__collaborating_physician_email`}
       title={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
       type='email'
     />
+
     <IMask
       label={`${abbr} Collaborating Physician Phone Number`}
-      name={`states_of_license_${abbr}_collaborating_physician_phone`}
+      name={`states_of_license__${abbr}__collaborating_physician_phone`}
       mask='(999) 999-9999'
       title={`${abbr} Collaborating Physician Phone Number`}
       type='tel'
+    />
+    <FileInput
+      heading='Please upload your 4NP here'
+      name={`states_of_license__${abbr}__form_4NP_doc`}
+      accept={acceptForCredentialing}
     />
   </div>
 );
@@ -85,7 +93,7 @@ const StatesOfLicense = () => {
             const target = event.target as HTMLInputElement;
             const abbr = target.dataset.option?.split('(')[1].slice(0, 2);
             const fieldName =
-              `states_of_license_summary_${abbr}_license` as keyof FormData;
+              `states_of_license_summary__${abbr}__license` as keyof FormData;
 
             if (target.checked) {
               setValue(fieldName, 'License Complete');
@@ -97,9 +105,6 @@ const StatesOfLicense = () => {
 
         {values?.map((val) => {
           const { name, abbr } = states[val];
-          const collaborating_physician = watch(
-            `states_of_license_${abbr}_collaborating_physician`,
-          );
 
           return (
             <HiddenSection
@@ -122,39 +127,43 @@ const StatesOfLicense = () => {
 
               <Radios
                 className='sm:grid-cols-1'
-                name={`states_of_license_${abbr}_collaborating_physician`}
+                name={`states_of_license__${abbr}__collaborating_physician`}
                 options={collaboratingPhysicianOptions}
-                showHiddenSectionValue={[0, 1]}
-                hiddenSection={
-                  collaborating_physician ===
-                  collaboratingPhysicianOptions[0].value ? (
-                    <Option1 abbr={abbr} />
-                  ) : collaborating_physician ===
-                    collaboratingPhysicianOptions[1].value ? (
-                    <FileInput
-                      heading='Please upload your 4NP here'
-                      name={`states_of_license_${abbr}_form_4NP_doc`}
-                      accept={acceptForCredentialing}
-                    />
-                  ) : null
-                }
+                showHiddenSectionValue={1}
+                hiddenSection={<CPHS abbr={abbr} />}
               />
 
               <FileInput
                 heading={`Please upload a copy of your ${abbr} State License`}
-                name={`states_of_license_${abbr}_state_license_doc`}
+                name={`states_of_license__${abbr}__state_license_doc`}
                 accept={acceptForCredentialing}
-                containerClassName='mt-4 mb-2'
+                containerClassName='my-4'
               />
-              <Input
-                label={`${abbr} State DEA Number`}
-                name={`states_of_license_${abbr}_DEA_state_number`}
-                containerClassName='mb-4'
-              />
-              <FileInput
-                heading={`Please upload a copy of your ${abbr} State DEA`}
-                name={`states_of_license_${abbr}_DEA_state_doc`}
-                accept={acceptForCredentialing}
+
+              <Radios
+                label={`Please do you have a DEA in ${abbr}?`}
+                name='states_of_license__DE__DEA_state_doc'
+                options={YES_NO}
+                showHiddenSectionValue={0}
+                hiddenSection={
+                  <div className='!space-y-4'>
+                    <Input
+                      label={`${abbr} State DEA Number`}
+                      name={`states_of_license__${abbr}__DEA_state_number`}
+                      containerClassName='mb-4'
+                      slotProps={{
+                        htmlInput: {
+                          maxLength: 9,
+                        },
+                      }}
+                    />
+                    <FileInput
+                      heading={`Please upload a copy of your ${abbr} State DEA`}
+                      name={`states_of_license__${abbr}__DEA_state_doc`}
+                      accept={acceptForCredentialing}
+                    />
+                  </div>
+                }
               />
             </HiddenSection>
           );

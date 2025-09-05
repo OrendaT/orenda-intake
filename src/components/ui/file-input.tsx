@@ -34,8 +34,10 @@ const FileInput = ({
   errorMsg,
   accept = acceptedFormats.join(','),
   maxSize = 5,
+  maxLength = 3,
   validations,
   containerClassName,
+  ...rest
 }: FileInputProps) => {
   const {
     register,
@@ -43,7 +45,7 @@ const FileInput = ({
     formState: { errors },
   } = useFormContext();
 
-  const file = watch(name)?.[0];
+  const files = watch(name);
 
   return (
     <div className={cn('mt-2', containerClassName)}>
@@ -72,10 +74,14 @@ const FileInput = ({
 
         {label && <p className='mb-[0.81rem] text-sm'>{label}</p>}
 
-        {file && (
-          <p className='text-orenda-green mb-4 truncate text-sm font-medium'>
-            {file?.name}
-          </p>
+        {!!files.length && (
+          <ul className='mb-4 space-y-0.5'>
+            {[...files].map((file: File) => (
+              <li className='text-orenda-green truncate text-sm font-medium'>
+                {file?.name}
+              </li>
+            ))}
+          </ul>
         )}
 
         <small className='clamp-[text,xs,sm] text-[#626262]'>
@@ -102,27 +108,45 @@ const FileInput = ({
                 if (required)
                   return value.length > 0 || 'This field is required';
               },
-              acceptedFormats: (files) => {
-                const fileType = files[0]?.type;
-                if (fileType && accept) {
-                  const accepted = accept.split(',');
 
-                  return accepted.includes(fileType) || 'Invalid file format';
+              acceptedFormats: (files) => {
+                if (!files?.length || !accept) return true;
+
+                const accepted = accept.split(',').map((f) => f.trim());
+
+                for (const file of files) {
+                  if (!accepted.includes(file.type)) {
+                    return 'Invalid file format';
+                  }
                 }
+
+                return true;
               },
+
               maxSize: (files) => {
-                const fileSize = files[0]?.size;
-                if (fileSize && maxSize) {
-                  return (
-                    fileSize <= maxSize * 1024 * 1024 ||
-                    `File size must be less than ${maxSize}MB`
-                  );
+                if (!files?.length || !maxSize) return true;
+
+                for (const file of files) {
+                  if (file.size > maxSize * 1024 * 1024) {
+                    return `File size must be less than ${maxSize}MB`;
+                  }
                 }
+
+                return true;
               },
+
+              maxLength: (files) => {
+                if (rest.multiple && files?.length > maxLength) {
+                  return `You can upload a maximum of ${maxLength} files`;
+                }
+                return true;
+              },
+
               ...validations,
             },
           })}
           accept={accept}
+          {...rest}
         />
       </label>
     </div>

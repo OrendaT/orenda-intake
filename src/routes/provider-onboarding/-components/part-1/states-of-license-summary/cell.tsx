@@ -16,7 +16,7 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
   const columnValue = _column.id;
 
   const fieldName =
-    `states_of_license_summary_${row}_${parentColumn}` as keyof FormData;
+    `states_of_license_summary__${row}__${parentColumn}` as keyof FormData;
 
   const value = watch(fieldName);
   const selectedStates = watch('states_of_license') ?? [];

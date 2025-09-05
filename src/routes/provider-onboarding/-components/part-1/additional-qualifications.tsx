@@ -11,6 +11,7 @@ const HiddenSection = () => (
       heading='Copy of Additional qualification/certifications:'
       name='additional_qualifications_doc'
       accept={acceptForCredentialing}
+      multiple
     />
   </div>
 );

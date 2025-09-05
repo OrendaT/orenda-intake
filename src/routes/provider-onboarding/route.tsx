@@ -6,6 +6,7 @@ import Button from '@/components/ui/custom-button';
 import {
   checkErrors,
   getItem,
+  isValidEmail,
   parseOnboardingFormData,
   removeItem,
   removeLSItem,
@@ -83,11 +84,19 @@ function ProviderOnboardingForm() {
 
   useAutoSave({ key: FORMS.provider_onboarding, value: formState });
 
+  const { name, email, date_of_birth, state } = formState;
+
   useCreatePendingForm({
     formID: 'provider_onboarding_id',
-    isPendingForm: false,
-    data: {},
-    url: 'patients/pending-patient',
+    isPendingForm: Boolean(
+      name?.length > 1 && isValidEmail(email) && date_of_birth && state,
+    ),
+    data: {
+      name,
+      email,
+      date_of_birth,
+    },
+    url: 'providers/pending-provider',
   });
 
   const acceptedTerms =

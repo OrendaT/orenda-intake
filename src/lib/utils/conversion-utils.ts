@@ -50,8 +50,8 @@ export const base64ToFile = (base64Data: string, fileName: string) => {
 
 export const convertFileListsToFiles = <T>(obj: Record<string, unknown>): T => {
   Object.entries(obj).forEach(([key, value]) => {
-    if (value instanceof FileList && value.length === 1) {
-      obj[key] = value[0];
+    if (value instanceof FileList) {
+      obj[key] = value.length === 1 ? value[0] : [...value];
     }
   });
   return obj as T;

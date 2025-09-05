@@ -40,12 +40,12 @@ export type BaseFieldProps = {
 
 export type InputProps = BaseFieldProps & TextFieldProps;
 
-export type FileInputProps = BaseFieldProps & {
-  heading?: string | ReactNode;
-  subheading?: string | ReactNode;
-  maxSize?: 5;
-  accept?: ComponentProps<'input'>['accept'];
-};
+export type FileInputProps = BaseFieldProps &
+  ComponentProps<'input'> & {
+    heading?: string | ReactNode;
+    subheading?: string | ReactNode;
+    maxSize?: number;
+  };
 
 export type TDatePickerProps = BaseFieldProps & DatePickerProps;
 

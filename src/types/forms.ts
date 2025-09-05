@@ -101,7 +101,6 @@ export type CreditCardFormData = {
 
 export type StateCode = (typeof US_STATES)[number]['code'];
 type LicenseField =
-  | 'state_of_license_details'
   | 'collaborating_physician'
   | 'collaborating_physician_name'
   | 'collaborating_physician_npi'
@@ -188,9 +187,9 @@ export type ProviderOnboardingFormData = {
 
   states_of_license: string[];
 } & {
-  [K in `states_of_license_${StateCode}_${LicenseField}`]?: string;
+  [K in `states_of_license__${StateCode}__${LicenseField}`]?: string;
 } & {
-  [K in `states_of_license_summary_${StateCode}_${LicenseSummaryField}`]?: string;
+  [K in `states_of_license_summary__${StateCode}__${LicenseSummaryField}`]?: string;
 };
 export type FormData =
   | IntakeFormData
