@@ -74,7 +74,7 @@ const FileInput = ({
 
         {label && <p className='mb-[0.81rem] text-sm'>{label}</p>}
 
-        {!!files.length && (
+        {!!files?.length && (
           <ul className='mb-4 space-y-0.5'>
             {[...files].map((file: File) => (
               <li className='text-orenda-green truncate text-sm font-medium'>
