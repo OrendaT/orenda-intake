@@ -102,7 +102,7 @@ type ShowHiddenValue = string | number | (string | number)[] | boolean | null;
 function shouldShowHiddenSection(
   showHiddenSectionValue: ShowHiddenValue,
   selectedValue: unknown,
-  options: { value: string }[],
+  options: readonly { value: string }[],
 ): boolean {
   if (showHiddenSectionValue === null || showHiddenSectionValue === false) {
     return false;

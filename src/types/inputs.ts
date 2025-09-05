@@ -72,7 +72,7 @@ export type RadioProps = BaseFieldProps & {
   labelSuffix?: ReactNode;
   showHiddenSectionValue?: number | string | boolean | string[] | number[];
   hiddenSection?: ReactNode;
-  options: Option[];
+  options: readonly Option[];
 };
 
 export type ButtonProps = ComponentProps<'button'> & {
