@@ -155,7 +155,7 @@ export const providerOnboardingInitialValues: ProviderOnboardingFormData = {
   proof_of_address_ID: '',
   patient_age_groups: [],
 
-  health_conditions: [],
+  health_conditions: ['Depression', 'Anxiety', 'ADHD'],
   health_specialties: [],
 
   speaks_additional_lang: '',
