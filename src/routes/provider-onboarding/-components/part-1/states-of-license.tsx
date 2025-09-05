@@ -85,7 +85,7 @@ const StatesOfLicense = () => {
             const target = event.target as HTMLInputElement;
             const abbr = target.dataset.option?.split('(')[1].slice(0, 2);
             const fieldName =
-              `states_of_license_summary[${abbr}_license]` as keyof FormData;
+              `states_of_license_summary_${abbr}_license` as keyof FormData;
 
             if (target.checked) {
               setValue(fieldName, 'License Complete');
