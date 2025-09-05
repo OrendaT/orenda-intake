@@ -1,8 +1,13 @@
-import type { LicenseDea } from '@/types';
+import type {
+  CreditCardFormData,
+  IntakeFormData,
+  LicenseDea,
+  ProviderOnboardingFormData,
+} from '@/types';
 
 export const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-export const intakeInitialValues = {
+export const intakeInitialValues: IntakeFormData = {
   first_name: '',
   last_name: '',
   preferred_name: '',
@@ -77,7 +82,7 @@ export const intakeInitialValues = {
   race_other: '',
 };
 
-export const creditCardInitialValues = {
+export const creditCardInitialValues: CreditCardFormData = {
   patient_name: '',
   date_of_birth: '',
   cardholder_name: '',
@@ -96,11 +101,11 @@ export const creditCardInitialValues = {
   signature_date: new Date(),
 };
 
-export const providerOnboardingInitialValues = {
+export const providerOnboardingInitialValues: ProviderOnboardingFormData = {
   name: '',
   email: '',
+  all_names_used: '',
   date_of_birth: '',
-  phone: '',
   social_security_number: '',
   street_address: '',
   address_two: '',
@@ -121,70 +126,54 @@ export const providerOnboardingInitialValues = {
   referral_source: '',
   referral_source_detail: '',
 
-  states_of_license: [],
-  primary_state_of_license_details: '',
-
-  collaborating_physician: '',
-  collaborating_physician_name: '',
-  collaborating_physician_npi: '',
-  collaborating_physician_email: '',
-
-  form_4NP_doc: '',
   consent_create_pecos_account: '',
-
   PECOS_username: '',
   PECOS_password: '',
   NPPES_username: '',
   NPPES_password: '',
   PTAN_medicare_ID: '',
 
-  primary_state_license_doc: '',
-  primary_state_dea_number: '',
-  primary_state_dea_doc: '',
-
-  has_additional_np_licenses: '',
-  additional_np_licenses: [],
-  additional_state_license_doc: '',
-  has_additional_dea_registrations: '',
-  additional_dea_reg: '',
-  additional_dea_doc: '',
-
   pmhnp_bc_doc: '',
   has_additional_qualifications: '',
   additional_qualifications: [],
+  additional_langs: [],
   additional_qualifications_doc: '',
 
   malpractice_insurance_doc: '',
   resume_cv_doc: '',
 
   highest_nursing_degree: '',
+  highest_nursing_degree_other: '',
+  highest_nursing_degree_start_date: '',
+  highest_nursing_degree_end_date: '',
+  highest_nursing_degree_school: '',
+
+  COI_coverage: '',
+  COI_coverage_doc: '',
+
   photo_ID: '',
   proof_of_address_ID: '',
   patient_age_groups: [],
 
-  follow_up_duration: '',
-  offers_therapy_session: '',
-  therapy_session: [],
-  health_conditions_treated: ['Depression', 'Anxiety', 'ADHD'],
+  health_conditions: [],
   health_specialties: [],
+
   speaks_additional_lang: '',
-  additional_langs: [],
+
   ketamine_assisted_therapy: '',
   ketamine_assisted_therapy_more_info: '',
 
   race_ethnicity: '',
+  race_ethnicity_other: '',
+
   therapy_preference_response: '',
   therapy_policy_acknowledgement: '',
 
   identity_details: '',
-
   policy_agreement: '',
   policy_agreement_signature: '',
 
-  // custom fields
-  race_ethnicity_other: '',
-  additional_langs_other: '',
-  therapy_session_other: '',
+  states_of_license: [],
 };
 
 export const LDStates: LicenseDea[] = [

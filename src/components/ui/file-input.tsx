@@ -105,7 +105,7 @@ const FileInput = ({
               acceptedFormats: (files) => {
                 const fileType = files[0]?.type;
                 if (fileType && accept) {
-                  let accepted = accept.split(',');
+                  const accepted = accept.split(',');
 
                   return accepted.includes(fileType) || 'Invalid file format';
                 }

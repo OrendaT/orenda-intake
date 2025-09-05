@@ -4,6 +4,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@/components/ui/custom-button';
 import {
+  checkErrors,
   getItem,
   parseOnboardingFormData,
   removeItem,
@@ -24,7 +25,6 @@ import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import { PolicyDialog } from '@/components';
 import SuccessModal from './-components/success-modal';
-import { useState } from 'react';
 
 export const Route = createFileRoute('/provider-onboarding')({
   component: ProviderOnboardingForm,
@@ -54,23 +54,20 @@ function ProviderOnboardingForm() {
     handleSubmit,
     register,
     reset,
-    setFocus,
     watch,
     formState: { errors, isSubmitting },
   } = methods;
-  const { mutateAsync: submitForm } = useSubmitForm({
+  const { mutateAsync: submitForm, isSuccess } = useSubmitForm({
     form: 'provider_onboarding',
     url: 'providers',
   });
   const { resetSignature } = useSignature();
-  const [success, setSuccess] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
-    // simulate successful submission
-    setSuccess(true);
-    return;
     // Parse the form data to ensure it matches the expected structure
     data = parseOnboardingFormData(data);
+
+    console.log(data);
 
     const res = await submitForm(data);
 
@@ -179,40 +176,18 @@ function ProviderOnboardingForm() {
               <Button
                 disabled={!acceptedTerms}
                 isLoading={isSubmitting}
+                onClick={() => checkErrors(errors)}
                 type='submit'
                 className='mx-auto mt-12'
               >
                 {isSubmitting ? 'Submitting' : 'Submit Form'}
               </Button>
-
-              {!!Object.entries(errors)?.length && (
-                <>
-                  <p className='error !mt-4 mb-2 text-center !text-sm font-semibold'>
-                    Please ensure all required fields are filled out.
-                  </p>
-                  <ul className='mx-auto w-fit text-center text-sm font-medium'>
-                    {Object.entries(errors)
-                      .slice(0, 3)
-                      .map(([name, { message }]) => (
-                        <li
-                          className='cursor-pointer text-red-900'
-                          key={name}
-                          onClick={() =>
-                            setFocus(name as keyof ProviderOnboardingFormData)
-                          }
-                        >
-                          {name}: {message}
-                        </li>
-                      ))}
-                  </ul>
-                </>
-              )}
             </form>
           </FormProvider>
         </div>
       </main>
 
-      <SuccessModal open={success} />
+      <SuccessModal open={isSuccess} />
     </>
   );
 }

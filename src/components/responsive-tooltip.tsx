@@ -3,13 +3,13 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
 
 interface ResponsiveTooltipProps {
   trigger?: string;
@@ -29,15 +29,15 @@ const ResponsiveTooltip = ({
       <TooltipProvider>
         <Tooltip delayDuration={300}>
           <TooltipTrigger
-            type="button"
+            type='button'
             className={cn(
-              "ml-2 hidden size-4 shrink-0 place-items-center rounded-full border-2 border-zinc-700 text-xs leading-none md:grid",
-              className
+              'ml-2 hidden size-4 shrink-0 place-items-center rounded-full border-2 border-zinc-700 text-xs leading-none md:grid',
+              className,
             )}
           >
-            {trigger || "?"}
+            {trigger || '?'}
           </TooltipTrigger>
-          <TooltipContent className={cn("max-w-[40ch]", contentClassName)}>
+          <TooltipContent className={cn('max-w-[40ch]', contentClassName)}>
             {content}
           </TooltipContent>
         </Tooltip>
@@ -45,18 +45,18 @@ const ResponsiveTooltip = ({
 
       <Popover>
         <PopoverTrigger
-          type="button"
+          type='button'
           className={cn(
-            "ml-2 grid size-4 shrink-0 place-items-center rounded-full border-2 border-zinc-700 text-xs leading-none md:hidden",
-            className
+            'ml-2 grid size-4 shrink-0 place-items-center rounded-full border-2 border-zinc-700 text-xs leading-none md:hidden',
+            className,
           )}
         >
           ?
         </PopoverTrigger>
         <PopoverContent
           className={cn(
-            "max-w-[40ch] bg-black/90 p-2 text-xs text-white",
-            contentClassName
+            'max-w-[40ch] bg-black/90 p-2 text-xs text-white',
+            contentClassName,
           )}
         >
           {content}

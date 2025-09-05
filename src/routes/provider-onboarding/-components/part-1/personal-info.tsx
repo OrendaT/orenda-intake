@@ -7,7 +7,7 @@ const PersonalInfo = () => {
       <h3 className='heading'>Personal Information</h3>
 
       <Input name='name' label='Full Name' />
-      <Input name='all_names' label='All Names Ever Used' />
+      <Input name='all_names_used' label='All Names Ever Used' />
       <DatePicker
         name='date_of_birth'
         label='Date of Birth'

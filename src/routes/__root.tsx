@@ -21,7 +21,7 @@ export const Route = createRootRoute({
             <Outlet />
           </SignatureProvider>
 
-          <Toaster />
+          <Toaster richColors />
         </ThemeProvider>
         <TanStackRouterDevtools />
       </QueryClientProvider>

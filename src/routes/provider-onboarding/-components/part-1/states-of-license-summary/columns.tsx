@@ -17,42 +17,44 @@ export const columns = [
         header: 'License',
         columns: [
           columnHelper.accessor((row) => row.license?.complete, {
-            id: 'license_complete',
+            id: 'License Complete',
             header: 'Complete',
             cell: Cell,
           }),
           columnHelper.accessor((row) => row.license?.in_process, {
-            id: 'license_in_process',
+            id: 'License  In Process',
             header: 'In Process',
             cell: Cell,
           }),
         ],
       }),
       columnHelper.group({
-        id: 'dea',
+        id: 'DEA',
         header: 'DEA',
         columns: [
           columnHelper.accessor((row) => row.dea?.complete, {
-            id: 'dea_complete',
+            id: 'DEA complete',
             header: 'Complete',
             cell: Cell,
           }),
           columnHelper.accessor((row) => row.dea?.in_process, {
-            id: 'dea_in_process',
+            id: 'DEA In Process',
             header: 'In Process',
             cell: Cell,
           }),
         ],
       }),
       columnHelper.group({
-        id: 'practice_independently',
+        id: 'practice_ind',
         header: 'Practice Independently',
         columns: [
           columnHelper.accessor((row) => row.practice_independently?.yes, {
+            id: 'Yes',
             header: 'Yes',
             cell: Cell,
           }),
           columnHelper.accessor((row) => row.practice_independently?.no, {
+            id: 'No',
             header: 'No',
             cell: Cell,
           }),

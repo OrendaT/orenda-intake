@@ -11,29 +11,7 @@ import { StatesContext } from './states-of-license-summary/states-context';
 import { LDStates } from '@/lib/definitions';
 import { useState } from 'react';
 import IMask from '@/components/ui/imask';
-
-const states = {
-  'New York (NY)': {
-    name: 'New York',
-    abbr: 'NY',
-  },
-  'Massachusetts (MA)': {
-    name: 'Massachusetts',
-    abbr: 'MA',
-  },
-  'Connecticut (CT)': {
-    name: 'Connecticut',
-    abbr: 'CT',
-  },
-  'New Jersey (NJ)': {
-    name: 'New Jersey',
-    abbr: 'NJ',
-  },
-};
-
-export const statesOfLicenseOptions = Object.keys(states).map((state) => ({
-  value: state,
-}));
+import { statesOfLicenseOptions, states } from './data';
 
 const collaboratingPhysicianOptions = [
   {
@@ -62,21 +40,21 @@ const Option1 = ({
   <div className='space-y-4'>
     <Input
       label={`${abbr} Collaborating Physician Name`}
-      name={`${abbr}_collaborating_physician_name`}
+      name={`states_of_license_${abbr}_collaborating_physician_name`}
     />
     <Input
       label={`${abbr} Collaborating Physician NPI: (put n/a if you do not know)`}
-      name={`${abbr}_collaborating_physician_npi`}
+      name={`states_of_license_${abbr}_collaborating_physician_npi`}
     />
     <Input
       label={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
-      name={`${abbr}_collaborating_physician_email`}
+      name={`states_of_license_${abbr}_collaborating_physician_email`}
       title={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
       type='email'
     />
     <IMask
       label={`${abbr} Collaborating Physician Phone Number`}
-      name={`${abbr}_collaborating_physician_phone`}
+      name={`states_of_license_${abbr}_collaborating_physician_phone`}
       mask='(999) 999-9999'
       title={`${abbr} Collaborating Physician Phone Number`}
       type='tel'
@@ -105,11 +83,12 @@ const StatesOfLicense = () => {
           options={statesOfLicenseOptions}
           onClick={(event) => {
             const target = event.target as HTMLInputElement;
+            const abbr = target.dataset.option?.split('(')[1].slice(0, 2);
             const fieldName =
-              `${target.dataset.option?.split('(')[1].slice(0, 2)}_license` as keyof FormData;
+              `states_of_license_summary[${abbr}_license]` as keyof FormData;
 
             if (target.checked) {
-              setValue(fieldName, ['license_complete']);
+              setValue(fieldName, 'License Complete');
             } else {
               setValue(fieldName, undefined);
             }
@@ -117,44 +96,44 @@ const StatesOfLicense = () => {
         />
 
         {values?.map((val) => {
-          const state = states[val];
+          const { name, abbr } = states[val];
           const collaborating_physician = watch(
-            `${state.abbr}_collaborating_physician` as keyof FormData,
+            `states_of_license_${abbr}_collaborating_physician`,
           );
 
           return (
             <HiddenSection
               className='m-0 ps-0 pt-1 before:content-none'
               show={!!val}
-              key={state.name}
+              key={name}
             >
               <h3 className='relative mx-auto mt-4 mb-6 flex h-px w-full items-center bg-[#B2B2B2]'>
                 <span className='absolute right-1/2 translate-x-1/2 bg-white px-4 font-medium'>
-                  For {state.name}
+                  For {name}
                 </span>
               </h3>
 
               <p className='clamp-[text,xs,sm] mb-2 font-bold'>
-                If you are a {state.abbr} provider and are not yet practicing
+                If you are a {abbr} provider and are not yet practicing
                 independently, please let us know your current status regarding
-                collaborating physician agreements for the State of {state.name}
+                collaborating physician agreements for the State of {name}
                 .*
               </p>
 
               <Radios
                 className='sm:grid-cols-1'
-                name={`${state.abbr}_collaborating_physician`}
+                name={`states_of_license_${abbr}_collaborating_physician`}
                 options={collaboratingPhysicianOptions}
                 showHiddenSectionValue={[0, 1]}
                 hiddenSection={
                   collaborating_physician ===
                   collaboratingPhysicianOptions[0].value ? (
-                    <Option1 abbr={state.abbr} />
+                    <Option1 abbr={abbr} />
                   ) : collaborating_physician ===
                     collaboratingPhysicianOptions[1].value ? (
                     <FileInput
                       heading='Please upload your 4NP here'
-                      name={`${state.abbr}_form_4NP_doc`}
+                      name={`states_of_license_${abbr}_form_4NP_doc`}
                       accept={acceptForCredentialing}
                     />
                   ) : null
@@ -162,19 +141,19 @@ const StatesOfLicense = () => {
               />
 
               <FileInput
-                heading={`Please upload a copy of your ${state.abbr} State License`}
-                name={`${state.abbr}_state_license_doc`}
+                heading={`Please upload a copy of your ${abbr} State License`}
+                name={`states_of_license_${abbr}_state_license_doc`}
                 accept={acceptForCredentialing}
                 containerClassName='mt-4 mb-2'
               />
               <Input
-                label={`${state.abbr} State DEA Number`}
-                name={`${state.abbr}_state_dea_number`}
+                label={`${abbr} State DEA Number`}
+                name={`states_of_license_${abbr}_DEA_state_number`}
                 containerClassName='mb-4'
               />
               <FileInput
-                heading={`Please upload a copy of your ${state.abbr} State DEA`}
-                name={`${state.abbr}_state_dea_doc`}
+                heading={`Please upload a copy of your ${abbr} State DEA`}
+                name={`states_of_license_${abbr}_DEA_state_doc`}
                 accept={acceptForCredentialing}
               />
             </HiddenSection>

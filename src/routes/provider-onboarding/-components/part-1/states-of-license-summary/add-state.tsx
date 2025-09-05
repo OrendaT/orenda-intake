@@ -11,59 +11,12 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useState } from 'react';
 import { LuPlus } from 'react-icons/lu';
 import { useStates } from './states-context';
-
-const US_STATES = [
-  { label: 'Alabama (AL)', value: 'AL' },
-  { label: 'Alaska (AK)', value: 'AK' },
-  { label: 'Arizona (AZ)', value: 'AZ' },
-  { label: 'Arkansas (AR)', value: 'AR' },
-  { label: 'California (CA)', value: 'CA' },
-  { label: 'Colorado (CO)', value: 'CO' },
-  { label: 'Delaware (DE)', value: 'DE' },
-  { label: 'Florida (FL)', value: 'FL' },
-  { label: 'Georgia (GA)', value: 'GA' },
-  { label: 'Hawaii (HI)', value: 'HI' },
-  { label: 'Idaho (ID)', value: 'ID' },
-  { label: 'Illinois (IL)', value: 'IL' },
-  { label: 'Indiana (IN)', value: 'IN' },
-  { label: 'Iowa (IA)', value: 'IA' },
-  { label: 'Kansas (KS)', value: 'KS' },
-  { label: 'Kentucky (KY)', value: 'KY' },
-  { label: 'Louisiana (LA)', value: 'LA' },
-  { label: 'Maine (ME)', value: 'ME' },
-  { label: 'Maryland (MD)', value: 'MD' },
-  { label: 'Michigan (MI)', value: 'MI' },
-  { label: 'Minnesota (MN)', value: 'MN' },
-  { label: 'Mississippi (MS)', value: 'MS' },
-  { label: 'Missouri (MO)', value: 'MO' },
-  { label: 'Montana (MT)', value: 'MT' },
-  { label: 'Nebraska (NE)', value: 'NE' },
-  { label: 'Nevada (NV)', value: 'NV' },
-  { label: 'New Hampshire (NH)', value: 'NH' },
-  { label: 'New Mexico (NM)', value: 'NM' },
-  { label: 'North Carolina (NC)', value: 'NC' },
-  { label: 'North Dakota (ND)', value: 'ND' },
-  { label: 'Ohio (OH)', value: 'OH' },
-  { label: 'Oklahoma (OK)', value: 'OK' },
-  { label: 'Oregon (OR)', value: 'OR' },
-  { label: 'Pennsylvania (PA)', value: 'PA' },
-  { label: 'Rhode Island (RI)', value: 'RI' },
-  { label: 'South Carolina (SC)', value: 'SC' },
-  { label: 'South Dakota (SD)', value: 'SD' },
-  { label: 'Tennessee (TN)', value: 'TN' },
-  { label: 'Texas (TX)', value: 'TX' },
-  { label: 'Utah (UT)', value: 'UT' },
-  { label: 'Vermont (VT)', value: 'VT' },
-  { label: 'Virginia (VA)', value: 'VA' },
-  { label: 'Washington (WA)', value: 'WA' },
-  { label: 'West Virginia (WV)', value: 'WV' },
-  { label: 'Wisconsin (WI)', value: 'WI' },
-  { label: 'Wyoming (WY)', value: 'WY' },
-];
+import { US_STATES } from '@/lib/constants';
+import type { LicenseDea } from '@/types';
 
 const AddState = () => {
   const [open, setOpen] = useState(false);
-  const [state, setState] = useState('');
+  const [state, setState] = useState<LicenseDea['name']>();
 
   const { setStates } = useStates();
 
@@ -106,9 +59,12 @@ const AddState = () => {
               className: 'pointer-events-auto',
             }}
           >
-            {US_STATES?.map(({ label, value }) => (
-              <MenuItem key={value} value={value}>
-                {label}
+            {US_STATES.filter(({ code }) => {
+              const hiddenStates = ['NY', 'MA', 'CT', 'NJ'];
+              return !hiddenStates.includes(code);
+            }).map(({ value, code }) => (
+              <MenuItem key={code} value={code}>
+                {`${value} (${code})`}
               </MenuItem>
             ))}
           </Select>

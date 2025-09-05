@@ -28,7 +28,7 @@ const useCreatePendingForm = ({
   const isCreatingRef = useRef(false);
 
   useEffect(() => {
-    let isMounted = true;
+    const isMounted = true;
 
     const createPendingForm = async () => {
       if (!isPendingForm || state.formId || isCreatingRef.current || !isMounted)
@@ -60,10 +60,10 @@ const useCreatePendingForm = ({
         if (isMounted)
           setState((prev) => ({ ...prev, isError: true, error: errorMsg }));
       } finally {
-        if (!isMounted) return;
-
-        setState((prev) => ({ ...prev, isLoading: false }));
-        isCreatingRef.current = false;
+        if (isMounted) {
+          setState((prev) => ({ ...prev, isLoading: false }));
+          isCreatingRef.current = false;
+        }
       }
     };
 

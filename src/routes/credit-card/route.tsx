@@ -12,6 +12,7 @@ import useSubmitForm from '@/hooks/use-submit-form';
 import { FORM_IDS, FORMS, US_STATES } from '@/lib/constants';
 import { creditCardInitialValues as initialValues } from '@/lib/definitions';
 import {
+  checkErrors,
   cn,
   getItem,
   parseCCFormData,
@@ -53,7 +54,7 @@ function CreditCard() {
     handleSubmit,
     watch,
     reset,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = methods;
 
   const cc_number = watch('credit_card_number');
@@ -324,6 +325,7 @@ function CreditCard() {
               type='submit'
               className='mx-auto mt-12'
               isLoading={isSubmitting}
+              onClick={() => checkErrors(errors)}
             >
               {isSubmitting ? 'Submitting' : 'Submit Form'}
             </Button>

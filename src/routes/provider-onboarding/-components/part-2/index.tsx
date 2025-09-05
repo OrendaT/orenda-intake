@@ -39,7 +39,7 @@ const Part2 = () => {
       <fieldset className='fieldset'>
         <SelectCheckboxes
           label='Please choose your top 3 specialties'
-          name='health_conditions_treated'
+          name='health_conditions'
           options={mentalHealthIssues}
         />
 

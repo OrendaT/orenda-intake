@@ -32,24 +32,33 @@ const MSNDNPCOI = () => {
             )}
 
             <div className='mb-3 flex w-full flex-col items-start gap-x-10 gap-y-3 *:w-full sm:flex-row'>
-              <DatePicker label='Start Date' name='hnd_start_date' />
+              <DatePicker
+                label='Start Date'
+                name='highest_nursing_degree_start_date'
+              />
 
-              <DatePicker label='End Date' name='hnd_end_date' />
+              <DatePicker
+                label='End Date'
+                name='highest_nursing_degree_end_date'
+              />
             </div>
 
-            <Input label='Name of School Attended' name='hnd_school' />
+            <Input
+              label='Name of School Attended'
+              name='highest_nursing_degree_school'
+            />
           </>
         }
       />
 
       <Radios
         label='Do you have COI coverage?'
-        name='coi_coverage'
+        name='COI_coverage'
         options={YES_NO}
         showHiddenSectionValue={0}
         required={false}
         hiddenSection={
-          <FileInput heading='Please upload' name='coi_coverage_doc' />
+          <FileInput heading='Please upload' name='COI_coverage_doc' />
         }
       />
     </fieldset>

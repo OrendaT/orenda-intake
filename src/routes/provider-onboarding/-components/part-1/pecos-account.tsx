@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 
 const HiddenSection = ({ value }: { value: string }) => (
   <div className='space-y-4'>
-    {value === 'Yes' ? (
+    {value === YES_NO[0].value ? (
       <>
         <p className='mb-2 max-w-[40ch] font-medium'>
           <small>
@@ -37,7 +37,7 @@ const HiddenSection = ({ value }: { value: string }) => (
 
 const PecosAccount = () => {
   const { watch } = useFormContext<ProviderOnboardingFormData>();
-  const value = watch('consent_create_pecos_account') as 'Yes' | 'No';
+  const value = watch('consent_create_pecos_account');
 
   return (
     <fieldset className='fieldset'>
