@@ -1,4 +1,6 @@
-import type { US_STATES } from '@/lib/constants';
+import { FORMS, US_STATES } from '@/lib/constants';
+
+export type FormType = keyof typeof FORMS;
 
 // ---------- Intake Form ----------
 export type IntakeFormData = {

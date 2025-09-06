@@ -10,6 +10,7 @@ import {
   parseOnboardingFormData,
   removeItem,
   removeLSItem,
+  toUSDate,
 } from '@/lib/utils';
 import { FORM_IDS, FORMS } from '@/lib/constants';
 import useAutoSave from '@/hooks/use-auto-save';
@@ -89,12 +90,15 @@ function ProviderOnboardingForm() {
   useCreatePendingForm({
     formID: 'provider_onboarding_id',
     isPendingForm: Boolean(
-      name?.length > 1 && isValidEmail(email) && date_of_birth && state,
+      name?.length > 1 &&
+        isValidEmail(email) &&
+        date_of_birth &&
+        state,
     ),
     data: {
       name,
       email,
-      date_of_birth,
+      date_of_birth: toUSDate(date_of_birth),
     },
     url: 'providers/pending-provider',
   });

@@ -7,11 +7,54 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NotFound from '@/components/not-found';
 import Error from '@/components/error';
+import type { FormType } from '@/types';
+import { removeItem } from '@/lib/utils';
+import { FORMS } from '@/lib/constants';
 
 const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
-  component: () => (
+  component: RootRoute,
+  errorComponent: Error,
+  notFoundComponent: NotFound,
+  beforeLoad: () => {
+    const clearForm: FormType | 'all' | undefined = import.meta.env
+      .VITE_CLEAR_FORM;
+
+    console.log(clearForm);
+
+    if (clearForm) {
+      switch (clearForm) {
+        case 'intake':
+          removeItem(FORMS.intake);
+          return;
+        case 'credit_card':
+          removeItem(FORMS.credit_card);
+          return;
+        case 'provider_onboarding':
+          removeItem(FORMS.provider_onboarding);
+          return;
+        case 'all':
+          removeItem(FORMS.intake);
+          removeItem(FORMS.credit_card);
+          removeItem(FORMS.provider_onboarding);
+          return;
+        default:
+          return;
+      }
+    }
+  },
+  head: () => ({
+    meta: [
+      {
+        title: 'Orenda Forms',
+      },
+    ],
+  }),
+});
+
+function RootRoute() {
+  return (
     <>
       <HeadContent />
 
@@ -26,14 +69,5 @@ export const Route = createRootRoute({
         <TanStackRouterDevtools />
       </QueryClientProvider>
     </>
-  ),
-  errorComponent: Error,
-  notFoundComponent: NotFound,
-  head: () => ({
-    meta: [
-      {
-        title: 'Orenda Forms',
-      },
-    ],
-  }),
-});
+  );
+}

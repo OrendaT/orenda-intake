@@ -6,6 +6,7 @@ import type {
 import {
   convertBase64ToFile,
   convertFileListsToFiles,
+  toUSDate,
 } from './conversion-utils';
 import { removeEmptyValues } from '.';
 
@@ -27,9 +28,7 @@ export const parseIntakeFormData = (data: IntakeFormData) => {
   data = convertFileListsToFiles(data);
 
   // parse DOB (convert date object to US date)
-  const rawDOB = new Date(data.date_of_birth);
-  const formattedDOB = rawDOB.toLocaleDateString('en-US');
-  data.date_of_birth = formattedDOB;
+  data.date_of_birth = toUSDate(data.date_of_birth);
 
   // remove empty values
   data = removeEmptyValues(data);
@@ -42,14 +41,10 @@ export const parseCCFormData = (data: CreditCardFormData) => {
   data = convertBase64ToFile(data);
 
   // parse DOB date (convert date object to US date)
-  const rawDOB = new Date(data.date_of_birth);
-  const formattedDOB = rawDOB.toLocaleDateString('en-US');
-  data.date_of_birth = formattedDOB;
+  data.date_of_birth = toUSDate(data.date_of_birth);
 
   // parse signature date (convert date object to US date)
-  const rawSignatureDate = new Date(data.signature_date);
-  const formattedSignatureDate = rawSignatureDate.toLocaleDateString('en-US');
-  data.signature_date = formattedSignatureDate;
+  data.signature_date = toUSDate(data.signature_date);
 
   // remove empty values
   data = removeEmptyValues(data);

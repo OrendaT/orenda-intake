@@ -48,6 +48,11 @@ export const base64ToFile = (base64Data: string, fileName: string) => {
   return new File([uint8Array], fileName, { type: mime });
 };
 
+export const toUSDate = (date: Date | string) => {
+  const _date = new Date(date);
+  return _date.toLocaleDateString('en-US');
+};
+
 export const convertFileListsToFiles = <T>(obj: Record<string, unknown>): T => {
   Object.entries(obj).forEach(([key, value]) => {
     if (value instanceof FileList) {
