@@ -68,12 +68,13 @@ export type CheckboxProps = BaseFieldProps &
     otherName?: BaseFieldProps['name'];
   };
 
-export type RadioProps = BaseFieldProps & {
-  labelSuffix?: ReactNode;
-  showHiddenSectionValue?: number | string | boolean | string[] | number[];
-  hiddenSection?: ReactNode;
-  options: readonly Option[];
-};
+export type RadioProps = BaseFieldProps &
+  ComponentProps<'input'> & {
+    labelSuffix?: ReactNode;
+    showHiddenSectionValue?: number | string | boolean | string[] | number[];
+    hiddenSection?: ReactNode;
+    options: readonly Option[];
+  };
 
 export type ButtonProps = ComponentProps<'button'> & {
   asChild?: boolean;

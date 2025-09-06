@@ -22,9 +22,7 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
   const selectedStates = watch('states_of_license') ?? [];
 
   return (
-    <label
-      className='hover:bg-orenda-green/5 mx-auto grid size-6 w-full cursor-pointer place-items-center rounded border-dashed transition-colors duration-150'
-    >
+    <label className='hover:bg-orenda-green/5 mx-auto grid size-6 w-full cursor-pointer place-items-center rounded border-dashed transition-colors duration-150'>
       {value === columnValue && <LuCheck className='size-5' />}
 
       <input
@@ -36,22 +34,33 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
           if (value && value === columnValue) {
             setValue(fieldName, undefined);
           }
+          const statesOfLicenseOption = statesOfLicenseOptions.find(
+            ({ value }) => value.includes(row),
+          )?.value;
 
-          if (parentColumn === 'license') {
-            const statesOfLicenseOption = statesOfLicenseOptions.find(
-              ({ value }) => value.includes(row),
-            )?.value;
-
-            setValue(
-              'states_of_license',
-              target.checked
-                ? statesOfLicenseOption
-                  ? Array.from(
-                      new Set([...selectedStates, statesOfLicenseOption]),
-                    )
-                  : selectedStates
-                : selectedStates.filter((value) => !value.includes(row)),
+          if (parentColumn === 'license' && statesOfLicenseOption) {
+            if (target.checked) {
+              setValue(
+                'states_of_license',
+                Array.from(new Set([...selectedStates, statesOfLicenseOption])),
+              );
+            } else {
+              setValue(
+                'states_of_license',
+                selectedStates.filter((value) => !value.includes(row)),
+              );
+              setValue(`states_of_license_summary__${row}__DEA`, undefined);
+            }
+          } else if (parentColumn === 'DEA' && statesOfLicenseOption) {
+            const thisOptionSelected = selectedStates.includes(
+              statesOfLicenseOption,
             );
+            if (thisOptionSelected)
+              if (target.checked) {
+                setValue(`states_of_license__${row}__has_DEA`, 'Yes');
+              } else {
+                setValue(`states_of_license__${row}__has_DEA`, 'No');
+              }
           }
         }}
         hidden

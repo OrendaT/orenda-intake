@@ -50,7 +50,6 @@ const Checkboxes = ({
             >
               <input
                 {...props}
-                id={id}
                 className={cn('peer size-3.5 flex-shrink-0', size)}
                 data-option={option}
                 type='checkbox'
@@ -65,7 +64,7 @@ const Checkboxes = ({
                   validate: validations,
                 })}
               />
-              {option}
+              <span className='-mt-px leading-none'>{option}</span>
             </label>
           );
         })}

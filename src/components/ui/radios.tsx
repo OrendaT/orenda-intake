@@ -19,6 +19,7 @@ const Radios = ({
   hiddenSection,
   registerOptions,
   containerClassName,
+  ...props
 }: RadioProps) => {
   const {
     register,
@@ -57,17 +58,18 @@ const Radios = ({
           const id = name + value;
           const option = label || value;
           return (
-            <div
+            <label
               key={id}
               className={cn(
                 'clamp-[text,sm,base] flex items-start gap-2 font-medium',
               )}
             >
               <input
-                id={id}
+                {...props}
                 className='peer size-4 flex-shrink-0'
                 type='radio'
                 value={option}
+                data-option={option}
                 {...register(name, {
                   disabled: disabled,
                   required: {
@@ -77,13 +79,8 @@ const Radios = ({
                   ...registerOptions,
                 })}
               />
-              <label
-                className='-mt-[0.25px] leading-none'
-                htmlFor={name + option}
-              >
-                {option}
-              </label>
-            </div>
+              <span className='-mt-[0.25px] leading-none'>{option}</span>
+            </label>
           );
         })}
       </div>

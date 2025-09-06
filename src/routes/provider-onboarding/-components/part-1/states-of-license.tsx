@@ -92,13 +92,16 @@ const StatesOfLicense = () => {
           onClick={(event) => {
             const target = event.target as HTMLInputElement;
             const abbr = target.dataset.option?.split('(')[1].slice(0, 2);
-            const fieldName =
+            const licenseSummaryField =
               `states_of_license_summary__${abbr}__license` as keyof FormData;
+            const deaSummaryField =
+              `states_of_license_summary__${abbr}__DEA` as keyof FormData;
 
             if (target.checked) {
-              setValue(fieldName, 'License Complete');
+              setValue(licenseSummaryField, 'Complete');
             } else {
-              setValue(fieldName, undefined);
+              setValue(licenseSummaryField, undefined);
+              setValue(deaSummaryField, undefined);
             }
           }}
         />
@@ -145,6 +148,22 @@ const StatesOfLicense = () => {
                 name={`states_of_license__${abbr}__has_DEA`}
                 options={YES_NO}
                 showHiddenSectionValue={0}
+                registerOptions={{
+                  shouldUnregister: true,
+                }}
+                onClick={(event) => {
+                  const target = event.target as HTMLInputElement;
+                  const option = target.dataset.option;
+
+                  const fieldName =
+                    `states_of_license_summary__${abbr}__DEA` as keyof FormData;
+
+                  if (option === 'Yes') {
+                    setValue(fieldName, 'Complete');
+                  } else {
+                    setValue(fieldName, undefined);
+                  }
+                }}
                 hiddenSection={
                   <div className='!space-y-4'>
                     <Input

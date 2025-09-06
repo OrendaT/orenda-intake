@@ -16,7 +16,12 @@ const CAQH = () => {
       />
       <Input name='CAQH_username' label='CAQH Username' />
       <Input name='CAQH_password' label='CAQH Password' type='password' />
-      <Input name='NPI_number' label='NPI Number' />
+      <IMask
+        name='NPI_number'
+        label='NPI Number'
+        mask={'9999999999'}
+        maskChar=''
+      />
     </fieldset>
   );
 };
