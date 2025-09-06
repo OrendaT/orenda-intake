@@ -24,12 +24,10 @@ export default function DataTable({ table, className }: DataTableProps) {
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow className='hover:bg-transparent' key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
+              const id = nanoid();
               return (
                 !header.id.includes('table') && (
-                  <TableHead
-                    key={header.id + headerGroup.id}
-                    colSpan={header.colSpan}
-                  >
+                  <TableHead key={id} colSpan={header.colSpan}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(

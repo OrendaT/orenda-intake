@@ -17,12 +17,12 @@ export const columns = [
         header: 'License',
         columns: [
           columnHelper.accessor((row) => row.license?.complete, {
-            id: 'License Complete',
+            id: 'Complete',
             header: 'Complete',
             cell: Cell,
           }),
           columnHelper.accessor((row) => row.license?.in_process, {
-            id: 'License  In Process',
+            id: ' In Process',
             header: 'In Process',
             cell: Cell,
           }),
@@ -33,12 +33,12 @@ export const columns = [
         header: 'DEA',
         columns: [
           columnHelper.accessor((row) => row.dea?.complete, {
-            id: 'DEA complete',
+            id: 'Complete',
             header: 'Complete',
             cell: Cell,
           }),
           columnHelper.accessor((row) => row.dea?.in_process, {
-            id: 'DEA In Process',
+            id: 'In Process',
             header: 'In Process',
             cell: Cell,
           }),

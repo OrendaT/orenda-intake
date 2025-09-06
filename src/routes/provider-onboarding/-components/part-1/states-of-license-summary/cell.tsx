@@ -22,7 +22,9 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
   const selectedStates = watch('states_of_license') ?? [];
 
   return (
-    <label className='hover:bg-orenda-green/5 mx-auto grid size-6 w-full cursor-pointer place-items-center rounded border-dashed transition-colors duration-150'>
+    <label
+      className='hover:bg-orenda-green/5 mx-auto grid size-6 w-full cursor-pointer place-items-center rounded border-dashed transition-colors duration-150'
+    >
       {value === columnValue && <LuCheck className='size-5' />}
 
       <input

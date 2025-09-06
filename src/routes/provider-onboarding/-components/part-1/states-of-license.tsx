@@ -142,7 +142,7 @@ const StatesOfLicense = () => {
 
               <Radios
                 label={`Please do you have a DEA in ${abbr}?`}
-                name='states_of_license__DE__DEA_state_doc'
+                name={`states_of_license__${abbr}__has_DEA`}
                 options={YES_NO}
                 showHiddenSectionValue={0}
                 hiddenSection={

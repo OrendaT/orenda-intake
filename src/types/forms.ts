@@ -107,6 +107,7 @@ type LicenseField =
   | 'collaborating_physician_email'
   | 'collaborating_physician_phone'
   | 'state_license_doc'
+  | 'has_DEA'
   | 'DEA_state_number'
   | 'DEA_state_doc'
   | 'form_4NP_doc';
