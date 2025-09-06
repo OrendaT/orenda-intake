@@ -34,15 +34,15 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
           if (value && value === columnValue) {
             setValue(fieldName, undefined);
           }
-          const statesOfLicenseOption = statesOfLicenseOptions.find(
+          const state = statesOfLicenseOptions.find(
             ({ value }) => value.includes(row),
           )?.value;
 
-          if (parentColumn === 'license' && statesOfLicenseOption) {
+          if (parentColumn === 'license' && state) {
             if (target.checked) {
               setValue(
                 'states_of_license',
-                Array.from(new Set([...selectedStates, statesOfLicenseOption])),
+                Array.from(new Set([...selectedStates, state])),
               );
             } else {
               setValue(
@@ -51,11 +51,11 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
               );
               setValue(`states_of_license_summary__${row}__DEA`, undefined);
             }
-          } else if (parentColumn === 'DEA' && statesOfLicenseOption) {
-            const thisOptionSelected = selectedStates.includes(
-              statesOfLicenseOption,
+          } else if (parentColumn === 'DEA' && state) {
+            const isSelectedState = selectedStates.includes(
+              state,
             );
-            if (thisOptionSelected)
+            if (isSelectedState)
               if (target.checked) {
                 setValue(`states_of_license__${row}__has_DEA`, 'Yes');
               } else {
