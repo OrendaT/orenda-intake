@@ -41,6 +41,10 @@ const Part2 = () => {
           label='Please choose your top 3 specialties'
           name='health_conditions'
           options={mentalHealthIssues}
+          validations={{
+            oneMore: (value) =>
+              value.length > 3 || 'Please select at least one more',
+          }}
         />
 
         <hr className='mt-5 border-[#B2B2B2]' />

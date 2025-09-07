@@ -17,6 +17,8 @@ const SelectCheckboxes = ({
   disabled,
   otherLabel,
   otherName,
+  validations,
+  registerOptions,
 }: CheckboxProps) => {
   const {
     register,
@@ -61,6 +63,8 @@ const SelectCheckboxes = ({
                     message: 'Please select at least one',
                   },
                   disabled: disabled,
+                  validate: validations,
+                  ...registerOptions,
                 })}
                 hidden
               />
