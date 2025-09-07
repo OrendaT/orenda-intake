@@ -10,6 +10,7 @@ const Biography = () => {
         heading='Professional Statement'
         name='professional_statement'
         accept={acceptForCredentialing}
+        maxSize={0.3}
       />
 
       <FileInput
@@ -27,6 +28,7 @@ const Biography = () => {
           </>
         }
         accept='image/jpeg,image/png'
+        maxSize={0.3}
       />
 
       <FileInput
@@ -44,6 +46,7 @@ const Biography = () => {
           </>
         }
         accept='image/jpeg,image/png'
+        maxSize={0.3}
       />
     </fieldset>
   );

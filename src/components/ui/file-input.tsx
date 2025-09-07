@@ -24,6 +24,9 @@ const getFileTypes = (accept: string) => {
   return [...new Set(fileTypes)];
 };
 
+const getMaxSize = (maxSize: number) =>
+  `${maxSize < 1 ? maxSize * 1000 : maxSize}${maxSize < 1 ? 'K' : 'M'}B`;
+
 const FileInput = ({
   label,
   heading,
@@ -85,7 +88,7 @@ const FileInput = ({
         )}
 
         <small className='clamp-[text,xs,sm] text-[#626262]'>
-          {getFileTypes(accept).join(' or ')} Only • {maxSize}MB max
+          {getFileTypes(accept).join(' or ')} Only • {getMaxSize(maxSize)} max
         </small>
 
         {errors?.[name]?.message && (
@@ -128,7 +131,7 @@ const FileInput = ({
 
                 for (const file of files) {
                   if (file.size > maxSize * 1024 * 1024) {
-                    return `File size must be less than ${maxSize}MB`;
+                    return `File size must be less than ${getMaxSize(maxSize)}`;
                   }
                 }
 

@@ -66,6 +66,7 @@ const CPHS = ({
       heading='Please upload your 4NP here'
       name={`states_of_license__${abbr}__form_4NP_doc`}
       accept={acceptForCredentialing}
+      maxSize={0.3}
     />
   </div>
 );
@@ -140,6 +141,7 @@ const StatesOfLicense = () => {
                 heading={`Please upload a copy of your ${abbr} State License`}
                 name={`states_of_license__${abbr}__state_license_doc`}
                 accept={acceptForCredentialing}
+                maxSize={0.3}
                 containerClassName='my-4'
               />
 
@@ -180,6 +182,7 @@ const StatesOfLicense = () => {
                       heading={`Please upload a copy of your ${abbr} State DEA`}
                       name={`states_of_license__${abbr}__DEA_state_doc`}
                       accept={acceptForCredentialing}
+                      maxSize={0.3}
                     />
                   </div>
                 }

@@ -33,6 +33,7 @@ const Part1 = () => {
           heading='Copy of PMHNP-BC (Cert with GOLD seal, or ANCC card is satisfactory)'
           name='pmhnp_bc_doc'
           accept={acceptForCredentialing}
+          maxSize={0.3}
         />
       </fieldset>
 
@@ -43,6 +44,7 @@ const Part1 = () => {
           heading='Copy of Malpractice Insurance - MUST be CURRENT DATE, not future dated. If expiring soon, please email future dated to credentialing@orendapsych.com'
           name='malpractice_insurance_doc'
           accept={acceptForCredentialing}
+          maxSize={0.3}
         />
       </fieldset>
 
@@ -51,6 +53,7 @@ const Part1 = () => {
           heading='PDF of Resume/CV (please include mm/yyyy of start and end dates for BSN and MSN or DNP)'
           name='resume_cv_doc'
           accept={acceptForCredentialing}
+          maxSize={0.3}
         />
       </fieldset>
 
