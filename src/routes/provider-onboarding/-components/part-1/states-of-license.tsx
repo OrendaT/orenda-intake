@@ -42,11 +42,14 @@ const CPHS = ({
       label={`${abbr} Collaborating Physician Name`}
       name={`states_of_license__${abbr}__collaborating_physician_name`}
     />
-    <IMask
+    <Input
       label={`${abbr} Collaborating Physician NPI: (put n/a if you do not know)`}
       name={`states_of_license__${abbr}__collaborating_physician_npi`}
-      mask={'9999999999'}
-      maskChar=''
+      slotProps={{
+        htmlInput: {
+          maxLength: 10,
+        },
+      }}
     />
     <Input
       label={`${abbr} Collaborating Physician email address: (For payor verification purposes only; no other actions will be taken with this information)`}
