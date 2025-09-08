@@ -20,6 +20,9 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
 
   const value = watch(fieldName);
   const selectedStates = watch('states_of_license') ?? [];
+  const state = statesOfLicenseOptions.find(({ value }) =>
+    value.includes(row),
+  )?.value;
 
   return (
     <label className='hover:bg-orenda-green/5 mx-auto grid size-6 w-full cursor-pointer place-items-center rounded border-dashed transition-colors duration-150'>
@@ -32,11 +35,8 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
         onClick={(event) => {
           const target = event.target as HTMLInputElement;
           if (value && value === columnValue) {
-            setValue(fieldName, undefined);
+            setValue(fieldName, '');
           }
-          const state = statesOfLicenseOptions.find(({ value }) =>
-            value.includes(row),
-          )?.value;
 
           if (parentColumn === 'license' && state) {
             if (target.checked && columnValue === 'Complete') {
@@ -49,7 +49,7 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
                 'states_of_license',
                 selectedStates.filter((value) => !value.includes(row)),
               );
-              setValue(`states_of_license_summary__${row}__DEA`, undefined);
+              setValue(`states_of_license_summary__${row}__DEA`, '');
             }
           } else if (parentColumn === 'DEA' && state) {
             const isSelectedState = selectedStates.includes(state);

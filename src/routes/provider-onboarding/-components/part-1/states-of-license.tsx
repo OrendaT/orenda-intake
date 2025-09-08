@@ -104,8 +104,8 @@ const StatesOfLicense = () => {
             if (target.checked) {
               setValue(licenseSummaryField, 'Complete');
             } else {
-              setValue(licenseSummaryField, undefined);
-              setValue(deaSummaryField, undefined);
+              setValue(licenseSummaryField, '');
+              setValue(deaSummaryField, '');
             }
           }}
         />
@@ -166,7 +166,7 @@ const StatesOfLicense = () => {
                   if (option === 'Yes') {
                     setValue(fieldName, 'Complete');
                   } else {
-                    setValue(fieldName, undefined);
+                    setValue(fieldName, '');
                   }
                 }}
                 hiddenSection={

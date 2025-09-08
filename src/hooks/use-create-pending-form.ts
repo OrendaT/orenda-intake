@@ -31,7 +31,13 @@ const useCreatePendingForm = ({
     const isMounted = true;
 
     const createPendingForm = async () => {
-      if (!isPendingForm || state.formId || isCreatingRef.current || !isMounted)
+      if (
+        !isPendingForm ||
+        state.formId ||
+        isCreatingRef.current ||
+        !isMounted ||
+        state.isError
+      )
         return;
 
       isCreatingRef.current = true;
@@ -57,8 +63,9 @@ const useCreatePendingForm = ({
             ? err.message
             : 'Something went wrong';
 
-        if (isMounted)
+        if (isMounted) {
           setState((prev) => ({ ...prev, isError: true, error: errorMsg }));
+        }
       } finally {
         if (isMounted) {
           setState((prev) => ({ ...prev, isLoading: false }));
