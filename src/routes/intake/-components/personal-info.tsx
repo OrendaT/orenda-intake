@@ -10,11 +10,17 @@ export default function PersonalInfo() {
   return (
     <fieldset className='fieldset'>
       <div className='!mt-4 grid gap-x-8 gap-y-6 sm:grid-cols-2'>
-        <Input label='First Name' name='first_name' />
-        <Input label='Last Name' name='last_name' />
+        <Input label='Legal First Name' name='first_name' />
+        <Input label='Legal Last Name' name='last_name' />
       </div>
 
-      <Input label='Preferred Name' name='preferred_name' required={false} />
+      <Input
+        label='Preferred Name'
+        name='preferred_name'
+        required={false}
+        helperText='Please provide your preferred name in full when logging in to telehealth visits
+'
+      />
 
       <DatePicker
         label='Date of Birth'
@@ -94,7 +100,6 @@ export default function PersonalInfo() {
       />
 
       {/* Sex Assigned at Birth */}
-
       <Radios
         label={`Patient's sex assigned at birth:`}
         labelSuffix={
@@ -117,6 +122,22 @@ export default function PersonalInfo() {
         }
         name='gender'
         required={false}
+      />
+
+      <Radios
+        label='Preferred Pronouns'
+        name='preferred_pronouns'
+        options={[
+          { value: 'She/Her' },
+          { value: 'He/Him' },
+          { value: 'They/Them' },
+          { value: 'Other' },
+          { value: 'Prefer not to say' },
+        ]}
+        showHiddenSectionValue='Other'
+        hiddenSection={
+          <Input label='Please state' name='preferred_pronouns_other' />
+        }
       />
 
       <Radios

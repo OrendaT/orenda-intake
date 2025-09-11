@@ -19,12 +19,6 @@ const HiddenSection = ({ value }: { value: string }) => (
       </>
     ) : (
       <>
-        <p className='mb-2 max-w-[40ch] font-medium'>
-          <small>
-            By initialling here, I authorize Orenda to create an account on my
-            behalf
-          </small>
-        </p>
         <Input
           label='Please provide your NPPES Username (to create your login details for PECOS)'
           name='NPPES_username'
@@ -46,14 +40,12 @@ const PecosAccount = () => {
         name='consent_create_pecos_account'
         className='sm:grid-cols-1'
         options={[
-          ...YES_NO,
-          {
-            value:
-              ' I do not authorize Orenda to access or create a PECOS account on my behalf',
-          },
+          { value: 'Yes' },
+          { value: 'No, I authorize Orenda to create an account on my behalf' },
         ]}
         showHiddenSectionValue={[0, 1]}
         hiddenSection={<HiddenSection value={value} />}
+     
       />
 
       <p>

@@ -8,7 +8,6 @@ export const patientsAgeGroups = [
 export const mentalHealthIssues = [
   { value: 'Adjustment Disorder' },
   { value: 'Anger Management' },
-  { value: 'Autism' },
   { value: 'Autism Spectrum Disorders (ASD)' },
   { value: 'Bipolar Disorder' },
   { value: 'Body Image' },
@@ -53,28 +52,16 @@ export const mentalHealthIssues = [
 ];
 
 export const mentalHealthSpecializations = [
-  // { value: 'ADHD' },
-  // { value: 'Anger Management' },
-  // { value: 'Couples' },
-  // { value: 'Eating Disorders' },
-  // { value: 'Group Therapy' },
-  // { value: 'LGBTQ+ Care' },
-  // { value: 'Premenstrual Dysphoric Disorder (PDD)' },
-
   { value: "Men's Health" },
   { value: 'Weight Management' },
   { value: 'Couples' },
-  { value: 'Genomic Testing' },
   { value: 'Eating Disorders' },
   { value: 'Fertility' },
   { value: "Women's Health" },
   { value: 'LGBTQ' },
   { value: 'Gender Affirming Care' },
   { value: 'Substance Use Disorder (SUD)' },
-  { value: 'Autism' },
-  { value: 'Medication Assisted Treatment' },
-  { value: 'In-Person Visits' },
-  { value: 'Autism Spectrum Disorder' },
+  { value: 'Autism Spectrum Disorders (ASD)' },
   { value: 'MAT / Suboxone' },
 ];
 

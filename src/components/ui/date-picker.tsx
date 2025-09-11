@@ -47,7 +47,6 @@ const DatePicker = ({
             onChange={field.onChange}
             required={required}
             calendarIcon={<Calendar className='clamp-[size,4,1.2rem]' />}
-            {...inputProps}
             className={cn('font-dm-sans w-full border-b-2', {
               'border-[#d32f2f] text-[#d32f2f] [&_svg]:stroke-[#d32f2f]': error,
             })}
@@ -55,6 +54,7 @@ const DatePicker = ({
             dayPlaceholder='dd'
             yearPlaceholder='yyyy'
             format='MM/dd/yyyy'
+            {...inputProps}
           />
 
           {error && <p className='error'>{error?.message}</p>}

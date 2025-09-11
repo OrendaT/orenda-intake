@@ -1,12 +1,12 @@
 const PracticePolicy = () => {
   return (
-    <section className="mt-12">
-      <h2 className="mb-4 font-dm-sans font-semibold clamp-[text,lg,xl]">
+    <section className='mt-12'>
+      <h2 className='font-dm-sans clamp-[text,lg,xl] mb-4 font-semibold'>
         PRACTICE POLICIES
       </h2>
 
-      <div className="space-y-6">
-        <article className="space-y-4">
+      <div className='space-y-6'>
+        <article className='space-y-4'>
           <p>
             APPOINTMENTS: Orenda Psychiatry offers tele-health appointments by
             video conferencing. In-person appointments are offered at provider
@@ -20,7 +20,7 @@ const PracticePolicy = () => {
               be charged as follows:
             </p>
 
-            <ol className="list-decimal space-y-2 ps-4">
+            <ol className='list-decimal space-y-2 ps-4'>
               <li>
                 On the morning of your scheduled appointment (for copays and/or
                 deductible)
@@ -129,18 +129,21 @@ const PracticePolicy = () => {
             contact Orenda Psychiatry directly. It is expected that you and your
             provider meet consistently and regularly in order for your
             prescriber to provide medication management. Orenda Psychiatry
-            providers will not provide early refills on controlled substances.{" "}
+            providers will not provide early refills on controlled substances.
+            Lost or stolen prescriptions may require a police report in order
+            for your prescription to be replaced.{' '}
             <strong>
               Additionally, prescriptions for controlled substances require that
               the client be assessed prior to each refill. Controlled substance
               prescription quantities will not exceed a 30 day supply.
-            </strong>{" "}
+            </strong>{' '}
             Please note that our providers are highly experienced and qualified
             to offer expert opinions on your case. As such, they are not
             obligated to prescribe a specific medication if they believe it is
             unnecessary or potentially harmful, based on their professional
             judgment and expertise.
           </p>
+
           <p>
             SOCIAL MEDIA AND TELECOMMUNICATION: Due to the importance of your
             confidentiality and the importance of minimizing dual relationships,
@@ -170,8 +173,8 @@ const PracticePolicy = () => {
             discontinued.
           </p>
         </article>
-        <article className="space-y-4">
-          <h3 className="font-semibold">
+        <article className='space-y-4'>
+          <h3 className='font-semibold'>
             INFORMED CONSENT FOR PSYCHIATRIC TREATMENT
           </h3>
           <p>
@@ -195,8 +198,8 @@ const PracticePolicy = () => {
             a medical or psychiatric emergency.
           </p>
 
-          <h3 className="font-semibold">WHEN DUTY OF CARE BEGINS</h3>
-          <ul className="sublist-disc">
+          <h3 className='font-semibold'>WHEN DUTY OF CARE BEGINS</h3>
+          <ul className='sublist-disc'>
             <li>
               I understand that my provider will take responsibility for my care
               after I have completed all of the required health questions and
@@ -227,10 +230,10 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3 className="font-semibold">
+          <h3 className='font-semibold'>
             RISKS AND BENEFITS OF USING OUR TELEPSYCHIATRY SERVICE
           </h3>
-          <ul className="sublist-disc">
+          <ul className='sublist-disc'>
             <li>
               I understand that currently video conferencing technology will be
               used and that I may not have the opportunity to meet with my
@@ -271,10 +274,10 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3 className="font-semibold">
+          <h3 className='font-semibold'>
             IMPORTANCE OF FULLY AND TRUTHFULLY ANSWERING ALL QUESTIONS
           </h3>
-          <ul className="sublist-disc">
+          <ul className='sublist-disc'>
             <li>
               I understand that the information I provide will be used to
               determine my treatment. I understand that the safety and
@@ -296,8 +299,8 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3 className="font-medium">RISKS OF PSYCHOTROPIC MEDICATION</h3>
-          <ul className="sublist-disc">
+          <h3 className='font-medium'>RISKS OF PSYCHOTROPIC MEDICATION</h3>
+          <ul className='sublist-disc'>
             <li>
               • I understand that the information I provide will be used to
               determine my treatment. I understand that the safety and
@@ -371,10 +374,10 @@ const PracticePolicy = () => {
             </li>
           </ul>
 
-          <h3 className="font-semibold">
+          <h3 className='font-semibold'>
             RISKS TO ELECTRONIC HEALTH INFORMATION
           </h3>
-          <ul className="list-disc">
+          <ul className='list-disc'>
             <li>
               I understand that although Orenda Psychiatry implements
               administrative, physical, and technical safeguards to protect my
@@ -382,8 +385,8 @@ const PracticePolicy = () => {
               and confidentiality of my health information.
             </li>
           </ul>
-          <h3 className="font-semibold">RISKS AND BENEFITS TO PSYCHOTHERAPY</h3>
-          <ul className="list-disc">
+          <h3 className='font-semibold'>RISKS AND BENEFITS TO PSYCHOTHERAPY</h3>
+          <ul className='list-disc'>
             <li>
               I understand that the outcome of my treatment depends largely on
               my willingness to engage in this process, which may, at times,
@@ -403,7 +406,7 @@ const PracticePolicy = () => {
             held privilege of confidentiality exist and are itemized below:
           </p>
 
-          <ol className="list-decimal space-y-4">
+          <ol className='list-decimal space-y-4'>
             <li>
               If a client threatens or attempts to commit suicide or otherwise
               conducts him/her self in a manner in which there is a substantial
@@ -440,8 +443,8 @@ const PracticePolicy = () => {
           </ol>
         </article>
 
-        <article className="space-y-4">
-          <h3 className="font-semibold">CONSENT FOR MEDICATION HISTORY</h3>
+        <article className='space-y-4'>
+          <h3 className='font-semibold'>CONSENT FOR MEDICATION HISTORY</h3>
 
           <p>
             I understand that as part of my healthcare at Orenda Psychiatry, it

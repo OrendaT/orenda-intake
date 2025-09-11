@@ -15,7 +15,7 @@ const Biography = () => {
 
       <FileInput
         heading='Headshot 1'
-        subheading='Please provide a professional, high-quality images. Include one
+        subheading='Please provide a professional, high-quality image of yourself. Include one
           outdoor image with trees for marketing purposes.'
         name='headshot_1'
         label={

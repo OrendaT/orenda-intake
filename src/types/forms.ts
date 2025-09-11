@@ -7,6 +7,10 @@ export type IntakeFormData = {
   first_name: string;
   last_name: string;
   preferred_name: string;
+
+  preferred_pronouns: string;
+  preferred_pronouns_other?: string;
+
   date_of_birth: string;
   phone: string;
   email: string;
