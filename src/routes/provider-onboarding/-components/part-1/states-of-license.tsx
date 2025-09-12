@@ -92,7 +92,7 @@ const StatesOfLicense = () => {
     return (
       <>
         <h3 className='relative mx-auto mt-4 mb-6 flex h-px w-full items-center bg-[#B2B2B2]'>
-          <span className='absolute right-1/2 text-center translate-x-1/2 bg-white px-4 font-medium'>
+          <span className='absolute right-1/2 translate-x-1/2 bg-white px-4 text-center font-medium'>
             For {name}
           </span>
         </h3>
