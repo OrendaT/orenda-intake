@@ -1,6 +1,37 @@
 import FileInput from '@/components/ui/file-input';
 import { acceptForCredentialing } from '@/lib/constants';
 
+const Heading = ({ number }: { number: '1' | '2' }) => (
+  <FileInput
+    heading={`Headshot ${number}`}
+    subheading={
+      <>
+        <p>
+          Please provide a professional, high-quality image of yourself. Include
+          one outdoor image with trees for marketing purposes.
+        </p>
+        <ul className='mt-2'>
+          <li>Smile 😊 ✅</li>
+          <li>Natural background with nature ✅</li>
+          <li>No selfies ❌</li>
+        </ul>
+      </>
+    }
+    name={`headshot_${number}`}
+    label={
+      <>
+        Jpeg or Png (nice smile,{' '}
+        <strong>
+          NO selfies, NO formal attire, NATURAL BACKGROUND PREFERRED.
+          Square/landscape shape, NOT round.)
+        </strong>
+      </>
+    }
+    accept='image/jpeg,image/png'
+    maxSize={0.3}
+  />
+);
+
 const Biography = () => {
   return (
     <fieldset className='fieldset'>
@@ -13,41 +44,8 @@ const Biography = () => {
         maxSize={0.3}
       />
 
-      <FileInput
-        heading='Headshot 1'
-        subheading='Please provide a professional, high-quality image of yourself. Include one
-          outdoor image with trees for marketing purposes.'
-        name='headshot_1'
-        label={
-          <>
-            Jpeg or Png (nice smile,{' '}
-            <strong>
-              NO selfies, NO formal attire, NATURAL BACKGROUND PREFERRED.
-              Square/landscape shape, NOT round.)
-            </strong>
-          </>
-        }
-        accept='image/jpeg,image/png'
-        maxSize={0.3}
-      />
-
-      <FileInput
-        heading='Headshot 2'
-        subheading='Please provide a professional, high-quality images. Include one
-          outdoor image with trees for marketing purposes.'
-        name='headshot_2'
-        label={
-          <>
-            Jpeg or Png (nice smile,{' '}
-            <strong>
-              NO selfies, NO formal attire, NATURAL BACKGROUND PREFERRED.
-              Square/landscape shape, NOT round.)
-            </strong>
-          </>
-        }
-        accept='image/jpeg,image/png'
-        maxSize={0.3}
-      />
+      <Heading number='1' />
+      <Heading number='2' />
     </fieldset>
   );
 };
