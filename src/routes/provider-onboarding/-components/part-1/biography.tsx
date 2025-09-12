@@ -1,9 +1,9 @@
 import FileInput from '@/components/ui/file-input';
 import { acceptForCredentialing } from '@/lib/constants';
 
-const Heading = ({ number }: { number: '1' | '2' }) => (
+const Heading = ({ num }: { num: '1' | '2' }) => (
   <FileInput
-    heading={`Headshot ${number}`}
+    heading={`Headshot ${num}`}
     subheading={
       <>
         <p>
@@ -17,7 +17,7 @@ const Heading = ({ number }: { number: '1' | '2' }) => (
         </ul>
       </>
     }
-    name={`headshot_${number}`}
+    name={`headshot_${num}`}
     label={
       <>
         Jpeg or Png (nice smile,{' '}
@@ -44,8 +44,8 @@ const Biography = () => {
         maxSize={0.3}
       />
 
-      <Heading number='1' />
-      <Heading number='2' />
+      <Heading num='1' />
+      <Heading num='2' />
     </fieldset>
   );
 };
