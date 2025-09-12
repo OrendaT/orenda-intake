@@ -184,7 +184,6 @@ const StatesOfLicense = () => {
           name='states_of_license'
           className='sm:grid-cols-1'
           options={options}
-          // hiddenSectionClassName='m-0 ps-0 pt-1 before:content-none'
           onClick={(event) => {
             const target = event.target as HTMLInputElement;
             const abbr = target.dataset.option?.split('(')[1].slice(0, 2);

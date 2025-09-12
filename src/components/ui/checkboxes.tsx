@@ -72,7 +72,10 @@ const Checkboxes = ({
               </label>
 
               <HiddenSection
-                className={cn('pt-0', hiddenSectionClassName)}
+                className={cn(
+                  'ml-1.5 pt-0 before:left-0',
+                  hiddenSectionClassName,
+                )}
                 show={isChecked && Boolean(hiddenSection)}
               >
                 {hiddenSection}
