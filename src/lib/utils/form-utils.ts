@@ -20,6 +20,10 @@ export const parseIntakeFormData = (data: IntakeFormData) => {
     data.relationship_status = data.relationship_status_other;
     delete data.relationship_status_other;
   }
+  if (data.preferred_pronouns_other) {
+    data.preferred_pronouns = data.preferred_pronouns_other;
+    delete data.preferred_pronouns_other;
+  }
 
   // convert Base64 strings to Files
   data = convertBase64ToFile(data);

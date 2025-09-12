@@ -36,6 +36,7 @@ const HearAbout = () => {
                 : 'Please specify referring providers name'
             }
             name={'referral_source_detail'}
+            size='small'
           />
         }
       />

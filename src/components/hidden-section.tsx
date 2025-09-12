@@ -33,7 +33,7 @@ const HiddenSection = ({
             className,
           )}
         >
-          {children}{' '}
+          {children}
         </motion.div>
       )}
     </AnimatePresence>

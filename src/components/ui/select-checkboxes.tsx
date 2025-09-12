@@ -87,6 +87,7 @@ const SelectCheckboxes = ({
           }
           name={otherName || ((name + '_other') as CheckboxProps['name'])}
           required={includesOther}
+          size='small'
         />
       </HiddenSection>
     </div>

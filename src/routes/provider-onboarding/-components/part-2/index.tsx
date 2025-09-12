@@ -71,6 +71,7 @@ const Part2 = () => {
             <Input
               label='Please explain'
               name='ketamine_assisted_therapy_more_info'
+              size='small'
             />
           }
         />
@@ -83,7 +84,11 @@ const Part2 = () => {
           options={ethnicities}
           showHiddenSectionValue='Others'
           hiddenSection={
-            <Input label='Please specify' name='race_ethnicity_other' />
+            <Input
+              label='Please specify'
+              name='race_ethnicity_other'
+              size='small'
+            />
           }
         />
       </fieldset>

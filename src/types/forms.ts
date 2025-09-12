@@ -20,6 +20,7 @@ export type IntakeFormData = {
   relationship_with_child: string;
   sex_assigned_at_birth: string;
   gender: string;
+
   address_one: string;
   address_two: string;
   city: string;
@@ -75,6 +76,8 @@ export type IntakeFormData = {
   appointment_address: string;
   appointment_city: string;
   appointment_state: string;
+  appointment_street_address: string;
+  appointment_zip_code: string;
   photo_ID: string;
 
   insurance_provider: string;

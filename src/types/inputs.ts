@@ -13,6 +13,7 @@ type Option = {
   label?: string;
   value: string;
   readonly?: boolean;
+  hiddenSection?: ReactNode;
 };
 
 type NamePath =
@@ -22,7 +23,7 @@ type NamePath =
 
 export type BaseFieldProps = {
   label?: string | ReactNode;
-  name: NamePath;
+  name: string | NamePath;
 
   customLabel?: string;
   showRequiredMark?: boolean;
@@ -66,6 +67,7 @@ export type CheckboxProps = BaseFieldProps &
     labelSuffix?: ReactNode;
     otherLabel?: string;
     otherName?: BaseFieldProps['name'];
+    hiddenSectionClassName?: string;
   };
 
 export type RadioProps = BaseFieldProps &

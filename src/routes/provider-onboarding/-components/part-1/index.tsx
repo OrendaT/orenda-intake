@@ -9,7 +9,7 @@ import StatesOfLicense from './states-of-license';
 import HearAbout from './hear-about';
 import PecosAccount from './pecos-account';
 import AdditionalQualifications from './additional-qualifications';
-import MSNDNPCOI from './msn-dnp-coi';
+import ProgramsCOI from './programs-coi';
 
 const Part1 = () => {
   return (
@@ -57,7 +57,7 @@ const Part1 = () => {
         />
       </fieldset>
 
-      <MSNDNPCOI />
+      <ProgramsCOI />
       <IdentificationRequirements />
     </div>
   );

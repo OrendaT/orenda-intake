@@ -136,7 +136,11 @@ export default function PersonalInfo() {
         ]}
         showHiddenSectionValue='Other'
         hiddenSection={
-          <Input label='Please state' name='preferred_pronouns_other' />
+          <Input
+            label='Please state'
+            name='preferred_pronouns_other'
+            size='small'
+          />
         }
       />
 
@@ -150,7 +154,9 @@ export default function PersonalInfo() {
         options={ethnicities}
         required={false}
         showHiddenSectionValue='Others'
-        hiddenSection={<Input label='Please specify' name='race_other' />}
+        hiddenSection={
+          <Input label='Please specify' name='race_other' size='small' />
+        }
       />
     </fieldset>
   );

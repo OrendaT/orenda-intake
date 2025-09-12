@@ -80,6 +80,10 @@ export const intakeInitialValues: IntakeFormData = {
 
   race: '',
   race_other: '',
+  preferred_pronouns: '',
+
+  appointment_street_address: '',
+  appointment_zip_code: '',
 };
 
 export const creditCardInitialValues: CreditCardFormData = {

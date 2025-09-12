@@ -45,6 +45,7 @@ const Languages = () => {
               <Input
                 label='Others? Please specify'
                 name='additional_langs_other'
+                size='small'
               />
             </HiddenSection>
           </div>

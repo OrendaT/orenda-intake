@@ -59,13 +59,13 @@ const AddressDetails = () => {
               <div className='clamp-[gap-x,8,16] grid gap-y-5 sm:grid-cols-2'>
                 <Input
                   label='Appointment Address'
-                  name='appointment_address_address'
+                  name='appointment_street_address'
                   errorMsg='Appointment address is required'
                   size='small'
                 />
                 <IMask
                   label='Zip Code'
-                  name='appointment_address_zip_code'
+                  name='appointment_zip_code'
                   errorMsg='Zip code is required'
                   inputProps={{
                     size: 'small',

@@ -5,25 +5,37 @@ import type { ProviderOnboardingFormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 
 const HiddenSection = ({ value }: { value: string }) => (
-  <div className='space-y-4'>
+  <div className='space-y-3'>
     {value === YES_NO[0].value ? (
       <>
-        <p className='mb-2 max-w-[40ch] font-medium'>
+        <p className='mb-2 font-medium'>
           <small>
             By providing my log in credentials here, I authorize Orenda to
             access my account on my behalf
           </small>
         </p>
-        <Input label='PECOS Username' name='PECOS_username' />
-        <Input label='PECOS Password' name='PECOS_password' type='password' />
+        <Input label='PECOS Username' name='PECOS_username' size='small' />
+        <Input
+          label='PECOS Password'
+          name='PECOS_password'
+          type='password'
+          size='small'
+        />
       </>
     ) : (
       <>
         <Input
-          label='Please provide your NPPES Username (to create your login details for PECOS)'
+          label='Please provide your NPPES Username'
           name='NPPES_username'
+          size='small'
+          helperText='To create your login details for PECOS'
         />
-        <Input label='NPPES Password' name='PECOS_password' type='password' />
+        <Input
+          label='NPPES Password'
+          name='PECOS_password'
+          type='password'
+          size='small'
+        />
       </>
     )}
   </div>
@@ -45,7 +57,6 @@ const PecosAccount = () => {
         ]}
         showHiddenSectionValue={[0, 1]}
         hiddenSection={<HiddenSection value={value} />}
-     
       />
 
       <p>

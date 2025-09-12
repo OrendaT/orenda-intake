@@ -32,7 +32,8 @@
 
     .react-calendar {
       width: 100%;
-      max-width: 300px;
+      max-width: 320px;
+      min-width: 300px;
       padding: 0.5rem;
       border: 1px solid rgba(0, 0, 0, 0.285);
       border-radius: 1rem;

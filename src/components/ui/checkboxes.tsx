@@ -19,6 +19,7 @@ const Checkboxes = ({
   otherLabel,
   otherName,
   containerClassName,
+  hiddenSectionClassName,
   ...props
 }: CheckboxProps) => {
   const {
@@ -39,33 +40,44 @@ const Checkboxes = ({
         {required && <RequiredMark />}
       </h3>
       <div className={cn('grid gap-3 sm:grid-cols-2', className)}>
-        {options.map(({ label, value }) => {
+        {options.map(({ label, value, hiddenSection }) => {
           const option = label || value;
           const id = name + value;
+          const isChecked =
+            Array.isArray(selected) && selected.includes(option);
 
           return (
-            <label
-              key={id}
-              className={cn('flex items-start gap-2 leading-none')}
-            >
-              <input
-                {...props}
-                className={cn('peer size-3.5 flex-shrink-0', size)}
-                data-option={option}
-                type='checkbox'
-                value={option}
-                {...register(name, {
-                  disabled: disabled,
-                  required: {
-                    value: required,
-                    message: errorMsg || 'This field is required',
-                  },
-                  ...registerOptions,
-                  validate: validations,
-                })}
-              />
-              <span className='-mt-px leading-none'>{option}</span>
-            </label>
+            <div className='grid'>
+              <label
+                key={id}
+                className={cn('flex items-start gap-2 leading-none')}
+              >
+                <input
+                  {...props}
+                  className={cn('peer size-3.5 flex-shrink-0', size)}
+                  data-option={option}
+                  type='checkbox'
+                  value={option}
+                  {...register(name, {
+                    disabled: disabled,
+                    required: {
+                      value: required,
+                      message: errorMsg || 'This field is required',
+                    },
+                    ...registerOptions,
+                    validate: validations,
+                  })}
+                />
+                <span className='-mt-px leading-none'>{option}</span>
+              </label>
+
+              <HiddenSection
+                className={cn('pt-0', hiddenSectionClassName)}
+                show={isChecked && Boolean(hiddenSection)}
+              >
+                {hiddenSection}
+              </HiddenSection>
+            </div>
           );
         })}
       </div>
@@ -82,6 +94,7 @@ const Checkboxes = ({
           }
           name={otherName || ((name + '_other') as CheckboxProps['name'])}
           required={includesOther}
+          size='small'
         />
       </HiddenSection>
     </div>
