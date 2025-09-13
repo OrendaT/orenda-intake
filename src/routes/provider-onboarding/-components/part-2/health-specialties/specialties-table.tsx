@@ -36,7 +36,7 @@ const SpecialtiesTable = () => {
             <TableCell className='text-left font-medium border-none py-2 rounded-l'>{specialty}</TableCell>
             {ratings.map((rating) => (
               <TableCell className='border-none last:rounded-e'>
-                <label className='block px-4'>
+                <label className='block px-4 pt-1'>
                   <input
                     type='radio'
                     value={`${specialty}, ${rating}`}
