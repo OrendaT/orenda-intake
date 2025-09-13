@@ -24,3 +24,8 @@ const StatesOfLicenseSummary = () => {
   );
 };
 export default StatesOfLicenseSummary;
+
+// In all honesty, the use of tanstack table in creating
+// this table was not necessary, and it could've been
+// built without it. unfortunately what has been done
+// has been done, and it's not broken...

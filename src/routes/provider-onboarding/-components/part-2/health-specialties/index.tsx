@@ -18,13 +18,13 @@ const HealthSpecialties = () => {
 
       <hr className='mt-5 border-[#B2B2B2]' />
 
-      <h3 className='label mb-2'>
+      <h3 className='label'>
         Please state your comfort level in handling each of these issues on a
         scale of 1 to 4
         <RequiredMark />
       </h3>
 
-      <p className='mb-4 text-sm'>
+      <p className='-mt-6 text-sm'>
         (1 = Least comfortable, 4 = Very comfortable)
       </p>
 

@@ -76,3 +76,22 @@ export const treatmentApproaches = [
   },
   { value: 'I will only provide combined medication with therapy' },
 ];
+
+export const experienceLevels = [
+  {
+    value:
+      'Beginner / Limited Experience – Newly licensed or in early training, minimal independent practice.',
+  },
+  {
+    value:
+      'Intermediate – Some independent clinical experience, still building confidence and expertise.',
+  },
+  {
+    value:
+      'Experienced – Several years of practice, comfortable managing a wide range of clinical situations.',
+  },
+  {
+    value:
+      'Expert / Highly Experienced – Extensive practice history, advanced clinical skills, often supervising or mentoring others.',
+  },
+];

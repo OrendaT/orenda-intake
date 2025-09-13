@@ -179,6 +179,7 @@ export const providerOnboardingInitialValues: ProviderOnboardingFormData = {
 
   states_of_license: [],
   nursing_degrees: [],
+  clinical_experience_level: '',
 };
 
 export const LDStates: LicenseDea[] = [

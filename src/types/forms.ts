@@ -202,6 +202,7 @@ export type ProviderOnboardingFormData = {
   states_of_license: string[];
 
   nursing_degrees: string[];
+  clinical_experience_level: string;
 } & {
   [K in `states_of_license__${StateCode}__${LicenseField}`]?: string;
 } & {

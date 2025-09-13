@@ -2,7 +2,11 @@ import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import { ethnicities, YES_NO } from '@/lib/constants';
 import Languages from './languages';
-import { patientsAgeGroups, treatmentApproaches } from './data';
+import {
+  experienceLevels,
+  patientsAgeGroups,
+  treatmentApproaches,
+} from './data';
 import Checkboxes from '@/components/ui/checkboxes';
 import HealthSpecialties from './health-specialties';
 
@@ -32,6 +36,16 @@ const Part2 = () => {
       </fieldset>
 
       <HealthSpecialties />
+
+      <fieldset className='fieldset'>
+        <Radios
+          label='Please rate your overall clinical experience level'
+          name='clinical_experience_level'
+          options={experienceLevels}
+          className='sm:grid-cols-1'
+        />
+      </fieldset>
+
       <Languages />
 
       <fieldset className='fieldset'>
