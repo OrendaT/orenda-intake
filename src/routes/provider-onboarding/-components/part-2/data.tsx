@@ -79,18 +79,43 @@ export const treatmentApproaches = [
 
 export const experienceLevels = [
   {
+    label: (
+      <>
+        <strong className='font-medium'>Beginner / Limited Experience</strong> –
+        Newly licensed or in early training, minimal independent practice.
+      </>
+    ),
     value:
       'Beginner / Limited Experience – Newly licensed or in early training, minimal independent practice.',
   },
   {
+    label: (
+      <>
+        <strong className='font-medium'>Intermediate</strong> – Some independent
+        clinical experience, still building confidence and expertise.
+      </>
+    ),
     value:
       'Intermediate – Some independent clinical experience, still building confidence and expertise.',
   },
   {
+    label: (
+      <>
+        <strong className='font-medium'>Experienced</strong> – Several years of
+        practice, comfortable managing a wide range of clinical situations.
+      </>
+    ),
     value:
       'Experienced – Several years of practice, comfortable managing a wide range of clinical situations.',
   },
   {
+    label: (
+      <>
+        <strong className='font-medium'>Expert / Highly Experienced</strong> –
+        Extensive practice history, advanced clinical skills, often supervising
+        or mentoring others.
+      </>
+    ),
     value:
       'Expert / Highly Experienced – Extensive practice history, advanced clinical skills, often supervising or mentoring others.',
   },

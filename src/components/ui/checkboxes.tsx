@@ -55,9 +55,9 @@ const Checkboxes = ({
                 <input
                   {...props}
                   className={cn('peer size-3.5 flex-shrink-0', size)}
-                  data-option={option}
+                  data-option={value}
                   type='checkbox'
-                  value={option}
+                  value={value}
                   {...register(name, {
                     disabled: disabled,
                     required: {

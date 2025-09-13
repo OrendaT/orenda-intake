@@ -10,7 +10,7 @@ import type {
 import ReactInputMask from 'react-input-mask';
 
 type Option = {
-  label?: string;
+  label?: string | ReactNode;
   value: string;
   readonly?: boolean;
   hiddenSection?: ReactNode;

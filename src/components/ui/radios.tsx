@@ -61,15 +61,15 @@ const Radios = ({
             <label
               key={id}
               className={cn(
-                'clamp-[text,sm,base] flex items-start gap-2 font-medium',
+                'clamp-[text,sm,base] flex items-start gap-2',
               )}
             >
               <input
                 {...props}
                 className='peer size-4 flex-shrink-0'
                 type='radio'
-                value={option}
-                data-option={option}
+                value={value}
+                data-option={value}
                 {...register(name, {
                   disabled: disabled,
                   required: {
