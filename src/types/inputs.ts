@@ -23,7 +23,7 @@ type NamePath =
 
 export type BaseFieldProps = {
   label?: string | ReactNode;
-  name: string | NamePath;
+  name: NamePath;
 
   customLabel?: string;
   showRequiredMark?: boolean;

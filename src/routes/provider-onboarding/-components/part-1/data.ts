@@ -18,10 +18,10 @@ export const states = {
 } as const;
 
 export const programs = [
-  { value: `Bachelor's (BSN)`, abbr: 'BSN' },
-  { value: `Master's (MSN)`, abbr: 'MSN' },
-  { value: `Doctorate (DNP)`, abbr: 'DNP' },
-  { value: `N/A`, abbr: '' },
+  { label: '', value: `Bachelor's (BSN)`, abbr: 'BSN' },
+  { label: '', value: `Master's (MSN)`, abbr: 'MSN' },
+  { label: '', value: `Doctorate (DNP)`, abbr: 'DNP' },
+  { label: 'N/A', value: '', abbr: '' },
 ] as const;
 
 export const statesOfLicenseOptions = Object.keys(states).map((state) => ({

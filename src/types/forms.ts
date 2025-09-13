@@ -120,6 +120,10 @@ type LicenseField =
   | 'DEA_state_number'
   | 'DEA_state_doc'
   | 'form_4NP_doc';
+
+export type NursingDegree = 'BSN' | 'MSN' | 'DNP';
+type NursingDegreeField = 'institution' | 'start_date' | 'end_date';
+
 export type LicenseSummaryField = 'license' | 'DEA' | 'practice_ind';
 
 export type ProviderOnboardingFormData = {
@@ -196,11 +200,18 @@ export type ProviderOnboardingFormData = {
   policy_agreement_signature: string;
 
   states_of_license: string[];
+
+  nursing_degrees: string[];
 } & {
   [K in `states_of_license__${StateCode}__${LicenseField}`]?: string;
 } & {
   [K in `states_of_license_summary__${StateCode}__${LicenseSummaryField}`]?: string;
+} & {
+  [K in `nursing_degrees_${NursingDegree}_${NursingDegreeField}`]?: string;
+} & {
+  [K in `health_specialties[${number}]`]?: string;
 };
+
 export type FormData =
   | IntakeFormData
   | CreditCardFormData

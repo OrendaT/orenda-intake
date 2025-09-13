@@ -34,7 +34,7 @@ const SelectCheckboxes = ({
   return (
     <div className={cn('mt-2 w-full', containerClassName)}>
       {label && (
-        <h3 className='label mb-4'>
+        <h3 className='label mb-4 relative'>
           {label}
           {required && showRequiredMark && <RequiredMark />}
         </h3>

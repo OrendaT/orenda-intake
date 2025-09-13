@@ -5,26 +5,27 @@ import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import { programs } from './data';
 import { YES_NO } from '@/lib/constants';
+import type { NursingDegree } from '@/types';
 
-const HiddenSection = ({ abbr }: { abbr: string }) => {
+const HiddenSection = ({ abbr }: { abbr: NursingDegree }) => {
   return (
     <>
       <Input
         containerClassName='mb-3'
         label='Institution'
-        name={`${abbr}_institution`}
+        name={`nursing_degrees_${abbr}_institution`}
         size='small'
       />
       <div className='mb-3 flex w-full flex-col items-start gap-x-10 gap-y-3 *:w-full sm:flex-row'>
         <DatePicker
           label='Start Date'
-          name={`${abbr}_highest_nursing_degree_start_date`}
+          name={`nursing_degrees_${abbr}_start_date`}
           format='MM/yyyy'
         />
 
         <DatePicker
           label='End Date'
-          name={`${abbr}_highest_nursing_degree_send_date`}
+          name={`nursing_degrees_${abbr}_end_date`}
           format='MM/yyyy'
         />
       </div>
@@ -33,16 +34,17 @@ const HiddenSection = ({ abbr }: { abbr: string }) => {
 };
 
 const ProgramsCOI = () => {
-  const options = programs.map(({ value, abbr }) => ({
+  const options = programs.map(({ label, value, abbr }) => ({
+    label,
     value,
-    hiddenSection: value !== 'N/A' && <HiddenSection abbr={abbr} />,
+    hiddenSection: value && abbr && <HiddenSection abbr={abbr} />,
   }));
 
   return (
     <fieldset className='fieldset'>
       <Checkboxes
         label=' Please provide program information with start and end dates'
-        name='highest_nursing_degree'
+        name='nursing_degrees'
         className='sm:grid-cols-1'
         options={options}
         hiddenSectionClassName='pb-1'

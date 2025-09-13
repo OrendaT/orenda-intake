@@ -9,17 +9,16 @@ import {
 } from '@/components/ui/table';
 import { flexRender, type Table as TTable } from '@tanstack/react-table';
 import { cn } from '@/lib/utils';
-import type { LicenseDea } from '@/types';
 import { nanoid } from 'nanoid';
 
-interface DataTableProps {
-  table: TTable<LicenseDea>;
+interface DataTableProps<T = unknown> {
+  table: TTable<T>;
   className?: string;
 }
 
-export default function DataTable({ table, className }: DataTableProps) {
+export default function DataTable<T>({ table, className }: DataTableProps<T>) {
   return (
-    <Table className={cn('group', className)}>
+    <Table className={cn(className)}>
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow className='hover:bg-transparent' key={headerGroup.id}>

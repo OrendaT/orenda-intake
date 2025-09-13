@@ -1,15 +1,10 @@
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
-import SelectCheckboxes from '@/components/ui/select-checkboxes';
 import { ethnicities, YES_NO } from '@/lib/constants';
 import Languages from './languages';
-import {
-  mentalHealthIssues,
-  mentalHealthSpecializations,
-  patientsAgeGroups,
-  treatmentApproaches,
-} from './data';
+import { patientsAgeGroups, treatmentApproaches } from './data';
 import Checkboxes from '@/components/ui/checkboxes';
+import HealthSpecialties from './health-specialties';
 
 const Part2 = () => {
   return (
@@ -36,26 +31,7 @@ const Part2 = () => {
         />
       </fieldset>
 
-      <fieldset className='fieldset'>
-        <SelectCheckboxes
-          label='Please choose your top 3 specialties'
-          name='health_conditions'
-          options={mentalHealthIssues}
-          validations={{
-            oneMore: (value) =>
-              value.length > 3 || 'Please select at least one more',
-          }}
-        />
-
-        <hr className='mt-5 border-[#B2B2B2]' />
-
-        <SelectCheckboxes
-          label='Which of these conditions are you comfortable/ experienced in handling?'
-          name='health_specialties'
-          options={mentalHealthSpecializations}
-        />
-      </fieldset>
-
+      <HealthSpecialties />
       <Languages />
 
       <fieldset className='fieldset'>
