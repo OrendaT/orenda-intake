@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { mentalHealthSpecializations as rows } from '../data';
+import { mentalHealthConditions as rows } from '../data';
 import { useFormContext } from 'react-hook-form';
 import type { ProviderOnboardingFormData } from '@/types';
 

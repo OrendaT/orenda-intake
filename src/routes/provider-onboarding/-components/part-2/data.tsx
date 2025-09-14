@@ -51,7 +51,7 @@ export const mentalHealthSpecialties = [
   { value: 'ADHD', readonly: true },
 ];
 
-export const mentalHealthSpecializations = [
+export const mentalHealthConditions = [
   { value: "Men's Health" },
   { value: 'Weight Management' },
   { value: 'Couples' },
