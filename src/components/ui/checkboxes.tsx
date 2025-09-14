@@ -31,7 +31,7 @@ const Checkboxes = ({
   const selected = watch(name);
   const includesOther =
     Array.isArray(selected) &&
-    (selected.includes('Other') || selected.includes('Others'));
+    (selected?.includes('Other') || selected?.includes('Others'));
 
   return (
     <div className={cn('mt-2 w-full', containerClassName)}>
@@ -44,7 +44,7 @@ const Checkboxes = ({
           const option = label || value;
           const id = name + value;
           const isChecked =
-            Array.isArray(selected) && selected.includes(option);
+            Array.isArray(selected) && selected?.includes(option);
 
           return (
             <div className='grid'>
@@ -93,7 +93,7 @@ const Checkboxes = ({
         <Input
           label={
             otherLabel ||
-            `${Array.isArray(selected) ? selected?.find((val: string) => val.includes('Other')) : selected}? Please specify`
+            `${Array.isArray(selected) ? selected?.find((val: string) => val?.includes('Other')) : selected}? Please specify`
           }
           name={otherName || ((name + '_other') as CheckboxProps['name'])}
           required={includesOther}

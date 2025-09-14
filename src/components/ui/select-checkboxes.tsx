@@ -29,7 +29,7 @@ const SelectCheckboxes = ({
   const selected = watch(name);
   const includesOther =
     Array.isArray(selected) &&
-    (selected.includes('Other') || selected.includes('Others'));
+    (selected?.includes('Other') || selected?.includes('Others'));
 
   return (
     <div className={cn('mt-2 w-full', containerClassName)}>
@@ -83,7 +83,7 @@ const SelectCheckboxes = ({
         <Input
           label={
             otherLabel ||
-            `${Array.isArray(selected) ? selected?.find((val: string) => val.includes('Other')) : selected}? Please specify`
+            `${Array.isArray(selected) ? selected?.find((val: string) => val?.includes('Other')) : selected}? Please specify`
           }
           name={otherName || ((name + '_other') as CheckboxProps['name'])}
           required={includesOther}

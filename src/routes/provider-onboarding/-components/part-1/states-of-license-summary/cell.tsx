@@ -21,7 +21,7 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
   const value = watch(fieldName);
   const selectedStates = watch('states_of_license') ?? [];
   const state = statesOfLicenseOptions.find(({ value }) =>
-    value.includes(row),
+    value?.includes(row),
   )?.value;
 
   return (
@@ -52,7 +52,7 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
               setValue(`states_of_license_summary__${row}__DEA`, '');
             }
           } else if (parentColumn === 'DEA' && state) {
-            const isSelectedState = selectedStates.includes(state);
+            const isSelectedState = selectedStates?.includes(state);
             if (isSelectedState)
               if (target.checked && columnValue === 'Complete') {
                 setValue(`states_of_license__${row}__has_DEA`, 'Yes');
