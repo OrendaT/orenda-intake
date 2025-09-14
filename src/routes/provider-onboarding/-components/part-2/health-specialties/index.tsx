@@ -1,5 +1,5 @@
 import SelectCheckboxes from '@/components/ui/select-checkboxes';
-import { mentalHealthIssues } from '../data';
+import { mentalHealthSpecialties } from '../data';
 import RequiredMark from '@/components/ui/required-mark';
 import SpecialtiesTable from './specialties-table';
 
@@ -8,8 +8,8 @@ const HealthSpecialties = () => {
     <fieldset className='fieldset'>
       <SelectCheckboxes
         label='Please choose your top 3 specialties'
-        name='health_conditions'
-        options={mentalHealthIssues}
+        name='health_specialties'
+        options={mentalHealthSpecialties}
         validations={{
           oneMore: (value) =>
             value.length > 3 || 'Please select at least one more',

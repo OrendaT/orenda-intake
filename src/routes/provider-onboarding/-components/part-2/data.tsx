@@ -5,7 +5,7 @@ export const patientsAgeGroups = [
   { value: 'Seniors (65+ yrs)' },
 ];
 
-export const mentalHealthIssues = [
+export const mentalHealthSpecialties = [
   { value: 'Adjustment Disorder' },
   { value: 'Anger Management' },
   { value: 'Autism Spectrum Disorders (ASD)' },

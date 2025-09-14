@@ -13,34 +13,39 @@ import type { ProviderOnboardingFormData } from '@/types';
 const ratings = ['1', '2', '3', '4'];
 
 const SpecialtiesTable = () => {
-  const { register, watch } = useFormContext<ProviderOnboardingFormData>();
-
-  console.log(watch('health_specialties'));
+  const { register } = useFormContext<ProviderOnboardingFormData>();
 
   return (
-    <Table className='border-none border-spacing-y-1 border-separate'>
+    <Table className='border-separate border-spacing-y-1 border-none'>
       <TableHeader>
         <TableRow className=''>
-          <TableHead className='border-b border-x-0 border-t-0 h-5'></TableHead>
+          <TableHead className='h-5 border-x-0 border-t-0 border-b'></TableHead>
           {ratings.map((heading, index) => (
-            <TableHead className='border-b border-x-0 border-t-0 h-5 text-primary' key={index}>{heading}</TableHead>
+            <TableHead
+              className='text-primary h-5 border-x-0 border-t-0 border-b'
+              key={index}
+            >
+              {heading}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
         {rows.map(({ value: specialty }, index) => (
           <TableRow
-            className='bg-lavender-mist/15 border-none hover:bg-lavender-mist/30 transition-colors duration-150'
+            className='bg-lavender-mist/15 hover:bg-lavender-mist/30 border-none transition-colors duration-150'
             key={specialty}
           >
-            <TableCell className='text-left font-medium border-none py-2 rounded-l'>{specialty}</TableCell>
+            <TableCell className='rounded-l border-none py-2 text-left font-medium'>
+              {specialty}
+            </TableCell>
             {ratings.map((rating) => (
               <TableCell className='border-none last:rounded-e'>
                 <label className='block px-4 pt-1'>
                   <input
                     type='radio'
                     value={`${specialty}, ${rating}`}
-                    {...register(`health_specialties[${index}]`)}
+                    {...register(`health_conditions[${index}]`)}
                   />
                 </label>
               </TableCell>

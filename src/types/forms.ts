@@ -179,8 +179,8 @@ export type ProviderOnboardingFormData = {
   proof_of_address_ID: string;
   patient_age_groups: string[];
 
-  health_conditions: string[];
   health_specialties: string[];
+  health_conditions: string[];
 
   speaks_additional_lang: string;
   additional_langs: string[];
@@ -210,7 +210,7 @@ export type ProviderOnboardingFormData = {
 } & {
   [K in `nursing_degrees_${NursingDegree}_${NursingDegreeField}`]?: string;
 } & {
-  [K in `health_specialties[${number}]`]?: string;
+  [K in `health_conditions[${number}]`]?: string;
 };
 
 export type FormData =
