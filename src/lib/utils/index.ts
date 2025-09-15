@@ -43,7 +43,10 @@ export const getLSItem = (key: string) => {
 
 export const removeItem = (key: string) => Cookies.remove(key);
 
-export const removeLSItem = (key: string) => localStorage.removeItem(key);
+export const removeLSItem = (key: string) => {
+  localStorage.removeItem(key);
+  console.log('removed');
+};
 
 export const isNumeric = (value: string | number) => {
   if (typeof value === 'number') return !isNaN(value);

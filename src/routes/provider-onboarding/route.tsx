@@ -49,25 +49,29 @@ function ProviderOnboardingForm() {
     defaultValues: defaultValues as OnboardingFormData,
   });
   const { handleSubmit, register, reset } = methods;
+
   const { mutateAsync: submitForm, isSuccess } = useSubmitForm({
     form: 'provider_onboarding',
     url: 'providers',
   });
+
   const resetSignature = useSignature((state) => state.resetSignature);
 
   const onSubmit = handleSubmit(async (data) => {
     // Parse the form data to ensure it matches the expected structure
     data = parseOnboardingFormData(data);
 
-    const res = await submitForm(data);
-
-    if (res?.data.success) {
-      removeItem(FORMS.provider_onboarding);
-      reset(initialValues);
-      removeLSItem(FORM_IDS.provider_onboarding);
-      resetSignature();
-    }
+    await submitForm(data, {
+      onSuccess: () => {
+        removeItem(FORMS.provider_onboarding);
+        reset(initialValues);
+        removeLSItem(FORM_IDS.provider_onboarding);
+        resetSignature();
+      },
+    });
   });
+
+  console.log('route re-render');
 
   return (
     <>
@@ -152,8 +156,8 @@ function ProviderOnboardingForm() {
             </form>
 
             <PersistFormValues
-              saveKey='provider_onboarding'
-              formID='provider_onboarding_id'
+              saveKey={FORMS.provider_onboarding}
+              formID={FORM_IDS.provider_onboarding}
               url='providers/pending-provider'
               fields={[
                 {

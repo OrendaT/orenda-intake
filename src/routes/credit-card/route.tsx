@@ -68,14 +68,14 @@ function CreditCard() {
 
   const onSubmit = handleSubmit(async (data) => {
     data = parseCCFormData(data);
-    const res = await submitForm(data);
-
-    if (res?.data.success) {
-      removeItem(FORMS.credit_card);
-      removeLSItem(FORM_IDS.credit_card);
-      resetSignature();
-      reset(initialValues);
-    }
+    await submitForm(data, {
+      onSuccess: () => {
+        removeItem(FORMS.credit_card);
+        removeLSItem(FORM_IDS.credit_card);
+        resetSignature();
+        reset(initialValues);
+      },
+    });
   });
 
   return (

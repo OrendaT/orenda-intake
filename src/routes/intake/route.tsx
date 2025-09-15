@@ -54,14 +54,14 @@ export function IntakeForm() {
     // parse intake form data
     data = parseIntakeFormData(data);
 
-    const res = await submitForm(data);
-
-    if (res?.data.success) {
-      removeItem(FORMS.intake);
-      reset(initialValues);
-      removeLSItem(FORM_IDS.intake);
-      resetSignature();
-    }
+    await submitForm(data, {
+      onSuccess: () => {
+        removeItem(FORMS.intake);
+        reset(initialValues);
+        removeLSItem(FORM_IDS.intake);
+        resetSignature();
+      },
+    });
   });
 
   return (
