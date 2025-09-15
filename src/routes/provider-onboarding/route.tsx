@@ -59,7 +59,6 @@ function ProviderOnboardingForm() {
     // Parse the form data to ensure it matches the expected structure
     data = parseOnboardingFormData(data);
 
-
     const res = await submitForm(data);
 
     if (res?.data.success) {
@@ -69,7 +68,6 @@ function ProviderOnboardingForm() {
       resetSignature();
     }
   });
-
 
   return (
     <>

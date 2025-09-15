@@ -1,7 +1,6 @@
 import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 import Button from './custom-button';
 import { checkErrors } from '@/lib/utils';
-import { useEffect } from 'react';
 
 const SubmitButton = () => {
   const { errors, isSubmitting } = useFormState();
@@ -9,8 +8,6 @@ const SubmitButton = () => {
   const policy = getValues('policy_agreement');
   const policy_agreement =
     useWatch({ name: 'policy_agreement', exact: true }) ?? policy;
-
-
 
   return (
     <Button

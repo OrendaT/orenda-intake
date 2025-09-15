@@ -21,7 +21,7 @@ const PersistFormValues = ({
   fields,
   keysToRemove,
 }: PersistFormValueProps) => {
-  const formState = useWatch<FormData>({exact: true}) as FormData;
+  const formState = useWatch<FormData>({ exact: true }) as FormData;
 
   const sanitizedState = sanitizeState(formState, keysToRemove);
 
