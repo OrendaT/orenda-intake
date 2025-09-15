@@ -1,15 +1,12 @@
-import type {
-  LicenseDea,
-  ProviderOnboardingFormData as FormData,
-} from '@/types';
+import type { LicenseDea, OnboardingFormData as FormData } from '@/types';
 import type { CellContext } from '@tanstack/react-table';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { LuCheck } from 'react-icons/lu';
 import { statesOfLicenseOptions } from '../data';
 
 const Cell = (info: CellContext<LicenseDea, unknown>) => {
   const { row: _row, column: _column } = info;
-  const { register, watch, setValue } = useFormContext<FormData>();
+  const { register, setValue } = useFormContext<FormData>();
 
   const row = _row.original.name;
   const parentColumn = _column.parent?.id;
@@ -18,8 +15,10 @@ const Cell = (info: CellContext<LicenseDea, unknown>) => {
   const fieldName =
     `states_of_license_summary__${row}__${parentColumn}` as keyof FormData;
 
-  const value = watch(fieldName);
-  const selectedStates = watch('states_of_license') ?? [];
+  const value = useWatch<FormData>({ name: fieldName, exact: true });
+  const selectedStates =
+    (useWatch<FormData>({ name: 'states_of_license', exact: true }) as string[]) ?? [];
+
   const state = statesOfLicenseOptions.find(({ value }) =>
     value?.includes(row),
   )?.value;

@@ -1,6 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { cn } from '../../lib/utils';
 import type { InputProps } from '@/types';
+import ErrorMessage from './error-message';
 
 const AgreementCheckbox = ({
   label,
@@ -11,7 +12,6 @@ const AgreementCheckbox = ({
 }: InputProps) => {
   const {
     register,
-    formState: { errors },
   } = useFormContext();
   return (
     <div>
@@ -32,9 +32,8 @@ const AgreementCheckbox = ({
         />
         {label}
       </label>
-      {errors?.[name]?.message && (
-        <p className='error px-3'>{errors?.[name]?.message.toString()}</p>
-      )}
+
+      <ErrorMessage name={name} className='px-3'/>
     </div>
   );
 };

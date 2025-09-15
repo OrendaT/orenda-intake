@@ -1,14 +1,16 @@
 import type {
   CreditCardFormData,
+  FieldConfig,
+  FormData,
   IntakeFormData,
-  ProviderOnboardingFormData,
+  OnboardingFormData,
 } from '@/types';
 import {
   convertBase64ToFile,
   convertFileListsToFiles,
   toUSDate,
 } from './conversion-utils';
-import { removeEmptyValues } from '.';
+import { isValidEmail, removeEmptyValues } from '.';
 
 export const parseIntakeFormData = (data: IntakeFormData) => {
   // replace actual value with other
@@ -56,7 +58,7 @@ export const parseCCFormData = (data: CreditCardFormData) => {
   return data;
 };
 
-export const parseOnboardingFormData = (data: ProviderOnboardingFormData) => {
+export const parseOnboardingFormData = (data: OnboardingFormData) => {
   // replace values with others value
   if (data.race_ethnicity_other) {
     data.race_ethnicity = data.race_ethnicity_other;
@@ -79,3 +81,59 @@ export const parseOnboardingFormData = (data: ProviderOnboardingFormData) => {
 
   return data;
 };
+
+//
+export const checkFormData = (formState: FormData, fields: FieldConfig[]) => {
+  const data: Record<string, unknown> = {};
+  let isPendingForm = true;
+
+  for (const { key, type, noSend } of fields) {
+    const value = formState[key as keyof FormData];
+
+    switch (type) {
+      case 'string':
+        if (typeof value !== 'string' || value.trim().length <= 3) {
+          isPendingForm = false;
+        }
+        break;
+
+      case 'array':
+        if (!Array.isArray(value) || value.length <= 3) {
+          isPendingForm = false;
+        }
+        break;
+
+      case 'email':
+        if (typeof value !== 'string' || !isValidEmail(value)) {
+          isPendingForm = false;
+        }
+        break;
+
+      case 'date':
+        if (!value) {
+          isPendingForm = false;
+        } else {
+          if (!noSend) data[key] = toUSDate(value);
+          continue;
+        }
+        break;
+    }
+
+    if (noSend) continue;
+
+    data[key] = value;
+  }
+
+  return { data, isPendingForm };
+};
+
+export function sanitizeState<T extends Record<string, unknown>>(
+  formState: T,
+  keysToRemove?: string[],
+) {
+  if (keysToRemove)
+    for (const key of keysToRemove) {
+      delete formState[key];
+    }
+  return formState;
+}

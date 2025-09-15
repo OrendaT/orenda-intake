@@ -1,18 +1,13 @@
-import Button from '@/components/ui/custom-button';
 import DatePicker from '@/components/ui/date-picker';
 import IMask from '@/components/ui/imask';
 import Input from '@/components/ui/input';
 import PaymentIcon from '@/components/ui/payment-icon';
 import Select from '@/components/ui/select';
 import SignaturePad from '@/components/ui/signature';
-import useCreatePendingForm from '@/hooks/use-create-pending-form';
-import useAutoSave from '@/hooks/use-auto-save';
-import useSignature from '@/hooks/use-signature';
 import useSubmitForm from '@/hooks/use-submit-form';
 import { FORM_IDS, FORMS, US_STATES } from '@/lib/constants';
 import { creditCardInitialValues as initialValues } from '@/lib/definitions';
 import {
-  checkErrors,
   cn,
   getItem,
   parseCCFormData,
@@ -24,8 +19,11 @@ import { InputAdornment } from '@mui/material';
 import { createFileRoute } from '@tanstack/react-router';
 import { cvv, expirationDate, number } from 'card-validator';
 import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import SuccessModal from './-components/success-modal';
+import { useSignature } from '@/store/signature';
+import SubmitButton from '@/components/ui/submit-button';
+import PersistFormValues from '@/components/persist-form-values';
 
 export const Route = createFileRoute('/credit-card')({
   component: CreditCard,
@@ -44,20 +42,15 @@ function CreditCard() {
   const methods = useForm<CreditCardFormData>({
     defaultValues: defaultValues as CreditCardFormData,
   });
-  const { resetSignature } = useSignature();
+  const resetSignature = useSignature((state) => state.resetSignature);
   const { mutateAsync: submitForm, isSuccess } = useSubmitForm({
     form: 'credit_card',
     url: 'credit-cards',
   });
 
-  const {
-    handleSubmit,
-    watch,
-    reset,
-    formState: { isSubmitting, errors },
-  } = methods;
+  const { handleSubmit, reset } = methods;
 
-  const cc_number = watch('credit_card_number');
+  const cc_number = useWatch({ name: 'credit_card_number' });
   const [hideCardNumber, setHideCardNumber] = useState(true);
   const [cardDetails, setCardDetails] = useState(() => {
     const validation = number(cc_number);
@@ -79,30 +72,6 @@ function CreditCard() {
       resetSignature();
       reset(initialValues);
     }
-  });
-
-  const formState = watch();
-
-  useAutoSave({ key: FORMS.credit_card, value: formState });
-
-  const { patient_name, cardholder_name, date_of_birth, address_one, city } =
-    formState;
-
-  useCreatePendingForm({
-    formID: 'credit_card_id',
-    isPendingForm: Boolean(
-      patient_name?.length > 1 &&
-        cardholder_name?.length > 3 &&
-        date_of_birth &&
-        address_one &&
-        city,
-    ),
-    data: {
-      patient_name,
-      cardholder_name,
-      date_of_birth: new Date(date_of_birth).toLocaleDateString('en-US'),
-    },
-    url: 'credit-cards/pending-credit-card',
   });
 
   return (
@@ -321,15 +290,38 @@ function CreditCard() {
             </div>
 
             {/* Form submit button */}
-            <Button
-              type='submit'
-              className='mx-auto mt-12'
-              isLoading={isSubmitting}
-              onClick={() => checkErrors(errors)}
-            >
-              {isSubmitting ? 'Submitting' : 'Submit Form'}
-            </Button>
+            <SubmitButton />
           </form>
+
+          <PersistFormValues
+            saveKey='credit_card'
+            formID='credit_card_id'
+            url='credit-cards/pending-credit-card'
+            fields={[
+              {
+                key: 'patient_name',
+                type: 'string',
+              },
+              {
+                key: 'cardholder_name',
+                type: 'string',
+              },
+              {
+                key: 'date_of_birth',
+                type: 'date',
+              },
+              {
+                key: 'address_one',
+                type: 'string',
+                noSend: true,
+              },
+              {
+                key: 'city',
+                type: 'string',
+                noSend: true,
+              },
+            ]}
+          />
         </FormProvider>
       </main>
 

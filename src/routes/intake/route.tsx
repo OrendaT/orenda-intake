@@ -1,16 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { FormProvider, useForm } from 'react-hook-form';
-import Button from '@/components/ui/custom-button';
 import {
-  checkErrors,
   getItem,
-  isValidEmail,
   parseIntakeFormData,
   removeItem,
   removeLSItem,
 } from '@/lib/utils';
 import { FORM_IDS, FORMS } from '@/lib/constants';
-import useAutoSave from '@/hooks/use-auto-save';
 import useSubmitForm from '@/hooks/use-submit-form';
 import { intakeInitialValues as initialValues } from '@/lib/definitions';
 import {
@@ -23,10 +19,11 @@ import {
 } from '@/components';
 import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
-import useCreatePendingForm from '@/hooks/use-create-pending-form';
-import useSignature from '@/hooks/use-signature';
 import SuccessModal from '@/routes/intake/-components/success-modal';
 import type { IntakeFormData } from '@/types';
+import { useSignature } from '@/store/signature';
+import SubmitButton from '@/components/ui/submit-button';
+import PersistFormValues from '@/components/persist-form-values';
 
 export const Route = createFileRoute('/intake')({
   component: IntakeForm,
@@ -46,23 +43,12 @@ export function IntakeForm() {
   const methods = useForm<IntakeFormData>({
     defaultValues: defaultValues as IntakeFormData,
   });
-  const {
-    handleSubmit,
-    register,
-    reset,
-    watch,
-    formState: { errors, isSubmitting },
-  } = methods;
+  const { handleSubmit, register, reset } = methods;
   const { isSuccess, mutateAsync: submitForm } = useSubmitForm({
     form: 'intake',
     url: 'patients',
   });
-  const { resetSignature } = useSignature();
-
-  // Watch the policy agreement checkbox
-  const acceptedTerms =
-    watch('policy_agreement')?.[0] === 'I agree' ||
-    watch('policy_agreement') === 'I agree';
+  const resetSignature = useSignature((state) => state.resetSignature);
 
   const onSubmit = handleSubmit(async (data) => {
     // parse intake form data
@@ -76,32 +62,6 @@ export function IntakeForm() {
       removeLSItem(FORM_IDS.intake);
       resetSignature();
     }
-  });
-
-  const formState = watch();
-  const sanitizedState = {
-    ...formState,
-    policy_agreement: undefined,
-  };
-
-  useAutoSave({ value: sanitizedState });
-
-  const { first_name, last_name, email, phone } = formState;
-
-  useCreatePendingForm({
-    formID: 'intake_id',
-    isPendingForm: Boolean(
-      first_name?.length > 1 &&
-        last_name?.length > 1 &&
-        isValidEmail(email) &&
-        phone?.length > 7,
-    ),
-    data: {
-      first_name,
-      last_name,
-      email,
-    },
-    url: 'patients/pending-patient',
   });
 
   return (
@@ -205,16 +165,34 @@ export function IntakeForm() {
               </fieldset>
 
               {/* Form submit button */}
-              <Button
-                disabled={!acceptedTerms}
-                isLoading={isSubmitting}
-                onClick={() => checkErrors(errors)}
-                type='submit'
-                className='mx-auto mt-12'
-              >
-                {isSubmitting ? 'Submitting' : 'Submit Form'}
-              </Button>
+              <SubmitButton />
             </form>
+
+            <PersistFormValues
+              saveKey='intake'
+              formID='intake_id'
+              url='patients/pending-patient'
+              fields={[
+                {
+                  key: 'first_name',
+                  type: 'string',
+                },
+                {
+                  key: 'last_name',
+                  type: 'string',
+                },
+                {
+                  key: 'email',
+                  type: 'email',
+                },
+                {
+                  key: 'phone',
+                  type: 'string',
+                  noSend: true,
+                },
+              ]}
+              keysToRemove={['policy_agreement']}
+            />
           </FormProvider>
         </div>
       </main>

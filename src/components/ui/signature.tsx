@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormState } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
-import useSignature from '@/hooks/use-signature';
+
 import type { BaseFieldProps } from '@/types';
-import type { TSignature } from '@/context/signature-context';
+import { useSignature, type SignatureState } from '@/store/signature';
 
 const CANVAS_X = 1200; // Canvas width in pixels
 const CANVAS_Y = 320; // Canvas height in pixels
@@ -24,18 +24,17 @@ const Comp = ({
 }: {
   id: string;
   className?: string;
-  onChange: (value: TSignature) => void;
-  value: TSignature;
+  onChange: (value: SignatureState) => void;
+  value: SignatureState;
 }) => {
-  const { signature, setSignature } = useSignature();
+  const signature = useSignature((state) => state.signature);
+  const setSignature = useSignature((state) => state.setSignature);
 
   const [isClicked, setIsClicked] = useState(false);
   const [focused, setFocused] = useState(false);
-  const {
-    formState: { errors },
-  } = useFormContext();
+  const { errors } = useFormState();
 
-  const prevSignatureRef = useRef<TSignature>(signature);
+  const prevSignatureRef = useRef<SignatureState>(signature);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   /**
@@ -115,7 +114,7 @@ const Comp = ({
 
     // Update the previous signature reference
     prevSignatureRef.current = signature;
-  }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value.text]);
+  }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value?.text]);
 
   return (
     <div id={id} className={cn('signature', className)}>
@@ -198,7 +197,7 @@ export default function SignaturePad({
       rules={{
         required: { value: required, message: errorMsg },
         validate: (value) => {
-          if (required) return value.text.length > 0 || errorMsg;
+          if (required) return value?.text.length > 0 || errorMsg;
         },
         ...rules,
       }}
@@ -206,7 +205,7 @@ export default function SignaturePad({
         <Comp
           id={name}
           className={className}
-          onChange={(signature: TSignature) => onChange(signature)}
+          onChange={(signature: SignatureState) => onChange(signature)}
           value={value}
         />
       )}

@@ -1,4 +1,13 @@
 import { FORMS, US_STATES } from '@/lib/constants';
+import type { NamePath } from './inputs';
+
+export type ValidatorType = 'string' | 'email' | 'date' | 'array';
+// validator types
+export type FieldConfig = {
+  key: NamePath;
+  type: ValidatorType;
+  noSend?: boolean;
+};
 
 export type FormType = keyof typeof FORMS;
 
@@ -126,7 +135,7 @@ type NursingDegreeField = 'institution' | 'start_date' | 'end_date';
 
 export type LicenseSummaryField = 'license' | 'DEA' | 'practice_ind';
 
-export type ProviderOnboardingFormData = {
+export type OnboardingFormData = {
   name: string;
   email: string;
   all_names_used: string;
@@ -213,7 +222,4 @@ export type ProviderOnboardingFormData = {
   [K in `health_conditions[${number}]`]?: string;
 };
 
-export type FormData =
-  | IntakeFormData
-  | CreditCardFormData
-  | ProviderOnboardingFormData;
+export type FormData = IntakeFormData | CreditCardFormData | OnboardingFormData;

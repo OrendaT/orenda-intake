@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import RequiredMark from './required-mark';
 import type { CheckboxProps } from '@/types';
 import Input from './input';
 import HiddenSection from '../hidden-section';
+import ErrorMessage from './error-message';
 
 const Checkboxes = ({
   label,
@@ -24,11 +25,9 @@ const Checkboxes = ({
 }: CheckboxProps) => {
   const {
     register,
-    formState: { errors },
-    watch,
   } = useFormContext();
 
-  const selected = watch(name);
+  const selected = useWatch({ name, exact: true });
   const includesOther =
     Array.isArray(selected) &&
     (selected?.includes('Other') || selected?.includes('Others'));
@@ -44,14 +43,11 @@ const Checkboxes = ({
           const option = label || value;
           const id = name + value;
           const isChecked =
-            Array.isArray(selected) && selected?.includes(option);
+            Array.isArray(selected) && selected.includes(option);
 
           return (
-            <div className='grid'>
-              <label
-                key={id}
-                className={cn('flex items-start gap-2 leading-none')}
-              >
+            <div className='grid' key={id}>
+              <label className={cn('flex items-start gap-2 leading-none')}>
                 <input
                   {...props}
                   className={cn('peer size-3.5 flex-shrink-0', size)}
@@ -85,9 +81,7 @@ const Checkboxes = ({
         })}
       </div>
 
-      {errors?.[name]?.message && (
-        <p className='error px-3'>{errors?.[name]?.message.toString()}</p>
-      )}
+ <ErrorMessage name={name} className='px-3'/>
 
       <HiddenSection show={includesOther} className='pt-1 pb-3'>
         <Input

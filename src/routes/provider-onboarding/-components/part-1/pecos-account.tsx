@@ -1,8 +1,8 @@
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import { YES_NO } from '@/lib/constants';
-import type { ProviderOnboardingFormData } from '@/types';
-import { useFormContext } from 'react-hook-form';
+import type { OnboardingFormData } from '@/types';
+import { useWatch } from 'react-hook-form';
 
 const HiddenSection = ({ value }: { value: string }) => (
   <div className='space-y-3'>
@@ -42,8 +42,10 @@ const HiddenSection = ({ value }: { value: string }) => (
 );
 
 const PecosAccount = () => {
-  const { watch } = useFormContext<ProviderOnboardingFormData>();
-  const value = watch('consent_create_pecos_account');
+  const value = useWatch<OnboardingFormData>({
+    name: 'consent_create_pecos_account',
+    exact: true
+  }) as string;
 
   return (
     <fieldset className='fieldset'>

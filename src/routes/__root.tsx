@@ -1,5 +1,4 @@
 import { Toaster } from '@/components/ui/sonner';
-import { SignatureProvider } from '@/context/signature-context';
 import theme from '@/lib/mui-theme';
 import { ThemeProvider } from '@mui/material';
 import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router';
@@ -21,26 +20,24 @@ export const Route = createRootRoute({
     const clearForm: FormType | 'all' | undefined = import.meta.env
       .VITE_CLEAR_FORM;
 
-    console.log(clearForm);
-
     if (clearForm) {
       switch (clearForm) {
         case 'intake':
           removeItem(FORMS.intake);
-          return;
+          break;
         case 'credit_card':
           removeItem(FORMS.credit_card);
-          return;
+          break;
         case 'provider_onboarding':
           removeItem(FORMS.provider_onboarding);
-          return;
+          break;
         case 'all':
           removeItem(FORMS.intake);
           removeItem(FORMS.credit_card);
           removeItem(FORMS.provider_onboarding);
-          return;
+          break;
         default:
-          return;
+          break;
       }
     }
   },
@@ -60,9 +57,7 @@ function RootRoute() {
 
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <SignatureProvider>
-            <Outlet />
-          </SignatureProvider>
+          <Outlet />
 
           <Toaster richColors />
         </ThemeProvider>

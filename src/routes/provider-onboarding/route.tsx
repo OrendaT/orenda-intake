@@ -2,22 +2,15 @@ import { createFileRoute } from '@tanstack/react-router';
 
 // Importing necessary components and hooks
 import { FormProvider, useForm } from 'react-hook-form';
-import Button from '@/components/ui/custom-button';
 import {
-  checkErrors,
   getItem,
-  isValidEmail,
   parseOnboardingFormData,
   removeItem,
   removeLSItem,
-  toUSDate,
 } from '@/lib/utils';
 import { FORM_IDS, FORMS } from '@/lib/constants';
-import useAutoSave from '@/hooks/use-auto-save';
 import useSubmitForm from '@/hooks/use-submit-form';
-import useCreatePendingForm from '@/hooks/use-create-pending-form';
-import useSignature from '@/hooks/use-signature';
-import type { ProviderOnboardingFormData } from '@/types';
+import type { OnboardingFormData } from '@/types';
 import { providerOnboardingInitialValues as initialValues } from '@/lib/definitions';
 
 // Importing the component for Part 1 of the form
@@ -27,6 +20,9 @@ import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import { PolicyDialog } from '@/components';
 import SuccessModal from './-components/success-modal';
+import PersistFormValues from '@/components/persist-form-values';
+import SubmitButton from '@/components/ui/submit-button';
+import { useSignature } from '@/store/signature';
 
 export const Route = createFileRoute('/provider-onboarding')({
   component: ProviderOnboardingForm,
@@ -49,27 +45,20 @@ export const Route = createFileRoute('/provider-onboarding')({
 
 function ProviderOnboardingForm() {
   const defaultValues = getItem(FORMS.provider_onboarding) || initialValues;
-  const methods = useForm<ProviderOnboardingFormData>({
-    defaultValues: defaultValues as ProviderOnboardingFormData,
+  const methods = useForm<OnboardingFormData>({
+    defaultValues: defaultValues as OnboardingFormData,
   });
-  const {
-    handleSubmit,
-    register,
-    reset,
-    watch,
-    formState: { errors, isSubmitting },
-  } = methods;
+  const { handleSubmit, register, reset } = methods;
   const { mutateAsync: submitForm, isSuccess } = useSubmitForm({
     form: 'provider_onboarding',
     url: 'providers',
   });
-  const { resetSignature } = useSignature();
+  const resetSignature = useSignature((state) => state.resetSignature);
 
   const onSubmit = handleSubmit(async (data) => {
     // Parse the form data to ensure it matches the expected structure
     data = parseOnboardingFormData(data);
 
-    console.log(data);
 
     const res = await submitForm(data);
 
@@ -81,31 +70,6 @@ function ProviderOnboardingForm() {
     }
   });
 
-  const formState = watch();
-
-  useAutoSave({ key: FORMS.provider_onboarding, value: formState });
-
-  const { name, email, date_of_birth, state } = formState;
-
-  useCreatePendingForm({
-    formID: 'provider_onboarding_id',
-    isPendingForm: Boolean(
-      name?.length > 1 &&
-        isValidEmail(email) &&
-        date_of_birth &&
-        state,
-    ),
-    data: {
-      name,
-      email,
-      date_of_birth: toUSDate(date_of_birth),
-    },
-    url: 'providers/pending-provider',
-  });
-
-  const acceptedTerms =
-    watch('policy_agreement')?.[0] === 'I agree' ||
-    watch('policy_agreement') === 'I agree';
 
   return (
     <>
@@ -140,7 +104,7 @@ function ProviderOnboardingForm() {
                       type='checkbox'
                       value='I agree'
                       {...register('policy_agreement', {
-                        required: 'This field is required',
+                        required: 'Please agree to the terms and conditions',
                       })}
                     />
 
@@ -186,16 +150,34 @@ function ProviderOnboardingForm() {
               </fieldset>
 
               {/* Form submit button */}
-              <Button
-                disabled={!acceptedTerms}
-                isLoading={isSubmitting}
-                onClick={() => checkErrors(errors)}
-                type='submit'
-                className='mx-auto mt-12'
-              >
-                {isSubmitting ? 'Submitting' : 'Submit Form'}
-              </Button>
+              <SubmitButton />
             </form>
+
+            <PersistFormValues
+              saveKey='provider_onboarding'
+              formID='provider_onboarding_id'
+              url='providers/pending-provider'
+              fields={[
+                {
+                  key: 'name',
+                  type: 'string',
+                },
+                {
+                  key: 'email',
+                  type: 'email',
+                },
+                {
+                  key: 'date_of_birth',
+                  type: 'date',
+                },
+                {
+                  key: 'state',
+                  type: 'string',
+                  noSend: true,
+                },
+              ]}
+              keysToRemove={['policy_agreement']}
+            />
           </FormProvider>
         </div>
       </main>

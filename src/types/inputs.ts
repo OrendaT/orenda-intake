@@ -5,7 +5,7 @@ import type { ControllerProps, RegisterOptions } from 'react-hook-form';
 import type {
   CreditCardFormData,
   IntakeFormData,
-  ProviderOnboardingFormData,
+  OnboardingFormData,
 } from './forms';
 import ReactInputMask from 'react-input-mask';
 
@@ -16,10 +16,10 @@ type Option = {
   hiddenSection?: ReactNode;
 };
 
-type NamePath =
+export type NamePath =
   | keyof IntakeFormData
   | keyof CreditCardFormData
-  | keyof ProviderOnboardingFormData;
+  | keyof OnboardingFormData;
 
 export type BaseFieldProps = {
   label?: string | ReactNode;

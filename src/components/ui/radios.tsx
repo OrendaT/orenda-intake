@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import RequiredMark from './required-mark';
 import type { RadioProps } from '@/types';
 import HiddenSection from '../hidden-section';
+import ErrorMessage from './error-message';
 
 const Radios = ({
   name,
@@ -23,11 +24,9 @@ const Radios = ({
 }: RadioProps) => {
   const {
     register,
-    formState: { errors },
-    watch,
   } = useFormContext();
 
-  const selectedValue = watch(name);
+  const selectedValue = useWatch({ name, exact: true });
 
   const showHiddenSection = shouldShowHiddenSection(
     showHiddenSectionValue,
@@ -60,9 +59,7 @@ const Radios = ({
           return (
             <label
               key={id}
-              className={cn(
-                'clamp-[text,sm,base] flex items-start gap-2',
-              )}
+              className={cn('clamp-[text,sm,base] flex items-start gap-2')}
             >
               <input
                 {...props}
@@ -84,9 +81,7 @@ const Radios = ({
           );
         })}
       </div>
-      {errors?.[name]?.message && (
-        <p className='error px-3'>{errors?.[name]?.message.toString()}</p>
-      )}
+<ErrorMessage name={name} className='px-3'/>
 
       <HiddenSection show={showHiddenSection}>{hiddenSection}</HiddenSection>
     </div>

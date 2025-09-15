@@ -1,9 +1,10 @@
 import type { FileInputProps } from '@/types';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 import { LuUpload } from 'react-icons/lu';
 import RequiredMark from './required-mark';
 import { cn } from '@/lib/utils';
 import { acceptedFormats } from '@/lib/constants';
+import ErrorMessage from './error-message';
 
 const getFileTypes = (accept: string) => {
   const types = accept.split(',');
@@ -42,13 +43,10 @@ const FileInput = ({
   containerClassName,
   ...rest
 }: FileInputProps) => {
-  const {
-    register,
-    watch,
-    formState: { errors },
-  } = useFormContext();
+  const { register } = useFormContext();
 
-  const files = watch(name);
+  const { errors } = useFormState();
+  const files = useWatch({ name, exact: true });
 
   return (
     <div className={cn('mt-2', containerClassName)}>
@@ -91,9 +89,7 @@ const FileInput = ({
           {getFileTypes(accept).join(' or ')} Only • {getMaxSize(maxSize)} max
         </small>
 
-        {errors?.[name]?.message && (
-          <p className='error'>{errors?.[name]?.message.toString()}</p>
-        )}
+        <ErrorMessage name={name} />
 
         {/* Hidden File Input */}
         <input

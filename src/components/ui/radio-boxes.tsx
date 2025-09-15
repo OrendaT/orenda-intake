@@ -1,6 +1,7 @@
 import type { RadioProps } from "@/types";
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
+import ErrorMessage from "./error-message";
 
 const RadioBoxes = ({
   name,
@@ -14,7 +15,7 @@ const RadioBoxes = ({
 }: RadioProps) => {
   const {
     register,
-    formState: { errors },
+
   } = useFormContext();
 
   return (
@@ -48,9 +49,7 @@ const RadioBoxes = ({
           </label>
         );
       })}
-      {errors?.[name]?.message && (
-        <p className="px-3 error">{errors?.[name]?.message.toString()}</p>
-      )}
+<ErrorMessage name={name} className="px-3"/>
     </>
   );
 };

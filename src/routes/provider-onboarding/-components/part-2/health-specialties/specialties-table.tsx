@@ -8,12 +8,12 @@ import {
 } from '@/components/ui/table';
 import { mentalHealthConditions as rows } from '../data';
 import { useFormContext } from 'react-hook-form';
-import type { ProviderOnboardingFormData } from '@/types';
+import type { OnboardingFormData } from '@/types';
 
 const ratings = ['1', '2', '3', '4'];
 
 const SpecialtiesTable = () => {
-  const { register } = useFormContext<ProviderOnboardingFormData>();
+  const { register } = useFormContext<OnboardingFormData>();
 
   return (
     <Table className='border-separate border-spacing-y-1 border-none'>
@@ -23,7 +23,7 @@ const SpecialtiesTable = () => {
           {ratings.map((heading, index) => (
             <TableHead
               className='text-primary h-5 border-x-0 border-t-0 border-b'
-              key={index}
+              key={index + heading}
             >
               {heading}
             </TableHead>
@@ -40,7 +40,10 @@ const SpecialtiesTable = () => {
               {specialty}
             </TableCell>
             {ratings.map((rating) => (
-              <TableCell className='border-none last:rounded-e'>
+              <TableCell
+                key={rating + index + specialty}
+                className='border-none last:rounded-e'
+              >
                 <label className='block px-4 pt-1'>
                   <input
                     type='radio'

@@ -3,7 +3,7 @@ import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import { acceptForCredentialing, YES_NO } from '@/lib/constants';
-import type { ProviderOnboardingFormData as FormData } from '@/types';
+import type { OnboardingFormData as FormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 import StatesOfLicenseSummary from './states-of-license-summary';
 import { StatesContext } from './states-of-license-summary/states-context';

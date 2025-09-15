@@ -1,7 +1,7 @@
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
-import type { ProviderOnboardingFormData } from '@/types';
-import { useFormContext } from 'react-hook-form';
+import type { OnboardingFormData } from '@/types';
+import { useWatch } from 'react-hook-form';
 
 const hearAboutOptions = [
   { value: 'Job Board (e.g., Indeed, LinkedIn)' },
@@ -15,9 +15,10 @@ const hearAboutOptions = [
 ];
 
 const HearAbout = () => {
-  const { watch } = useFormContext<ProviderOnboardingFormData>();
-
-  const value = watch('referral_source');
+  const value = useWatch<OnboardingFormData>({
+    name: 'referral_source',
+    exact: true
+  });
   const isOthers = value === 'Others';
 
   return (

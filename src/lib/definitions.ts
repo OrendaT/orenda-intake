@@ -2,7 +2,7 @@ import type {
   CreditCardFormData,
   IntakeFormData,
   LicenseDea,
-  ProviderOnboardingFormData,
+  OnboardingFormData,
 } from '@/types';
 
 export const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -105,7 +105,7 @@ export const creditCardInitialValues: CreditCardFormData = {
   signature_date: new Date(),
 };
 
-export const providerOnboardingInitialValues: ProviderOnboardingFormData = {
+export const providerOnboardingInitialValues: OnboardingFormData = {
   name: '',
   email: '',
   all_names_used: '',
@@ -159,8 +159,8 @@ export const providerOnboardingInitialValues: ProviderOnboardingFormData = {
   proof_of_address_ID: '',
   patient_age_groups: [],
 
-  health_conditions: ['Depression', 'Anxiety', 'ADHD'],
-  health_specialties: [],
+  health_specialties: ['Depression', 'Anxiety', 'ADHD'],
+  health_conditions: [],
 
   speaks_additional_lang: '',
 

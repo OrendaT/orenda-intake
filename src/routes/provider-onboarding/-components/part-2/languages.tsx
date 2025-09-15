@@ -3,7 +3,7 @@ import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
 import Select from '@/components/ui/select';
 import { YES_NO } from '@/lib/constants';
-import type { ProviderOnboardingFormData } from '@/types';
+import type { OnboardingFormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 
 const languages = [
@@ -22,7 +22,7 @@ const languages = [
 ];
 
 const Languages = () => {
-  const { watch } = useFormContext<ProviderOnboardingFormData>();
+  const { watch } = useFormContext<OnboardingFormData>();
   const hasOthers = watch('additional_langs')?.includes('Others');
 
   return (
