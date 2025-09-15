@@ -1,4 +1,4 @@
 const RequiredMark = () => {
-  return <span className='ps-1 text-orenda-purple'>*</span>;
+  return <span className='text-orenda-purple ps-1'>*</span>;
 };
 export default RequiredMark;

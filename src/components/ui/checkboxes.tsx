@@ -23,9 +23,7 @@ const Checkboxes = ({
   hiddenSectionClassName,
   ...props
 }: CheckboxProps) => {
-  const {
-    register,
-  } = useFormContext();
+  const { register } = useFormContext();
 
   const selected = useWatch({ name, exact: true });
   const includesOther =
@@ -81,7 +79,7 @@ const Checkboxes = ({
         })}
       </div>
 
- <ErrorMessage name={name} className='px-3'/>
+      <ErrorMessage name={name} className='px-3' />
 
       <HiddenSection show={includesOther} className='pt-1 pb-3'>
         <Input

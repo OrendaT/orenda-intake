@@ -22,9 +22,7 @@ const Radios = ({
   containerClassName,
   ...props
 }: RadioProps) => {
-  const {
-    register,
-  } = useFormContext();
+  const { register } = useFormContext();
 
   const selectedValue = useWatch({ name, exact: true });
 
@@ -81,7 +79,7 @@ const Radios = ({
           );
         })}
       </div>
-<ErrorMessage name={name} className='px-3'/>
+      <ErrorMessage name={name} className='px-3' />
 
       <HiddenSection show={showHiddenSection}>{hiddenSection}</HiddenSection>
     </div>

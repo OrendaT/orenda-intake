@@ -10,9 +10,7 @@ const AgreementCheckbox = ({
   className,
   registerOptions,
 }: InputProps) => {
-  const {
-    register,
-  } = useFormContext();
+  const { register } = useFormContext();
   return (
     <div>
       <label
@@ -33,7 +31,7 @@ const AgreementCheckbox = ({
         {label}
       </label>
 
-      <ErrorMessage name={name} className='px-3'/>
+      <ErrorMessage name={name} className='px-3' />
     </div>
   );
 };

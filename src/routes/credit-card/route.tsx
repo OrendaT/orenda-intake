@@ -48,9 +48,13 @@ function CreditCard() {
     url: 'credit-cards',
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, control } = methods;
 
-  const cc_number = useWatch({ name: 'credit_card_number' });
+  const cc_number = useWatch({
+    name: 'credit_card_number',
+    control,
+    exact: true,
+  });
   const [hideCardNumber, setHideCardNumber] = useState(true);
   const [cardDetails, setCardDetails] = useState(() => {
     const validation = number(cc_number);
@@ -313,12 +317,12 @@ function CreditCard() {
               {
                 key: 'address_one',
                 type: 'string',
-                noSend: true,
+                sendToDB: false,
               },
               {
                 key: 'city',
                 type: 'string',
-                noSend: true,
+                sendToDB: false,
               },
             ]}
           />

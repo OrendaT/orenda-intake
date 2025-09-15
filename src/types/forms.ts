@@ -6,7 +6,7 @@ export type ValidatorType = 'string' | 'email' | 'date' | 'array';
 export type FieldConfig = {
   key: NamePath;
   type: ValidatorType;
-  noSend?: boolean;
+  sendToDB?: boolean;
 };
 
 export type FormType = keyof typeof FORMS;

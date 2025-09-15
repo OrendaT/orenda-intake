@@ -87,7 +87,7 @@ export const checkFormData = (formState: FormData, fields: FieldConfig[]) => {
   const data: Record<string, unknown> = {};
   let isPendingForm = true;
 
-  for (const { key, type, noSend } of fields) {
+  for (const { key, type, sendToDB = true } of fields) {
     const value = formState[key as keyof FormData];
 
     switch (type) {
@@ -113,13 +113,13 @@ export const checkFormData = (formState: FormData, fields: FieldConfig[]) => {
         if (!value) {
           isPendingForm = false;
         } else {
-          if (!noSend) data[key] = toUSDate(value);
+          if (sendToDB) data[key] = toUSDate(value);
           continue;
         }
         break;
     }
 
-    if (noSend) continue;
+    if (!sendToDB) continue;
 
     data[key] = value;
   }
@@ -132,8 +132,9 @@ export function sanitizeState<T extends Record<string, unknown>>(
   keysToRemove?: string[],
 ) {
   if (keysToRemove)
-    for (const key of keysToRemove) {
+    keysToRemove.forEach((key) => {
       delete formState[key];
-    }
+    });
+
   return formState;
 }

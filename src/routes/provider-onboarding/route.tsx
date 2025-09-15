@@ -171,7 +171,7 @@ function ProviderOnboardingForm() {
                 {
                   key: 'state',
                   type: 'string',
-                  noSend: true,
+                  sendToDB: false,
                 },
               ]}
               keysToRemove={['policy_agreement']}

@@ -17,10 +17,7 @@ const Error = (props: ErrorComponentProps) => {
         Error stack: {props.error?.stack}
       </p>
 
-      <Button
-        className='w-fit px-12'
-        onClick={() => location.reload()}
-      >
+      <Button className='w-fit px-12' onClick={() => location.reload()}>
         Refresh Page
       </Button>
     </div>

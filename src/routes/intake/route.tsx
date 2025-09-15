@@ -188,7 +188,7 @@ export function IntakeForm() {
                 {
                   key: 'phone',
                   type: 'string',
-                  noSend: true,
+                  sendToDB: false,
                 },
               ]}
               keysToRemove={['policy_agreement']}
