@@ -74,13 +74,12 @@ const Input = ({
                           ? 'hide the password'
                           : 'display the password'
                       }
-                      title={
-                        currentType === 'text'
-                          ? 'Hide'
-                          : 'Show'
-                      }
+                      title={currentType === 'text' ? 'Hide' : 'Show'}
                       onClick={togglePassword}
-                      className='*:clamp-[size,5,1.35rem]'
+                      className={cn(
+                        '*:clamp-[size,5,1.35rem]',
+                        error && '*:text-error-red',
+                      )}
                       edge='start'
                     >
                       {currentType === 'password' ? <FiEyeOff /> : <FiEye />}

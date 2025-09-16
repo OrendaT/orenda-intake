@@ -73,7 +73,7 @@ const SelectCheckboxes = ({
         })}
       </div>
 
-      <ErrorMessage name={name} className='mt-0 px-3' />
+      <ErrorMessage name={name} className='px-2' />
 
       <HiddenSection show={includesOther} className='pt-1 pb-3'>
         <Input
