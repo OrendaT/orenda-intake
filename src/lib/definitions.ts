@@ -141,16 +141,10 @@ export const providerOnboardingInitialValues: OnboardingFormData = {
   has_additional_qualifications: '',
   additional_qualifications: [],
   additional_langs: [],
-  additional_qualifications_doc: '',
+  additional_qualifications_docs: '',
 
   malpractice_insurance_doc: '',
   resume_cv_doc: '',
-
-  highest_nursing_degree: '',
-  highest_nursing_degree_other: '',
-  highest_nursing_degree_start_date: '',
-  highest_nursing_degree_end_date: '',
-  highest_nursing_degree_school: '',
 
   COI_coverage: '',
   COI_coverage_doc: '',
