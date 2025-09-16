@@ -2,7 +2,7 @@ import Checkboxes from '@/components/ui/checkboxes';
 import FileInput from '@/components/ui/file-input';
 import Input from '@/components/ui/input';
 import Radios from '@/components/ui/radios';
-import { acceptForCredentialing, YES_NO } from '@/lib/constants';
+import { YES_NO } from '@/lib/constants';
 import type { OnboardingFormData as FormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 import StatesOfLicenseSummary from './states-of-license-summary';
@@ -72,7 +72,6 @@ const CPHS = ({
     <FileInput
       heading={`Please upload your ${fileName} here`}
       name={`states_of_license__${abbr}__${abbr === 'NY' ? 'form_4NP' : 'collaborating_agreement'}_doc`}
-      accept={acceptForCredentialing}
       maxSize={0.3}
     />
   </div>
@@ -115,7 +114,6 @@ const StatesOfLicense = () => {
         <FileInput
           heading={`Please upload a copy of your ${abbr} State License`}
           name={`states_of_license__${abbr}__state_license_doc`}
-          accept={acceptForCredentialing}
           maxSize={0.3}
           containerClassName='my-4'
         />
@@ -156,7 +154,6 @@ const StatesOfLicense = () => {
               <FileInput
                 heading={`Please upload a copy of your ${abbr} State DEA`}
                 name={`states_of_license__${abbr}__DEA_state_doc`}
-                accept={acceptForCredentialing}
                 maxSize={0.3}
               />
             </div>
