@@ -9,7 +9,7 @@ const HiddenSection = () => (
 
     <FileInput
       heading='Copy of Additional qualification/certifications:'
-      name='additional_qualifications_doc'
+      name='additional_qualifications_docs'
       accept={acceptForCredentialing}
       maxSize={0.3}
       multiple

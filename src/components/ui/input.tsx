@@ -1,8 +1,10 @@
 import { cn, isValidEmail } from '@/lib/utils';
-import { TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import type { InputProps } from '@/types';
 import RequiredMark from './required-mark';
+import { useState } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Input = ({
   name,
@@ -18,6 +20,11 @@ const Input = ({
   registerOptions,
   ...inputProps
 }: InputProps) => {
+  const [currentType, setCurrentType] = useState(type);
+  const togglePassword = () => {
+    setCurrentType((prev) => (prev === 'password' ? 'text' : 'password'));
+  };
+
   return (
     <div className={cn('w-full', containerClassName)}>
       {customLabel && (
@@ -51,12 +58,37 @@ const Input = ({
             {...field}
             inputRef={ref}
             required={required}
-            type={type}
+            type={currentType}
             helperText={error ? error.message : null}
             id={id || name}
             error={!!error}
             variant={variant}
             fullWidth
+            slotProps={{
+              input: {
+                endAdornment: type === 'password' && (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label={
+                        currentType === 'text'
+                          ? 'hide the password'
+                          : 'display the password'
+                      }
+                      title={
+                        currentType === 'text'
+                          ? 'Hide'
+                          : 'Show'
+                      }
+                      onClick={togglePassword}
+                      className='*:size-[1.35rem]'
+                      edge='start'
+                    >
+                      {currentType === 'password' ? <FiEyeOff /> : <FiEye />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              },
+            }}
             {...inputProps}
           />
         )}

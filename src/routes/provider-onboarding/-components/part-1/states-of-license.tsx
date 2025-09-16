@@ -71,7 +71,7 @@ const CPHS = ({
     />
     <FileInput
       heading={`Please upload your ${fileName} here`}
-      name={`states_of_license__${abbr}__form_4NP_doc`}
+      name={`states_of_license__${abbr}__${abbr === 'NY' ? 'form_4NP' : 'collaborating_agreement'}_doc`}
       accept={acceptForCredentialing}
       maxSize={0.3}
     />

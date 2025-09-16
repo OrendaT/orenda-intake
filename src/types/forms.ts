@@ -128,7 +128,8 @@ type LicenseField =
   | 'has_DEA'
   | 'DEA_state_number'
   | 'DEA_state_doc'
-  | 'form_4NP_doc';
+  | 'form_4NP_doc'
+  | 'collaborating_agreement_doc';
 
 export type NursingDegree = 'BSN' | 'MSN' | 'DNP';
 type NursingDegreeField = 'institution' | 'start_date' | 'end_date';
@@ -170,16 +171,10 @@ export type OnboardingFormData = {
   pmhnp_bc_doc: string;
   has_additional_qualifications: string;
   additional_qualifications: string[];
-  additional_qualifications_doc: string;
+  additional_qualifications_docs: string;
 
   malpractice_insurance_doc: string;
   resume_cv_doc: string;
-
-  highest_nursing_degree: string;
-  highest_nursing_degree_other: string;
-  highest_nursing_degree_start_date: string;
-  highest_nursing_degree_end_date: string;
-  highest_nursing_degree_school: string;
 
   COI_coverage: string;
   COI_coverage_doc: string;
