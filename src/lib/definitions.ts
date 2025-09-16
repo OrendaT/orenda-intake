@@ -43,7 +43,6 @@ export const intakeInitialValues: IntakeFormData = {
   // New fields
   seen_health_professional: '',
   symptoms_past_six_months: [],
-  symptoms_other: '',
   current_medications: '',
   medication_allergies: '',
   alcohol_frequency: '',
@@ -53,7 +52,6 @@ export const intakeInitialValues: IntakeFormData = {
   hospitalized_psych_details: '',
   family_history_mental_illness: '',
   personal_medical_history: [],
-  personal_medical_history_other: '',
   height: '',
   weight: '',
   pregnant_or_breastfeeding: '',

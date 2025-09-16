@@ -99,7 +99,6 @@ const MentalHealth = () => {
           { value: 'None Apply' },
           { value: 'Other' },
         ]}
-        otherName='symptoms_other'
       />
 
       <Input

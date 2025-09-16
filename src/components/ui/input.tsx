@@ -80,7 +80,7 @@ const Input = ({
                           : 'Show'
                       }
                       onClick={togglePassword}
-                      className='*:size-[1.35rem]'
+                      className='*:clamp-[size,5,1.35rem]'
                       edge='start'
                     >
                       {currentType === 'password' ? <FiEyeOff /> : <FiEye />}

@@ -12,6 +12,8 @@ import {
 } from './conversion-utils';
 import { isValidEmail, removeEmptyValues } from '.';
 
+const _others = ['other', 'others'];
+
 export const parseIntakeFormData = (data: IntakeFormData) => {
   // replace actual value with other
   if (data.race_other) {
@@ -25,6 +27,26 @@ export const parseIntakeFormData = (data: IntakeFormData) => {
   if (data.preferred_pronouns_other) {
     data.preferred_pronouns = data.preferred_pronouns_other;
     delete data.preferred_pronouns_other;
+  }
+  if (data.symptoms_past_six_months_other) {
+    const others = data.symptoms_past_six_months_other.split(',');
+    data.symptoms_past_six_months = [
+      ...data.symptoms_past_six_months.filter(
+        (s) => !_others.includes(s.toLowerCase()),
+      ),
+      ...others,
+    ];
+    delete data.symptoms_past_six_months_other;
+  }
+  if (data.personal_medical_history_other) {
+    const others = data.personal_medical_history_other.split(',');
+    data.personal_medical_history = [
+      ...data.personal_medical_history.filter(
+        (s) => !_others.includes(s.toLowerCase()),
+      ),
+      ...others,
+    ];
+    delete data.personal_medical_history_other;
   }
 
   // convert Base64 strings to Files
@@ -65,8 +87,13 @@ export const parseOnboardingFormData = (data: OnboardingFormData) => {
     delete data.race_ethnicity_other;
   }
   if (data.additional_langs_other) {
-    const otherLanguages = data.additional_langs_other.split(',');
-    data.additional_langs = [...data.additional_langs, ...otherLanguages];
+    const others = data.additional_langs_other.split(',');
+    data.additional_langs = [
+      ...data.additional_langs.filter(
+        (s) => !_others.includes(s.toLowerCase()),
+      ),
+      ...others,
+    ];
     delete data.additional_langs_other;
   }
 

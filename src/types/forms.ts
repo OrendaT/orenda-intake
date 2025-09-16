@@ -53,7 +53,7 @@ export type IntakeFormData = {
   // New fields
   seen_health_professional: string;
   symptoms_past_six_months: string[];
-  symptoms_other: string;
+  symptoms_past_six_months_other?: string;
   current_medications: string;
   medication_allergies: string;
   alcohol_frequency: string;
@@ -63,7 +63,7 @@ export type IntakeFormData = {
   hospitalized_psych_details: string;
   family_history_mental_illness: string;
   personal_medical_history: string[];
-  personal_medical_history_other: string;
+  personal_medical_history_other?: string;
   height: string;
   weight: string;
   pregnant_or_breastfeeding: string;

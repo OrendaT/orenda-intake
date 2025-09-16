@@ -80,7 +80,7 @@ const FileInput = ({
             {[...files].map((file: File) => (
               <li
                 key={file.name}
-                className='text-orenda-green truncate text-sm font-medium'
+                className='text-orenda-green text-sm font-medium'
               >
                 {file?.name}
               </li>
