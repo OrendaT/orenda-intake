@@ -1,13 +1,17 @@
 import { useFormContext, useFormState, useWatch } from 'react-hook-form';
-import Button from './custom-button';
 import { checkErrors } from '@/lib/utils';
+import Button from './ui/custom-button';
 
 const SubmitButton = () => {
   const { errors, isSubmitting } = useFormState();
   const { getValues } = useFormContext();
-  const policy = getValues('policy_agreement');
-  const policy_agreement =
-    useWatch({ name: 'policy_agreement', exact: true }) ?? policy;
+
+  // Only try to get/watch if the field exists
+  const hasPolicyAgreement = 'policy_agreement' in getValues();
+  const policy_agreement = hasPolicyAgreement
+    ? (useWatch({ name: 'policy_agreement', exact: true }) ??
+      getValues('policy_agreement'))
+    : true; // default to true if field not present
 
   return (
     <Button
@@ -21,4 +25,5 @@ const SubmitButton = () => {
     </Button>
   );
 };
+
 export default SubmitButton;

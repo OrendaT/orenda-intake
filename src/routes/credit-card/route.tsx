@@ -22,7 +22,7 @@ import { useState } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import SuccessModal from './-components/success-modal';
 import { useSignature } from '@/store/signature';
-import SubmitButton from '@/components/ui/submit-button';
+import SubmitButton from '@/components/submit-button';
 import PersistFormValues from '@/components/persist-form-values';
 
 export const Route = createFileRoute('/credit-card')({

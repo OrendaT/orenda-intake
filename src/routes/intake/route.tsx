@@ -22,7 +22,7 @@ import ResponsiveTooltip from '@/components/responsive-tooltip';
 import SuccessModal from '@/routes/intake/-components/success-modal';
 import type { IntakeFormData } from '@/types';
 import { useSignature } from '@/store/signature';
-import SubmitButton from '@/components/ui/submit-button';
+import SubmitButton from '@/components/submit-button';
 import PersistFormValues from '@/components/persist-form-values';
 
 export const Route = createFileRoute('/intake')({

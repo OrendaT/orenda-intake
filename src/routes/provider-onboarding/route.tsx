@@ -21,7 +21,7 @@ import ResponsiveTooltip from '@/components/responsive-tooltip';
 import { PolicyDialog } from '@/components';
 import SuccessModal from './-components/success-modal';
 import PersistFormValues from '@/components/persist-form-values';
-import SubmitButton from '@/components/ui/submit-button';
+import SubmitButton from '@/components/submit-button';
 import { useSignature } from '@/store/signature';
 
 export const Route = createFileRoute('/provider-onboarding')({
