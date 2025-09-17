@@ -113,7 +113,6 @@ export const parseOnboardingFormData = (data: OnboardingFormData) => {
   return data;
 };
 
-//
 export const checkFormData = (formState: FormData, fields: FieldConfig[]) => {
   const data: Record<string, unknown> = {};
   let isPendingForm = true;
