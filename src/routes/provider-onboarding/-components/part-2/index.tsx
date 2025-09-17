@@ -50,7 +50,7 @@ const Part2 = () => {
 
       <fieldset className='fieldset'>
         <Radios
-          label='Are you interested in providing Ketamine-Assisted Therapy? (We collaborate with Wondermed and Minbloom, two leading providers in the psychedelic space. We offer support through training, additional insurance, and other resources related to ketamine treatment)'
+          label='Are you interested in providing Ketamine-Assisted Therapy? (We collaborate with Wondermed and Mindbloom, two leading providers in the psychedelic space. We offer support through training, additional insurance, and other resources related to ketamine treatment)'
           name='ketamine_assisted_therapy'
           options={[
             ...YES_NO,

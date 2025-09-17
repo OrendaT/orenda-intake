@@ -74,3 +74,13 @@ export const convertBase64ToFile = <T>(obj: Record<string, unknown>): T => {
 
   return obj as T;
 };
+
+export const parseDates = <T>(obj: Record<string, unknown>): T => {
+  Object.entries(obj).forEach(([key, value]) => {
+    if (value && value instanceof Date && !isNaN(value.getTime())) {
+      obj[key] = toUSDate(value);
+    }
+  });
+
+  return obj as T;
+};

@@ -13,19 +13,19 @@ const HiddenSection = ({ abbr }: { abbr: NursingDegree }) => {
       <Input
         containerClassName='mb-3'
         label='Institution'
-        name={`nursing_degrees_${abbr}_institution`}
+        name={`nursing_degrees__${abbr}__institution`}
         size='small'
       />
       <div className='mb-3 flex w-full flex-col items-start gap-x-10 gap-y-3 *:w-full sm:flex-row'>
         <DatePicker
           label='Start Date'
-          name={`nursing_degrees_${abbr}_start_date`}
+          name={`nursing_degrees__${abbr}__start_date`}
           format='MM/yyyy'
         />
 
         <DatePicker
           label='End Date'
-          name={`nursing_degrees_${abbr}_end_date`}
+          name={`nursing_degrees__${abbr}__end_date`}
           format='MM/yyyy'
         />
       </div>

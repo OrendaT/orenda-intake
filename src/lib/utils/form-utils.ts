@@ -8,6 +8,7 @@ import type {
 import {
   convertBase64ToFile,
   convertFileListsToFiles,
+  parseDates,
   toUSDate,
 } from './conversion-utils';
 import { isValidEmail, removeEmptyValues } from '.';
@@ -55,8 +56,8 @@ export const parseIntakeFormData = (data: IntakeFormData) => {
   // convert FileLists to Files
   data = convertFileListsToFiles(data);
 
-  // parse DOB (convert date object to US date)
-  data.date_of_birth = toUSDate(data.date_of_birth);
+  // convert date objects to date string
+  data = parseDates(data);
 
   // remove empty values
   data = removeEmptyValues(data);
@@ -68,11 +69,8 @@ export const parseCCFormData = (data: CreditCardFormData) => {
   // convert Base64 strings to Files
   data = convertBase64ToFile(data);
 
-  // parse DOB date (convert date object to US date)
-  data.date_of_birth = toUSDate(data.date_of_birth);
-
-  // parse signature date (convert date object to US date)
-  data.signature_date = toUSDate(data.signature_date);
+  // convert date objects to date string
+  data = parseDates(data);
 
   // remove empty values
   data = removeEmptyValues(data);
@@ -97,11 +95,17 @@ export const parseOnboardingFormData = (data: OnboardingFormData) => {
     delete data.additional_langs_other;
   }
 
+  if (data.states_of_license) delete data.states_of_license;
+  if (data.nursing_degrees) delete data.nursing_degrees;
+
   // convert Base64 strings to Files
   data = convertBase64ToFile(data);
 
   // convert FileLists to Files
   data = convertFileListsToFiles(data);
+
+  // convert date objects to date string
+  data = parseDates(data);
 
   // remove empty values
   data = removeEmptyValues(data);

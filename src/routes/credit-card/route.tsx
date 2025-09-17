@@ -294,7 +294,7 @@ function CreditCard() {
             </div>
 
             {/* Form submit button */}
-            <SubmitButton />
+            <SubmitButton hasPolicy={false} />
           </form>
 
           <PersistFormValues

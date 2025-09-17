@@ -203,16 +203,16 @@ export type OnboardingFormData = {
   policy_agreement: string;
   policy_agreement_signature: string;
 
-  states_of_license: string[];
+  states_of_license?: string[];
 
-  nursing_degrees: string[];
+  nursing_degrees?: string[];
   clinical_experience_level: string;
 } & {
   [K in `states_of_license__${StateCode}__${LicenseField}`]?: string;
 } & {
   [K in `states_of_license_summary__${StateCode}__${LicenseSummaryField}`]?: string;
 } & {
-  [K in `nursing_degrees_${NursingDegree}_${NursingDegreeField}`]?: string;
+  [K in `nursing_degrees__${NursingDegree}__${NursingDegreeField}`]?: string;
 } & {
   [K in `health_conditions[${number}]`]?: string;
 };

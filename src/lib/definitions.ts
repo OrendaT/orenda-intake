@@ -4,6 +4,7 @@ import type {
   LicenseDea,
   OnboardingFormData,
 } from '@/types';
+import { toUSDate } from './utils';
 
 export const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -100,7 +101,7 @@ export const creditCardInitialValues: CreditCardFormData = {
   credit_card_csv: '',
 
   signature: '',
-  signature_date: new Date(),
+  signature_date: toUSDate(new Date()),
 };
 
 export const providerOnboardingInitialValues: OnboardingFormData = {
