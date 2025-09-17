@@ -96,6 +96,7 @@ const FileInput = ({
 
         {/* Hidden File Input */}
         <input
+          hidden
           id={name}
           type='file'
           {...register(name, {
