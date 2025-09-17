@@ -74,6 +74,7 @@ function CreditCard() {
         removeLSItem(FORM_IDS.credit_card);
         resetSignature();
         reset(initialValues);
+        scrollTo(0, 0);
       },
     });
   });

@@ -74,89 +74,91 @@ const CPHS = ({
   </div>
 );
 
-const StatesOfLicense = () => {
+const HiddenSection = ({ val }: { val: keyof typeof states }) => {
   const { setValue } = useFormContext<FormData>();
 
-  const HiddenSection = ({ val }: { val: keyof typeof states }) => {
-    const { name, abbr } = states[val];
+  const { name, abbr } = states[val];
 
-    const fileName = abbr === 'NY' ? '4NP' : ' collaborative agreement';
-    const options = collaboratingPhysicianOptions(fileName);
+  const fileName = abbr === 'NY' ? '4NP' : ' collaborative agreement';
+  const options = collaboratingPhysicianOptions(fileName);
 
-    return (
-      <>
-        <h3 className='relative mx-auto mt-4 mb-6 flex h-px w-full items-center bg-[#B2B2B2]'>
-          <span className='absolute right-1/2 translate-x-1/2 bg-white px-4 text-center font-medium'>
-            For {name}
-          </span>
-        </h3>
+  return (
+    <>
+      <h3 className='relative mx-auto mt-4 mb-6 flex h-px w-full items-center bg-[#B2B2B2]'>
+        <span className='absolute right-1/2 translate-x-1/2 bg-white px-4 text-center font-medium'>
+          For {name}
+        </span>
+      </h3>
 
-        <p className='clamp-[text,xs,sm] mb-2 font-bold'>
-          If you are a {abbr} provider and are not yet practicing independently,
-          please let us know your current status regarding collaborating
-          physician agreements for the State of {name}
-          .*
-        </p>
+      <p className='clamp-[text,xs,sm] mb-2 font-bold'>
+        If you are a {abbr} provider and are not yet practicing independently,
+        please let us know your current status regarding collaborating physician
+        agreements for the State of {name}
+        .*
+      </p>
 
-        <Radios
-          className='sm:grid-cols-1'
-          name={`states_of_license__${abbr}__collaborating_physician`}
-          options={options}
-          showHiddenSectionValue={1}
-          hiddenSection={<CPHS abbr={abbr} fileName={fileName} />}
-        />
+      <Radios
+        className='sm:grid-cols-1'
+        name={`states_of_license__${abbr}__collaborating_physician`}
+        options={options}
+        showHiddenSectionValue={1}
+        hiddenSection={<CPHS abbr={abbr} fileName={fileName} />}
+      />
 
-        <FileInput
-          heading={`Please upload a copy of your ${abbr} State License`}
-          name={`states_of_license__${abbr}__state_license_doc`}
-          maxSize={0.3}
-          containerClassName='my-4'
-        />
+      <FileInput
+        heading={`Please upload a copy of your ${abbr} State License`}
+        name={`states_of_license__${abbr}__state_license_doc`}
+        maxSize={0.3}
+        containerClassName='my-4'
+      />
 
-        <Radios
-          label={`Please do you have a DEA in ${abbr}?`}
-          name={`states_of_license__${abbr}__has_DEA`}
-          options={YES_NO}
-          showHiddenSectionValue={0}
-          registerOptions={{
-            shouldUnregister: true,
-          }}
-          onClick={(event) => {
-            const target = event.target as HTMLInputElement;
-            const option = target.dataset.option;
+      <Radios
+        label={`Please do you have a DEA in ${abbr}?`}
+        name={`states_of_license__${abbr}__has_DEA`}
+        options={YES_NO}
+        showHiddenSectionValue={0}
+        registerOptions={{
+          shouldUnregister: true,
+        }}
+        onClick={(event) => {
+          const target = event.target as HTMLInputElement;
+          const option = target.dataset.option;
 
-            const fieldName =
-              `states_of_license_summary__${abbr}__DEA` as keyof FormData;
+          const fieldName =
+            `states_of_license_summary__${abbr}__DEA` as keyof FormData;
 
-            if (option === 'Yes') {
-              setValue(fieldName, 'Complete');
-            } else {
-              setValue(fieldName, '');
-            }
-          }}
-          hiddenSection={
-            <div className='!space-y-4'>
-              <Input
-                label={`${abbr} State DEA Number`}
-                name={`states_of_license__${abbr}__DEA_state_number`}
-                containerClassName='mb-4'
-                slotProps={{
-                  htmlInput: {
-                    maxLength: 9,
-                  },
-                }}
-              />
-              <FileInput
-                heading={`Please upload a copy of your ${abbr} State DEA`}
-                name={`states_of_license__${abbr}__DEA_state_doc`}
-                maxSize={0.3}
-              />
-            </div>
+          if (option === 'Yes') {
+            setValue(fieldName, 'Complete');
+          } else {
+            setValue(fieldName, '');
           }
-        />
-      </>
-    );
-  };
+        }}
+        hiddenSection={
+          <div className='!space-y-4'>
+            <Input
+              label={`${abbr} State DEA Number`}
+              name={`states_of_license__${abbr}__DEA_state_number`}
+              containerClassName='mb-4'
+              slotProps={{
+                htmlInput: {
+                  maxLength: 9,
+                },
+              }}
+            />
+            <FileInput
+              heading={`Please upload a copy of your ${abbr} State DEA`}
+              name={`states_of_license__${abbr}__DEA_state_doc`}
+              maxSize={0.3}
+            />
+          </div>
+        }
+      />
+    </>
+  );
+};
+
+const StatesOfLicense = () => {
+  const { setValue } = useFormContext<FormData>();
 
   const options = statesOfLicenseOptions.map(({ value }) => ({
     value,

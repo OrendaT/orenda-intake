@@ -67,6 +67,7 @@ function ProviderOnboardingForm() {
         reset(initialValues);
         removeLSItem(FORM_IDS.provider_onboarding);
         resetSignature();
+        scrollTo(0, 0);
       },
     });
   });

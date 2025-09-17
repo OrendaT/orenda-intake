@@ -60,6 +60,7 @@ export function IntakeForm() {
         reset(initialValues);
         removeLSItem(FORM_IDS.intake);
         resetSignature();
+        scrollTo(0, 0);
       },
     });
   });
