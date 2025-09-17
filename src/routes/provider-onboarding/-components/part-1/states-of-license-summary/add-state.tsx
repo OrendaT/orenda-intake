@@ -10,22 +10,18 @@ import {
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useState } from 'react';
 import { LuPlus } from 'react-icons/lu';
-import { useStates } from './states-context';
 import { US_STATES } from '@/lib/constants';
 import type { LicenseDea } from '@/types';
+import { useStates } from '@/store/states-of-license-summary';
 
 const AddState = () => {
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<LicenseDea['name']>();
 
-  const { setStates } = useStates();
+  const addState = useStates((s) => s.addState);
 
   const submit = () => {
-    if (state)
-      setStates((prev) => {
-        const hasState = prev.find((s) => s.name === state);
-        return hasState ? prev : [...prev, { name: state }];
-      });
+    if (state) addState({ name: state });
     setOpen(false);
   };
 

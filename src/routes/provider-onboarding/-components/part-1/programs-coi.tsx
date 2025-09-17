@@ -21,12 +21,14 @@ const HiddenSection = ({ abbr }: { abbr: NursingDegree }) => {
           label='Start Date'
           name={`nursing_degrees__${abbr}__start_date`}
           format='MM/yyyy'
+          maxDetail='year'
         />
 
         <DatePicker
           label='End Date'
           name={`nursing_degrees__${abbr}__end_date`}
           format='MM/yyyy'
+          maxDetail='year'
         />
       </div>
     </>

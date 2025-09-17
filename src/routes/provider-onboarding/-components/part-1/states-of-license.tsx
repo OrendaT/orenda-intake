@@ -6,9 +6,6 @@ import { YES_NO } from '@/lib/constants';
 import type { OnboardingFormData as FormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 import StatesOfLicenseSummary from './states-of-license-summary';
-import { StatesContext } from './states-of-license-summary/states-context';
-import { LDStates } from '@/lib/definitions';
-import { useState } from 'react';
 import IMask from '@/components/ui/imask';
 import { statesOfLicenseOptions, states } from './data';
 
@@ -78,8 +75,6 @@ const CPHS = ({
 );
 
 const StatesOfLicense = () => {
-  const [_states, setStates] = useState(() => LDStates);
-
   const { setValue } = useFormContext<FormData>();
 
   const HiddenSection = ({ val }: { val: keyof typeof states }) => {
@@ -169,38 +164,36 @@ const StatesOfLicense = () => {
   }));
 
   return (
-    <StatesContext value={{ states: _states, setStates }}>
-      <fieldset className='fieldset'>
-        <Checkboxes
-          label={
-            <>
-              Which of these states do you have a license in?{' '}
-              <small>(Select all states licensed)</small>
-            </>
+    <fieldset className='fieldset'>
+      <Checkboxes
+        label={
+          <>
+            Which of these states do you have a license in?{' '}
+            <small>(Select all states licensed)</small>
+          </>
+        }
+        name='states_of_license'
+        className='sm:grid-cols-1'
+        options={options}
+        onClick={(event) => {
+          const target = event.target as HTMLInputElement;
+          const abbr = target.dataset.option?.split('(')[1].slice(0, 2);
+          const licenseSummaryField =
+            `states_of_license_summary__${abbr}__license` as keyof FormData;
+          const deaSummaryField =
+            `states_of_license_summary__${abbr}__DEA` as keyof FormData;
+
+          if (target.checked) {
+            setValue(licenseSummaryField, 'Complete');
+          } else {
+            setValue(licenseSummaryField, '');
+            setValue(deaSummaryField, '');
           }
-          name='states_of_license'
-          className='sm:grid-cols-1'
-          options={options}
-          onClick={(event) => {
-            const target = event.target as HTMLInputElement;
-            const abbr = target.dataset.option?.split('(')[1].slice(0, 2);
-            const licenseSummaryField =
-              `states_of_license_summary__${abbr}__license` as keyof FormData;
-            const deaSummaryField =
-              `states_of_license_summary__${abbr}__DEA` as keyof FormData;
+        }}
+      />
 
-            if (target.checked) {
-              setValue(licenseSummaryField, 'Complete');
-            } else {
-              setValue(licenseSummaryField, '');
-              setValue(deaSummaryField, '');
-            }
-          }}
-        />
-
-        <StatesOfLicenseSummary />
-      </fieldset>
-    </StatesContext>
+      <StatesOfLicenseSummary />
+    </fieldset>
   );
 };
 export default StatesOfLicense;

@@ -6,6 +6,7 @@ import '@/styles/react-date-picker.css';
 import 'react-calendar/dist/Calendar.css';
 import RequiredMark from './required-mark';
 import type { TDatePickerProps } from '@/types';
+import { format } from 'date-fns';
 
 const DatePicker = ({
   label,
@@ -44,7 +45,15 @@ const DatePicker = ({
 
           <ReactDatePicker
             value={field.value}
-            onChange={field.onChange}
+            onChange={(date) => {
+              if (!date) {
+                field.onChange(date);
+                return;
+              }
+
+              const _date = format(date as Date, 'MM/dd/yyyy');
+              field.onChange(_date);
+            }}
             required={required}
             calendarIcon={<Calendar className='clamp-[size,4,1.2rem]' />}
             className={cn('font-dm-sans w-full border-b-2', {

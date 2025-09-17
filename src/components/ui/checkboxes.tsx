@@ -30,8 +30,7 @@ const Checkboxes = ({
     Array.isArray(selected) &&
     (selected?.includes('Other') || selected?.includes('Others'));
 
-  console.log('checkboxes re-render');
-
+ 
   return (
     <div className={cn('mt-2 w-full', containerClassName)}>
       <h3 className='label'>

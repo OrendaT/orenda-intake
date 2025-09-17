@@ -1,3 +1,5 @@
+import { format, isDate } from 'date-fns';
+
 export const convertToFormData = (obj: Record<string, unknown>) => {
   const formData = new FormData();
 
@@ -75,12 +77,21 @@ export const convertBase64ToFile = <T>(obj: Record<string, unknown>): T => {
   return obj as T;
 };
 
-export const parseDates = <T>(obj: Record<string, unknown>): T => {
-  Object.entries(obj).forEach(([key, value]) => {
-    if (value && value instanceof Date && !isNaN(value.getTime())) {
-      obj[key] = toUSDate(value);
-    }
-  });
+export const convertDatesToMonthYear = <T>(
+  obj: Record<string, unknown>,
+  keys: string[],
+): T => {
+  const result: Record<string, unknown> = { ...obj };
 
-  return obj as T;
+  for (const [key, value] of Object.entries(result)) {
+    if (value && typeof value === 'string' && isDate(new Date(value))) {
+      for (const _key of keys) {
+        if (key.includes(_key)) {
+          result[key] = format(new Date(value), 'MM/yyyy');
+        }
+      }
+    }
+  }
+
+  return result as T;
 };

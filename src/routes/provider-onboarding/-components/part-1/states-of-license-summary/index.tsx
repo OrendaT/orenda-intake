@@ -2,10 +2,10 @@ import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 import { columns } from './columns';
 import DataTable from './data-table';
-import { useStates } from './states-context';
+import { useStates } from '@/store/states-of-license-summary';
 
 const StatesOfLicenseSummary = () => {
-  const { states: data } = useStates();
+  const data = useStates((s) => s.states);
 
   const table = useReactTable({
     data,

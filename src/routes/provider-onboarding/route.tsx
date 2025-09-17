@@ -71,8 +71,6 @@ function ProviderOnboardingForm() {
     });
   });
 
-  console.log('route re-render');
-
   return (
     <>
       <main className='main'>
