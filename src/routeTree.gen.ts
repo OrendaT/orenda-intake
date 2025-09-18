@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProviderOnboardingRouteRouteImport } from './routes/provider-onboarding/route'
 import { Route as IntakeRouteRouteImport } from './routes/intake/route'
 import { Route as CreditCardRouteRouteImport } from './routes/credit-card/route'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ProviderOnboardingRouteRoute = ProviderOnboardingRouteRouteImport.update({
+  id: '/provider-onboarding',
+  path: '/provider-onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IntakeRouteRoute = IntakeRouteRouteImport.update({
   id: '/intake',
   path: '/intake',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
   '/intake': typeof IntakeRouteRoute
+  '/provider-onboarding': typeof ProviderOnboardingRouteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
   '/intake': typeof IntakeRouteRoute
+  '/provider-onboarding': typeof ProviderOnboardingRouteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
   '/intake': typeof IntakeRouteRoute
+  '/provider-onboarding': typeof ProviderOnboardingRouteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/credit-card' | '/intake'
+  fullPaths: '/' | '/credit-card' | '/intake' | '/provider-onboarding'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/credit-card' | '/intake'
-  id: '__root__' | '/' | '/credit-card' | '/intake'
+  to: '/' | '/credit-card' | '/intake' | '/provider-onboarding'
+  id: '__root__' | '/' | '/credit-card' | '/intake' | '/provider-onboarding'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CreditCardRouteRoute: typeof CreditCardRouteRoute
   IntakeRouteRoute: typeof IntakeRouteRoute
+  ProviderOnboardingRouteRoute: typeof ProviderOnboardingRouteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/provider-onboarding': {
+      id: '/provider-onboarding'
+      path: '/provider-onboarding'
+      fullPath: '/provider-onboarding'
+      preLoaderRoute: typeof ProviderOnboardingRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/intake': {
       id: '/intake'
       path: '/intake'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CreditCardRouteRoute: CreditCardRouteRoute,
   IntakeRouteRoute: IntakeRouteRoute,
+  ProviderOnboardingRouteRoute: ProviderOnboardingRouteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

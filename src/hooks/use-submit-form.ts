@@ -2,7 +2,7 @@ import axios from '@/lib/api/axios';
 import type { FORM_EPS } from '@/lib/api/endpoints';
 import { FORM_IDS } from '@/lib/constants';
 import { convertToFormData, getLSItem } from '@/lib/utils';
-import type { CreditCardFormData, IntakeFormData } from '@/types';
+import type { FormData } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
@@ -13,7 +13,7 @@ interface useSubmitFormProps {
 }
 
 const useSubmitForm = ({ form, url }: useSubmitFormProps) => {
-  const submitForm = async (data: IntakeFormData | CreditCardFormData) => {
+  const submitForm = async (data: FormData) => {
     const id = getLSItem(FORM_IDS[form]);
     const submitData = { ...data, id };
     const formData = convertToFormData(submitData);

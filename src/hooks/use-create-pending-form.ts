@@ -2,14 +2,14 @@ import axios from '@/lib/api/axios';
 import type { PENDING_FORM_EPS } from '@/lib/api/endpoints';
 import { FORM_IDS } from '@/lib/constants';
 import { convertToFormData, getLSItem, setLSItem } from '@/lib/utils';
-import type { CreditCardFormData, IntakeFormData } from '@/types';
-import { AxiosError } from 'axios';
+import type { FormData } from '@/types';
+import { isAxiosError } from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
 interface UseCreatePendingFormProps {
   formID: (typeof FORM_IDS)[keyof typeof FORM_IDS];
   isPendingForm: boolean;
-  data: Partial<IntakeFormData | CreditCardFormData>;
+  data: Partial<FormData>;
   url: (typeof PENDING_FORM_EPS)[keyof typeof PENDING_FORM_EPS];
 }
 
@@ -19,55 +19,65 @@ const useCreatePendingForm = ({
   data,
   url,
 }: UseCreatePendingFormProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [formId, setFormId] = useState(() => getLSItem(formID));
-  const [error, setError] = useState(null);
-
-  // Prevent multiple simultaneous calls to the api
+  const [state, setState] = useState({
+    isLoading: false,
+    isError: false,
+    error: null,
+    formId: getLSItem(formID),
+  });
   const isCreatingRef = useRef(false);
 
   useEffect(() => {
-    const createPendingPatient = async () => {
-      // Exit early if conditions aren't met
-      if (!isPendingForm || formId || isCreatingRef.current) {
+    const isMounted = true;
+
+    const createPendingForm = async () => {
+      if (
+        !isPendingForm ||
+        state.formId ||
+        isCreatingRef.current ||
+        !isMounted ||
+        state.isError
+      )
         return;
-      }
+
+      isCreatingRef.current = true;
+      setState((prev) => ({
+        ...prev,
+        isLoading: true,
+        isError: false,
+        error: null,
+      }));
 
       try {
-        isCreatingRef.current = true;
-        setIsLoading(true);
-        setIsError(false);
-        setError(null);
-
         const _data = convertToFormData(data);
-
         const res = await axios.post(url, _data);
 
-        if (res.data.success) {
+        if (res.data.success && isMounted) {
           setLSItem(formID, res.data.id);
-          setFormId(res.data.id);
+          setState((prev) => ({ ...prev, formId: res.data.id }));
         }
       } catch (err) {
-        setIsError(true);
-        setError(
-          err instanceof AxiosError
-            ? err?.response?.data
-            : err instanceof Error
-              ? err.message
-              : 'Something went wrong',
-        );
-        console.error('Failed to create pending patient', err);
+        const errorMsg = isAxiosError(err)
+          ? err.response?.data
+          : err instanceof Error
+            ? err.message
+            : 'Something went wrong';
+
+        if (isMounted) {
+          setState((prev) => ({ ...prev, isError: true, error: errorMsg }));
+        }
       } finally {
-        setIsLoading(false);
-        isCreatingRef.current = false;
+        if (isMounted) {
+          setState((prev) => ({ ...prev, isLoading: false }));
+          isCreatingRef.current = false;
+        }
       }
     };
 
-    createPendingPatient();
-  }, [data, url, isPendingForm, formId, formID]);
+    createPendingForm();
+  }, [isPendingForm, state.formId, data, url, formID]);
 
-  return { isLoading, isError, error, formId };
+  return state;
 };
 
 export default useCreatePendingForm;

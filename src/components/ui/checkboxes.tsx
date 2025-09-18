@@ -1,8 +1,10 @@
-import { cn } from "@/lib/utils";
-import { useFormContext } from "react-hook-form";
-import RequiredMark from "./required-mark";
-import type { CheckboxProps } from "@/types";
-import Input from "./input";
+import { cn } from '@/lib/utils';
+import { useFormContext, useWatch } from 'react-hook-form';
+import RequiredMark from './required-mark';
+import type { CheckboxProps } from '@/types';
+import Input from './input';
+import HiddenSection from '../hidden-section';
+import ErrorMessage from './error-message';
 
 const Checkboxes = ({
   label,
@@ -17,61 +19,80 @@ const Checkboxes = ({
   validations,
   otherLabel,
   otherName,
+  containerClassName,
+  hiddenSectionClassName,
+  ...props
 }: CheckboxProps) => {
-  const {
-    register,
-    formState: { errors },
-    watch,
-  } = useFormContext();
+  const { register } = useFormContext();
 
-  const selected = watch(name);
-  const includesOther = Array.isArray(selected) && selected.includes("Other");
+  const selected = useWatch({ name, exact: true });
+  const includesOther =
+    Array.isArray(selected) &&
+    (selected?.includes('Other') || selected?.includes('Others'));
 
+ 
   return (
-    <div>
-      <h3 className="label">
+    <div className={cn('mt-2 w-full', containerClassName)}>
+      <h3 className='label'>
         {label}
         {required && <RequiredMark />}
       </h3>
-      <div className={cn("grid gap-x-3 sm:grid-cols-2", className)}>
-        {options.map(({ label, value }) => {
+      <div className={cn('grid gap-3 sm:grid-cols-2', className)}>
+        {options.map(({ label, value, hiddenSection }) => {
           const option = label || value;
           const id = name + value;
+          const isChecked =
+            Array.isArray(selected) && selected.includes(option);
 
           return (
-            <div key={id} className={cn("flex items-baseline gap-2")}>
-              <input
-                id={id}
-                className={cn("peer flex-shrink-0", size)}
-                type="checkbox"
-                value={option}
-                {...register(name, {
-                  disabled: disabled,
-                  required: {
-                    value: required,
-                    message: errorMsg || "This field is required",
-                  },
-                  ...registerOptions,
-                  validate: validations,
-                })}
-              />
-              <label htmlFor={id}>{option}</label>
+            <div className='grid' key={id}>
+              <label className={cn('flex items-start gap-2 leading-none')}>
+                <input
+                  {...props}
+                  className={cn('peer size-3.5 flex-shrink-0', size)}
+                  data-option={value}
+                  type='checkbox'
+                  value={value}
+                  {...register(name, {
+                    disabled: disabled,
+                    required: {
+                      value: required,
+                      message: errorMsg || 'This field is required',
+                    },
+                    ...registerOptions,
+                    validate: validations,
+                  })}
+                />
+                <span className='-mt-px leading-none'>{option}</span>
+              </label>
+
+              <HiddenSection
+                className={cn(
+                  'ml-1.5 pt-0 before:left-0',
+                  hiddenSectionClassName,
+                )}
+                show={isChecked && Boolean(hiddenSection)}
+              >
+                {hiddenSection}
+              </HiddenSection>
             </div>
           );
         })}
       </div>
 
-      {errors?.[name]?.message && (
-        <p className="error px-3">{errors?.[name]?.message.toString()}</p>
-      )}
+      <ErrorMessage name={name} className='px-3' />
 
-      {includesOther && (
+      <HiddenSection show={includesOther} className='pt-1 pb-3'>
         <Input
-          label={otherLabel || "Other? Please specify"}
-          name={otherName || name + "_other"}
+          label={
+            otherLabel ||
+            `${Array.isArray(selected) ? selected?.find((val: string) => val?.includes('Other')) : selected}? Please specify`
+          }
+          name={otherName || ((name + '_other') as CheckboxProps['name'])}
           required={includesOther}
+          size='small'
         />
-      )}
+      </HiddenSection>
     </div>
   );
 };

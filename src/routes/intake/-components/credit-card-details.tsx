@@ -22,7 +22,7 @@ const CreditCardDetails = () => {
   });
 
   return (
-    <fieldset className='fieldset'>
+    <fieldset className='fieldset mb-10'>
       <h3 className='heading mt-4'>Credit Card Details</h3>
       <p className='clamp-[text,sm,base]'>
         Your copay/deductible is due at the time of your appointment. We require
@@ -44,8 +44,8 @@ const CreditCardDetails = () => {
             <span
               key={index}
               className={cn(
-                'bg-white/30 text-base tracking-tighter blur-[4px]',
-                cardDetails.number[index] === ' ' && 'w-2.5',
+                'clamp-[text,sm,base] bg-white/30 tracking-tighter blur-[4px]',
+                cardDetails.number[index] === ' ' && 'w-3',
               )}
             >
               {cardDetails.number[index]}

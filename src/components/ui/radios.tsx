@@ -1,7 +1,9 @@
-import { cn } from "@/lib/utils";
-import { useFormContext } from "react-hook-form";
-import RequiredMark from "./required-mark";
-import type { RadioProps } from "@/types";
+import { cn } from '@/lib/utils';
+import { useFormContext, useWatch } from 'react-hook-form';
+import RequiredMark from './required-mark';
+import type { RadioProps } from '@/types';
+import HiddenSection from '../hidden-section';
+import ErrorMessage from './error-message';
 
 const Radios = ({
   name,
@@ -12,37 +14,31 @@ const Radios = ({
   grid = true,
   required = true,
   showRequiredMark = true,
-  errorMsg = "This field is required",
+  errorMsg = 'This field is required',
   labelSuffix,
-  showHiddenSectionValue,
+  showHiddenSectionValue = false,
   hiddenSection,
   registerOptions,
   containerClassName,
+  ...props
 }: RadioProps) => {
-  const {
-    register,
-    formState: { errors },
-    watch,
-  } = useFormContext();
+  const { register } = useFormContext();
 
-  const selectedValue = watch(name);
+  const selectedValue = useWatch({ name, exact: true });
 
-  const showHiddenSection =
-    typeof showHiddenSectionValue === "number"
-      ? selectedValue === options[showHiddenSectionValue].value
-      : Array.isArray(showHiddenSectionValue)
-        ? showHiddenSectionValue.includes(selectedValue)
-        : typeof showHiddenSectionValue === "string"
-          ? selectedValue === showHiddenSectionValue
-          : false;
+  const showHiddenSection = shouldShowHiddenSection(
+    showHiddenSectionValue,
+    selectedValue,
+    options,
+  );
 
   return (
-    <div className={cn("w-full", containerClassName)}>
+    <div className={cn('mt-2 w-full', containerClassName)}>
       {label && (
-        <h3 className="label">
+        <h3 className='label'>
           {label}
           {required && showRequiredMark && <RequiredMark />}
-          <div className="inline-flex h-full flex-col items-center">
+          <div className='inline-flex h-full flex-col items-center'>
             {labelSuffix}
           </div>
         </h3>
@@ -50,26 +46,25 @@ const Radios = ({
       <div
         className={cn(
           grid
-            ? "grid gap-x-3 gap-y-1 sm:grid-cols-2"
-            : "flex items-center clamp-[gap,5,7]",
-          className
+            ? 'grid gap-x-3 gap-y-4 py-1 sm:grid-cols-2'
+            : 'clamp-[gap,5,7] flex items-center',
+          className,
         )}
       >
         {options.map(({ label, value }) => {
           const id = name + value;
           const option = label || value;
           return (
-            <div
+            <label
               key={id}
-              className={cn(
-                "flex items-center gap-2 font-medium clamp-[text,sm,base]"
-              )}
+              className={cn('clamp-[text,sm,base] flex items-start gap-2')}
             >
               <input
-                id={id}
-                className="peer size-4 flex-shrink-0"
-                type="radio"
-                value={option}
+                {...props}
+                className='peer size-4 flex-shrink-0'
+                type='radio'
+                value={value}
+                data-option={value}
                 {...register(name, {
                   disabled: disabled,
                   required: {
@@ -79,21 +74,47 @@ const Radios = ({
                   ...registerOptions,
                 })}
               />
-              <label htmlFor={name + option}>{option}</label>
-            </div>
+              <span className='-mt-[0.25px] leading-none'>{option}</span>
+            </label>
           );
         })}
       </div>
-      {errors?.[name]?.message && (
-        <p className="error px-3">{errors?.[name]?.message.toString()}</p>
-      )}
+      <ErrorMessage name={name} className='px-3' />
 
-      {showHiddenSection && (
-        <div className="hidden-section mt-5 bg-transparent">
-          {hiddenSection}
-        </div>
-      )}
+      <HiddenSection show={showHiddenSection}>{hiddenSection}</HiddenSection>
     </div>
   );
 };
 export default Radios;
+
+type ShowHiddenValue = string | number | (string | number)[] | boolean | null;
+
+function shouldShowHiddenSection(
+  showHiddenSectionValue: ShowHiddenValue,
+  selectedValue: unknown,
+  options: readonly { value: string }[],
+): boolean {
+  if (showHiddenSectionValue === null || showHiddenSectionValue === false) {
+    return false;
+  }
+
+  if (showHiddenSectionValue === true) {
+    return true;
+  }
+
+  const valuesToCheck = Array.isArray(showHiddenSectionValue)
+    ? showHiddenSectionValue
+    : [showHiddenSectionValue];
+
+  return valuesToCheck.some((val) => {
+    if (typeof val === 'string') {
+      return selectedValue === val;
+    }
+
+    if (typeof val === 'number' && val >= 0 && val < options.length) {
+      return selectedValue === options[val].value;
+    }
+
+    return false;
+  });
+}

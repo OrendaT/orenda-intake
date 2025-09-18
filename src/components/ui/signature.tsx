@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormState } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
-import useSignature from '@/hooks/use-signature';
+
 import type { BaseFieldProps } from '@/types';
-import type { TSignature } from '@/context/signature-context';
+import { useSignature, type SignatureState } from '@/store/signature';
 
 const CANVAS_X = 1200; // Canvas width in pixels
 const CANVAS_Y = 320; // Canvas height in pixels
@@ -24,18 +24,17 @@ const Comp = ({
 }: {
   id: string;
   className?: string;
-  onChange: (value: TSignature) => void;
-  value: TSignature;
+  onChange: (value: SignatureState) => void;
+  value: SignatureState;
 }) => {
-  const { signature, setSignature } = useSignature();
+  const signature = useSignature((state) => state.signature);
+  const setSignature = useSignature((state) => state.setSignature);
 
   const [isClicked, setIsClicked] = useState(false);
   const [focused, setFocused] = useState(false);
-  const {
-    formState: { errors },
-  } = useFormContext();
+  const { errors } = useFormState();
 
-  const prevSignatureRef = useRef<TSignature>(signature);
+  const prevSignatureRef = useRef<SignatureState>(signature);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   /**
@@ -80,8 +79,8 @@ const Comp = ({
 
   /** Redraw stored signature text on canvas */
   const sign = () => {
-    if (signature.text) {
-      drawOnCanvas(signature.text);
+    if (signature?.text) {
+      drawOnCanvas(signature?.text);
       setIsClicked(true);
       onChange(signature);
     }
@@ -99,7 +98,7 @@ const Comp = ({
     const signatureChanged = prevSignatureRef.current.text !== signature.text;
 
     /** Clears the signature from external clear */
-    if (!signature.text && value?.text) {
+    if (!signature?.text && value?.text) {
       handleChange('');
       setIsClicked(false);
       return;
@@ -115,12 +114,12 @@ const Comp = ({
 
     // Update the previous signature reference
     prevSignatureRef.current = signature;
-  }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value.text]);
+  }, [signature, isClicked, drawOnCanvas, onChange, handleChange, value?.text]);
 
   return (
     <div id={id} className={cn('signature', className)}>
       {/* Text input for signature */}
-      {(!signature.text || value?.text) && !isClicked && (
+      {(!signature?.text || value?.text) && !isClicked && (
         <input
           type='text'
           value={value?.text}
@@ -128,7 +127,7 @@ const Comp = ({
             if (value.length > MAX_LENGTH) return;
             handleChange(value);
           }}
-          className='clamp-[text,sm,base] mt-4 mb-2 block w-full max-w-sm rounded bg-white/50 px-4 py-2 outline outline-zinc-200 transition-all duration-300 focus:outline-zinc-500'
+          className='clamp-[text,sm,base] mt-4 mb-2 block w-full max-w-sm border-b border-l border-[#b2b2b2] px-2 py-[0.38rem] transition-all duration-300 outline-none focus:border-[#070707]'
           placeholder='Type your signature here'
           onFocus={() => setFocused(true)}
           onBlur={() => {
@@ -181,7 +180,7 @@ const Comp = ({
  * @component SignaturePad
  *
  * @description A typed signature input controlled by React Hook Form. Renders a canvas preview and outputs
- * base64-encoded image of the signature.
+ * base64-encoded image of the signature?.
  */
 export default function SignaturePad({
   name,
@@ -197,13 +196,16 @@ export default function SignaturePad({
       disabled={disabled}
       rules={{
         required: { value: required, message: errorMsg },
+        validate: (value) => {
+          if (required) return value?.text.length > 0 || errorMsg;
+        },
         ...rules,
       }}
       render={({ field: { onChange, value } }) => (
         <Comp
           id={name}
           className={className}
-          onChange={(signature: TSignature) => onChange(signature)}
+          onChange={(signature: SignatureState) => onChange(signature)}
           value={value}
         />
       )}

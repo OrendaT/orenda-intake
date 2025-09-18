@@ -1,7 +1,7 @@
-import type { MaskProps } from "@/types";
-import { TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
-import InputMask from "@mona-health/react-input-mask";
+import type { MaskProps } from '@/types';
+import { TextField } from '@mui/material';
+import { Controller } from 'react-hook-form';
+import InputMask from '@mona-health/react-input-mask';
 
 const IMask = ({
   label,
@@ -10,7 +10,7 @@ const IMask = ({
   id,
   disabled,
   required = true,
-  variant = "standard",
+  variant = 'standard',
   errorMsg,
   placeholder,
   rules,
@@ -25,7 +25,7 @@ const IMask = ({
       rules={{
         required: {
           value: required,
-          message: errorMsg || "This field is required",
+          message: errorMsg || 'This field is required',
         },
         validate: validations,
         ...rules,
@@ -35,12 +35,12 @@ const IMask = ({
           <TextField
             inputRef={ref}
             required={required}
-            type={type || "text"}
+            type={type || 'text'}
             helperText={error ? error?.message : null}
             id={id || name}
             label={label}
             error={!!error}
-            variant={variant || "standard"}
+            variant={variant || 'standard'}
             fullWidth
             placeholder={placeholder}
             {...inputProps}

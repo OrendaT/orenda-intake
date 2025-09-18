@@ -32,7 +32,8 @@
 
     .react-calendar {
       width: 100%;
-      max-width: 300px;
+      max-width: 320px;
+      min-width: 300px;
       padding: 0.5rem;
       border: 1px solid rgba(0, 0, 0, 0.285);
       border-radius: 1rem;
@@ -52,6 +53,11 @@
         border: 1px solid #eee;
         font-size: 1rem;
         font-weight: 600;
+      }
+      .react-calendar__navigation button:disabled {
+        background-color: transparent;
+        opacity: 50%;
+        cursor: not-allowed;
       }
 
       .react-calendar__navigation__label {
@@ -87,6 +93,12 @@
 
         &:hover:not(.react-calendar__tile--active) {
           background: #eee;
+        }
+
+        &:disabled {
+          background-color: transparent;
+          opacity: 50%;
+          cursor: not-allowed;
         }
       }
 

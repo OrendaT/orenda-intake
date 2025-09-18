@@ -4,21 +4,28 @@ import Radios from '@/components/ui/radios';
 import DatePicker from '@/components/ui/date-picker';
 import Signature from '../../../components/ui/signature';
 import ResponsiveTooltip from '../../../components/responsive-tooltip';
+import { ethnicities } from '@/lib/constants';
 
 export default function PersonalInfo() {
   return (
     <fieldset className='fieldset'>
       <div className='!mt-4 grid gap-x-8 gap-y-6 sm:grid-cols-2'>
-        <Input label='First Name' name='first_name' />
-        <Input label='Last Name' name='last_name' />
+        <Input label='Legal First Name' name='first_name' />
+        <Input label='Legal Last Name' name='last_name' />
       </div>
 
-      <Input label='Preferred Name' name='preferred_name' required={false} />
+      <Input
+        label='Preferred Name'
+        name='preferred_name'
+        required={false}
+        helperText='Please provide your preferred name in full when logging in to telehealth visits
+'
+      />
 
       <DatePicker
         label='Date of Birth'
         name='date_of_birth'
-        containerClassName='pt-4'
+        maxDate={new Date()}
       />
 
       <div className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>
@@ -93,7 +100,6 @@ export default function PersonalInfo() {
       />
 
       {/* Sex Assigned at Birth */}
-
       <Radios
         label={`Patient's sex assigned at birth:`}
         labelSuffix={
@@ -108,7 +114,6 @@ export default function PersonalInfo() {
         grid={false}
       />
 
-      {/* Gender (Optional) */}
       <Input
         label={
           <>
@@ -117,6 +122,41 @@ export default function PersonalInfo() {
         }
         name='gender'
         required={false}
+      />
+
+      <Radios
+        label='Preferred Pronouns'
+        name='preferred_pronouns'
+        options={[
+          { value: 'She/Her' },
+          { value: 'He/Him' },
+          { value: 'They/Them' },
+          { value: 'Other' },
+          { value: 'Prefer not to say' },
+        ]}
+        showHiddenSectionValue='Other'
+        hiddenSection={
+          <Input
+            label='Please state'
+            name='preferred_pronouns_other'
+            size='small'
+          />
+        }
+      />
+
+      <Radios
+        label={
+          <>
+            Please indicate your race <small>(Optional)</small>
+          </>
+        }
+        name='race'
+        options={ethnicities}
+        required={false}
+        showHiddenSectionValue='Others'
+        hiddenSection={
+          <Input label='Please specify' name='race_other' size='small' />
+        }
       />
     </fieldset>
   );

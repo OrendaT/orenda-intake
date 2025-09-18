@@ -5,23 +5,23 @@ import {
   FaCcMastercard,
   FaCcJcb,
   FaCreditCard,
-} from "react-icons/fa6";
-import { FaCcAmex as FaCcAmericanExpress } from "react-icons/fa";
+} from 'react-icons/fa6';
+import { FaCcAmex as FaCcAmericanExpress } from 'react-icons/fa';
 
 const PaymentIcon = ({ type }: { type: string }) => {
   const Icon = () => {
     switch (type) {
-      case "visa":
+      case 'visa':
         return <FaCcVisa />;
-      case "mastercard":
+      case 'mastercard':
         return <FaCcMastercard />;
-      case "american-express":
+      case 'american-express':
         return <FaCcAmericanExpress />;
-      case "discover":
+      case 'discover':
         return <FaCcDiscover />;
-      case "amex":
+      case 'amex':
         return <FaCcAmex />;
-      case "jcb":
+      case 'jcb':
         return <FaCcJcb />;
       default:
         return <FaCreditCard />;
@@ -29,7 +29,7 @@ const PaymentIcon = ({ type }: { type: string }) => {
   };
 
   return (
-    <span className="text-black *:size-5">
+    <span className='text-black *:size-5'>
       <Icon />
     </span>
   );

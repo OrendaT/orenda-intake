@@ -1,29 +1,34 @@
-import { cn } from "@/lib/utils";
-import { TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
-import type { InputProps } from "@/types";
-import RequiredMark from "./required-mark";
+import { cn, isValidEmail } from '@/lib/utils';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { Controller } from 'react-hook-form';
+import type { InputProps } from '@/types';
+import RequiredMark from './required-mark';
+import { useState } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Input = ({
   name,
   customLabel,
-  type = "text",
+  type = 'text',
   id,
   required = true,
   disabled,
-  variant = "standard",
-  errorMsg = "This field is required",
-  placeholder,
+  variant = 'standard',
+  errorMsg = 'This field is required',
   validations,
-  className,
   containerClassName,
   registerOptions,
   ...inputProps
 }: InputProps) => {
+  const [currentType, setCurrentType] = useState(type);
+  const togglePassword = () => {
+    setCurrentType((prev) => (prev === 'password' ? 'text' : 'password'));
+  };
+
   return (
-    <div className={cn("w-full", containerClassName)}>
+    <div className={cn('w-full', containerClassName)}>
       {customLabel && (
-        <h3 className="label">
+        <h3 className='label'>
           {customLabel}
           {required && <RequiredMark />}
         </h3>
@@ -37,21 +42,52 @@ const Input = ({
             message: errorMsg,
           },
           ...registerOptions,
-          validate: validations,
+          validate: {
+            isValidEmail: (value: string) => {
+              if (value && type === 'email')
+                return (
+                  isValidEmail(value) || 'Please enter a valid email address'
+                );
+              return true;
+            },
+            ...validations,
+          },
         }}
         render={({ field: { ref, ...field }, fieldState: { error } }) => (
           <TextField
             {...field}
             inputRef={ref}
             required={required}
-            type={type}
+            type={currentType}
             helperText={error ? error.message : null}
             id={id || name}
             error={!!error}
             variant={variant}
             fullWidth
-            placeholder={placeholder}
-            className={className}
+            slotProps={{
+              input: {
+                endAdornment: type === 'password' && (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label={
+                        currentType === 'text'
+                          ? 'hide the password'
+                          : 'display the password'
+                      }
+                      title={currentType === 'text' ? 'Hide' : 'Show'}
+                      onClick={togglePassword}
+                      className={cn(
+                        '*:clamp-[size,5,1.35rem]',
+                        error && '*:text-error-red',
+                      )}
+                      edge='start'
+                    >
+                      {currentType === 'password' ? <FiEyeOff /> : <FiEye />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              },
+            }}
             {...inputProps}
           />
         )}
