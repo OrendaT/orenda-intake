@@ -5,21 +5,7 @@ import Select from '@/components/ui/select';
 import { YES_NO } from '@/lib/constants';
 import type { OnboardingFormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
-
-const languages = [
-  { value: 'Russian' },
-  { value: 'Bengali' },
-  { value: 'Cantonese' },
-  { value: 'Mandarin' },
-  { value: 'Uzbek' },
-  { value: 'Tagalog' },
-  { value: 'Spanish' },
-  { value: 'Yoruba' },
-  { value: 'French (Creole)' },
-  { value: 'Portuguese' },
-  { value: 'None' },
-  { value: 'Others' },
-];
+import { languages } from './data';
 
 const Languages = () => {
   const { watch } = useFormContext<OnboardingFormData>();

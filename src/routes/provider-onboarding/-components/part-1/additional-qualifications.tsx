@@ -10,7 +10,6 @@ const HiddenSection = () => (
     <FileInput
       heading='Copy of Additional qualification/certifications:'
       name='additional_qualifications_docs'
-      maxSize={0.3}
       multiple
     />
   </div>

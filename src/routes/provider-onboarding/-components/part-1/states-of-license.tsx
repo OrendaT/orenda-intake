@@ -7,31 +7,19 @@ import type { OnboardingFormData as FormData } from '@/types';
 import { useFormContext } from 'react-hook-form';
 import StatesOfLicenseSummary from './states-of-license-summary';
 import IMask from '@/components/ui/imask';
-import { statesOfLicenseOptions, states } from './data';
+import { statesOfLicenseOptions, states, cPOptions } from './data';
 
-const collaboratingPhysicianOptions = (fileName: string) => [
-  {
-    value:
-      'I have met the required amount of time and I can practice independently.',
-  },
-  {
-    value: `Yes – I do have a ${fileName} on file with the state, and can provide a copy of my ${fileName} form.`,
-  },
-  {
-    value: `Yes – I do have a ${fileName} on file with the state, but I do not have a copy of the ${fileName} form available.`,
-  },
-  {
-    value: `No, I do not practice independently; I need a collaborating physician agreement, and I do not have a ${fileName} form or any collaborating agreement on file for the state.`,
-  },
-];
+interface SLHSProps {
+  val: keyof typeof states;
+}
 
-const CPHS = ({
-  abbr,
-  fileName,
-}: {
-  abbr: (typeof states)[Exclude<keyof typeof states, 'Others'>]['abbr'];
+interface CPHSProps {
+  abbr: (typeof states)[keyof typeof states]['abbr'];
   fileName: string;
-}) => (
+}
+
+// Collaborating Physician Hidden Section
+const CPHS = ({ abbr, fileName }: CPHSProps) => (
   <div className='!space-y-4'>
     <Input
       label={`${abbr} Collaborating Physician Name`}
@@ -69,18 +57,17 @@ const CPHS = ({
     <FileInput
       heading={`Please upload your ${fileName} here`}
       name={`states_of_license__${abbr}__${abbr === 'NY' ? 'form_4NP' : 'collaborating_agreement'}_doc`}
-      maxSize={0.3}
     />
   </div>
 );
 
-const HiddenSection = ({ val }: { val: keyof typeof states }) => {
+// State of License Hidden Section
+const SLHS = ({ val }: SLHSProps) => {
   const { setValue } = useFormContext<FormData>();
 
   const { name, abbr } = states[val];
-
   const fileName = abbr === 'NY' ? '4NP' : ' collaborative agreement';
-  const options = collaboratingPhysicianOptions(fileName);
+  const options = cPOptions(fileName);
 
   return (
     <>
@@ -108,7 +95,6 @@ const HiddenSection = ({ val }: { val: keyof typeof states }) => {
       <FileInput
         heading={`Please upload a copy of your ${abbr} State License`}
         name={`states_of_license__${abbr}__state_license_doc`}
-        maxSize={0.3}
         containerClassName='my-4'
       />
 
@@ -148,7 +134,6 @@ const HiddenSection = ({ val }: { val: keyof typeof states }) => {
             <FileInput
               heading={`Please upload a copy of your ${abbr} State DEA`}
               name={`states_of_license__${abbr}__DEA_state_doc`}
-              maxSize={0.3}
             />
           </div>
         }
@@ -162,7 +147,7 @@ const StatesOfLicense = () => {
 
   const options = statesOfLicenseOptions.map(({ value }) => ({
     value,
-    hiddenSection: <HiddenSection val={value} />,
+    hiddenSection: <SLHS val={value} />,
   }));
 
   return (

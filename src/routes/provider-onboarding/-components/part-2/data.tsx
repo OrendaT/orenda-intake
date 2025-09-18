@@ -120,3 +120,17 @@ export const experienceLevels = [
       'Expert / Highly Experienced – Extensive practice history, advanced clinical skills, often supervising or mentoring others.',
   },
 ];
+
+export const languages = [
+  { value: 'Russian' },
+  { value: 'Bengali' },
+  { value: 'Cantonese' },
+  { value: 'Mandarin' },
+  { value: 'Uzbek' },
+  { value: 'Tagalog' },
+  { value: 'Spanish' },
+  { value: 'Yoruba' },
+  { value: 'French (Creole)' },
+  { value: 'Portuguese' },
+  { value: 'Others' },
+];

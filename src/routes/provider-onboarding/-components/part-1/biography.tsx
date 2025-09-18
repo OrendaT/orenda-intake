@@ -28,7 +28,6 @@ const Heading = ({ num }: { num: '1' | '2' }) => (
       </>
     }
     accept='image/jpeg,image/png'
-    maxSize={0.3}
   />
 );
 
@@ -41,7 +40,6 @@ const Biography = () => {
         heading='Professional Statement'
         name='professional_statement'
         accept={acceptForCredentialing}
-        maxSize={0.3}
       />
 
       <Heading num='1' />

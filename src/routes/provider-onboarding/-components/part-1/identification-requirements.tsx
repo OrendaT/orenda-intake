@@ -27,12 +27,10 @@ const IdentificationRequirements = () => {
           </>
         }
         name='photo_ID'
-        maxSize={0.3}
       />
       <FileInput
         heading='Upload Your Proof of Address ID'
         name='proof_of_address_ID'
-        maxSize={0.3}
       />
     </fieldset>
   );

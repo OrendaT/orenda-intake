@@ -27,3 +27,19 @@ export const programs = [
 export const statesOfLicenseOptions = Object.keys(states).map((state) => ({
   value: state as keyof typeof states,
 }));
+
+export const cPOptions = (fileName: string) => [
+  {
+    value:
+      'I have met the required amount of time and I can practice independently.',
+  },
+  {
+    value: `Yes – I do have a ${fileName} on file with the state, and can provide a copy of my ${fileName} form.`,
+  },
+  {
+    value: `Yes – I do have a ${fileName} on file with the state, but I do not have a copy of the ${fileName} form available.`,
+  },
+  {
+    value: `No, I do not practice independently; I need a collaborating physician agreement, and I do not have a ${fileName} form or any collaborating agreement on file for the state.`,
+  },
+];
