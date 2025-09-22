@@ -188,4 +188,4 @@ export const LDStates: LicenseDea[] = [
   {
     name: 'NJ',
   },
-];
+] as const;

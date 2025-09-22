@@ -41,6 +41,7 @@ const FileInput = ({
   maxLength = 3,
   validations,
   containerClassName,
+  registerOptions,
   ...rest
 }: FileInputProps) => {
   const { register } = useFormContext();
@@ -146,6 +147,7 @@ const FileInput = ({
 
               ...validations,
             },
+            ...registerOptions,
           })}
           accept={accept}
           {...rest}

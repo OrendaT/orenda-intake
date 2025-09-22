@@ -22,7 +22,7 @@ export const columns = [
             cell: Cell,
           }),
           columnHelper.accessor((row) => row.license?.in_process, {
-            id: ' In Process',
+            id: 'In Process',
             header: 'In Process',
             cell: Cell,
           }),

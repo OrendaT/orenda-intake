@@ -10,13 +10,25 @@ import {
 import { flexRender, type Table as TTable } from '@tanstack/react-table';
 import { cn } from '@/lib/utils';
 import { nanoid } from 'nanoid';
+import { LuX } from 'react-icons/lu';
+import { useStates } from '@/store/states-of-license-summary';
+import { LDStates } from '@/lib/definitions';
+import type { LicenseDea } from '@/types';
 
-interface DataTableProps<T = unknown> {
-  table: TTable<T>;
+interface DataTableProps {
+  table: TTable<LicenseDea>;
   className?: string;
 }
 
-export default function DataTable<T>({ table, className }: DataTableProps<T>) {
+const originalStates = LDStates.map((state) => state.name);
+
+export default function DataTable({ table, className }: DataTableProps) {
+  const removeState = useStates((s) => s.removeState);
+
+  const deleteRow = (name: LicenseDea['name']) => {
+    removeState(name);
+  };
+
   return (
     <Table className={cn(className)}>
       <TableHeader>
@@ -47,6 +59,7 @@ export default function DataTable<T>({ table, className }: DataTableProps<T>) {
             <TableRow
               key={row.id}
               data-state={row.getIsSelected() && 'selected'}
+              className='relative'
             >
               {row.getVisibleCells().map((cell) => {
                 const id = nanoid();
@@ -56,6 +69,16 @@ export default function DataTable<T>({ table, className }: DataTableProps<T>) {
                   </TableCell>
                 );
               })}
+
+              {!originalStates.includes(row.original.name) && (
+                <button
+                  type='button'
+                  className='text-error-red absolute top-0.5 right-0.5 grid size-4 cursor-pointer place-items-center rounded-full border'
+                  onClick={() => deleteRow(row.original.name)}
+                >
+                  <LuX className='size-3' />
+                </button>
+              )}
             </TableRow>
           ))
         }
