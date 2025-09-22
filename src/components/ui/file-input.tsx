@@ -118,7 +118,10 @@ const FileInput = ({
                 const accepted = accept.split(',').map((f) => f.trim());
 
                 for (const file of files) {
-                  if (!accepted.includes(file.type)) {
+                  if (
+                    !accepted.includes(file.type) &&
+                    !(file.type === '' && file.name.endsWith('.heic'))
+                  ) {
                     return 'Invalid file format';
                   }
                 }
