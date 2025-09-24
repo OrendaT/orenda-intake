@@ -58,7 +58,7 @@ const Comp = ({
 
     if (text) {
       ctx.font =
-        'italic 100px "Dancing Script", "Pacifico", "Great Vibes", "Brush Script MT", cursive';
+        '100px "Dancing Script", "Pacifico", "Great Vibes", "Brush Script MT", cursive';
       ctx.fillStyle = 'rgba(0,0,0)';
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'center';
