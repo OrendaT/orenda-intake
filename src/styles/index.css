@@ -164,6 +164,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('../assets/fonts/DancingScript-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400; /* Regular */
+  font-display: swap;
+}
+
 :root,
 #root,
 html,
