@@ -2,12 +2,14 @@ export const FORMS = {
   intake: 'intake',
   credit_card: 'credit_card',
   provider_onboarding: 'provider_onboarding',
+  intake_provider: 'intake_provider',
 } as const;
 
 export const FORM_IDS = {
   intake: 'intake_id',
   credit_card: 'credit_card_id',
   provider_onboarding: 'provider_onboarding_id',
+  intake_provider: 'intake_provider_id',
 } as const;
 
 export const EXPIRY_TIME = 3;
@@ -76,7 +78,7 @@ export const acceptedFormats = [
   'image/gif',
   'image/heic',
   'application/pdf',
- ] as const;
+] as const;
 
 export const acceptForCredentialing = [
   ...acceptedFormats,
