@@ -46,7 +46,7 @@ export function IntakeProviderForm() {
   const { handleSubmit, register, reset } = methods;
   const { isSuccess, mutateAsync: submitForm } = useSubmitForm({
     form: 'intake_provider',
-    url: 'patients',
+    url: 'patients_with_provider',
   });
   const resetSignature = useSignature((state) => state.resetSignature);
 
@@ -172,7 +172,7 @@ export function IntakeProviderForm() {
             <PersistFormValues
               saveKey='intake_provider'
               formID='intake_provider_id'
-              url='patients/pending-patient'
+              url='patients_with_provider/pending-patient'
               fields={[
                 {
                   key: 'first_name',
