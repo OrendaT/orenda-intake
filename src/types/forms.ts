@@ -95,6 +95,10 @@ export type IntakeFormData = {
   race_other?: string;
 };
 
+export type IntakeProviderFormData = IntakeFormData & {
+  provider: string;
+};
+
 // ---------- Credit Card Form ----------
 export type CreditCardFormData = {
   patient_name: string;

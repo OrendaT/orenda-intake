@@ -25,8 +25,8 @@ import { useSignature } from '@/store/signature';
 import SubmitButton from '@/components/submit-button';
 import PersistFormValues from '@/components/persist-form-values';
 
-export const Route = createFileRoute('/intake/ketie-saintelus')({
-  component: IntakeProviderForm,
+export const Route = createFileRoute('/intake/')({
+  component: IntakeForm,
   head: () => ({
     meta: [
       {
@@ -38,15 +38,15 @@ export const Route = createFileRoute('/intake/ketie-saintelus')({
   }),
 });
 
-export function IntakeProviderForm() {
-  const defaultValues = getItem(FORMS.intake_provider) ?? initialValues;
+export function IntakeForm() {
+  const defaultValues = getItem(FORMS.intake) ?? initialValues;
   const methods = useForm<IntakeFormData>({
     defaultValues: defaultValues as IntakeFormData,
   });
   const { handleSubmit, register, reset } = methods;
   const { isSuccess, mutateAsync: submitForm } = useSubmitForm({
-    form: 'intake_provider',
-    url: 'patients_with_provider',
+    form: 'intake',
+    url: 'patients',
   });
   const resetSignature = useSignature((state) => state.resetSignature);
 
@@ -56,9 +56,9 @@ export function IntakeProviderForm() {
 
     await submitForm(data, {
       onSuccess: () => {
-        removeItem(FORMS.intake_provider);
+        removeItem(FORMS.intake);
         reset(initialValues);
-        removeLSItem(FORM_IDS.intake_provider);
+        removeLSItem(FORM_IDS.intake);
         resetSignature();
         scrollTo(0, 0);
       },
@@ -170,9 +170,9 @@ export function IntakeProviderForm() {
             </form>
 
             <PersistFormValues
-              saveKey='intake_provider'
-              formID='intake_provider_id'
-              url='patients_with_provider/pending-patient'
+              saveKey='intake'
+              formID='intake_id'
+              url='patients/pending-patient'
               fields={[
                 {
                   key: 'first_name',

@@ -10,19 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProviderOnboardingRouteRouteImport } from './routes/provider-onboarding/route'
-import { Route as IntakeRouteRouteImport } from './routes/intake/route'
 import { Route as CreditCardRouteRouteImport } from './routes/credit-card/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as IntakeKetieSaintelusRouteRouteImport } from './routes/intake/ketie-saintelus/route'
+import { Route as IntakeIndexRouteImport } from './routes/intake/index'
+import { Route as IntakeKetieSaintelusIndexRouteImport } from './routes/intake/ketie-saintelus/index'
 
 const ProviderOnboardingRouteRoute = ProviderOnboardingRouteRouteImport.update({
   id: '/provider-onboarding',
   path: '/provider-onboarding',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IntakeRouteRoute = IntakeRouteRouteImport.update({
-  id: '/intake',
-  path: '/intake',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreditCardRouteRoute = CreditCardRouteRouteImport.update({
@@ -35,64 +30,70 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IntakeKetieSaintelusRouteRoute =
-  IntakeKetieSaintelusRouteRouteImport.update({
-    id: '/ketie-saintelus',
-    path: '/ketie-saintelus',
-    getParentRoute: () => IntakeRouteRoute,
+const IntakeIndexRoute = IntakeIndexRouteImport.update({
+  id: '/intake/',
+  path: '/intake/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntakeKetieSaintelusIndexRoute =
+  IntakeKetieSaintelusIndexRouteImport.update({
+    id: '/intake/ketie-saintelus/',
+    path: '/intake/ketie-saintelus/',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
-  '/intake': typeof IntakeRouteRouteWithChildren
   '/provider-onboarding': typeof ProviderOnboardingRouteRoute
-  '/intake/ketie-saintelus': typeof IntakeKetieSaintelusRouteRoute
+  '/intake': typeof IntakeIndexRoute
+  '/intake/ketie-saintelus': typeof IntakeKetieSaintelusIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
-  '/intake': typeof IntakeRouteRouteWithChildren
   '/provider-onboarding': typeof ProviderOnboardingRouteRoute
-  '/intake/ketie-saintelus': typeof IntakeKetieSaintelusRouteRoute
+  '/intake': typeof IntakeIndexRoute
+  '/intake/ketie-saintelus': typeof IntakeKetieSaintelusIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/credit-card': typeof CreditCardRouteRoute
-  '/intake': typeof IntakeRouteRouteWithChildren
   '/provider-onboarding': typeof ProviderOnboardingRouteRoute
-  '/intake/ketie-saintelus': typeof IntakeKetieSaintelusRouteRoute
+  '/intake/': typeof IntakeIndexRoute
+  '/intake/ketie-saintelus/': typeof IntakeKetieSaintelusIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/credit-card'
-    | '/intake'
     | '/provider-onboarding'
+    | '/intake'
     | '/intake/ketie-saintelus'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/credit-card'
-    | '/intake'
     | '/provider-onboarding'
+    | '/intake'
     | '/intake/ketie-saintelus'
   id:
     | '__root__'
     | '/'
     | '/credit-card'
-    | '/intake'
     | '/provider-onboarding'
-    | '/intake/ketie-saintelus'
+    | '/intake/'
+    | '/intake/ketie-saintelus/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CreditCardRouteRoute: typeof CreditCardRouteRoute
-  IntakeRouteRoute: typeof IntakeRouteRouteWithChildren
   ProviderOnboardingRouteRoute: typeof ProviderOnboardingRouteRoute
+  IntakeIndexRoute: typeof IntakeIndexRoute
+  IntakeKetieSaintelusIndexRoute: typeof IntakeKetieSaintelusIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,13 +103,6 @@ declare module '@tanstack/react-router' {
       path: '/provider-onboarding'
       fullPath: '/provider-onboarding'
       preLoaderRoute: typeof ProviderOnboardingRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/intake': {
-      id: '/intake'
-      path: '/intake'
-      fullPath: '/intake'
-      preLoaderRoute: typeof IntakeRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/credit-card': {
@@ -125,33 +119,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/intake/ketie-saintelus': {
-      id: '/intake/ketie-saintelus'
-      path: '/ketie-saintelus'
+    '/intake/': {
+      id: '/intake/'
+      path: '/intake'
+      fullPath: '/intake'
+      preLoaderRoute: typeof IntakeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/intake/ketie-saintelus/': {
+      id: '/intake/ketie-saintelus/'
+      path: '/intake/ketie-saintelus'
       fullPath: '/intake/ketie-saintelus'
-      preLoaderRoute: typeof IntakeKetieSaintelusRouteRouteImport
-      parentRoute: typeof IntakeRouteRoute
+      preLoaderRoute: typeof IntakeKetieSaintelusIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface IntakeRouteRouteChildren {
-  IntakeKetieSaintelusRouteRoute: typeof IntakeKetieSaintelusRouteRoute
-}
-
-const IntakeRouteRouteChildren: IntakeRouteRouteChildren = {
-  IntakeKetieSaintelusRouteRoute: IntakeKetieSaintelusRouteRoute,
-}
-
-const IntakeRouteRouteWithChildren = IntakeRouteRoute._addFileChildren(
-  IntakeRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CreditCardRouteRoute: CreditCardRouteRoute,
-  IntakeRouteRoute: IntakeRouteRouteWithChildren,
   ProviderOnboardingRouteRoute: ProviderOnboardingRouteRoute,
+  IntakeIndexRoute: IntakeIndexRoute,
+  IntakeKetieSaintelusIndexRoute: IntakeKetieSaintelusIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

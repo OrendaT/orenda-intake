@@ -20,13 +20,13 @@ import {
 import SignaturePad from '@/components/ui/signature';
 import ResponsiveTooltip from '@/components/responsive-tooltip';
 import SuccessModal from '@/routes/intake/-components/success-modal';
-import type { IntakeFormData } from '@/types';
+import type { IntakeProviderFormData } from '@/types';
 import { useSignature } from '@/store/signature';
 import SubmitButton from '@/components/submit-button';
 import PersistFormValues from '@/components/persist-form-values';
 
-export const Route = createFileRoute('/intake')({
-  component: IntakeForm,
+export const Route = createFileRoute('/intake/ketie-saintelus/')({
+  component: IntakeProviderForm,
   head: () => ({
     meta: [
       {
@@ -38,27 +38,28 @@ export const Route = createFileRoute('/intake')({
   }),
 });
 
-export function IntakeForm() {
-  const defaultValues = getItem(FORMS.intake) ?? initialValues;
-  const methods = useForm<IntakeFormData>({
-    defaultValues: defaultValues as IntakeFormData,
+export function IntakeProviderForm() {
+  const defaultValues = getItem(FORMS.intake_provider) ?? initialValues;
+  const methods = useForm<IntakeProviderFormData>({
+    defaultValues: defaultValues as IntakeProviderFormData,
   });
   const { handleSubmit, register, reset } = methods;
   const { isSuccess, mutateAsync: submitForm } = useSubmitForm({
-    form: 'intake',
-    url: 'patients',
+    form: 'intake_provider',
+    url: 'patients_with_provider',
   });
   const resetSignature = useSignature((state) => state.resetSignature);
 
   const onSubmit = handleSubmit(async (data) => {
     // parse intake form data
-    data = parseIntakeFormData(data);
+    data = parseIntakeFormData(data) as IntakeProviderFormData;
+    data.provider = 'ketie-saintelus';
 
     await submitForm(data, {
       onSuccess: () => {
-        removeItem(FORMS.intake);
+        removeItem(FORMS.intake_provider);
         reset(initialValues);
-        removeLSItem(FORM_IDS.intake);
+        removeLSItem(FORM_IDS.intake_provider);
         resetSignature();
         scrollTo(0, 0);
       },
@@ -170,9 +171,9 @@ export function IntakeForm() {
             </form>
 
             <PersistFormValues
-              saveKey='intake'
-              formID='intake_id'
-              url='patients/pending-patient'
+              saveKey='intake_provider'
+              formID='intake_provider_id'
+              url='patients_with_provider/pending-patient'
               fields={[
                 {
                   key: 'first_name',
